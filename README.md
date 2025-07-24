@@ -19,7 +19,7 @@ Incluye:
 - **Thymeleaf**
 - **Maven**
 - **MySQL**
-- **Docker (opcional)**
+- **Docker**
 - **HTML + CSS + JS**
 
 ---
