@@ -21,6 +21,7 @@ target/
 
 ### Variables de entorno ###
 *.env
+**/.env
 **/*.env
 */*.env
 

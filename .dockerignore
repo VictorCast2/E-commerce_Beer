@@ -1,0 +1,61 @@
+# ---------------------------
+# Archivos del sistema operativo
+# ---------------------------
+.DS_Store
+
+# ---------------------------
+# Configuración de IDEs (IntelliJ, VS Code, STS)
+# ---------------------------
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.sts4-cache/
+.toolstarget/
+
+# ---------------------------
+# Control de versiones
+# ---------------------------
+.git/
+.gitignore
+
+# ---------------------------
+# Archivos de log
+# ---------------------------
+*.log
+
+# ---------------------------
+# Archivos de entorno y secretos
+# ---------------------------
+.env
+*.env
+secrets.dev.yaml
+values.dev.yaml
+
+# ---------------------------
+# Docker y Compose
+# ---------------------------
+Dockerfile
+Dockerfile*
+docker-compose*
+compose.y*ml
+
+# ---------------------------
+# Dependencias externas o artefactos
+# ---------------------------
+target/
+vendor/
+charts/
+*.dbmdl
+*.jfm
+
+# ---------------------------
+# Archivos de documentación
+# ---------------------------
+*.md
+LICENSE
+README.md

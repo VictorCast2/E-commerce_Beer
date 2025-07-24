@@ -1,21 +1,33 @@
-# Security Policy
+# 🔐 Security Policy
 
-## Supported Versions
+## 📦 Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Las siguientes versiones del proyecto están siendo activamente soportadas con actualizaciones de seguridad:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Versión JDk | Soporte             |
+|------------:|---------------------|
+|        21.x | ✅ Soportado         |
+|        17.x | ✅ Soportado      |
+|        < 23 | ❌ No soportado      |
 
-## Reporting a Vulnerability
+---
 
-Use this section to tell people how to report a vulnerability.
+## 🛡️ Reporte de Vulnerabilidades
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Si encuentras una vulnerabilidad de seguridad en este proyecto, te pedimos que **no la publiques públicamente**. En su lugar, por favor repórtala responsablemente a través del siguiente medio:
+
+- 📧 Correo: `security@tudominio.com` (modifica esto según corresponda)
+- 🕒 Tiempo estimado de respuesta: dentro de los 7 días hábiles
+
+### Qué puedes esperar
+
+- Recibirás una confirmación de recepción de tu reporte.
+- Investigaremos y validaremos el reporte.
+- Si es confirmado, trabajaremos en una solución y emitiremos una actualización.
+- En caso de ser rechazado, te explicaremos por qué.
+
+Tu colaboración ayuda a mantener nuestro proyecto seguro para todos. ¡Gracias!
+
+---
+
+> _Nota: Esta política puede actualizarse con el tiempo. Consulta regularmente si estás manejando seguridad en integraciones._

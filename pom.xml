@@ -15,10 +15,19 @@
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE</url>
+			<distribution>E-commerce_Beer</distribution>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>VictorCast2</id>
+			<name>VictorCast2</name>
+			<email>victor@example.com</email>
+			<organization>Universidad</organization>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
