@@ -25,6 +25,10 @@ target/
 **/*.env
 */*.env
 
+### El .mvm ###
+.mvn/
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper.jar
 
 ### NetBeans ###
 /nbproject/private/
