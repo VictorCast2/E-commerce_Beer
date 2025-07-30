@@ -1,4 +1,4 @@
-package com.E_commerce_Beer.Exception;
+package com.E_commerce_Beer.exception;
 
 public class SegurityException extends RuntimeException {
 
