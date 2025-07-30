@@ -1,4 +1,4 @@
-package com.E_commerce_Beer.configuration.Security;
+package com.E_commerce_Beer.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

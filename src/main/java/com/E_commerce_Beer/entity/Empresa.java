@@ -36,5 +36,5 @@ public class Empresa {
     @Column(name = "sector")
     @Enumerated(EnumType.STRING)
     private ESector eSector;
-    private Boolean activo;
+    private boolean activo;
 }

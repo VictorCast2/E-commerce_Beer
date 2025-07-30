@@ -18,7 +18,9 @@ public class Compra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "compra_id")
     private Long compraId;
+    @Column(name = "metodo_pago")
     @Enumerated(EnumType.STRING)
     private EMetodoPago eMetodoPago;
     private double subtotal;
@@ -26,6 +28,7 @@ public class Compra {
     private double iva;
     private double total;
     private LocalDateTime fecha;
+    @Column(name = "estado")
     @Enumerated(EnumType.STRING)
     private EEstado eEstado;
 

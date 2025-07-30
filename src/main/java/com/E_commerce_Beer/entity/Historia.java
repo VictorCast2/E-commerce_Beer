@@ -27,7 +27,7 @@ public class Historia {
     @Column(name = "historia_completa")
     private String historiaCompleta;
     private LocalDate fecha;
-    private Boolean activo;
+    private boolean activo;
 
     // Cardinalidad con la tabla comentario (relación bidireccional)
     @OneToMany(mappedBy = "historia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
