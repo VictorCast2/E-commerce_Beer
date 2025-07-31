@@ -26,14 +26,17 @@ body {
     height: 130px;
     position: fixed;
     display: flex;
+    gap: 2rem;
     justify-content: space-between;
     align-items: center;
-    padding: 0 4em;
+    padding: 0 3em;
+    z-index: 1000; 
 }
 
 .header__logo {
-    font: 700 25px "Geist";
+    font: 700 1.5rem "Geist";
 }
+
 
 .header__navbar {
     display: flex;
@@ -45,10 +48,9 @@ body {
     backdrop-filter: blur(30px);
     border-radius: 50px;
     width: 100%;
-    max-width: 750px;
+    max-width: 850px;
     min-width: 350px;
     min-height: 75px;
-    padding-left: 0.3em;
 }
 
 .navbar__list {
@@ -61,33 +63,121 @@ body {
 .item__link {
     text-decoration: none;
     color: #000000;
-    font: 700 20px "Urbanist";
+    font: 700 1.2rem "Urbanist";
 }
 
-.link--button {
-    background-color: #f59e0b;
-    padding: 0.8em 1em;
-    color: #ffffff;
-    border-radius: 50px;
-
+.list__icon { 
+    margin-left: 1.5rem;
+    display: flex;
+    gap: 1.3rem;
 }
 
+.icon__item {
+    position: relative;
+}
+
+.icon__item i {
+    cursor: pointer;
+    font: 500 2rem "Urbanist";
+}
+
+.icon__badge {
+    position: absolute;
+    top: -6px;
+    font: 500 0.3rem "Urbanist";
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font: 700 1.2rem "Urbanist";
+    cursor: pointer;
+}
+
+.language-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    color: inherit;
+}
+
+.dropdown-toggle i {
+    font-size: 1.2rem;
+}
+
+.dropdown-menu {
+    list-style: none;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 0.3rem 0;
+    display: none;
+    z-index: 100;
+    min-width: 4rem;
+}
+
+.dropdown-menu li {
+    padding: 0.4rem 1rem;
+    font: 500 0.95rem "Urbanist";
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f3f4f6;
+}
+
+.language-selector:hover .dropdown-menu {
+    display: block;
+}
+
+/**Section hero__content */
 .hero__content {
     padding: 140px 0 0 0;
 }
 
+.information__img {
+    position: relative;
+}
+
 .information__img img {
     float: right;
-    margin:-31em 8em 0 0;
+    margin: -31em 7em 0 0;
     max-width: 100%;
-
+    transform: rotate(-20deg);
+    position: relative;
 }
 
 
 .content__information .information__title {
-    font: 700 5.8em/1 "Geist";
-    width: 900px;
-    margin: 0 0 0.2em 0.5em;
+    font: 700 5.8rem/1 "Geist";
+    width: 950px;
+    margin: 0 0 0.2em 0.4em;
 }
 
 .content__information .information__text {
@@ -172,10 +262,8 @@ body {
 }
 
 
-
-
 /** Logos Cerveza */
-.logos {
+/* .logos {
     width: 80%;
     display: flex;
     margin: auto;
@@ -189,7 +277,7 @@ body {
     animation: 10s slide infinite linear;
 
     img {
-        height: 50px;
+        height: 80px;
         margin: 0 70px;
     }
 }
@@ -200,6 +288,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    background: linear-gradient(to left,rgba(255,255,255,0),rgba(255,255,255));
     width: 200px;
     height: 100%;
 }
@@ -210,6 +299,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+    background: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255));
     width: 200px;
     height: 100%;
 }
@@ -222,4 +312,22 @@ body {
     to {
         transform: translateX(-100%);
     }
+} */
+
+/** Section about */
+.about{
+    background-image: radial-gradient(125% 125% at 50% 10%, #fff 40%, #f59e0b  100%); 
+    min-height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    overflow: hidden;
+    z-index: 0;
+    
 }
+
+.about__content{
+    padding-top: 140px;
+}
+
