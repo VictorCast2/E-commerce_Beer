@@ -4,8 +4,9 @@ import com.application.compra.entity.Compra;
 import com.application.empresa.entity.Empresa;
 import com.application.rol.entity.Rol;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,12 +30,23 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id")
     private Long usuarioId;
+
+    @Column(name = "cedula", nullable = false)
     private String cedula;
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombres;
+    @Column(name = "apellido", nullable = false, length = 50)
     private String apellidos;
-    private String telefono;
+    @Size(min = 10, max = 10, message = "El telefono debe tener un minimo de 10 y maximo de 10 caracteres")
+    @Column(name = "telefono", nullable = false)
+    private int telefono;
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
+    @Email(message = "El correo debe ser válido")
+    @Column(name = "correo", nullable = false, length = 100)
     private String correo;
-    private String password;
+    @Column(name = "contrasenna", nullable = false, length = 100)
+    private String contrasenna;
 
     // Cardinalidad con la tabla rol (relación unidireccional)
     @ManyToOne
@@ -55,6 +67,20 @@ public class Usuario {
     private Empresa empresa;
 
     // Cardinalidad con la tabla compra (relación bidireccional)
+    @Column(name = "compras")
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
+
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
+
+    @Column(name = "account_No_Expired")
+    private boolean accountNoExpired;
+
+    @Column(name = "account_No_Locked")
+    private boolean accountNoLocked;
+
+    @Column(name = "credential_No_Expired")
+    private boolean credentialNoExpired;
+
 }

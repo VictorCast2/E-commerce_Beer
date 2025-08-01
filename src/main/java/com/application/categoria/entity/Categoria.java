@@ -1,6 +1,6 @@
 package com.application.categoria.entity;
 
-import com.application.Enum.ECategoria;
+import com.application.categoria.enums.ECategoria;
 import com.application.producto.entity.Producto;
 import jakarta.persistence.*;
 import lombok.*;

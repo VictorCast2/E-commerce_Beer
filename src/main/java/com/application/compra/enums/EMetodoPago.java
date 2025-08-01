@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.compra.enums;
 
 public enum EMetodoPago {
     TRANSFERENCIA,

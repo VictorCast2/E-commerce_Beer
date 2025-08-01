@@ -1,7 +1,7 @@
 package com.application.compra.entity;
 
-import com.application.Enum.EEstado;
-import com.application.Enum.EMetodoPago;
+import com.application.compra.enums.EEstado;
+import com.application.compra.enums.EMetodoPago;
 import com.application.usuario.entity.Usuario;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.application.empresa.entity;
 
-import com.application.Enum.ESector;
+import com.application.empresa.enums.ESector;
 import jakarta.persistence.*;
 import lombok.*;
 

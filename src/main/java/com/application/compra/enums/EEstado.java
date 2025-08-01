@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.compra.enums;
 
 public enum EEstado {
     PENDIENTE,         // Pedido generado pero no pagado
