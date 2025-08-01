@@ -62,7 +62,7 @@ public class SegurityConfig {
                     )
                     .build();
         } catch (Exception e) {
-            throw new SecurityException("error al construir la cadena de seguridad", e);
+            throw new SecurityException("Error al construir la cadena de seguridad", e);
         }
     }
 
