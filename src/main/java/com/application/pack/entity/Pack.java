@@ -1,6 +1,6 @@
 package com.application.pack.entity;
 
-import com.application.Enum.ETipo;
+import com.application.pack.enums.ETipo;
 import com.application.compra.entity.DetalleVenta;
 import com.application.shared.ItemProducto;
 import jakarta.persistence.*;
@@ -34,7 +34,7 @@ public class Pack extends ItemProducto {
 
     // Cardinalidad con la tabla pack_producto
     @OneToMany(mappedBy = "pack", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<PackProducto> packProductos = new HashSet<>();
+    private Set<com.application.pack.entity.PackProducto> packProductos = new HashSet<>();
 
     // Cardinalidad con la tabla detálle ventas
     @OneToMany(mappedBy = "pack", fetch = FetchType.LAZY)

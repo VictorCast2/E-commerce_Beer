@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.categoria.enums;
 
 public enum ECategoria {
     CERVEZA_RUBIA,

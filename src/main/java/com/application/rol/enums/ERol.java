@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.rol.enums;
 
 public enum ERol {
     ADMIN,

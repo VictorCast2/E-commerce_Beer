@@ -1,6 +1,6 @@
 package com.application.rol.entity;
 
-import com.application.Enum.ERol;
+import com.application.rol.enums.ERol;
 import jakarta.persistence.*;
 import lombok.*;
 

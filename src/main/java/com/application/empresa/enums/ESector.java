@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.empresa.enums;
 
 public enum ESector {
     HOTEL,

@@ -1,4 +1,4 @@
-package com.application.Enum;
+package com.application.pack.enums;
 
 public enum ETipo {
     UNIDAD,         // Pack con una sola unidad (poco común pero posible)
