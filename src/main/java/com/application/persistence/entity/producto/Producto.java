@@ -2,7 +2,7 @@ package com.application.persistence.entity.producto;
 
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.pack.PackProducto;
-import com.application.shared.ItemProducto;
+import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
 

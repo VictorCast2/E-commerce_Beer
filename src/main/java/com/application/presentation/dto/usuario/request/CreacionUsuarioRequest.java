@@ -1,10 +1,16 @@
 package com.application.presentation.dto.usuario.request;
 
-import com.application.persistence.entity.rol.enums.ERol;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.Set;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public record CreacionUsuarioRequest(
         @NotBlank(message = "La cédula es obligatoria")
         String cedula,
@@ -19,7 +25,7 @@ public record CreacionUsuarioRequest(
 
         @NotBlank(message = "El teléfono es obligatorio")
         @Size(min = 10, max = 10, message = "El teléfono debe tener 10 dígitos")
-        int telefono,
+        String telefono,
 
         @NotBlank(message = "El correo es obligatorio")
         @Email(message = "El correo debe ser válido")
@@ -30,6 +36,6 @@ public record CreacionUsuarioRequest(
         String contrasenna,
 
         @NotBlank(message = "El rol es obligatorio")
-        ERol rol
+        Set<String> roles
         ) {
 }

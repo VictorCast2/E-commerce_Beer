@@ -2,7 +2,7 @@ package com.application.persistence.entity.pack;
 
 import com.application.persistence.entity.pack.enums.ETipo;
 import com.application.persistence.entity.compra.DetalleVenta;
-import com.application.shared.ItemProducto;
+import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
 
