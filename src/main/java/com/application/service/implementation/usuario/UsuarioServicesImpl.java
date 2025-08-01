@@ -8,7 +8,6 @@ import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.service.interfaces.usuario.UsuarioInterface;
-import com.application.utils.CustomUserDetails;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -21,7 +20,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import javax.validation.Valid;
+import java.util.Set;
 
 @Data
 @Service
@@ -43,9 +45,10 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
      * La contraseña se cifra antes de guardarla en la base de datos.
      */
     @Override
-    public UsuarioResponse crearUsuario(@Valid CreacionUsuarioRequest request) {
-        Rol rol = rolRepository.findByERol(request.rol())
-                .orElseThrow(() -> new IllegalArgumentException("Rol no encontrado: " + request.rol()));
+    public UsuarioResponse crearUsuario(@Valid @RequestBody CreacionUsuarioRequest request) {
+
+        Set<Rol> roles = request.roles().stream()
+                .map(rol -> Rol.builder())
 
         Usuario usuario = Usuario.builder()
                 .nombres(request.nombres())
@@ -54,14 +57,12 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
                 .telefono(request.telefono())
                 .correo(request.correo())
                 .contrasenna(encoder.encode(request.contrasenna()))
-                .rol(rol)
                 .empresa(null)
                 .isEnabled(true)
-                .accountNoExpired(true)
-                .accountNoLocked(true)
-                .credentialNoExpired(true)
+                .accountNonExpired(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
                 .build();
-
         usuarioRepository.save(usuario);
         return new UsuarioResponse("✅ Usuario creado exitosamente");
     }
@@ -103,9 +104,8 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
      */
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByCorreo(correo)
+        return usuarioRepository.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("El correo no existe: " + correo));
-        return new CustomUserDetails(usuario);
     }
 
     /**

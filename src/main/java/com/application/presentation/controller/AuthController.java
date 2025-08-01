@@ -30,8 +30,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String getLogin(Model model) {
-        model.addAttribute("loginRequest", new AuthLoginRequest("", ""));
+    public String getLogin() {
         return "Login";
     }
 
@@ -47,10 +46,7 @@ public class AuthController {
     }
 
     @GetMapping("/sign_up")
-    public String getSignUp(Model model) {
-        model.addAttribute("registroRequest", new CreacionUsuarioRequest(
-                "", "", "", 0, "", "", null));
-        model.addAttribute("roles", rolRepository.findAll());
+    public String getSignUp() {
         return "Registro";
     }
 
