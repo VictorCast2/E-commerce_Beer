@@ -1,6 +1,6 @@
 package com.application.utils;
 
-import com.application.usuario.entity.Usuario;
+import com.application.persistence.entity.usuario.Usuario;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

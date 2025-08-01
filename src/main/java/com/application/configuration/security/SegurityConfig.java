@@ -1,20 +1,14 @@
 package com.application.configuration.security;
 
-import com.application.usuario.services.UsuarioServices;
-import com.application.utils.CustomUserDetails;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,9 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Data
 @Configuration
 public class SegurityConfig {
-
-    @Autowired
-    private final UsuarioServices usuarioServices;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws SecurityException {
@@ -59,6 +50,24 @@ public class SegurityConfig {
                     )
                     .exceptionHandling(ex -> ex
                             .accessDeniedPage("/error/403")
+                    )
+                    .headers(headers -> headers
+                            // 🔐 Política de seguridad del contenido (Content Security Policy)
+                            .contentSecurityPolicy(csp -> csp
+                                    // Esta directiva limita el origen de recursos (scripts, imágenes, estilos, etc.) solo al mismo dominio ('self')
+                                    .policyDirectives("default-src 'self'")
+                            )
+                            // 🛡️ Protección contra ataques de clickjacking
+                            .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+                            // Esto permite que la aplicación se muestre en un <iframe> SOLO si la petición proviene del mismo dominio
+                            // Previene que otros sitios web maliciosos puedan embeber tu app en un iframe para robar datos
+                            // 📅 HSTS (HTTP Strict Transport Security)
+                            .httpStrictTransportSecurity(hsts -> hsts
+                                            .includeSubDomains(true)
+                                            // Aplica HSTS también a todos los subdominios (por ejemplo, admin.tuapp.com)
+                                            .maxAgeInSeconds(31536000)
+                                    // Fuerza que los navegadores accedan solo por HTTPS durante 1 año (31536000 segundos)
+                            )
                     )
                     .build();
         } catch (Exception e) {
