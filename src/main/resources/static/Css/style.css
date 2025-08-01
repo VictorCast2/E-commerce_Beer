@@ -167,7 +167,7 @@ body {
 
 .information__img img {
     float: right;
-    margin: -31em 7em 0 0;
+    margin: -30em 7em 0 0;
     max-width: 100%;
     transform: rotate(-20deg);
     position: relative;
@@ -175,14 +175,20 @@ body {
 
 
 .content__information .information__title {
-    font: 700 5.8rem/1 "Geist";
+    font: 700 6rem/1 "Geist";
     width: 950px;
-    margin: 0 0 0.2em 0.4em;
+    margin: 0 0 0 0.4em;
+}
+
+.content__information .information__subtitulo {
+    font: 700 9.8rem/1 "Geist";
+    width: 950px;
+    margin: 0 0 0.1em 1em;
 }
 
 .content__information .information__text {
     font: 600 1.4em "Urbanist";
-    width: 800px;
+    width: 950px;
     margin: 0 0 1em 2em;
 
 }
