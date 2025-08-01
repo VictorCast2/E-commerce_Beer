@@ -1,4 +1,4 @@
-package com.application.shared;
+package com.application.persistence.shared;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
