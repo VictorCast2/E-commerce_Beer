@@ -8,10 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/auth")
@@ -51,9 +50,9 @@ public class AuthController {
     }
 
     @PostMapping("/sign_up")
-    public String postSignUp(@ModelAttribute CreacionUsuarioRequest registroRequest, Model model) {
+    public String postSignUp(@Valid @RequestBody CreacionUsuarioRequest request, Model model) {
         try {
-            usuarioServicesImpl.crearUsuario(registroRequest);
+            usuarioServicesImpl.crearUsuario(request);
             return "redirect:/auth/login";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());

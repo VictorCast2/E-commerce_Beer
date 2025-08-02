@@ -1,6 +1,7 @@
 package com.application.service.implementation.usuario;
 
 import com.application.persistence.entity.rol.Rol;
+import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.repository.RolRepository;
 import com.application.presentation.dto.usuario.request.AuthLoginRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
@@ -20,10 +21,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.validation.Valid;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Service
@@ -45,25 +44,31 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
      * La contraseña se cifra antes de guardarla en la base de datos.
      */
     @Override
-    public UsuarioResponse crearUsuario(@Valid @RequestBody CreacionUsuarioRequest request) {
+    public UsuarioResponse crearUsuario(CreacionUsuarioRequest request) {
 
-        Set<Rol> roles = request.roles().stream()
-                .map(rol -> Rol.builder())
+        Set<Rol> roles = request.getRoles().stream()
+                .map(rol -> Rol.builder()
+                        .name(ERol.valueOf(rol))
+                .build())
+                .collect(Collectors.toSet());
 
         Usuario usuario = Usuario.builder()
-                .nombres(request.nombres())
-                .apellidos(request.apellidos())
-                .cedula(request.cedula())
-                .telefono(request.telefono())
-                .correo(request.correo())
-                .contrasenna(encoder.encode(request.contrasenna()))
+                .nombres(request.getNombres())
+                .apellidos(request.getApellidos())
+                .cedula(request.getCedula())
+                .telefono(request.getTelefono())
+                .roles(roles)
+                .correo(request.getCorreo())
+                .contrasenna(encoder.encode(request.getContrasenna()))
                 .empresa(null)
                 .isEnabled(true)
                 .accountNonExpired(true)
                 .accountNonLocked(true)
                 .credentialsNonExpired(true)
                 .build();
+
         usuarioRepository.save(usuario);
+
         return new UsuarioResponse("✅ Usuario creado exitosamente");
     }
 

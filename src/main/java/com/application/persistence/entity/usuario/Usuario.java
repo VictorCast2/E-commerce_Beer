@@ -100,7 +100,7 @@ public class Usuario implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getERol().name()))
+                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getName().name()))
                 .collect(Collectors.toSet());
     }
 
