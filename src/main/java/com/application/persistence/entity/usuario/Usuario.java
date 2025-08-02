@@ -10,10 +10,8 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,21 +36,21 @@ public class Usuario implements UserDetails {
     @Column(name = "usuario_id")
     private Long usuarioId;
 
-    @Column(name = "cedula", nullable = false)
+    @Column(name = "cedula")
     private String cedula;
-    @Column(name = "nombre", nullable = false, length = 50)
+    @Column(name = "nombre", length = 50)
     private String nombres;
-    @Column(name = "apellido", nullable = false, length = 50)
+    @Column(name = "apellido", length = 50)
     private String apellidos;
     @Size(min = 10, max = 10, message = "El teléfono debe tener 10 caracteres")
-    @Column(name = "telefono", nullable = false)
+    @Column(name = "telefono")
     private String telefono;
-    @Column(name = "imagen", nullable = false)
+    @Column(name = "imagen")
     private String imagen;
     @Email(message = "El correo debe ser válido")
-    @Column(name = "correo", nullable = false, length = 100)
+    @Column(name = "correo", length = 100)
     private String correo;
-    @Column(name = "contrasenna", nullable = false, length = 100)
+    @Column(name = "contrasenna", length = 100)
     private String contrasenna;
 
     @Column(name = "is_enabled")

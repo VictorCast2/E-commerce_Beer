@@ -60,6 +60,7 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
                 .roles(roles)
                 .correo(request.getCorreo())
                 .contrasenna(encoder.encode(request.getContrasenna()))
+                .imagen(request.getImagen())
                 .empresa(null)
                 .isEnabled(true)
                 .accountNonExpired(true)
@@ -90,12 +91,12 @@ public class UsuarioServicesImpl implements UserDetailsService, UsuarioInterface
      * Si las credenciales son incorrectas, lanza una excepción BadCredentialsException.
      */
     private Authentication authenticate(AuthLoginRequest request) {
-        UserDetails userDetails = loadUserByUsername(request.correo());
-
-        if (!encoder.matches(request.password(), userDetails.getPassword())) {
+        UserDetails userDetails = loadUserByUsername(request.getCorreo());
+        System.out.println("Autenticando usuario: " + request.getCorreo());
+        if (!encoder.matches(request.getPassword(), userDetails.getPassword())) {
+            System.out.println("Contraseña incorrecta para el usuario: " + request.getCorreo());
             throw new BadCredentialsException("❌ Contraseña incorrecta");
         }
-
         return new UsernamePasswordAuthenticationToken(
                 userDetails, // <- ya no usamos el String del correo, sino el objeto
                 userDetails.getPassword(),

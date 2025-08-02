@@ -1,6 +1,5 @@
 package com.application.presentation.controller;
 
-import com.application.persistence.repository.RolRepository;
 import com.application.presentation.dto.usuario.request.AuthLoginRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.service.implementation.usuario.UsuarioServicesImpl;
@@ -8,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @Controller
@@ -19,9 +18,6 @@ public class AuthController {
 
     @Autowired
     private final UsuarioServicesImpl usuarioServicesImpl;
-
-    @Autowired
-    private final RolRepository rolRepository;
 
     @GetMapping("/")
     public String index() {
@@ -35,13 +31,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public String postLogin(@ModelAttribute AuthLoginRequest loginRequest, Model model) {
-        try {
-            usuarioServicesImpl.loginUser(loginRequest);
-            return "redirect:/"; // Redirige a la página principal tras iniciar sesión
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "redirect:/auth/login"; // Vuelve al login si hay error
-        }
+        usuarioServicesImpl.loginUser(loginRequest);
+        return "redirect:/"; // Redirige a la página principal tras iniciar sesión
     }
 
     @GetMapping("/sign_up")
@@ -50,15 +41,12 @@ public class AuthController {
     }
 
     @PostMapping("/sign_up")
-    public String postSignUp(@Valid @RequestBody CreacionUsuarioRequest request, Model model) {
-        try {
-            usuarioServicesImpl.crearUsuario(request);
-            return "redirect:/auth/login";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("roles", rolRepository.findAll());
-            return "redirect:/auth/sign_up";
+    public String postSignUp(@Valid @RequestBody CreacionUsuarioRequest request, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
         }
+        usuarioServicesImpl.crearUsuario(request);
+        return "redirect:/auth/login";
     }
 
 }

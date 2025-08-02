@@ -1,9 +1,18 @@
 package com.application.presentation.dto.usuario.request;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@JsonPropertyOrder({"correo", "password"})
-public record AuthLoginRequest(@NotBlank(message = "el correo no puede estar en blanco") String correo,
-                               @NotBlank(message = "la contraseña no puede estar en blanco") String password) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthLoginRequest {
+
+    private String correo;
+
+    private String password;
+
 }
