@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -36,6 +37,13 @@ public class SegurityConfig {
                     .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(session -> session
                             .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                            .invalidSessionUrl("/auth/login")
+                            .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::migrateSession)
+                            .sessionConcurrency(concurrency -> concurrency
+                                    .maximumSessions(1)
+                                    .expiredUrl("/auth/login")
+                                    .sessionRegistry(datosSession())
+                            )
                     )
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
@@ -60,7 +68,10 @@ public class SegurityConfig {
                             .permitAll()
                     )
                     .formLogin(form -> form
+                            .loginPage("/auth/login")        // ← Página personalizada de login
+                            .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
                             .defaultSuccessUrl("/", true)
+                            .failureUrl("/auth/login?error=true")
                             .permitAll()
                     )
                     .exceptionHandling(ex -> ex

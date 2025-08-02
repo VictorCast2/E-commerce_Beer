@@ -24,12 +24,10 @@ public class AuthController {
         return "Index";
     }
 
-    /*
     @GetMapping("/login")
     public String getLogin() {
         return "Login";
     }
-     */
 
     @GetMapping("/sign_up")
     public String getSignUp() {
