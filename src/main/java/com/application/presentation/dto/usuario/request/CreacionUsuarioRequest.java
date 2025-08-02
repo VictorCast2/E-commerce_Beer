@@ -1,12 +1,12 @@
 package com.application.presentation.dto.usuario.request;
 
+import com.application.persistence.entity.rol.enums.ERol;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -30,8 +30,7 @@ public class CreacionUsuarioRequest {
         @Email(message = "El correo debe ser válido")
         private String correo;
 
-        @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
-        private String contrasenna;
+        private String password;
 
-        private Set<String> roles;
+        private String rol;
 }

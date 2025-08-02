@@ -3,7 +3,7 @@ package com.application.presentation.controller;
 import com.application.presentation.dto.usuario.request.AuthLoginRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.service.implementation.usuario.UsuarioServicesImpl;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/auth")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthController {
 
     @Autowired
@@ -24,16 +24,12 @@ public class AuthController {
         return "Index";
     }
 
+    /*
     @GetMapping("/login")
     public String getLogin() {
         return "Login";
     }
-
-    @PostMapping("/login")
-    public String postLogin(@ModelAttribute AuthLoginRequest loginRequest, Model model) {
-        usuarioServicesImpl.loginUser(loginRequest);
-        return "redirect:/"; // Redirige a la página principal tras iniciar sesión
-    }
+     */
 
     @GetMapping("/sign_up")
     public String getSignUp() {

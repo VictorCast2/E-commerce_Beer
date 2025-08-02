@@ -10,10 +10,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Getter
 @Setter
@@ -50,8 +47,8 @@ public class Usuario implements UserDetails {
     @Email(message = "El correo debe ser válido")
     @Column(name = "correo", length = 100)
     private String correo;
-    @Column(name = "contrasenna", length = 100)
-    private String contrasenna;
+    @Column(name = "password", length = 100)
+    private String password;
 
     @Column(name = "is_enabled")
     @Builder.Default
@@ -69,16 +66,14 @@ public class Usuario implements UserDetails {
     @Builder.Default
     private boolean credentialsNonExpired = true;
 
-    // Cardinalidad con la tabla rol (relación muchos a muchos)
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Rol.class, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "usuario_rol",
-            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id",
-                    foreignKey = @ForeignKey(name = "fk_usuario_rol_usuario")),
-            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "rol_id",
-                    foreignKey = @ForeignKey(name = "fk_usuario_rol_rol"))
+    // Cardinalidad con la tabla rol (relación unidireccional)
+    @ManyToOne
+    @JoinColumn(
+            name = "rol_id",
+            referencedColumnName = "rol_id",
+            foreignKey = @ForeignKey(name = "fk_usuario_rol")
     )
-    private Set<Rol> roles;
+    private Rol rol;
 
     // Cardinalidad con la tabla empresas (relación unidireccional)
     @ManyToOne
@@ -95,16 +90,24 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
 
+    /**
+     * Método para obtener los roles del usuario como una colección de GrantedAuthority.
+     * Si el rol es nulo o su nombre es nulo, devuelve una lista vacía.
+     * De lo contrario, devuelve una lista con el rol del usuario.
+     *
+     * @return Colección de GrantedAuthority
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.getName().name()))
-                .collect(Collectors.toSet());
+        if (rol == null || rol.getName() == null) {
+            return Collections.emptyList();
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
     }
 
     @Override
     public String getPassword() {
-        return this.contrasenna;
+        return this.password;
     }
 
     @Override
@@ -125,6 +128,11 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
 }

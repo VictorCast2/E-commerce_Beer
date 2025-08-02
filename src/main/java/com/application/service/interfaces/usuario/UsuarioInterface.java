@@ -8,6 +8,5 @@ import javax.validation.Valid;
 
 public interface UsuarioInterface {
     UsuarioResponse deleteUsuario(String correo);
-    UsuarioResponse loginUser(AuthLoginRequest request);
     UsuarioResponse crearUsuario(@Valid CreacionUsuarioRequest request);
 }
