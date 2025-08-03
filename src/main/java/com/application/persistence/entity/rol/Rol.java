@@ -20,5 +20,5 @@ public class Rol {
 
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
-    private ERol eRol;
+    private ERol name;
 }
