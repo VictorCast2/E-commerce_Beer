@@ -5,11 +5,11 @@ import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import javax.validation.constraints.Pattern;
 import java.util.*;
 
 @Getter
@@ -35,17 +35,18 @@ public class Usuario implements UserDetails {
 
     @Column(name = "cedula")
     private String cedula;
-    @Column(name = "nombre", length = 50)
+    @Column(name = "nombres", length = 50)
     private String nombres;
     @Column(name = "apellido", length = 50)
     private String apellidos;
-    @Size(min = 10, max = 10, message = "El teléfono debe tener 10 caracteres")
     @Column(name = "telefono")
+    @Pattern(regexp = "^(\\+\\d{1,3}[- ])?\\d{10}$", message = "El número de teléfono debe tener 10 dígitos y puede incluir un código de país opcional.")
     private String telefono;
     @Column(name = "imagen")
     private String imagen;
-    @Email(message = "El correo debe ser válido")
     @Column(name = "correo", length = 100)
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "El correo debe ser válido")
+    @Email(message = "El correo debe ser válido")
     private String correo;
     @Column(name = "password", length = 100)
     private String password;
