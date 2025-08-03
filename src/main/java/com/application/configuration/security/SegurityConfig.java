@@ -36,14 +36,8 @@ public class SegurityConfig {
             return http
                     .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(session -> session
-                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                             .invalidSessionUrl("/auth/login")
-                            .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::migrateSession)
-                            .sessionConcurrency(concurrency -> concurrency
-                                    .maximumSessions(1)
-                                    .expiredUrl("/auth/login")
-                                    .sessionRegistry(datosSession())
-                            )
                     )
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
