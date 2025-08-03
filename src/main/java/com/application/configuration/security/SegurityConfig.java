@@ -1,39 +1,62 @@
 package com.application.configuration.security;
 
+import com.application.persistence.repository.RolRepository;
+import com.application.persistence.repository.UsuarioRepository;
+import com.application.service.implementation.usuario.UsuarioServicesImpl;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Data
 @Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SegurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws SecurityException {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         try {
             return http
                     .csrf(AbstractHttpConfigurer::disable)
-                    .sessionManagement(session -> session.
-                            sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .sessionManagement(session -> session
+                            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                            .invalidSessionUrl("/auth/login")
+                            .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::migrateSession)
+                            .sessionConcurrency(concurrency -> concurrency
+                                    .maximumSessions(1)
+                                    .expiredUrl("/auth/login")
+                                    .sessionRegistry(datosSession())
+                            )
                     )
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
-                                    "/auth/**",         // Endpoints de autenticación
-                                    "/usuario/**",      // Endpoints de usuario
                                     "/Assets/**",       // Recursos estáticos
                                     "/Js/**",
                                     "/Json/**",
                                     "/Css/**"
                             ).permitAll()
+                            .requestMatchers(
+                                    "/auth/**",
+                                    "/usuario/**",
+                                    "/error/**",
+                                    "/error/").permitAll()
                             .anyRequest().authenticated()
                     )
                     .logout(logout -> logout
@@ -45,7 +68,10 @@ public class SegurityConfig {
                             .permitAll()
                     )
                     .formLogin(form -> form
-                            .loginPage("/auth/login")
+                            .loginPage("/auth/login")        // ← Página personalizada de login
+                            .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
+                            .defaultSuccessUrl("/", true)
+                            .failureUrl("/auth/login?error=true")
                             .permitAll()
                     )
                     .exceptionHandling(ex -> ex
@@ -69,6 +95,7 @@ public class SegurityConfig {
                                     // Fuerza que los navegadores accedan solo por HTTPS durante 1 año (31536000 segundos)
                             )
                     )
+                    .httpBasic(Customizer.withDefaults())
                     .build();
         } catch (Exception e) {
             throw new SecurityException("Error al construir la cadena de seguridad", e);
@@ -76,13 +103,49 @@ public class SegurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public UserDetailsService userDetailsService(
+            UsuarioRepository usuarioRepository,
+            RolRepository rolRepository, PasswordEncoder encoder) {
+        return new UsuarioServicesImpl(usuarioRepository, rolRepository, encoder);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * Configuración del DaoAuthenticationProvider para manejar la autenticación de usuarios
+     * Utiliza el UserDetailsService y PasswordEncoder definidos anteriormente
+     */
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
+    }
+
+    /**
+     * Configuración del AuthenticationManager para manejar la autenticación de usuarios
+     * Utiliza el UserDetailsService y PasswordEncoder definidos anteriormente
+     */
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity,
+                                                       PasswordEncoder passwordEncoder,
+                                                       UserDetailsService userDetailsService) throws Exception {
+        AuthenticationManagerBuilder authBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+        authBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        return authBuilder.build();
+    }
+
+    /**
+     * Registro de sesiones para manejar múltiples sesiones de usuario
+     * Permite rastrear las sesiones activas y gestionar el cierre de sesión
+     */
+    @Bean
+    public SessionRegistry datosSession() {
+        return new SessionRegistryImpl();
     }
 
 }
