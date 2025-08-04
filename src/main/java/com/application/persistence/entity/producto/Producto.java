@@ -35,7 +35,6 @@ public class Producto extends ItemProducto {
     @OneToMany(mappedBy = "producto",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @Builder.Default
     private Set<PackProducto> packProductos = new HashSet<>();
 
     @ManyToOne

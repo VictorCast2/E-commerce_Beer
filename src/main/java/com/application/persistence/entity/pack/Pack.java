@@ -33,12 +33,10 @@ public class Pack extends ItemProducto {
     private ETipo eTipo;
 
     // Cardinalidad con la tabla pack_producto
-    @Builder.Default
     @OneToMany(mappedBy = "pack", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PackProducto> packProductos = new HashSet<>();
 
     // Cardinalidad con la tabla detálle ventas
-    @Builder.Default
     @OneToMany(mappedBy = "pack", fetch = FetchType.LAZY)
     private Set<DetalleVenta> detalleVentas = new HashSet<>();
 }

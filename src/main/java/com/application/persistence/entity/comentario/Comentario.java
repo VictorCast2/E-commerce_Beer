@@ -42,6 +42,5 @@ public class Comentario {
             referencedColumnName = "historia_id",
             foreignKey = @ForeignKey(name = "fk_comentario_historia")
     )
-    @JsonIgnore
     private Historia historia;
 }
