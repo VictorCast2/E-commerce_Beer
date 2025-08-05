@@ -3,27 +3,20 @@ package com.application.service.implementation.usuario;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.repository.RolRepository;
+import com.application.presentation.dto.usuario.request.ActualizaccionUsuarioRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.service.interfaces.usuario.UsuarioInterface;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 @Service
 public class UsuarioServicesImpl implements UsuarioInterface, UserDetailsService {
@@ -80,6 +73,11 @@ public class UsuarioServicesImpl implements UsuarioInterface, UserDetailsService
         return new UsuarioResponse("✅ Usuario creado exitosamente");
     }
 
+    @Override
+    public UsuarioResponse actualizarUsuario(String correo, ActualizaccionUsuarioRequest request) {
+        return null;
+    }
+
     /**
      * Método para eliminar un usuario por su correo electrónico.
      * Busca al usuario en la base de datos y lo elimina si existe.
@@ -107,14 +105,14 @@ public class UsuarioServicesImpl implements UsuarioInterface, UserDetailsService
             return new UsernameNotFoundException("Usuario no encontrado");
         });
 
-        System.out.println("Usuario encontrado: " +  usuario.getUsername()+
+        System.out.println("Usuario encontrado: " +  usuario.getCorreo()+
                 " | Rol sin formato: " + usuario.getRol().getName() +
                 " | Rol con formato: " + usuario.getAuthorities()+
                 " | Contraseña (hash): " + usuario.getPassword()
         );
 
         return new User(
-                usuario.getUsername(),
+                usuario.getCorreo(),
                 usuario.getPassword(),
                 true,
                 true,

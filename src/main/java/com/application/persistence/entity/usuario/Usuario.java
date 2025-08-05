@@ -26,7 +26,7 @@ import java.util.*;
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
 )
-public class Usuario implements UserDetails {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,42 +98,11 @@ public class Usuario implements UserDetails {
      *
      * @return Colección de GrantedAuthority
      */
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (rol == null || rol.getName() == null) {
             return Collections.emptyList();
         }
         return List.of(new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.correo;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
     }
 
 }

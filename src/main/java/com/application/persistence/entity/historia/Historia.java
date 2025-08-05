@@ -31,6 +31,7 @@ public class Historia {
     private boolean activo;
 
     // Cardinalidad con la tabla comentario (relación bidireccional)
+    @Builder.Default
     @OneToMany(mappedBy = "historia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comentario> comentarios = new HashSet<>();
 }

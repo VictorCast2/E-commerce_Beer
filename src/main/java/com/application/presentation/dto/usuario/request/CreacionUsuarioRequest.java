@@ -1,14 +1,11 @@
 package com.application.presentation.dto.usuario.request;
 
-import com.application.persistence.entity.rol.enums.ERol;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
