@@ -1,5 +1,6 @@
 package com.application.persistence.entity.categoria;
 
+import com.application.persistence.entity.pack.Pack;
 import com.application.persistence.entity.producto.Producto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,18 +33,7 @@ public class Categoria {
     @Column(nullable = false)
     private boolean activo;
 
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
-    private Set<Producto> productos = new HashSet<>();
-
-    // Agregar producto a categoria y viceversa (bidirectional)
-    public void addProducto(Producto producto) {
-        productos.add(producto);
-        producto.setCategoria(this);
-    }
-
-    // Eliminar producto de categoria y viceversa (bidirectional)
-    public void deleteProducto(Producto producto) {
-        productos.remove(producto);
-        producto.setCategoria(null);
-    }
+    // Cardinalidad con la tabla packs
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Pack> packs = new HashSet<>();
 }
