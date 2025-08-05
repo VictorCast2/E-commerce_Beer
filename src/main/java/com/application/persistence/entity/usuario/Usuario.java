@@ -39,12 +39,10 @@ public class Usuario implements UserDetails {
     private String nombres;
     @Column(name = "apellido", length = 50)
     private String apellidos;
-    @Size(min = 10, max = 10, message = "El teléfono debe tener 10 caracteres")
     @Column(name = "telefono")
     private String telefono;
     @Column(name = "imagen")
     private String imagen;
-    @Email(message = "El correo debe ser válido")
     @Column(name = "correo", length = 100)
     private String correo;
     @Column(name = "password", length = 100)
@@ -86,7 +84,6 @@ public class Usuario implements UserDetails {
 
     // Cardinalidad con la tabla compra (relación bidireccional)
     @Column(name = "compras")
-    @Builder.Default
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
 
