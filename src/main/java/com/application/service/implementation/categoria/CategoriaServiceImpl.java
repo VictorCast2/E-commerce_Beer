@@ -3,7 +3,7 @@ package com.application.service.implementation.categoria;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.repository.CategoriaRepository;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
-import com.application.presentation.dto.categoria.request.response.CategoriaResponse;
+import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.interfaces.categoria.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
