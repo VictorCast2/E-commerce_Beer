@@ -1,9 +1,9 @@
 package com.application.service.interfaces.categoria;
 
 import com.application.persistence.entity.categoria.Categoria;
-import com.application.presentation.dto.request.CategoriaCreateRequest;
-import com.application.presentation.dto.response.CategoriaResponse;
-import com.application.presentation.dto.response.GeneralResponse;
+import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
+import com.application.presentation.dto.categoria.request.response.CategoriaResponse;
+import com.application.presentation.dto.general.response.GeneralResponse;
 
 import java.util.List;
 
