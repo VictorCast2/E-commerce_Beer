@@ -1,8 +1,9 @@
 package com.application.configuration.security;
 
+import com.application.persistence.repository.EmpresaRepository;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
-import com.application.service.implementation.usuario.UsuarioServicesImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,15 +23,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SegurityConfig {
 
+    /**
+     * Configuración del filtro de seguridad para manejar la autenticación y autorización
+     * Utiliza HttpSecurity para definir las reglas de seguridad de la aplicación
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        .invalidSessionUrl("/auth/login")
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura la política de creación de sesiones como Stateless
+                        .invalidSessionUrl("/auth/login") // URL a la que redirigir si la sesión es inválida
+                        .maximumSessions(2) // Número máximo de sesiones por usuario
+                        .expiredUrl("/auth/login?expired") // Redirige si la sesión expiró
+                        .sessionRegistry(sessionRegistry()) // Registra las sesiones activas
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -48,19 +57,19 @@ public class SegurityConfig {
                         ).permitAll()
                         .anyRequest().authenticated()
                     )
+                .formLogin(form -> form
+                        .loginPage("/auth/login")        // ← Página personalizada de login
+                        .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
+                        .defaultSuccessUrl("/", true) // ← Redirige a la página principal después del login exitoso
+                        .failureUrl("/auth/login?error=true")
+                        .permitAll()
+                )
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/auth/login?logout")
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "access_token")
-                        .permitAll()
-                )
-                .formLogin(form -> form
-                        .loginPage("/auth/login")        // ← Página personalizada de login
-                        .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
                 .exceptionHandling(ex -> ex
@@ -88,13 +97,22 @@ public class SegurityConfig {
                 .build();
     }
 
+    /**
+     * Configuración del UserDetailsService para manejar la carga de usuarios
+     * Utiliza el UsuarioRepository y RolRepository para obtener los datos de usuario y rol
+     */
     @Bean
     public UserDetailsService userDetailsService(
             UsuarioRepository usuarioRepository,
-            RolRepository rolRepository, PasswordEncoder encoder) {
-        return new UsuarioServicesImpl(usuarioRepository, rolRepository, encoder);
+            RolRepository rolRepository, EmpresaRepository empresaRepository,
+            PasswordEncoder encoder) {
+        return new UsuarioServiceImpl(usuarioRepository, empresaRepository, rolRepository, encoder);
     }
 
+    /**
+     * Configuración del PasswordEncoder para manejar el cifrado de contraseñas
+     * Utiliza BCryptPasswordEncoder para cifrar las contraseñas de los usuarios
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -130,7 +148,7 @@ public class SegurityConfig {
      * Permite rastrear las sesiones activas y gestionar el cierre de sesión
      */
     @Bean
-    public SessionRegistry datosSession() {
+    public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
 

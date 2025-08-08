@@ -1,4 +1,4 @@
-package com.application.presentation.dto.request;
+package com.application.presentation.dto.categoria.request;
 
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;

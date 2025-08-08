@@ -1,4 +1,4 @@
-package com.application.presentation.dto.response;
+package com.application.presentation.dto.categoria.response;
 
 public record CategoriaResponse(
         String nombre,
