@@ -29,6 +29,7 @@ public class Empresa {
     private Long empresaId;
 
     @Column(name = "nit")
+    @Pattern(regexp = "", message = "El nit de la empresa debe ser válido")
     private String nit;
     @Column(name = "razon_social")
     private String razonSocial;

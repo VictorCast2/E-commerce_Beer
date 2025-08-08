@@ -5,7 +5,6 @@ import com.application.persistence.entity.pack.PackProducto;
 import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,4 +43,5 @@ public class Producto extends ItemProducto {
             foreignKey = @ForeignKey(name = "fk_producto_categoria")
     )
     private Categoria categoria;
+
 }
