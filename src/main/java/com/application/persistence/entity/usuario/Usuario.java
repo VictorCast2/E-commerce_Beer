@@ -5,11 +5,10 @@ import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.validation.constraints.Pattern;
 import java.util.*;
 
 @Getter
@@ -26,7 +25,7 @@ import java.util.*;
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
 )
-public class Usuario implements UserDetails {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,15 +34,18 @@ public class Usuario implements UserDetails {
 
     @Column(name = "cedula")
     private String cedula;
-    @Column(name = "nombre", length = 50)
+    @Column(name = "nombres", length = 50)
     private String nombres;
     @Column(name = "apellido", length = 50)
     private String apellidos;
     @Column(name = "telefono")
+    @Pattern(regexp = "^(\\+\\d{1,3}[- ])?\\d{10}$", message = "El número de teléfono debe tener 10 dígitos y puede incluir un código de país opcional.")
     private String telefono;
     @Column(name = "imagen")
     private String imagen;
     @Column(name = "correo", length = 100)
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "El correo debe ser válido")
+    @Email(message = "El correo debe ser válido")
     private String correo;
     @Column(name = "password", length = 100)
     private String password;
@@ -94,42 +96,11 @@ public class Usuario implements UserDetails {
      *
      * @return Colección de GrantedAuthority
      */
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (rol == null || rol.getName() == null) {
             return Collections.emptyList();
         }
         return List.of(new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.correo;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
     }
 
 }

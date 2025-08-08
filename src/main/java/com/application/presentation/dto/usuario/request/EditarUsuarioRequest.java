@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreacionUsuarioRequest {
+public class EditarUsuarioRequest {
 
     private String cedula;
 
@@ -34,5 +34,7 @@ public class CreacionUsuarioRequest {
     private String password;
 
     private String rol;
+
+    private String empresa;
 
 }
