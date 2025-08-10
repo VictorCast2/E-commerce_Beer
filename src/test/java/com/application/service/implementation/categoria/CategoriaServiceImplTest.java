@@ -111,7 +111,7 @@ class CategoriaServiceImplTest {
         verify(categoriaRepository).save( argumentCaptor.capture() );
 
         assertEquals("Categoria 1", argumentCaptor.getValue().getNombre());
-        assertEquals("Categoria creada exitosamente", resultado.mensaje());
+        assertEquals("categoria creada exitosamente", resultado.mensaje());
     }
 
     @Test
@@ -132,7 +132,7 @@ class CategoriaServiceImplTest {
         assertNotNull(argumentCaptor);
         assertEquals(1L, argumentCaptor.getValue().getCategoriaId());
         assertEquals("categoria actualizada", argumentCaptor.getValue().getNombre());
-        assertEquals("Categoria actualizada exitosamente", resultado.mensaje());
+        assertEquals("categoria actualizada exitosamente", resultado.mensaje());
     }
 
     @Test
@@ -150,7 +150,7 @@ class CategoriaServiceImplTest {
         verify(categoriaRepository).save(argumentCaptor.capture());
 
         assertFalse(argumentCaptor.getValue().isActivo());
-        assertEquals("Categoría deshabilitada exitosamente", resultado.mensaje());
+        assertEquals("categoría deshabilitada exitosamente", resultado.mensaje());
     }
 
     @Test
@@ -171,7 +171,7 @@ class CategoriaServiceImplTest {
         assertTrue(argumentCaptor.getValue().getPacks().isEmpty());
         assertEquals(1L, argumentCaptor.getValue().getCategoriaId());
         assertEquals("Categoria 1", argumentCaptor.getValue().getNombre());
-        assertEquals("Categoria eliminada exitosamente", resultado.mensaje());
+        assertEquals("categoria eliminada exitosamente", resultado.mensaje());
     }
 
     @Test

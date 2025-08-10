@@ -129,7 +129,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         Categoria categoria = this.getCategoriaById(id);
         categoria.setActivo(false);
         categoriaRepository.save(categoria);
-        return new GeneralResponse("Categoría deshabilitada exitosamente");
+        return new GeneralResponse("categoría deshabilitada exitosamente");
     }
 
     /**
