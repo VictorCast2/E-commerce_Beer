@@ -3,20 +3,18 @@ package com.application.service.implementation.categoria;
 import com.application.CategoriaDataProvider;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.repository.CategoriaRepository;
-import com.application.presentation.dto.request.CategoriaCreateRequest;
-import com.application.presentation.dto.response.CategoriaResponse;
-import com.application.presentation.dto.response.GeneralResponse;
+import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
+import com.application.presentation.dto.categoria.response.CategoriaResponse;
+import com.application.presentation.dto.general.response.GeneralResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
