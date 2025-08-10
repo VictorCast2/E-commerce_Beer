@@ -6,6 +6,7 @@ import com.application.persistence.entity.compra.DetalleVenta;
 import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(
         name = "pack",
@@ -34,6 +35,7 @@ public class Pack extends ItemProducto {
     private ETipo eTipo;
 
     // Cardinalidad con la tabla categoria
+    @Builder.Default
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "pack_categoria",
             joinColumns = @JoinColumn(name = "pack_id", referencedColumnName = "pack_id",
