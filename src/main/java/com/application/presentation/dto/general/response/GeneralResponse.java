@@ -1,4 +1,4 @@
-package com.application.presentation.dto.response;
+package com.application.presentation.dto.general.response;
 
 public record GeneralResponse(
         String mensaje
