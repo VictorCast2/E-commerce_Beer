@@ -89,4 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logos = document.getElementById("slider").cloneNode(true);
     document.getElementById("logos").appendChild(logos);
 
+    //cambiar anio del footer automaticamente
+    document.getElementById("anio__pagina").textContent = new Date().getFullYear();
+
 });

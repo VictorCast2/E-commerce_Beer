@@ -1,3 +1,10 @@
+:root{
+    --typografiaGeist:"Geist";
+    --typografiaUrbanist:"Urbanist";
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -458,7 +465,6 @@ body {
 .about {
     min-height: 100vh;
     padding-top: 100px;
-    background-color: #04101F;
 }
 
 .about__container {
@@ -480,6 +486,7 @@ body {
 .about__container .image-main img {
     max-width: 100%;
     width: 600px;
+    height: 650px;
     object-fit: cover;
 }
 
@@ -515,7 +522,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     flex-grow: 1;
-    color: white;
+    color: #000000;
     font-weight: 800;
     font-size: 2.25rem;
     line-height: 1.2;
@@ -524,23 +531,23 @@ body {
 }
 
 .information__description .description__title {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     font: 700 3.5rem "Geist";
 }
 
 .information__description .description__text {
-    font: 500 0.83rem "Urbanist";
+    font: 500 1.055rem "Urbanist";
     letter-spacing: 0.1em;
-    text-transform: uppercase;
 }
 
 .information__description .description__btn {
     text-decoration: none;
     width: 30%;
     cursor: pointer;
+    text-align: center;
     padding: 1rem 1.3rem;
-    background-color: #fff;
-    color: #000000;
+    background-color: #000000;
+    color: #fff;
     font: 600 1.3rem "Urbanist";
     margin-top: 1.5rem;
     border-radius: 5px;
@@ -804,7 +811,6 @@ body {
     text-decoration: line-through;
 }
 
-
 /** Banner de descuento */
 .banner {
     margin-top: 5rem;
@@ -855,12 +861,14 @@ body {
     color: #fff;
 }
 
+
 /* Por que deberias comprar con nosotros */
 .elegir__contenedor {
     min-height: 100vh;
     padding-top: 0px;
     position: relative;
     display: grid;
+    margin-top: 40px;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     align-items: center;
@@ -901,10 +909,10 @@ body {
 .elegir__icono {
     display: inline-block;
     margin-bottom: 0.5rem;
-    padding: 5px 10px;
+    padding:10px;
     font-size: 1.25rem;
     background-color: #cad8d8;
-    border-radius: 100%;
+    border-radius: 50%;
 }
 
 .elegir__tarjeta-titulo {
@@ -926,14 +934,275 @@ body {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
+/**Section Figuras */
+.figuras{
+    min-height: 35vh;
+}
+
+.figuras__content{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.figuras__content .content__figure{
+    width: 180px;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+    border: 1px solid #787a36;
+    border-radius: 4px;
+    margin: 15px 0;
+    transition: box-shadow .5s ease;
+}
+
+.figuras__content .content__figure:hover{
+    box-shadow: 10px 10px 54px rgba(70, 62, 211, 0.1);
+}
+
+.figuras__content .content__figure img{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.figuras__content .content__figure figcaption{
+    display: inline-block;
+    padding: 9px 8px 6px 8px;
+    line-height: 1;
+    font: 600 1rem var(--typografiaUrbanist);
+    border-radius: 4px;
+    color: #0000007b;
+    background-color: #fddde4;
+}
+
+.figuras__content .content__figure:nth-child(2) figcaption {
+    background-color: #cdebbc;
+}
+
+.figuras__content .content__figure:nth-child(3) figcaption {
+    background-color: #d1e8f2;
+}
+
+.figuras__content .content__figure:nth-child(4) figcaption {
+    background-color: #cdd4f8;
+}
+
+.figuras__content .content__figure:nth-child(5) figcaption {
+    background-color: #f6dbf6;
+}
+
+.figuras__content .content__figure:nth-child(6) figcaption {
+    background-color: #fff2e5;
+}
+
 /* Footer */
+
 .footer__subscripcion{
-    background-color: #F6ECDD;
-    min-height: 25vh;
+    background:#8e705c url(../Assets/Img/baner/b14.png) no-repeat 20% 30%;
+}
+
+.subcripcion__informativa{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    min-height: 200px;
+}
+
+.informativa__formulario{
+    padding-top: 30px;
+}
+
+.informativa__subscribir .subscribir__title{
+    font: 700 2rem "Geist";
+    margin: 0 0 1rem 0 ;
+    color: #fff;
+
+}
+
+.informativa__subscribir .subscribir__text{
+    font: 500 1.2rem "Urbanist";
+    color: #cdd4f8;
+
+}
+
+.informativa__subscribir .subscribir__text span{
+    color: #ffbd27;
+}
+
+/* Formulario de subcripcion */
+.formulario__input {
+    position: relative;
+}
+
+
+.formulario__input input {
+    margin: 10px 0 25px 30px;
+    background-color: transparent;
+    border: none;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    color: #374151;
+    border-radius: 5px;
+    width: 600px;
+    font: 500 1.1rem "Urbanist";
+    height: 65px;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.formulario__input input::placeholder{
+    color: #374151;
+}
+
+
+.formulario__input button{
+    position: absolute;
+    bottom:1.85rem;
+    right: 0.4rem;
+    font: 600 1.2rem var(--typografiaGeist);
+    width: 180px;
+    height: 55px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #8e705c;
 }
 
 
 .footer__enlaces {
     display: flex;
     justify-content: space-around;
+    padding-top: 50px;
+    min-height: 50vh;
+}
+
+/* .enlaces__categoriaNosotros .categoriaNosotros__logo{
+
+}
+ */
+
+.categoriaNosotros__list{
+    list-style-type: none;
+}
+
+.categoriaNosotros__list .list__title{
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.categoriaNosotros__list .list__item {
+    font: 400 1.1rem var(--typografiaUrbanist);
+    margin-bottom: 0.4rem;
+}
+
+.categoriaNosotros__list .list__siguenos{
+    font: 600 1.3rem var(--typografiaGeist);
+    padding-top: 2rem;
+}
+
+.categoriaNosotros__list .list__icon{
+    margin: 0.5rem 0 0 -0.4rem;
+}
+
+.categoriaNosotros__list .icon__social i{
+    display: flex;
+    gap: 6rem;
+    font-size: 1.5rem;
+    margin: 0.5rem 0  0 0;
+}
+
+/** Enlaces de categorias populares */
+.enlaces__categoriaPopulares .categoriaPopulares__title{
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__categoriaPopulares .categoriasPopulares__list{
+    list-style-type: none;
+
+}
+
+.categoriasPopulares__list .list__item{
+    margin-bottom: 0.7rem;
+    
+}
+
+
+.categoriasPopulares__list .list__item .item__footer{
+    text-decoration: none;
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+
+/** Enlaces de productos */
+.enlaces__categoriaProductos .categoriaProductos__title{
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__categoriaProductos .categoriaProductos__list{
+    list-style: none;
+
+}
+
+.categoriaProductos__list .list__item{
+    margin-bottom: 0.7rem;
+    
+}
+
+
+.categoriaProductos__list .list__item .item__footer{
+    text-decoration: none;
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+/**Instalar app mobile */
+.enlaces__instalar .instalar__title{
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__instalar .instalar__list{
+    list-style-type: none;
+}
+
+.instalar__list .list__item{
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+.enlaces__instalar .instalar__flex{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.instalar__flex figure{
+    border: 1px solid #ff7302;
+    border-radius: 5px;
+    padding: 0.1rem;
+    margin: 1rem 0;
+}
+
+.instalar__list .item--pagos{
+    margin-bottom: 1rem;
+}
+
+.footer .instalar__copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.instalar__copyright .copyright__text{
+    font: 500 1.1rem var(--typografiaUrbanist);
+}
+
+.instalar__copyright .copyright__text a{
+    text-decoration: none;
 }

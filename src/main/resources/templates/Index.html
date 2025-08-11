@@ -520,6 +520,13 @@
                     </div>
                 </div>
 
+                <div class="banner">
+                    <h4 class="banner__title">Promociones Especiales</h4>
+                    <h2 class="banner__subtitulo">Obten un <span>50% de Descuento</span> en Todas las Cervezas y Vinos
+                    </h2>
+                    <button class="banner__btn">Explorar Mas</button>
+                </div>
+
                 <h2 class="destacados__titles">Recién Llegados</h2>
 
                 <div class="flex">
@@ -645,11 +652,6 @@
         </section>
     </main>
 
-    <section class="banner">
-        <h4 class="banner__title">Promociones Especiales</h4>
-        <h2 class="banner__subtitulo">Obten un <span>50% de Descuento</span> en Todas las Cervezas y Vinos</h2>
-        <button class="banner__btn">Explorar Mas</button>
-    </section>
 
     <section class="elegir__contenedor">
         <img class="elegir__fondo" src="../static/Assets/Img/comprarNosotros/dot-bg.png" alt="fondo decorativo" />
@@ -700,107 +702,146 @@
             <img src="../static/Assets/Img/comprarNosotros/choose.jpg" alt="imagen elegir" />
         </figure>
     </section>
+    
 
+    <section class="figuras">
+        <div class="figuras__content">
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f1.png" alt="f1">
+                <figcaption>Envio Gratis</figcaption>
+            </figure>
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f2.png" alt="f1">
+                <figcaption>Pedido en Linea</figcaption>
+            </figure>
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f3.png" alt="f1">
+                <figcaption>Ahorra Dinero</figcaption>
+            </figure>
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f4.png" alt="f1">
+                <figcaption>Promociones</figcaption>
+            </figure>
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f5.png" alt="f1">
+                <figcaption>Venta Feliz</figcaption>
+            </figure>
+            <figure class="content__figure">
+                <img src="../static/Assets/Img/figures/f6.png" alt="f1">
+                <figcaption>F24/7 Soporte</figcaption>
+            </figure>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer__subscripcion">
             <div class="subcripcion__informativa">
-                <h2 class="informativa__title">Suscríbete al Boletín Informativo</h2>
-                <p class="informativa__text">
-                    Recibe actualizaciones por correo electrónico sobre nuestras últimas novedades y ofertas especiales
-                </p>
+                <div class="informativa__subscribir">
+                    <h2 class="subscribir__title">Suscríbete al Boletín Informativo</h2>
+                    <p class="subscribir__text">
+                        Recibe en tu correo nuestras últimas novedades y <span>las mejores ofertas especiales.</span>
+                    </p>
+                </div>
 
                 <div class="informativa__formulario">
                     <form class="formulario__subcripcion" action="">
-                        <input type="email" name="Email" id="email">
-                        <label for="email">Ingresa tu email</label>
-                        <button type="submit">Subcribe</button>
+                        <div class="subcripcion__formulario">
+                            <div class="formulario__input">
+                                <input type="email" autocomplete="off" placeholder="Ingresa tu email" name="Email" id="email">
+                                <button type="submit">Subcribete</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
 
         <div class="footer__enlaces">
+
+            <div class="enlaces__categoriaNosotros">
+                <figure class="categoriaNosotros__logo">
+                    <img src="" alt="">
+                </figure>
+
+                <ul class="categoriaNosotros__list">
+                    <h4 class="list__title">Contactanos</h4>
+
+                    <li class="list__item"><strong>Direccion: </strong>Fundacion Tecnologica De Comfenalco</li>
+                    <li class="list__item"><strong>Telefono: </strong> +321458924</li>
+                    <li class="list__item"><strong>Horarios: </strong> 7:00 - 17:00, Lunes - Viernes</li>
+
+                    <h4 class="list__siguenos">Siguenos en</h4>
+                    
+                    <div class="list__icon">
+                        <li class="icon__social"><i class="ri-facebook-fill"></i></li>
+                        <li class="icon__social"><i class="ri-twitter-fill"></i></li>
+                        <li class="icon__social"><i class="ri-instagram-fill"></i></li>
+                        <li class="icon__social"><i class="ri-pinterest-fill"></i></li>
+                    </div>
+
+                </ul>
+            </div>
+
             <div class="enlaces__categoriaPopulares">
                 <h2 class="categoriaPopulares__title">Categorias Populares</h2>
 
                 <ul class="categoriasPopulares__list">
-                    <li class="list__item"><a href="">Lager</a></li>
-                    <li class="list__item"><a href="">Ale</a></li>
-                    <li class="list__item"><a href="">IPA</a></li>
-                    <li class="list__item"><a href="">Vino tinto</a></li>
-                    <li class="list__item"><a href="">Vino blanco</a></li>
-                    <li class="list__item"><a href="">Whisky</a></li>
-                    <li class="list__item"><a href="">Vodka</a></li>
-                    <li class="list__item"><a href="">Licores de frutas</a></li>
-                    <li class="list__item"><a href="">Licores herbales</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Lager</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Ale</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Vino tinto</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Vino blanco</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Whisky</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Vodka</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Licores de frutas</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Licores herbales</a></li>
                 </ul>
             </div>
 
             <div class="enlaces__categoriaProductos">
-                <h2 class="categoriaProductos__title">Categorias Populares</h2>
+                <h2 class="categoriaProductos__title">Productos</h2>
 
                 <ul class="categoriaProductos__list">
-                    <li class="list__item"><a href="">Colecciones</a></li>
-                    <li class="list__item"><a href="">Nuevos Productos</a></li>
-                    <li class="list__item"><a href="">Catalogos</a></li>
-                    <li class="list__item"><a href="">Contactanos</a></li>
-                    <li class="list__item"><a href="">Los precios bajan</a></li>
-                    <li class="list__item"><a href="">Las mejores ventas</a></li>
-                    <li class="list__item"><a href="">Mapa del sitio</a></li>
-                    <li class="list__item"><a href="">Paquete y ahorro</a></li>
-                    <li class="list__item"><a href="">Tarjeta de regalo en línea</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Recién Llegados</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Nuevos Productos</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Catalogos</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Los precios bajan</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Las mejores ventas</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Mapa del sitio</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Paquete y ahorro</a></li>
+                    <li class="list__item"><a class="item__footer" href="">Tarjeta de regalo en línea</a></li>
                 </ul>
             </div>
 
-            <div class="enlaces__categoriaNosotros">
-                <h2 class="categoriaNosotros__title">Sobre Nosotros</h2>
+            <div class="enlaces__instalar">
+                <h2 class="instalar__title">Instalar App</h2>
 
-                <ul class="categoriaNosotros__list">
-                    <li class="list__item"><a href="">Sobre Nosotros</a></li>
-                    <li class="list__item"><a href="">Información de Entregas</a></li>
-                    <li class="list__item"><a href="">Políticas de Privacidad</a></li>
-                    <li class="list__item"><a href="">Contactanos</a></li>
-                    <li class="list__item"><a href="">Terminos y Condiciones</a></li>
-                    <li class="list__item"><a href="">Las mejores ventas</a></li>
-                    <li class="list__item"><a href="">Mapa del sitio</a></li>
-                    <li class="list__item"><a href="">Paquete y ahorro</a></li>
-                    <li class="list__item"><a href="">Tarjeta de regalo en línea</a></li>
+                <ul class="instalar__list">
+                    <li class="list__item">Desde App Store o Google Play</li>
                 </ul>
+
+                <div class="instalar__flex">
+                    <figure>
+                        <img src="../static/Assets/Img/footer/app.jpg" alt="">
+                    </figure>
+                    <figure>
+                        <img src="../static/Assets/Img/footer/play.jpg" alt="">
+                    </figure>
+                </div>
+
+                <ul class="instalar__list">
+                    <li class="list__item item--pagos">Pasarelas de Pago Seguras</li>
+                </ul>
+
+                <figure>
+                    <img src="../static/Assets/Img/footer/pay.png" alt="">
+                </figure>
             </div>
 
-            <div class="enlaces__categoriaNosotros">
-                <h2 class="categoriaNosotros__title">Mi Cuenta</h2>
 
-                <ul class="categoriaNosotros__list">
-                    <li class="list__item"><a href="">Sobre Nosotros</a></li>
-                    <li class="list__item"><a href="">Información de Entregas</a></li>
-                    <li class="list__item"><a href="">Políticas de Privacidad</a></li>
-                    <li class="list__item"><a href="">Contactanos</a></li>
-                    <li class="list__item"><a href="">Terminos y Condiciones</a></li>
-                    <li class="list__item"><a href="">Las mejores ventas</a></li>
-                    <li class="list__item"><a href="">Mapa del sitio</a></li>
-                    <li class="list__item"><a href="">Paquete y ahorro</a></li>
-                    <li class="list__item"><a href="">Tarjeta de regalo en línea</a></li>
-                </ul>
-            </div>
+        </div>
 
-            <div class="enlaces__categoriaNosotros">
-                <h2 class="categoriaNosotros__title">Contactos</h2>
-
-                <ul class="categoriaNosotros__list">
-                    <li class="list__item"><a href="">Sobre Nosotros</a></li>
-                    <li class="list__item"><a href="">Información de Entregas</a></li>
-                    <li class="list__item"><a href="">Políticas de Privacidad</a></li>
-                    <li class="list__item"><a href="">Contactanos</a></li>
-                    <li class="list__item"><a href="">Terminos y Condiciones</a></li>
-                    <li class="list__item"><a href="">Las mejores ventas</a></li>
-                    <li class="list__item"><a href="">Mapa del sitio</a></li>
-                    <li class="list__item"><a href="">Paquete y ahorro</a></li>
-                    <li class="list__item"><a href="">Tarjeta de regalo en línea</a></li>
-                </ul>
-            </div>
-
+        <div class="instalar__copyright">
+            <p class="copyright__text">© <span id="anio__pagina"></span>, Beer-E-ecommer - Todos los Derechos Reservados - Creado por <a href="#"><strong>Nosotros</strong></a></p>
         </div>
     </footer>
 
