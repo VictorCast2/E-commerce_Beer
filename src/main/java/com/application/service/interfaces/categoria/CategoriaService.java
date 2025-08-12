@@ -7,7 +7,6 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-@Repository
 public interface CategoriaService {
     Categoria getCategoriaById(Long id);
     List<CategoriaResponse> getCategorias();

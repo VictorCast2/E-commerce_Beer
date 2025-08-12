@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     /**
      * Obtiene una categoría por su ID.
@@ -84,7 +84,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @return DTO con mensaje de éxito
      */
     @Override
-    public GeneralResponse addCategoria(@Valid CategoriaCreateRequest categoriaRequest) {
+    public GeneralResponse addCategoria(CategoriaCreateRequest categoriaRequest) {
 
         Categoria categoria = Categoria.builder()
                 .nombre(categoriaRequest.nombre())
@@ -106,7 +106,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @throws NoSuchElementException si la categoría no existe
      */
     @Override
-    public GeneralResponse updateCategoria(@Valid CategoriaCreateRequest categoriaRequest, Long id) {
+    public GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id) {
 
         Categoria categoria = this.getCategoriaById(id);
 

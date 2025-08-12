@@ -48,6 +48,7 @@ public class SegurityConfig {
                                 "/error/**",
                                 "/error/"
                         ).permitAll()
+                        .requestMatchers("/admin/Categoria/**").hasRole("ADMIN")
                         .requestMatchers(
                                 "/",
                                 "/Assets/**",
