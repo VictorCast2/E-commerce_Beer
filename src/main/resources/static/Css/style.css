@@ -1,6 +1,7 @@
-:root{
-    --typografiaGeist:"Geist";
-    --typografiaUrbanist:"Urbanist";
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
 }
 
 
@@ -408,7 +409,7 @@ body {
 /** Logos Cerveza */
 .logos {
     min-height: 10vh;
-    margin-bottom: 2rem;
+
 }
 
 .content__logos {
@@ -461,220 +462,150 @@ body {
     }
 }
 
-/* About me */
-.about {
-    min-height: 100vh;
-    padding-top: 100px;
-}
 
-.about__container {
-    max-width: 96rem;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.about__container .image-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    margin: -0.14rem 0 0 -2rem;
-}
-
-.about__container .image-main img {
-    max-width: 100%;
-    width: 600px;
-    height: 650px;
-    object-fit: cover;
-}
-
-.about__container .container__content {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.container__content .image-row {
-    display: flex;
-    margin-left: -4rem;
-    gap: 1rem;
-}
-
-.container__content .image-row img:first-child {
-    max-width: 100%;
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
-}
-
-.container__content .image-row img:last-child {
-    max-width: 100%;
-    width: 600px;
-    height: 300px;
-    object-fit: cover;
-}
-
-.container__content .information__description {
-    margin: 1rem 0 0 -4.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-grow: 1;
-    color: #000000;
-    font-weight: 800;
-    font-size: 2.25rem;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    padding: 0 0.5rem;
-}
-
-.information__description .description__title {
-    margin-bottom: 1rem;
-    font: 700 3.5rem "Geist";
-}
-
-.information__description .description__text {
-    font: 500 1.055rem "Urbanist";
-    letter-spacing: 0.1em;
-}
-
-.information__description .description__btn {
-    text-decoration: none;
-    width: 30%;
-    cursor: pointer;
-    text-align: center;
-    padding: 1rem 1.3rem;
-    background-color: #000000;
-    color: #fff;
-    font: 600 1.3rem "Urbanist";
-    margin-top: 1.5rem;
-    border-radius: 5px;
-}
-
-/* Responsive para pantallas medianas hacia arriba */
-@media (min-width: 768px) {
-    .about__container {
-        flex-direction: row;
-        gap: 1.5rem;
-    }
-
-    .image-main {
-        width: 50%;
-        padding: 0;
-    }
-
-    .container__content {
-        width: 50%;
-        padding: 0;
-    }
-
-    .information__description {
-        font-size: 3rem;
-        padding: 0;
-    }
-}
 
 /* Section Producto */
 .productos {
     min-height: 100vh;
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
-.contenido__header {
+.productos__categoria {
+    position: relative;
+}
+
+.categorias__vertodos {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 6rem 2rem 6rem; 
+    margin: 0 6.2rem 2rem 6.2rem;
 }
 
-.productos__contenido .contenido__title {
+
+.categorias__vertodos .vertodos__titles {
     font: 700 1.576rem "Geist";
-    margin: 0; 
+
 }
 
-.carta__flechas {
+
+.categorias__vertodos .vertodos__enlaces {
+    font: 700 1.2rem "Geist";
+    color: #e30712;
+
+}
+
+
+.header__flechas {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    right: 1.5rem;
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
-.carta__flechas__arrow {
-    background-color: #eee;
+.flechas--categorias {
+    transform: translateY(-20%);
+}
+
+.flechas__arrow {
+    background: #fff;
     border: none;
+    font: 700 1.7rem var(--typografiaGeist);
+    cursor: pointer;
+    padding: 0.5rem 0.7rem;
     border-radius: 50%;
-    font-size: 1.5rem;
-    padding: 0.4rem 0.5rem;
-    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
 }
 
+.flechas__arrow:hover {
+    background: #eee;
+}
 
-.contenido__carta{
+.productos__categoria .categoria__carta {
     display: flex;
-    flex-wrap: wrap;
-    cursor: pointer;
     justify-content: center;
-    gap: 25px;
-    align-content: center;
+    gap: 1.5rem;
+    align-items: center;
 }
 
-
-.carta__item{
+.carta__item {
     min-width: 200px;
     border: 1px solid #ddd;
-    border-radius: 15px;
+    border-radius: 0.5rem;
     min-height: 250px;
     padding: 10px;
-    
+
 }
+
 .carta__item .item__img {
     background-color: #eee;
-    border-radius: 15px;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.carta__item .item__img img{
+
+.carta__item .item__img img {
     max-width: 100%;
     width: 100px;
-    height:auto;
+    height: auto;
 }
 
-.carta__item .item__name{
+.carta__item .item__name {
     font: 600 1.1rem "Geist";
-    margin:1rem 0 0 4rem;
+    margin: 1rem 0 0 4rem;
     color: #71717a;
 }
 
 /** Productos Destacados */
+.destacados__vertodos {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 6.2rem 2rem 6.2rem;
+}
 
 
-.productos__destacados .destacados__titles{
+.destacados__vertodos .destacados__titles {
     font: 700 1.576rem "Geist";
-    margin: 2rem 0 2rem 6rem;
 
 }
 
 
+.destacados__vertodos .vertodos__enlaces {
+    font: 700 1.2rem "Geist";
+    color: #e30712;
+
+}
+
 .flex {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 40px;
 }
 
-@media (min-width: 640px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.flex__productos {
+    overflow: hidden;
+    width: calc((300px * 4) + (40px * 3)); 
 }
 
-@media (min-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+.flex__productos-track{
+    display: flex;
+    gap: 40px;
+    position: relative;
+    transition: transform 0.9s ease-in-out;
+    width: max-content;
 }
+
 
 /* Card */
 .card {
@@ -691,15 +622,16 @@ body {
     text-align: left;
 }
 
-.card:hover {
+/* .card:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+ */
 
 .card-icons {
     position: absolute;
     top: 50%;
     right: -60px;
-    transform: translateY(-140%);
+    transform: translateY(-170%);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -727,11 +659,14 @@ body {
 }
 
 .card img {
-    width: 200px;
-    height: 200px;
+    max-width: 100%;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
     margin-bottom: 16px;
 }
+
+
 
 /* Badge */
 .badge {
@@ -778,10 +713,31 @@ body {
 
 .description {
     font: 400 1.1rem/1.4 "Urbanist";
-    margin-bottom: 8px;
+    margin: -8px 0 8px 0;
     text-align: left;
     color: #636465;
     width: 100%;
+}
+
+
+.pais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+
+}
+
+
+.pais img {
+    max-width: 100%;
+    width: 30px;
+    height: auto;
+}
+
+.pais .pais__name {
+    margin: -15px 0 0 0;
+    font: 600 1.1rem var(--typografiaUrbanist);
 }
 
 .stars {
@@ -790,6 +746,10 @@ body {
     font-size: 1.2rem;
     width: 100%;
     text-align: left;
+}
+
+.stars i {
+    margin: -3px;
 }
 
 .price-container {
@@ -880,21 +840,21 @@ body {
     top: 1rem;
     left: 57%;
     transform: translateX(-3rem);
-    max-width:300px;
+    max-width: 300px;
     opacity: 0.4;
     z-index: -1;
 }
 
-.elegir__contenido{
-    margin:-3rem 0 0 7rem;
+.elegir__contenido {
+    margin: -3rem 0 0 7rem;
 }
 
-.elegir__contenido .contenido__titulo{
+.elegir__contenido .contenido__titulo {
     font: 700 3rem "Geist";
     margin: 0 0 1.3rem 0;
 }
 
-.elegir__contenido .contenido__subtitulo{
+.elegir__contenido .contenido__subtitulo {
     font: 400 1.3rem "Urbanist";
     color: #71717a;
 }
@@ -909,7 +869,7 @@ body {
 .elegir__icono {
     display: inline-block;
     margin-bottom: 0.5rem;
-    padding:10px;
+    padding: 10px;
     font-size: 1.25rem;
     background-color: #cad8d8;
     border-radius: 50%;
@@ -935,18 +895,18 @@ body {
 }
 
 /**Section Figuras */
-.figuras{
+.figuras {
     min-height: 35vh;
 }
 
-.figuras__content{
+.figuras__content {
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.figuras__content .content__figure{
+.figuras__content .content__figure {
     width: 180px;
     text-align: center;
     padding: 25px 15px;
@@ -957,16 +917,16 @@ body {
     transition: box-shadow .5s ease;
 }
 
-.figuras__content .content__figure:hover{
+.figuras__content .content__figure:hover {
     box-shadow: 10px 10px 54px rgba(70, 62, 211, 0.1);
 }
 
-.figuras__content .content__figure img{
+.figuras__content .content__figure img {
     width: 100%;
     margin-bottom: 10px;
 }
 
-.figuras__content .content__figure figcaption{
+.figuras__content .content__figure figcaption {
     display: inline-block;
     padding: 9px 8px 6px 8px;
     line-height: 1;
@@ -998,11 +958,11 @@ body {
 
 /* Footer */
 
-.footer__subscripcion{
-    background:#8e705c url(../Assets/Img/baner/b14.png) no-repeat 20% 30%;
+.footer__subscripcion {
+    background: #8e705c url(../Assets/Img/baner/b14.png) no-repeat 20% 30%;
 }
 
-.subcripcion__informativa{
+.subcripcion__informativa {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -1010,24 +970,24 @@ body {
     min-height: 200px;
 }
 
-.informativa__formulario{
+.informativa__formulario {
     padding-top: 30px;
 }
 
-.informativa__subscribir .subscribir__title{
+.informativa__subscribir .subscribir__title {
     font: 700 2rem "Geist";
-    margin: 0 0 1rem 0 ;
+    margin: 0 0 1rem 0;
     color: #fff;
 
 }
 
-.informativa__subscribir .subscribir__text{
+.informativa__subscribir .subscribir__text {
     font: 500 1.2rem "Urbanist";
     color: #cdd4f8;
 
 }
 
-.informativa__subscribir .subscribir__text span{
+.informativa__subscribir .subscribir__text span {
     color: #ffbd27;
 }
 
@@ -1052,14 +1012,14 @@ body {
     outline: none;
 }
 
-.formulario__input input::placeholder{
+.formulario__input input::placeholder {
     color: #374151;
 }
 
 
-.formulario__input button{
+.formulario__input button {
     position: absolute;
-    bottom:1.85rem;
+    bottom: 1.85rem;
     right: 0.4rem;
     font: 600 1.2rem var(--typografiaGeist);
     width: 180px;
@@ -1084,11 +1044,11 @@ body {
 }
  */
 
-.categoriaNosotros__list{
+.categoriaNosotros__list {
     list-style-type: none;
 }
 
-.categoriaNosotros__list .list__title{
+.categoriaNosotros__list .list__title {
     font: 600 1.3rem var(--typografiaGeist);
     margin-bottom: 0.8rem;
 }
@@ -1098,40 +1058,40 @@ body {
     margin-bottom: 0.4rem;
 }
 
-.categoriaNosotros__list .list__siguenos{
+.categoriaNosotros__list .list__siguenos {
     font: 600 1.3rem var(--typografiaGeist);
     padding-top: 2rem;
 }
 
-.categoriaNosotros__list .list__icon{
+.categoriaNosotros__list .list__icon {
     margin: 0.5rem 0 0 -0.4rem;
 }
 
-.categoriaNosotros__list .icon__social i{
+.categoriaNosotros__list .icon__social i {
     display: flex;
     gap: 6rem;
     font-size: 1.5rem;
-    margin: 0.5rem 0  0 0;
+    margin: 0.5rem 0 0 0;
 }
 
 /** Enlaces de categorias populares */
-.enlaces__categoriaPopulares .categoriaPopulares__title{
+.enlaces__categoriaPopulares .categoriaPopulares__title {
     font: 600 1.3rem var(--typografiaGeist);
     margin-bottom: 0.8rem;
 }
 
-.enlaces__categoriaPopulares .categoriasPopulares__list{
+.enlaces__categoriaPopulares .categoriasPopulares__list {
     list-style-type: none;
 
 }
 
-.categoriasPopulares__list .list__item{
+.categoriasPopulares__list .list__item {
     margin-bottom: 0.7rem;
-    
+
 }
 
 
-.categoriasPopulares__list .list__item .item__footer{
+.categoriasPopulares__list .list__item .item__footer {
     text-decoration: none;
     font: 500 1rem var(--typografiaUrbanist);
     color: #374151;
@@ -1139,70 +1099,70 @@ body {
 
 
 /** Enlaces de productos */
-.enlaces__categoriaProductos .categoriaProductos__title{
+.enlaces__categoriaProductos .categoriaProductos__title {
     font: 600 1.3rem var(--typografiaGeist);
     margin-bottom: 0.8rem;
 }
 
-.enlaces__categoriaProductos .categoriaProductos__list{
+.enlaces__categoriaProductos .categoriaProductos__list {
     list-style: none;
 
 }
 
-.categoriaProductos__list .list__item{
+.categoriaProductos__list .list__item {
     margin-bottom: 0.7rem;
-    
+
 }
 
 
-.categoriaProductos__list .list__item .item__footer{
+.categoriaProductos__list .list__item .item__footer {
     text-decoration: none;
     font: 500 1rem var(--typografiaUrbanist);
     color: #374151;
 }
 
 /**Instalar app mobile */
-.enlaces__instalar .instalar__title{
+.enlaces__instalar .instalar__title {
     font: 600 1.3rem var(--typografiaGeist);
     margin-bottom: 0.8rem;
 }
 
-.enlaces__instalar .instalar__list{
+.enlaces__instalar .instalar__list {
     list-style-type: none;
 }
 
-.instalar__list .list__item{
+.instalar__list .list__item {
     font: 500 1rem var(--typografiaUrbanist);
     color: #374151;
 }
 
-.enlaces__instalar .instalar__flex{
+.enlaces__instalar .instalar__flex {
     display: flex;
     gap: 0.5rem;
 }
 
-.instalar__flex figure{
+.instalar__flex figure {
     border: 1px solid #ff7302;
     border-radius: 5px;
     padding: 0.1rem;
     margin: 1rem 0;
 }
 
-.instalar__list .item--pagos{
+.instalar__list .item--pagos {
     margin-bottom: 1rem;
 }
 
-.footer .instalar__copyright{
+.footer .instalar__copyright {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 50px 0;
 }
 
-.instalar__copyright .copyright__text{
+.instalar__copyright .copyright__text {
     font: 500 1.1rem var(--typografiaUrbanist);
 }
 
-.instalar__copyright .copyright__text a{
+.instalar__copyright .copyright__text a {
     text-decoration: none;
 }

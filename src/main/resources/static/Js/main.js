@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    //Carrusel del inicio
     const hero = document.querySelector('.hero');
     const slides = document.querySelectorAll('.carousel__slide');
     const dots = document.querySelectorAll('.carousel__dot');
@@ -88,6 +89,39 @@ document.addEventListener('DOMContentLoaded', () => {
     //duplicacion de los logos
     const logos = document.getElementById("slider").cloneNode(true);
     document.getElementById("logos").appendChild(logos);
+
+    // mostrar los productos con carrusel
+    document.querySelectorAll(".flex").forEach(carrusel => {
+        const track = carrusel.querySelector(".flex__productos-track");
+        const prevBtn = carrusel.querySelector(".arrow--left");
+        const nextBtn = carrusel.querySelector(".arrow--right");
+
+        const cardWidth = 300; // ancho de cada card
+        const gap = 40;        // espacio entre cards
+        const visibles = 4;    // cuántos se muestran a la vez
+
+        let posicion = 0;
+        const totalProductos = track.querySelectorAll(".card").length;
+        const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
+
+        const paso = visibles * (cardWidth + gap); // mueve 4 productos
+
+        nextBtn.addEventListener("click", () => {
+            if (posicion < maxPosicion) {
+                posicion += paso;
+                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (posicion > 0) {
+                posicion -= paso;
+                if (posicion < 0) posicion = 0; // no pasar inicio
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+    });
 
     //cambiar anio del footer automaticamente
     document.getElementById("anio__pagina").textContent = new Date().getFullYear();
