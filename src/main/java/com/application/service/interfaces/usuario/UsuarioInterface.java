@@ -6,7 +6,6 @@ import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import org.springframework.stereotype.Repository;
 import javax.validation.Valid;
 
-@Repository
 public interface UsuarioInterface {
     UsuarioResponse deleteUsuario(String correo);
     UsuarioResponse crearUsuario(@Valid CreacionUsuarioRequest request);

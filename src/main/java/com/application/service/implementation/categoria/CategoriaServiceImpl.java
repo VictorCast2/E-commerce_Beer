@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     /**
      * Obtiene una categoría por su ID.
@@ -29,21 +30,29 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Categoria getCategoriaById(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("La categoria con id= " + id + " no exite o ha sido eliminada"));
+                .orElseThrow(() -> new NoSuchElementException("La categoria con id= " + id + " no existe o ha sido eliminada"));
     }
 
     /**
      * Obtiene todas las categorías registradas (activas e inactivas).
      * Uso común para el panel administrativo.
      *
-     * @return Lista de DTOs con nombre y descripción de las categorías
+     * @return Lista de DTOs con nombre, descripción y cantidad de packs de las categorías
      */
     @Override
     public List<CategoriaResponse> getCategorias() {
-        return categoriaRepository.findAll()
+        List<Categoria> categorias = categoriaRepository.findAll();
+        return categorias
                 .stream()
-                .map(categoria -> new CategoriaResponse(categoria.getNombre(), categoria.getDescripcion()))
-                .toList();
+                .map(categoria -> {
+                    long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
+                    return new CategoriaResponse(
+                            categoria.getNombre(),
+                            categoria.getDescripcion(),
+                            cantidadPacks
+                    );
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -54,10 +63,18 @@ public class CategoriaServiceImpl implements CategoriaService {
      */
     @Override
     public List<CategoriaResponse> getCategoriasActivas() {
-        return categoriaRepository.findByActivoTrue()
+        List<Categoria> categoriasActivas = categoriaRepository.findByActivoTrue();
+        return categoriasActivas
                 .stream()
-                .map(categoria -> new CategoriaResponse(categoria.getNombre(), categoria.getDescripcion()))
-                .toList();
+                .map(categoria -> {
+                    long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
+                    return new CategoriaResponse(
+                            categoria.getNombre(),
+                            categoria.getDescripcion(),
+                            cantidadPacks
+                    );
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -67,7 +84,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @return DTO con mensaje de éxito
      */
     @Override
-    public GeneralResponse addCategoria(@Valid CategoriaCreateRequest categoriaRequest) {
+    public GeneralResponse addCategoria(CategoriaCreateRequest categoriaRequest) {
 
         Categoria categoria = Categoria.builder()
                 .nombre(categoriaRequest.nombre())
@@ -89,7 +106,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @throws NoSuchElementException si la categoría no existe
      */
     @Override
-    public GeneralResponse updateCategoria(@Valid CategoriaCreateRequest categoriaRequest, Long id) {
+    public GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id) {
 
         Categoria categoria = this.getCategoriaById(id);
 
@@ -112,7 +129,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         Categoria categoria = this.getCategoriaById(id);
         categoria.setActivo(false);
         categoriaRepository.save(categoria);
-        return new GeneralResponse("Categoría deshabilitada exitosamente");
+        return new GeneralResponse("categoría deshabilitada exitosamente");
     }
 
     /**
@@ -134,6 +151,18 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaRepository.delete(categoria);
 
         return new GeneralResponse("categoria eliminada exitosamente");
+    }
+
+    /**
+     * Cuenta los packs de una categoría.
+     * Este método es de uso interno para otros métodos del servicio.
+     *
+     * @param id ID de la categoría a buscar
+     * @return el total de packs de esa categoría
+     */
+    @Override
+    public long countPacksByCategoriaId(Long id) {
+        return categoriaRepository.countPacksByCategoriaId(id);
     }
 
 }
