@@ -2,6 +2,8 @@
     --typografiaGeist: "Geist";
     --typografiaUrbanist: "Urbanist";
     --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
 }
 
 
@@ -484,7 +486,7 @@ body {
 
 
 .categorias__vertodos .vertodos__titles {
-    font: 700 1.576rem "Geist";
+    font: 700 2rem "Geist";
 
 }
 
@@ -574,7 +576,7 @@ body {
 
 
 .destacados__vertodos .destacados__titles {
-    font: 700 1.576rem "Geist";
+    font: 700 2rem "Geist";
 
 }
 
@@ -595,10 +597,10 @@ body {
 
 .flex__productos {
     overflow: hidden;
-    width: calc((300px * 4) + (40px * 3)); 
+    width: calc((300px * 4) + (40px * 3));
 }
 
-.flex__productos-track{
+.flex__productos-track {
     display: flex;
     gap: 40px;
     position: relative;
@@ -761,12 +763,12 @@ body {
 }
 
 .price {
-    font: 900 1rem "Urbanist";
+    font: 900 1.2rem "Urbanist";
     color: #111827;
 }
 
 .price-old {
-    font: 600 0.975rem "Urbanist";
+    font: 600 1.2rem "Urbanist";
     color: #9ca3af;
     text-decoration: line-through;
 }
@@ -894,9 +896,132 @@ body {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Oferta del dia */
+.ofertaDia{
+    min-height: 50vh;
+}
+
+
+.ofertaDia__product .product__title{
+    font: 700 3rem var(--typografiaGeist);
+    margin: 0 0 2rem 5rem;
+
+}
+
+.ofertaDia__product .product__flex{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 8rem;
+}
+
+
+.flex__img img{
+    max-width: 100%;
+    width: 600px;
+    height: 500px;
+}
+
+
+.product__flex .flex__content{
+    max-width: 600px;
+}
+
+.flex__content .content__name{
+    font: 500 1.4rem var(--typografiaGeist);
+    margin: 0 0.8rem 0 0;
+
+}
+
+.flex__content .content__descuento{
+    font: 600 1rem var(--typografiaUrbanist);
+    background-color: #10b981;
+    color: #ffff;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.flex__content .content__title{
+    margin: 1.2rem 0 0.6rem 0;
+    font: 600 3rem var(--typografiaGeist);
+}
+
+.flex__content .content__description{
+    font: 500 1.3rem var(--typografiaUrbanist);
+    color: var(--colorLigth);
+    margin-bottom: 1.3rem;
+}
+
+.flex__content .content__time span{
+    font: 500 3.3rem var(--typografiaGeist);
+    margin: 0 1rem 0 0;
+}
+
+.flex__content .content__btn{
+    margin-top: 3rem;
+}
+
+.flex__content .content__precio{
+    background-color: var(--colorDark);
+    color: #ffff;
+    font: 500 1.3rem var(--typografiaGeist);
+    padding: 23px 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* Section Blog */
+.blog {
+    min-height: 50vh;
+    padding-top: 80px;
+
+}
+
+.blog .blog__title{
+    font: 700 3rem var(--typografiaGeist);
+    margin: 0 0 0 5.5rem;
+}
+
+.blog__flex {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.blog__card img {
+    max-width: 100%;
+    width: 400px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog__card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font: 600 1.2rem var(--typografiaGeist);
+    color: var(--colorDark);
+}
+
+.blog__card p {
+    font: 500 1.2rem var(--typografiaUrbanist);
+    color: var(--colorDark);
+}
+
+.blog__card p span {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--colorLigth);
+}
+
+
 /**Section Figuras */
 .figuras {
     min-height: 35vh;
+    padding:50px 0;
 }
 
 .figuras__content {
