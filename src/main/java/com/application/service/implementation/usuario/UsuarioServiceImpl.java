@@ -31,6 +31,11 @@ public class UsuarioServiceImpl implements UsuarioInterface, UserDetailsService 
     @Lazy
     private PasswordEncoder encoder;
 
+    public Usuario getUsuarioByCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new UsernameNotFoundException("Error: el correo " + correo + " no existe."));
+    }
+
     /**
      * Método para crear un nuevo usuario.
      * Utiliza el RolRepository para encontrar el rol correspondiente al usuario.

@@ -7,13 +7,16 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-@Repository
 public interface CategoriaService {
     Categoria getCategoriaById(Long id);
     List<CategoriaResponse> getCategorias();
     List<CategoriaResponse> getCategoriasActivas();
+
+    // CRUD
     GeneralResponse addCategoria(CategoriaCreateRequest categoriaRequest);
     GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id);
     GeneralResponse disableCategoria(Long id);
     GeneralResponse deleteCategoria(Long id);
+
+    long countPacksByCategoriaId(Long id);
 }
