@@ -670,6 +670,7 @@ body {
 
 
 
+
 /* Badge */
 .badge {
     position: absolute;
@@ -904,7 +905,7 @@ body {
 
 .ofertaDia__product .product__title{
     font: 700 3rem var(--typografiaGeist);
-    margin: 0 0 2rem 5rem;
+    margin: 0 0 2rem 7rem;
 
 }
 
@@ -912,13 +913,13 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
-    gap: 8rem;
+    gap: 5rem;
 }
 
 
 .flex__img img{
     max-width: 100%;
-    width: 600px;
+    width:600px;
     height: 500px;
 }
 
@@ -952,6 +953,23 @@ body {
     margin-bottom: 1.3rem;
 }
 
+.flex__content .content__precio{
+    margin: 0 0 1rem 0;
+    display: flex;
+    gap: 0.7rem;
+}
+
+.content__precio .precio__new{
+    font: 700 1.5rem var(--typografiaUrbanist);
+    color: #c8102e;
+}
+
+.content__precio .precio__old{
+    font: 700 1.5rem var(--typografiaUrbanist);
+    color: var(--colorLigth);
+    text-decoration: line-through;
+}
+
 .flex__content .content__time span{
     font: 500 3.3rem var(--typografiaGeist);
     margin: 0 1rem 0 0;
@@ -961,7 +979,7 @@ body {
     margin-top: 3rem;
 }
 
-.flex__content .content__precio{
+.flex__content .content__comprar{
     background-color: var(--colorDark);
     color: #ffff;
     font: 500 1.3rem var(--typografiaGeist);
