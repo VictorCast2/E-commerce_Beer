@@ -33,7 +33,7 @@ public class Compra {
     @Enumerated(EnumType.STRING)
     private EEstado eEstado;
 
-    // Cardinalidad con la tabla usuario (relación bidireccional)
+    // Cardinalidad con la tabla usuario
     @ManyToOne
     @JoinColumn(
             name = "usuario_id",

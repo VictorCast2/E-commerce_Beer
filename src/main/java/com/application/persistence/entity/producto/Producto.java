@@ -1,10 +1,11 @@
 package com.application.persistence.entity.producto;
 
-import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.pack.PackProducto;
 import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(
         name = "producto",
@@ -31,17 +32,10 @@ public class Producto extends ItemProducto {
     private String presentacion;
 
     // Cardinalidad con la tabla pack_producto
+    @Builder.Default
     @OneToMany(mappedBy = "producto",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Set<PackProducto> packProductos = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(
-            name = "categoria_id",
-            referencedColumnName = "categoria_id",
-            foreignKey = @ForeignKey(name = "fk_producto_categoria")
-    )
-    private Categoria categoria;
 
 }

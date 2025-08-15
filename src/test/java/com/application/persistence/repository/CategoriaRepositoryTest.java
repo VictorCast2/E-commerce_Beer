@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CategoriaRepositoryTest {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
-    TestEntityManager entityManager;
+    private TestEntityManager entityManager;
 
     @BeforeEach
     void setUp() {
