@@ -3,6 +3,7 @@ package com.application.persistence.entity.pack;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.pack.enums.ETipo;
 import com.application.persistence.entity.compra.DetalleVenta;
+import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.shared.ItemProducto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -46,10 +47,12 @@ public class Pack extends ItemProducto {
     private Set<Categoria> categorias = new HashSet<>();
 
     // Cardinalidad con la tabla pack_producto
+    @Builder.Default
     @OneToMany(mappedBy = "pack", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PackProducto> packProductos = new HashSet<>();
 
     // Cardinalidad con la tabla detálle ventas
+    @Builder.Default
     @OneToMany(mappedBy = "pack", fetch = FetchType.LAZY)
     private Set<DetalleVenta> detalleVentas = new HashSet<>();
 
@@ -63,5 +66,22 @@ public class Pack extends ItemProducto {
     public void deleteCategoria(Categoria categoria) {
         categorias.remove(categoria);
         categoria.getPacks().remove(this);
+    }
+
+    // Agregar producto a pack y viceversa (bidireccional)
+    public void addProducto(Producto producto, int cantidad) {
+        PackProducto packProducto = PackProducto.builder()
+                .pack(this)
+                .producto(producto)
+                .cantidad(cantidad)
+                .build();
+        packProductos.add(packProducto);
+        producto.getPackProductos().add(packProducto);
+    }
+
+    // Eliminar producto de pack y viceversa (bidireccional)
+    public void deleteProducto(Producto producto) {
+        packProductos.removeIf(pp -> pp.getProducto().equals(producto));
+        producto.getPackProductos().removeIf(pp -> pp.getPack().equals(this));
     }
 }

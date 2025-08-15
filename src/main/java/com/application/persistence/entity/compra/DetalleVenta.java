@@ -35,7 +35,7 @@ public class DetalleVenta {
     )
     private Pack pack;
 
-    // Cardinalidad con la table compra
+    // Cardinalidad con la table compra (relación unidireccional)
     @ManyToOne
     @JoinColumn(
             name = "compra_id",

@@ -6,6 +6,7 @@ import com.application.presentation.dto.categoria.request.CategoriaCreateRequest
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.interfaces.categoria.CategoriaService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.validation.Valid;
@@ -30,7 +31,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Categoria getCategoriaById(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("La categoria con id= " + id + " no existe o ha sido eliminada"));
+                .orElseThrow(() -> new NoSuchElementException("La categoria con id: " + id + " no existe o ha sido eliminada"));
     }
 
     /**
@@ -84,7 +85,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @return DTO con mensaje de éxito
      */
     @Override
-    public GeneralResponse addCategoria(CategoriaCreateRequest categoriaRequest) {
+    public GeneralResponse addCategoria(@NotNull CategoriaCreateRequest categoriaRequest) {
 
         Categoria categoria = Categoria.builder()
                 .nombre(categoriaRequest.nombre())
@@ -106,7 +107,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @throws NoSuchElementException si la categoría no existe
      */
     @Override
-    public GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id) {
+    public GeneralResponse updateCategoria(@NotNull CategoriaCreateRequest categoriaRequest, Long id) {
 
         Categoria categoria = this.getCategoriaById(id);
 
