@@ -29,25 +29,22 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usuario_id")
+    @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
 
-    @Column(name = "cedula")
+    @Column(length = 15, nullable = false)
     private String cedula;
-    @Column(name = "nombres", length = 50)
+    @Column(length = 175, nullable = false)
     private String nombres;
-    @Column(name = "apellido", length = 50)
+    @Column(length = 175, nullable = false)
     private String apellidos;
-    @Column(name = "telefono")
-    @Pattern(regexp = "^(\\+\\d{1,3}[- ])?\\d{10}$", message = "El número de teléfono debe tener 10 dígitos y puede incluir un código de país opcional.")
+    @Column(length = 20, nullable = false)
     private String telefono;
-    @Column(name = "imagen")
+    @Column(nullable = false)
     private String imagen;
-    @Column(name = "correo", length = 100)
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "El correo debe ser válido")
-    @Email(message = "El correo debe ser válido")
+    @Column(length = 100, nullable = false)
     private String correo;
-    @Column(name = "password", length = 100)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(name = "is_enabled")
