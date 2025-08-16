@@ -1,5 +1,6 @@
 package com.application.configuration.security;
 
+import com.application.configuration.Custom.CustomOAuth2UserService;
 import com.application.persistence.repository.EmpresaRepository;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
@@ -31,7 +32,7 @@ public class SegurityConfig {
      * Utiliza HttpSecurity para definir las reglas de seguridad de la aplicación
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomOAuth2UserService customOAuth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -57,9 +58,14 @@ public class SegurityConfig {
                                 "/Css/**"
                         ).permitAll()
                         .anyRequest().authenticated()
-                    )
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/")
+                        .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
+                        .defaultSuccessUrl("/proteted", true)
+                )
                 .formLogin(form -> form
-                        .loginPage("/auth/login")        // ← Página personalizada de login
+                        .loginPage("/")
                         .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
                         .defaultSuccessUrl("/", true) // ← Redirige a la página principal después del login exitoso
                         .failureUrl("/auth/login?error=true")
@@ -152,5 +158,6 @@ public class SegurityConfig {
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
+
 
 }
