@@ -1,0 +1,122 @@
+/* === Estilos globales === */
+body {
+    background-color: #f8fafc; /* blanco suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #1e293b; /* gris oscuro */
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    width: 380px;
+    text-align: center;
+}
+
+/* Títulos */
+.container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #1e40af; /* azul */
+}
+
+/* Subtítulos / párrafos */
+.container p {
+    margin-bottom: 1.5rem;
+    color: #475569; /* gris */
+}
+
+/* Inputs */
+.container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.container input:focus {
+    border-color: #2563eb; /* azul */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.btn-login:hover {
+    background-color: #1e3a8a;
+}
+
+.btn-register {
+    background-color: #1e40af;
+    color: #ffffff;
+}
+
+.btn-register:hover {
+    background-color: #1e3a8a;
+}
+
+.btn-google {
+    margin-top: 0.8rem;
+    background-color: #ffffff;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-google:hover {
+    background-color: #f1f5f9;
+}
+
+/* Errores */
+.error-message {
+    color: #dc2626; /* rojo */
+    font-size: 0.9rem;
+    margin: -5px 0 10px;
+    text-align: left;
+}
+
+.success-message {
+    color: #16a34a; /* verde */
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}

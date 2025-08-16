@@ -4,11 +4,9 @@ import com.application.persistence.entity.compra.Compra;
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import javax.validation.constraints.Pattern;
 import java.util.*;
 
 @Getter
