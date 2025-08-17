@@ -3,7 +3,7 @@ package com.application.service.implementation.producto;
 import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.repository.ProductoRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.producto.request.ProductoCreateResquest;
+import com.application.presentation.dto.producto.request.ProductoCreateRequest;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.interfaces.producto.ProductoService;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class ProductoServiceImpl implements ProductoService {
      * @throws NoSuchElementException si la producto no existe
      */
     @Override
-    public Producto getProsuctoById(Long id) {
+    public Producto getProductoById(Long id) {
         return productoRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Error: El producto con id: " + id + " no existe"));
     }
@@ -79,20 +79,20 @@ public class ProductoServiceImpl implements ProductoService {
     /**
      * Crea un nuevo producto a partir de un DTO de creación.
      *
-     * @param productoResquest DTO con los datos del nuevo producto
+     * @param productoRequest DTO con los datos del nuevo producto
      * @return Respuesta con mensaje de confirmación
      */
     @Override
-    public GeneralResponse addProducto(@NotNull ProductoCreateResquest productoResquest) {
+    public GeneralResponse addProducto(@NotNull ProductoCreateRequest productoRequest) {
 
         Producto producto = Producto.builder()
-                .imagen(productoResquest.imagen())
-                .nombre(productoResquest.nombre())
-                .precio(productoResquest.precio())
-                .stock(productoResquest.stock())
-                .descripcion(productoResquest.descripcion())
-                .marca(productoResquest.marca())
-                .presentacion(productoResquest.presentacion())
+                .imagen(productoRequest.imagen())
+                .nombre(productoRequest.nombre())
+                .precio(productoRequest.precio())
+                .stock(productoRequest.stock())
+                .descripcion(productoRequest.descripcion())
+                .marca(productoRequest.marca())
+                .presentacion(productoRequest.presentacion())
                 .activo(true)
                 .build();
 
@@ -104,27 +104,27 @@ public class ProductoServiceImpl implements ProductoService {
     /**
      * Actualiza los datos de un producto existente.
      *
-     * @param productoResquest DTO con los datos actualizados
+     * @param productoRequest DTO con los datos actualizados
      * @param id ID del producto a actualizar
      * @return Respuesta con mensaje de confirmación
      * @throws NoSuchElementException si el producto no existe
      */
     @Override
-    public GeneralResponse updateProducto(ProductoCreateResquest productoResquest, Long id) {
+    public GeneralResponse updateProducto(@NotNull ProductoCreateRequest productoRequest, Long id) {
 
-        Producto productoActualizado = this.getProsuctoById(id);
+        Producto productoActualizado = this.getProductoById(id);
 
-        productoActualizado.setImagen(productoResquest.imagen());
-        productoActualizado.setNombre(productoResquest.nombre());
-        productoActualizado.setPrecio(productoResquest.precio());
-        productoActualizado.setStock(productoResquest.stock());
-        productoActualizado.setDescripcion(productoResquest.descripcion());
-        productoActualizado.setMarca(productoResquest.marca());
-        productoActualizado.setPresentacion(productoResquest.presentacion());
+        productoActualizado.setImagen(productoRequest.imagen());
+        productoActualizado.setNombre(productoRequest.nombre());
+        productoActualizado.setPrecio(productoRequest.precio());
+        productoActualizado.setStock(productoRequest.stock());
+        productoActualizado.setDescripcion(productoRequest.descripcion());
+        productoActualizado.setMarca(productoRequest.marca());
+        productoActualizado.setPresentacion(productoRequest.presentacion());
 
         productoRepository.save(productoActualizado);
 
-        return new GeneralResponse("Producto actualizado Exitosamente");
+        return new GeneralResponse("Producto actualizado exitosamente");
     }
 
     /**
@@ -137,7 +137,7 @@ public class ProductoServiceImpl implements ProductoService {
      */
     @Override
     public GeneralResponse disableProducto(Long id) {
-        Producto producto = this.getProsuctoById(id);
+        Producto producto = this.getProductoById(id);
         producto.setActivo(false);
         productoRepository.save(producto);
 
@@ -156,7 +156,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public GeneralResponse deleteProducto(Long id) {
 
-        Producto producto = this.getProsuctoById(id);
+        Producto producto = this.getProductoById(id);
 
         if (!producto.getPackProductos().isEmpty()) {
 

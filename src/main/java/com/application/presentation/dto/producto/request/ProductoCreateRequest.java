@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-public record ProductoCreateResquest(
+public record ProductoCreateRequest(
         @NotBlank String imagen,
         @NotBlank String nombre,
         @NotBlank @Positive double precio,
