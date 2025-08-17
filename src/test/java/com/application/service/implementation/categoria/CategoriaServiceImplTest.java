@@ -107,7 +107,7 @@ class CategoriaServiceImplTest {
         GeneralResponse resultado = categoriaService.addCategoria(categoriaRequest);
 
         // Then
-        ArgumentCaptor<Categoria>argumentCaptor = ArgumentCaptor.forClass(Categoria.class);
+        ArgumentCaptor<Categoria> argumentCaptor = ArgumentCaptor.forClass(Categoria.class);
         verify(categoriaRepository).save( argumentCaptor.capture() );
 
         assertEquals("Categoria 1", argumentCaptor.getValue().getNombre());
