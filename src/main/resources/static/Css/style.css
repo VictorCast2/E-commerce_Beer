@@ -738,6 +738,11 @@ body {
     height: auto;
 }
 
+
+.pais .pais--changed{
+    width: 35px;
+}
+
 .pais .pais__name {
     margin: -15px 0 0 0;
     font: 600 1.1rem var(--typografiaUrbanist);
