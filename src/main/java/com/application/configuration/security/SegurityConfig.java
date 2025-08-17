@@ -67,7 +67,7 @@ public class SegurityConfig {
                 .formLogin(form -> form
                         .loginPage("/")
                         .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
-                        .defaultSuccessUrl("/", true) // ← Redirige a la página principal después del login exitoso
+                        .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
