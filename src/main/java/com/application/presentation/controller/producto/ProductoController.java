@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/Producto")
+@RequestMapping("/admin/producto")
 public class ProductoController {
 
     @Autowired
@@ -45,36 +45,36 @@ public class ProductoController {
         return "Producto";
     }
 
-    @PostMapping("/add-Producto")
+    @PostMapping("/add-producto")
     public String addProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest) {
         GeneralResponse response = productoService.addProducto(productoRequest);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("/update-Producto/{id}")
+    @PostMapping("/update-producto/{id}")
     public String updateProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest, @PathVariable Long id) {
         GeneralResponse response = productoService.updateProducto(productoRequest, id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("disable-Producto/{id}")
+    @PostMapping("disable-producto/{id}")
     public String disableProducto(@PathVariable Long id) {
         GeneralResponse response = productoService.disableProducto(id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("delete-Producto/{id}")
+    @PostMapping("delete-producto/{id}")
     public String deleteProducto(@PathVariable Long id) {
         GeneralResponse response = productoService.deleteProducto(id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
  }
