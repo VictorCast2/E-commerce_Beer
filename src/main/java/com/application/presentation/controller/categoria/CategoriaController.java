@@ -45,7 +45,7 @@ public class CategoriaController {
         return "Categoria";
     }
 
-    @PostMapping("/addCategoria")
+    @PostMapping("/add-Categoria")
     public String addcategoria(@ModelAttribute @Valid CategoriaCreateRequest categoriaRequest) {
         GeneralResponse response = categoriaService.addCategoria(categoriaRequest);
         String mensaje = response.mensaje();
@@ -53,7 +53,7 @@ public class CategoriaController {
         return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("updateCategoria/{id}")
+    @PostMapping("update-Categoria/{id}")
     public String updateCategoria(
             @ModelAttribute @Valid CategoriaCreateRequest categoriaRequest,
             @PathVariable Long id
@@ -64,7 +64,7 @@ public class CategoriaController {
         return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("disableCategoria/{id}")
+    @PostMapping("disable-Categoria/{id}")
     public String disableCategoria(@PathVariable Long id) {
         GeneralResponse response = categoriaService.disableCategoria(id);
         String mensaje = response.mensaje();
@@ -72,7 +72,7 @@ public class CategoriaController {
         return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("deleteCategoria/{id}")
+    @PostMapping("delete-Categoria/{id}")
     public String deleteCategoria(@PathVariable Long id) {
         GeneralResponse response = categoriaService.deleteCategoria(id);
         String mensaje = response.mensaje();
