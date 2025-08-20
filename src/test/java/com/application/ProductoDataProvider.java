@@ -3,6 +3,9 @@ package com.application;
 import com.application.persistence.entity.pack.Pack;
 import com.application.persistence.entity.producto.Producto;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
+import com.application.presentation.dto.producto.response.ProductoResponse;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.Optional;
 
 public class ProductoDataProvider {
 
+    // Repository
     public static List<Producto> productoList() {
 
         Producto producto1 = Producto.builder()
@@ -35,6 +39,7 @@ public class ProductoDataProvider {
         ));
     }
 
+    // Service
     public static List<Producto> productoListMock() {
 
         Producto producto1 = Producto.builder()
@@ -128,5 +133,30 @@ public class ProductoDataProvider {
 
     public static ProductoCreateRequest newProductoMock() {
         return new ProductoCreateRequest("imagen 1", "Producto 1", 1000, 50, "Primer producto de pruebas", "marca 1", "350ml");
+    }
+
+    // Controller
+    public static List<ProductoResponse> productoResponseListMock() {
+        return List.of(
+                new ProductoResponse("imagen 1", "Producto 1", 1000, 50,
+                        "Primer producto de pruebas", "marca 1", "350ml"),
+                new ProductoResponse("imagen 2", "Producto 2", 2000, 50,
+                        "Segundo producto de pruebas", "marca 2", "250ml"),
+                new ProductoResponse("imagen 3", "Producto 3", 3000, 50,
+                        "Tercer producto de pruebas", "marca 3", "250ml")
+        );
+    }
+
+    public static MultiValueMap<String, String> productoParameters() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("imagen", "imagen1.png");
+        params.add("nombre", "Producto 1");
+        params.add("precio", "2000");
+        params.add("stock", "50");
+        params.add("descripcion", "Primer producto de pruebas");
+        params.add("marca", "marca 1");
+        params.add("presentacion", "350ml");
+
+        return params;
     }
 }
