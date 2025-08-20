@@ -58,7 +58,7 @@ E-commerce\_Beer/
 ````bash
 
    git clone https://github.com/tuusuario/E-commerce_Beer.git
-   cd E-commerce_Beer
+   cd application
 ````
 
 2. Configura la base de datos en `application.properties`.

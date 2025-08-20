@@ -27,7 +27,7 @@ git push origin nombre-de-tu-rama
 ## 📦 Estructura del proyecto
 
 ```bash
-E-commerce_Beer/
+application/
 ├── src/
 │   ├── main/
 │   │   ├── java/           # Código fuente de la aplicación
