@@ -46,11 +46,12 @@ public class AuthController {
             result.getAllErrors().forEach(error ->
                     System.out.println(error.getDefaultMessage())
             );
-            return "Registro"; // 🔥 volver a mostrar el form con errores
+            return "Registro";
         }
 
         usuarioServiceImpl.crearUsuario(request);
-        return "redirect:/auth/login"; // 🔥 solo si pasó la validación
+        return "redirect:/auth/login";
+
     }
 
 }
