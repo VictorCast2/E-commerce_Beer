@@ -3,6 +3,7 @@ package com.application;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.pack.Pack;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
+import com.application.presentation.dto.categoria.response.CategoriaResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class CategoriaDataProvider {
 
+    // Controller
     public static List<Categoria> categoriaList() {
 
         // ===== Categorías =====
@@ -62,6 +64,7 @@ public class CategoriaDataProvider {
         ));
     }
 
+    // Service
     public static List<Categoria> categoriaListMock() {
 
         // ===== Categorías =====
@@ -165,5 +168,13 @@ public class CategoriaDataProvider {
 
     public static long cantidadPackPorCategoria() {
         return 2L;
+    }
+
+    // Controller
+    public static List<CategoriaResponse> categoriaResponseListMock() {
+        return List.of(
+                new CategoriaResponse("Categoria 1", "Primera Categoria de Pruebas", 5),
+                new CategoriaResponse("Categoria 2", "Segunda Categoria de Pruebas", 3)
+        );
     }
 }
