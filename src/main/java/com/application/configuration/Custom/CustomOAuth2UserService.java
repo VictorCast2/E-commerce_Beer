@@ -50,7 +50,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             Usuario nuevo = Usuario.builder()
                     .nombres(nombre)
                     .apellidos(apellido)
-                    .cedula(null)  // no lo proporciona Google
+                    .cedula(null)
                     .telefono(null)
                     .rol(rol)
                     .correo(email)
