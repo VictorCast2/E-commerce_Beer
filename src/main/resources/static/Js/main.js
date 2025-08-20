@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+
+export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
 
@@ -9,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('scrolled');
         }
     });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    //Llamamos a la funcion
+    activarGlassmorphism();
 
     //Carrusel del inicio
     const hero = document.querySelector('.hero');

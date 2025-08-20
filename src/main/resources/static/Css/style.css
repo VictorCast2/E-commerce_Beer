@@ -464,17 +464,104 @@ body {
     }
 }
 
+/** Section Innovacion */
+.innovacion{
+    padding-top: 80px;
+    min-height: 100vh;
+}
 
+.innovaccion__content{
+    display: flex;
+    gap: 2rem;
+    padding: 0 130px;
+}
+
+.innovaccion__content .content__item{
+    background-color: #ffbd27;
+    width: 550px;
+    height: 650px;
+    border-radius: 30px;
+}
+
+.content__item .item__titulo{
+    font: 600 2rem var(--typografiaGeist);
+    margin: 3rem 0 1.3rem 4rem;
+}
+
+.content__item .item__texto{
+    font: 400 1rem var(--typografiaUrbanist);
+    width: 300px;
+    margin: 0 0 1.3rem 4rem;
+}
+
+.content__item .item__btnExplore{
+    border-bottom: 1px solid #000000;
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    color: #000000;
+    margin: 0 0 0 4rem;
+    font: 500 1.1rem var(--typografiaUrbanist);
+
+}
+
+.content__item .item__imgInnovadora{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+}
+
+.innovaccion__content .item--beerElegante{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.item--beerElegante .item__beerElegante{
+    background-color: #f6f6f6;
+    display: flex;
+    width: 700px;
+    height: 550px;
+    border-radius: 30px;
+}
+
+.beerElegante__descripcion .descripcion__titlte{
+    font: 600 2rem var(--typografiaGeist);
+    margin: 3rem 0 1.3rem 4rem;
+}
+
+.beerElegante__descripcion .descripcion__text{
+    font: 400 1rem var(--typografiaUrbanist);
+    width: 280px;
+    margin: 0 0 1.3rem 4rem;
+}
+
+.beerElegante__descripcion .descripcion__btn{
+    border-bottom: 1px solid #000000;
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    color: #000000;
+    margin: 0 0 0 4rem;
+    font: 500 1.1rem var(--typografiaUrbanist);
+}
+
+
+.descripcion__img img{
+    max-width: 100%;
+    width: 300px;
+}
+
+.descripcion__img .img__modern{
+    margin-left: 3rem;
+}
 
 /* Section Producto */
 .productos {
     min-height: 100vh;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
-.productos__categoria {
-    position: relative;
-}
 
 .categorias__vertodos {
     position: relative;
@@ -528,42 +615,7 @@ body {
     background: #eee;
 }
 
-.productos__categoria .categoria__carta {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    align-items: center;
-}
 
-.carta__item {
-    min-width: 200px;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    min-height: 250px;
-    padding: 10px;
-
-}
-
-.carta__item .item__img {
-    background-color: #eee;
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.carta__item .item__img img {
-    max-width: 100%;
-    width: 100px;
-    height: auto;
-}
-
-.carta__item .item__name {
-    font: 600 1.1rem "Geist";
-    margin: 1rem 0 0 4rem;
-    color: #71717a;
-}
 
 /** Productos Destacados */
 .destacados__vertodos {
@@ -876,7 +928,7 @@ body {
 
 .elegir__icono {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     padding: 10px;
     font-size: 1.25rem;
     background-color: #cad8d8;
@@ -892,6 +944,7 @@ body {
 .elegir__tarjeta-texto {
     color: #71717a;
     font: 400 1.1rem "Urbanist";
+    margin-top: -0.3rem;
 }
 
 .elegir__imagen img {
@@ -907,12 +960,10 @@ body {
     min-height: 50vh;
 }
 
-
-.ofertaDia__product .product__title{
-    font: 700 3rem var(--typografiaGeist);
-    margin: 0 0 2rem 7rem;
-
+.ofertaDia__product{
+    background-color: #f6f6f6;
 }
+
 
 .ofertaDia__product .product__flex{
     display: flex;
@@ -922,15 +973,15 @@ body {
 }
 
 
+
 .flex__img img{
     max-width: 100%;
-    width:600px;
-    height: 500px;
 }
 
 
 .product__flex .flex__content{
     max-width: 600px;
+    margin-top: 50px;
 }
 
 .flex__content .content__name{
@@ -988,7 +1039,7 @@ body {
     background-color: var(--colorDark);
     color: #ffff;
     font: 500 1.3rem var(--typografiaGeist);
-    padding: 23px 15px;
+    padding: 20px 15px;
     cursor: pointer;
     text-decoration: none;
 }
@@ -997,13 +1048,31 @@ body {
 /* Section Blog */
 .blog {
     min-height: 50vh;
-    padding-top: 80px;
+    padding: 80px 0;
 
 }
 
-.blog .blog__title{
+.blog__encabezado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 6.1rem;
+}
+
+.blog__encabezado .encabezado__title{
     font: 700 3rem var(--typografiaGeist);
     margin: 0 0 0 5.5rem;
+}
+
+.blog__encabezado .encabezado__btn{
+    background-color: transparent;
+    border: 1px solid #000000;
+    padding: 0.7rem 1rem;
+    font: 600 1.3rem var(--typografiaUrbanist);
+    text-decoration: none;
+    color: #000000;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .blog__flex {
@@ -1042,67 +1111,7 @@ body {
 
 
 /**Section Figuras */
-.figuras {
-    min-height: 35vh;
-    padding:50px 0;
-}
 
-.figuras__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.figuras__content .content__figure {
-    width: 180px;
-    text-align: center;
-    padding: 25px 15px;
-    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
-    border: 1px solid #787a36;
-    border-radius: 4px;
-    margin: 15px 0;
-    transition: box-shadow .5s ease;
-}
-
-.figuras__content .content__figure:hover {
-    box-shadow: 10px 10px 54px rgba(70, 62, 211, 0.1);
-}
-
-.figuras__content .content__figure img {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.figuras__content .content__figure figcaption {
-    display: inline-block;
-    padding: 9px 8px 6px 8px;
-    line-height: 1;
-    font: 600 1rem var(--typografiaUrbanist);
-    border-radius: 4px;
-    color: #0000007b;
-    background-color: #fddde4;
-}
-
-.figuras__content .content__figure:nth-child(2) figcaption {
-    background-color: #cdebbc;
-}
-
-.figuras__content .content__figure:nth-child(3) figcaption {
-    background-color: #d1e8f2;
-}
-
-.figuras__content .content__figure:nth-child(4) figcaption {
-    background-color: #cdd4f8;
-}
-
-.figuras__content .content__figure:nth-child(5) figcaption {
-    background-color: #f6dbf6;
-}
-
-.figuras__content .content__figure:nth-child(6) figcaption {
-    background-color: #fff2e5;
-}
 
 /* Footer */
 
