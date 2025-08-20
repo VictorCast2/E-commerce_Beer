@@ -1,13 +1,13 @@
-package com.application.presentation.controller.categoria;
+package com.application.presentation.controller.producto;
 
-import com.application.CategoriaDataProvider;
+import com.application.ProductoDataProvider;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
-import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
-import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.service.implementation.categoria.CategoriaServiceImpl;
+import com.application.presentation.dto.producto.request.ProductoCreateRequest;
+import com.application.presentation.dto.producto.response.ProductoResponse;
+import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CategoriaController.class)
-class CategoriaControllerTest {
+@WebMvcTest(ProductoController.class)
+class ProductoControllerTest {
 
     @MockitoBean
-    private CategoriaServiceImpl categoriaService;
+    private ProductoServiceImpl productoService;
 
     @MockitoBean
     private UsuarioServiceImpl usuarioService;
@@ -39,7 +39,7 @@ class CategoriaControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void categoria() throws Exception {
+    void producto() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
                 .cedula("12345")
@@ -48,107 +48,104 @@ class CategoriaControllerTest {
                 .rol(Rol.builder().name(ERol.ADMIN).build())
                 .build();
 
-        List<CategoriaResponse> categoriasMock = CategoriaDataProvider.categoriaResponseListMock();
+        List<ProductoResponse> productoList = ProductoDataProvider.productoResponseListMock();
 
-        String mensaje = "Mensaje de prueba";
+        String mensaje = "Mensaje de Pruebas";
 
         // When
         when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
-        when(categoriaService.getCategorias()).thenReturn(categoriasMock);
+        when(productoService.getProductos()).thenReturn(productoList);
 
         // Then
-        mockMvc.perform(get("/admin/categoria/")
+        mockMvc.perform(get("/admin/producto/")
                         .param("mensaje", mensaje)
                         .with(user("example@mail.com")
                                 .roles("ADMIN")))
                 .andExpect(status().isOk())
-                .andExpect(view().name("Categoria"))
+                .andExpect(view().name("Producto"))
                 .andExpect(model().attribute("usuario", usuarioMock))
-                .andExpect(model().attribute("categoriaList", categoriasMock))
+                .andExpect(model().attribute("productoList", productoList))
                 .andExpect(model().attribute("mensaje", mensaje));
-
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void addcategoria() throws Exception {
+    void addProducto() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
         // When
-        when(categoriaService.addCategoria( any(CategoriaCreateRequest.class) )).thenReturn(responseMock);
+        when(productoService.addProducto(any(ProductoCreateRequest.class))).thenReturn(responseMock);
 
         // Then
-        mockMvc.perform(post("/admin/categoria/add-categoria")
+        mockMvc.perform(post("/admin/producto/add-producto")
                         .with(csrf())
-                        .param("nombre", "Categoria 1")
-                        .param("descripcion", "Primera categoria de prueba"))
+                        .params(ProductoDataProvider.productoParameters()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).addCategoria( any(CategoriaCreateRequest.class) );
+        verify(productoService).addProducto(any(ProductoCreateRequest.class));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void updateCategoria() throws Exception {
+    void updateProducto() throws Exception {
         // Given
-        GeneralResponse resposeMock = new GeneralResponse("Categoria Actualizada");
-        String mensajeEconde = UriUtils.encode(resposeMock.mensaje(), StandardCharsets.UTF_8);
-        Long id = 1L;
-
-        // When
-        when(categoriaService.updateCategoria( any(CategoriaCreateRequest.class), anyLong() )).thenReturn(resposeMock);
-
-        // Then
-        mockMvc.perform(post("/admin/categoria/update-categoria/{id}", id)
-                        .with(csrf())
-                        .param("nombre", "Categoria actualizada")
-                        .param("descripcion", "Categoria de prueba actualizada"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEconde));
-
-        verify(categoriaService).updateCategoria( any(CategoriaCreateRequest.class), anyLong() );
-    }
-
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void disableCategoria() throws Exception {
-        // Given
-        GeneralResponse responseMock = new GeneralResponse("Categoria Deshabilitada");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
         // When
-        when(categoriaService.disableCategoria( anyLong() )).thenReturn(responseMock);
+        when(productoService.updateProducto(any(ProductoCreateRequest.class), anyLong())).thenReturn(responseMock);
 
         // Then
-        mockMvc.perform(post("/admin/categoria/disable-categoria/{id}", id)
+        mockMvc.perform(post("/admin/producto/update-producto/{id}", id)
+                        .with(csrf())
+                        .params(ProductoDataProvider.productoParameters()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
+
+        verify(productoService).updateProducto(any(ProductoCreateRequest.class), anyLong());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void disableProducto() throws Exception {
+        // Given
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
+        String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
+        Long id = 1L;
+
+        // When
+        when(productoService.disableProducto( anyLong() )).thenReturn(responseMock);
+
+        // Then
+        mockMvc.perform(post("/admin/producto/disable-producto/{id}", id)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).disableCategoria( anyLong() );
+        verify(productoService).disableProducto( anyLong() );
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void deleteCategoria() throws Exception {
+    void deleteProducto() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Categoria Eliminada");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
         // When
-        when(categoriaService.deleteCategoria( anyLong() )).thenReturn(responseMock);
+        when(productoService.deleteProducto( anyLong() )).thenReturn(responseMock);
 
         // Then
-        mockMvc.perform(post("/admin/categoria/delete-categoria/{id}", id)
-                .with(csrf()))
+        mockMvc.perform(post("/admin/producto/delete-producto/{id}", id)
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).deleteCategoria( anyLong() );
+        verify(productoService).deleteProducto( anyLong() );
     }
 }

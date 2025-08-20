@@ -1,6 +1,7 @@
 package com.application.presentation.dto.producto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.validation.annotation.Validated;
 
@@ -8,8 +9,8 @@ import org.springframework.validation.annotation.Validated;
 public record ProductoCreateRequest(
         @NotBlank String imagen,
         @NotBlank String nombre,
-        @NotBlank @Positive double precio,
-        @NotBlank @Positive int stock,
+        @NotNull @Positive double precio,
+        @NotNull @Positive int stock,
         @NotBlank String descripcion,
         @NotBlank String marca,
         @NotBlank String presentacion

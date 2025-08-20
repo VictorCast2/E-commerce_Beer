@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/Categoria")
+@RequestMapping("/admin/categoria")
 public class CategoriaController {
 
     @Autowired
@@ -45,15 +45,15 @@ public class CategoriaController {
         return "Categoria";
     }
 
-    @PostMapping("/addCategoria")
+    @PostMapping("/add-categoria")
     public String addcategoria(@ModelAttribute @Valid CategoriaCreateRequest categoriaRequest) {
         GeneralResponse response = categoriaService.addCategoria(categoriaRequest);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("updateCategoria/{id}")
+    @PostMapping("update-categoria/{id}")
     public String updateCategoria(
             @ModelAttribute @Valid CategoriaCreateRequest categoriaRequest,
             @PathVariable Long id
@@ -61,23 +61,23 @@ public class CategoriaController {
         GeneralResponse response = categoriaService.updateCategoria(categoriaRequest, id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("disableCategoria/{id}")
+    @PostMapping("disable-categoria/{id}")
     public String disableCategoria(@PathVariable Long id) {
         GeneralResponse response = categoriaService.disableCategoria(id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("deleteCategoria/{id}")
+    @PostMapping("delete-categoria/{id}")
     public String deleteCategoria(@PathVariable Long id) {
         GeneralResponse response = categoriaService.deleteCategoria(id);
         String mensaje = response.mensaje();
 
-        return "redirect:/admin/Categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+        return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
 }
