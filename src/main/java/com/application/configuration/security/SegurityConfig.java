@@ -160,5 +160,4 @@ public class SegurityConfig {
         return new SessionRegistryImpl();
     }
 
-
 }
