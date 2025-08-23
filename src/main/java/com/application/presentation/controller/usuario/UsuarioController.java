@@ -22,7 +22,6 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    @Autowired
     private final UsuarioServiceImpl usuarioServiceImpl;
 
     @PostMapping("/eliminar")

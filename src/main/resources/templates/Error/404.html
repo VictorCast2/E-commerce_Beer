@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="https://www.thymeleaf.org">
+  <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
-    <link rel="stylesheet" th:href="@{/css/Error.css}">
-    <link rel="icon" type="image/x-icon" th:href="@{/css/assets/image/icons/Error.png}">
-</head>
-<body>
-<div class="container">
-  <h1>Pagina no encontrada</h1>
-  <p>La url proporcionada no existe o no podemos encontrarla</p>
-  <div class="loader"></div>
-  <a href="javascript:history.back()" class="button">Volver</a>
-</div>
-</body>
+    <link rel="stylesheet" href="/Css/Error/Error.css"
+      th:href="@{/Css/Error/Error.css}">
+    <link rel="icon" type="image/x-icon"
+      th:href="@{/Assets/Img/Logo/Error/Error.png}"
+      href="/Assets/Img/Logo/Error/Error.png">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pagina no encontrada</h1>
+      <p>La url proporcionada no existe o no podemos encontrarla</p>
+      <div class="loader"></div>
+      <a href="javascript:history.back()" class="button">Volver</a>
+    </div>
+  </body>
 </html>

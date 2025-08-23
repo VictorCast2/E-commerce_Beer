@@ -6,6 +6,7 @@ import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +21,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/categoria")
+@RequiredArgsConstructor
 public class CategoriaController {
 
-    @Autowired
-    private CategoriaServiceImpl categoriaService;
-
-    @Autowired
-    private UsuarioServiceImpl usuarioService;
+    private final CategoriaServiceImpl categoriaService;
+    private final UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Categoria(
