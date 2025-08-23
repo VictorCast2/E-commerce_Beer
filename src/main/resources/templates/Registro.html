@@ -1,49 +1,208 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="/Css/Todo.Css" th:href="@{/Css/Todo.Css}">
-</head>
-<body>
-<div class="container">
-    <h1>Registro de Usuario</h1>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <form th:action="@{/auth/sign_up}" th:object="${usuario}" method="post">
-        <!-- Bloque de errores: AHORA DENTRO DEL FORM -->
-        <div th:if="${#fields.hasErrors('*')}" class="error-message">
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-            </ul>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+            integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" th:href="@{/Css/Registro.css}">
+        <link rel="icon" type="image/x-icon"
+            th:href="@{/Assets/Img/Logo/logoBeer.jpeg}"
+            href="/Assets/Img/Logo/logoBeer.jpeg">
+        <title>Registro</title>
+    </head>
+
+    <body>
+
+        <div class="icono__back">
+            <i class="ri-arrow-left-s-line"></i>
+            <a class="regresar" th:href="@{/auth/login}">Regresar A Login</a>
         </div>
 
-        <input type="text" th:field="*{cedula}" placeholder="Cédula" required />
-        <small class="error-message" th:errors="*{cedula}"></small>
+        <div class="contenido__form">
+            <form action="/auth/sign_up" method="post" class="form">
 
-        <input type="text" th:field="*{nombres}" placeholder="Nombres" required />
-        <small class="error-message" th:errors="*{nombres}"></small>
+                <h1 class="formulario__title">Registro</h1>
 
-        <input type="text" th:field="*{apellidos}" placeholder="Apellidos" required />
-        <small class="error-message" th:errors="*{apellidos}"></small>
+                <span class="formulario__title2">Registre Todos Sus Datos Por
+                    Favor</span>
 
-        <input type="text" th:field="*{telefono}" placeholder="Teléfono" required />
-        <small class="error-message" th:errors="*{telefono}"></small>
+                <div class="container__google">
+                    <img class="google__imagen"
+                        th:src="@{/css/assets/image/google.png}" alt>
+                    <p class="google__text">¿Registrar con otras cuentas?</p>
+                </div>
 
-        <input type="email" th:field="*{correo}" placeholder="Correo" required />
-        <small class="error-message" th:errors="*{correo}"></small>
+                <div class="formulario">
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="text" autocomplete="off" placeholder
+                                name="nombres" id="nombre">
+                            <label for="nombre">Nombre</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            El nombre debe tener al menos 3 letras y no contener
+                            números.
+                        </p>
+                    </div>
 
-        <input type="password" th:field="*{password}" placeholder="Contraseña" required />
-        <small class="error-message" th:errors="*{password}"></small>
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="text" autocomplete="off" placeholder
+                                name="apellidos" id="apellido">
+                            <label for="apellido">Apellido</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            El nombre debe tener al menos 3 letras y no contener
+                            números.
+                        </p>
+                    </div>
 
-        <input type="text" th:field="*{imagen}" placeholder="URL de Imagen (opcional)" />
-        <small class="error-message" th:errors="*{imagen}"></small>
+                    <div class="formulario__input">
+                        <div class="custom-select-wrapper">
+                            <select class="styled-select"
+                                name="tipoIdentificacion"
+                                id="tipoIdentificacion">
+                                <option disabled selected>Tipo De
+                                    Identificación</option>
+                                <option th:each="tipo : ${tiposIdentificacion}"
+                                    th:value="${tipo.name()}"
+                                    th:text="${tipo.descripcion}"></option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down custom-arrow"
+                                id="arrowIcon"></i>
+                        </div>
+                        <p class="input__error error--changed">
+                            Por favor, seleccione un tipo de identificación.
+                        </p>
+                    </div>
 
-        <button type="submit" class="btn btn-register">Registrar</button>
-    </form>
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="text" autocomplete="off" placeholder
+                                name="numeroIdentificacion"
+                                id="identificacion">
+                            <label for="identificacion">Identificacion</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            La cédula debe contener entre 6 y 10 dígitos
+                            numéricos.
+                        </p>
+                    </div>
 
-    <p style="margin-top: 1.5rem;">
-        ¿Ya tienes cuenta? <a th:href="@{/auth/login}">Inicia sesión</a>
-    </p>
-</div>
-</body>
-</html>
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="email" autocomplete="off" placeholder
+                                name="correo" id="email">
+                            <label for="email">Email</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error error--changed2">
+                            El correo solo puede contener
+                            letras,numeros,puntos,guiones y guion bajo.
+                        </p>
+                    </div>
+
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="text" autocomplete="off" placeholder
+                                name="telefono" id="telefono">
+                            <label for="telefono">Telefono</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            El teléfono solo puede contener numeros y el maximo
+                            son 10 digitos.
+                        </p>
+                    </div>
+
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="password" autocomplete="off"
+                                placeholder name="password" id="password">
+                            <label for="password">Password</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            La contraseña tiene que ser de 4 a 15 digitos
+                        </p>
+                    </div>
+
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="password" autocomplete="off"
+                                placeholder name="RepetirPassword"
+                                id="repeatPassword">
+                            <label for="repeatPassword">Repetir Password</label>
+                            <span class="box__icon"><i
+                                    class="ri-check-line"></i></span>
+                            <span class="box__icon"><i
+                                    class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            Ambas contraseña tienen que ser iguales.
+                        </p>
+                    </div>
+
+                    <div class="formulario__input">
+                        <div class="remember-forgot">
+                            <label class="forgot__label"><input type="checkbox"
+                                    name="terminos">Acepto Terminos Y
+                                Condiciones</label>
+                        </div>
+                    </div>
+
+                    <p class="input__advertencia">
+                        <i class="ri-error-warning-line"></i> <b>Error:</b> Por
+                        favor rellene el formulario correctamente.
+                    </p>
+
+                    <div class="formulario__input formulario__btn-container">
+                        <button class="formulario__btn"
+                            type="submit">Registrar</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="imagen__container">
+                <img class="container__login"
+                    th:src="@{/css/assets/image/servicios9.jpeg}" alt>
+            </div>
+
+            <div id="modalSuccess" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal"
+                        onclick="closeModal()">&times;</span>
+                    <i class="ri-check-line success-icon"></i>
+                    <h2>¡Se ha registrado exitosamente!</h2>
+                </div>
+            </div>
+            <script type="module" th:src="@{/Js/registro.js}"></script>
+        </body>
+    </html>
