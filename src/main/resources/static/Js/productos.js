@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     //Overflow de los productos
     const scrollContainer = document.querySelector('.deal__flex');
 
@@ -55,10 +54,5 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollContainer.addEventListener('mouseleave', () => {
         scrollContainer.classList.remove('scroll-active');
     });
-
-    //Pagination de las cartas de producto o catalago
-    
-
-
 
 });
