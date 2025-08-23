@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="https://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,8 +53,68 @@
                     </ul>
                 </nav>
 
+                <img class="nav__img" sec:authorize="isAuthenticated()"
+                     th:src="@{'/perfil-usuario/' + ${#authentication.principal?.imagen}}"
+                     th:alt="${#authentication.principal?.imagen}">
+
+                <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
+                    <div class="menu__sub">
+                        <div class="sub__info">
+                            <img class="info__img" th:src="@{'/perfil-usuario/' + ${#authentication.principal?.imagen}}" th:alt="${#authentication.principal?.imagen}" >
+                            <h2 class="info__title" th:text="${#authentication.principal?.nombres}">Nombre Usuario</h2>
+                        </div>
+                        <hr>
+
+                        <a th:href="@{/buques/perfil/}" class="sub__link">
+                            <i class="ri-user-fill"></i>
+                            <p class="link__text">Perfil</p>
+                            <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                        </a>
+
+                        <a th:href="@{/buques/configuraciones}" class="sub__link">
+                            <i class="ri-settings-5-fill"></i>
+                            <p class="link__text">Configuracion</p>
+                            <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                        </a>
+
+                        <a th:href="@{/buques/notificaciones}" class="sub__link">
+                            <i class="ri-notification-2-fill"></i>
+                            <p class="link__text">Notificaciones</p>
+                            <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                        </a>
+
+                        <!-- Panel de Control para AGENTE_NAVIERO -->
+                        <a th:href="@{/buques/panel-control}" class="sub__link"
+                           sec:authorize="hasAuthority('ROLE_AGENTE_NAVIERO') and #authentication.principal.empresa != null and #authentication.principal?.empresa.estadoEmpresa.name() == 'APROBADA'">
+                            <i class="ri-dashboard-fill"></i>
+                            <p class="link__text">Panel Control</p>
+                            <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                        </a>
+
+                        <!-- Panel de Control para ADMIN -->
+                        <a th:href="@{/buques/admin/}" class="sub__link"
+                           sec:authorize="hasAuthority('ROLE_ADMIN')">
+                            <i class="ri-dashboard-fill"></i>
+                            <p class="link__text">Panel Control</p>
+                            <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                        </a>
+
+                        <!-- Formulario para logout -->
+                        <form th:action="@{/auth/logout}" method="post" id="logoutForm">
+                            <a href="#" class="sub__link"
+                               onclick="document.getElementById('logoutForm').submit(); return false;">
+                                <i class="ri-logout-box-r-fill"></i>
+                                <p class="link__text">Cerrar sesión</p>
+                                <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+                        </form>
+
+                    </div>
+                </div>
+
                 <div class="list__icon">
 
+                    <!-- Idiomas -->
                     <span class="icon__item language-selector">
                         <div class="language-dropdown">
                             <button class="dropdown-toggle">
@@ -69,19 +129,23 @@
                         </div>
                     </span>
 
+                    <!-- Buscador -->
                     <span class="icon__item">
                         <i class="ri-search-line"></i>
                     </span>
 
+                    <!-- Usuario -->
                     <span class="icon__item">
                         <i class="ri-user-line"></i>
                     </span>
 
+                    <!-- Favoritos -->
                     <span class="icon__item">
                         <i class="ri-heart-3-line"></i>
                         <span class="icon__badge" id="fav-count">0</span>
                     </span>
 
+                    <!-- Carrito -->
                     <span class="icon__item">
                         <i class="ri-shopping-cart-2-line"></i>
                         <span class="icon__badge" id="cart-count">0</span>
