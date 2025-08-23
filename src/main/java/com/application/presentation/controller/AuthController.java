@@ -3,6 +3,7 @@ package com.application.presentation.controller;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +13,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
     private final UsuarioServiceImpl usuarioServiceImpl;
 
     @GetMapping("")
