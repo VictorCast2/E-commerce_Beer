@@ -1,28 +1,27 @@
-// =======================
-// 🌟 Efecto Glassmorphism Header
-// =======================
+
 export function activarGlassmorphism() {
+    // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
-            header?.classList.add('scrolled');
+            header.classList.add('scrolled');
         } else {
-            header?.classList.remove('scrolled');
+            header.classList.remove('scrolled');
         }
     });
 }
 
-// =======================
-// 🚀 Carrusel Hero (Inicio)
-// =======================
-function initHeroCarousel() {
+
+document.addEventListener('DOMContentLoaded', () => {
+    //Llamamos a la funcion
+    activarGlassmorphism();
+
+    //Carrusel del inicio
     const hero = document.querySelector('.hero');
     const slides = document.querySelectorAll('.carousel__slide');
     const dots = document.querySelectorAll('.carousel__dot');
     const arrows = document.querySelectorAll('.carousel__arrow');
-
-    if (!hero || slides.length === 0) return;
 
     let currentSlide = 0;
     let autoPlayInterval = null;
@@ -37,74 +36,72 @@ function initHeroCarousel() {
         const activeSlide = slides[index];
         const theme = activeSlide.getAttribute('data-theme');
 
-        hero.classList.remove(
-            'hero--paulaner',
-            'hero--heineken',
-            'hero--budweiser',
-            'hero--guinness'
-        );
+        hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
         hero.classList.add(`hero--${theme}`);
 
         currentSlide = index;
     }
 
+
+    // Siguiente slide
     function nextSlide() {
-        showSlide((currentSlide + 1) % slides.length);
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
     }
 
+    // Slide anterior
     function prevSlide() {
-        showSlide((currentSlide - 1 + slides.length) % slides.length);
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
     }
 
+    // Iniciar autoplay
     function startAutoplay() {
         autoPlayInterval = setInterval(nextSlide, 5000);
     }
 
-    function resetAutoplay() {
+    // Detener autoplay temporalmente
+    function stopAutoplay() {
         clearInterval(autoPlayInterval);
-        startAutoplay();
     }
 
     // Click en dots
-    dots.forEach(dot =>
+    dots.forEach(dot => {
         dot.addEventListener('click', () => {
-            showSlide(parseInt(dot.dataset.index));
-            resetAutoplay();
-        })
-    );
+            const index = parseInt(dot.dataset.index);
+            showSlide(index);
+            stopAutoplay();
+            startAutoplay(); // Reiniciar autoplay al interactuar
+        });
+    });
 
     // Click en flechas
-    arrows.forEach(arrow =>
+    arrows.forEach(arrow => {
         arrow.addEventListener('click', () => {
-            arrow.dataset.direction === 'next' ? nextSlide() : prevSlide();
-            resetAutoplay();
-        })
-    );
+            const direction = arrow.dataset.direction;
+            if (direction === 'next') {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            stopAutoplay();
+            startAutoplay(); // Reiniciar autoplay
+        });
+    });
 
+    // Mostrar primer slide
     showSlide(0);
     startAutoplay();
-}
 
-// =======================
-// ♻️ Duplicación de logos (scroll infinito)
-// =======================
-function duplicarLogos() {
-    const slider = document.getElementById("slider");
-    const logos = document.getElementById("logos");
-    if (slider && logos) {
-        logos.appendChild(slider.cloneNode(true));
-    }
-}
+    //duplicacion de los logos
+    const logos = document.getElementById("slider").cloneNode(true);
+    document.getElementById("logos").appendChild(logos);
 
-// =======================
-// 🛒 Carrusel de productos
-// =======================
-function initCarruselesProductos() {
+    // mostrar los productos con carrusel
     document.querySelectorAll(".flex").forEach(carrusel => {
         const track = carrusel.querySelector(".flex__productos-track");
         const prevBtn = carrusel.querySelector(".arrow--left");
         const nextBtn = carrusel.querySelector(".arrow--right");
-        if (!track || !prevBtn || !nextBtn) return;
 
         const cardWidth = 300; // ancho de cada card
         const gap = 40;        // espacio entre cards
@@ -113,53 +110,27 @@ function initCarruselesProductos() {
         let posicion = 0;
         const totalProductos = track.querySelectorAll(".card").length;
         const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
-        const paso = visibles * (cardWidth + gap);
 
-        function mover(delta) {
-            posicion = Math.min(Math.max(posicion + delta, 0), maxPosicion);
-            track.style.transform = `translateX(-${posicion}px)`;
-        }
+        const paso = visibles * (cardWidth + gap); // mueve 4 productos
 
-        nextBtn.addEventListener("click", () => mover(paso));
-        prevBtn.addEventListener("click", () => mover(-paso));
-    });
-}
+        nextBtn.addEventListener("click", () => {
+            if (posicion < maxPosicion) {
+                posicion += paso;
+                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
 
-// =======================
-// 📅 Año automático en footer
-// =======================
-function actualizarAnioFooter() {
-    const el = document.getElementById("anio__pagina");
-    if (el) el.textContent = new Date().getFullYear();
-}
-
-// =======================
-// 👤 Menú Perfil Usuario
-// =======================
-function initSubMenuPerfil() {
-    const subMenu = document.getElementById("SubMenu");
-    const profileImage = document.querySelector(".nav__img");
-    if (!subMenu || !profileImage) return;
-
-    profileImage.addEventListener("click", () => {
-        subMenu.classList.toggle("open__menu");
+        prevBtn.addEventListener("click", () => {
+            if (posicion > 0) {
+                posicion -= paso;
+                if (posicion < 0) posicion = 0; // no pasar inicio
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
     });
 
-    document.addEventListener("click", (e) => {
-        if (!subMenu.contains(e.target) && !profileImage.contains(e.target)) {
-            subMenu.classList.remove("open__menu");
-        }
-    });
-}
+    //cambiar anio del footer automaticamente
+    document.getElementById("anio__pagina").textContent = new Date().getFullYear();
 
-// =======================
-//  🚀 Inicialización
-// =======================
-document.addEventListener('DOMContentLoaded', () => {
-    activarGlassmorphism();
-    initHeroCarousel();
-    duplicarLogos();
-    initCarruselesProductos();
-    actualizarAnioFooter();
-    initSubMenuPerfil();
 });
