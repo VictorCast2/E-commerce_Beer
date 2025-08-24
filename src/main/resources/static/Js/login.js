@@ -1,21 +1,3 @@
-// Función para abrir el modal
-window.addEventListener('DOMContentLoaded', (event) => {
-    const modal = document.getElementById("modalSuccess");
-    if (modal) {
-        modal.style.display = "block"; // Mostrar el modal
-
-        // Después de 2 segundos (2000 milisegundos), redirigir a buques
-        setTimeout(() => {
-            window.location.href = '/buques/';
-        }, 2000);
-    }
-});
-
-// Función para cerrar el modal
-function closeModal() {
-    const modal = document.getElementById("modalSuccess");
-    modal.style.display = "none"; // Ocultar el modal
-}
 
 const fields = {
     email: {
@@ -90,14 +72,31 @@ form.addEventListener("submit", function (event) {
         errorMessageBox.style.display = "block";
         event.preventDefault(); // Evitar el envío del formulario
     } else {
-        // Si el formulario es válido, mostrar el modal de éxito
-        openModal();
-        event.preventDefault(); // Evitar el envío real hasta que el modal se cierre
-        setTimeout(function () {
-            form.submit(); // Enviar el formulario después de un tiempo (simulando un retardo de éxito)
-        }, 2000); // Ajusta el tiempo según necesites
+        // Guardamos bandera en sessionStorage
+        sessionStorage.setItem("loginSuccess", "true");
+        // El formulario se envía normalmente
     }
 });
+
+// Al cargar la página, revisamos si hay bandera de login
+window.addEventListener("DOMContentLoaded", () => {
+    if (sessionStorage.getItem("loginSuccess") === "true") {
+        Swal.fire({
+            title: "Inicio de sesión exitoso",
+            icon: "success",
+            timer: 3000,
+            draggable: true,
+            timerProgressBar: true,
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        });
+        //Eliminamos la bandera para que no vuelva a salir al refrescar
+        sessionStorage.removeItem("loginSuccess");
+    }
+});
+
 
 // Ocultar el mensaje de advertencia cuando el usuario empieza a escribir o marca el checkbox
 inputs.forEach(input => {
