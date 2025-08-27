@@ -1,132 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
-            integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="@{/Css/login.css}">
-        <link rel="icon" type="image/x-icon"
-              th:href="@{/Assets/Img/Logo/logoBeer.png}"
-              href="/Assets/Img/Logo/logoBeer.png">
-        <title>Iniciar sesión</title>
-    </head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="@{/Css/login.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logo/logoBeer.png}"
+        href="/Assets/Img/Logo/logoBeer.png">
+    <title>Iniciar sesión</title>
+</head>
 
-        <div class="icono__back">
-            <i class="ri-arrow-left-s-line"></i>
-            <a class="regresar" th:href="@{/}">Regresar A Inicio</a>
+<body>
+
+    <div class="icono__back">
+        <i class="ri-arrow-left-s-line"></i>
+        <a class="regresar" th:href="@{/}">Regresar A Inicio</a>
+    </div>
+
+    <form action="/auth/login" method="post" class="form">
+        <h1 class="formulario__title">Iniciar sesión</h1>
+
+        <span class="formulario__title2">Use su contraseña para iniciar
+            sesión</span>
+
+        <div class="container__google">
+            <a href="/oauth2/authorization/google" class="btn btn-google">
+                <img class="google__imagen" th:src="@{/Assets/Img/Logo/Google/google.png}" alt="Google">
+                <p class="google__text">¿Iniciar sesión con otras
+                    cuentas?</p>
+            </a>
         </div>
 
-        <form action="/auth/login" method="post" class="form">
-            <h1 class="formulario__title">Iniciar sesión</h1>
+        <div class="formulario">
 
-            <span class="formulario__title2">Use su contraseña para iniciar
-                sesión</span>
-
-            <div class="container__google">
-                <a href="/oauth2/authorization/google" class="btn btn-google">
-                    <img class="google__imagen"
-                        th:src="@{/Assets/Img/Logo/Google/google.png}" alt="Google">
-                    <p class="google__text">¿Iniciar sesión con otras
-                        cuentas?</p>
-                </a>
-            </div>
-
-            <div class="formulario">
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="email" autocomplete="off" placeholder
-                            name="correo" id="email">
-                        <label for="email">Email</label>
-                        <span class="box__icon"><i
-                                class="ri-check-line"></i></span>
-                        <span class="box__icon"><i
-                                class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--changed2">
-                        El correo solo puede contener letras, numeros, puntos,
-                        guiones y guion bajo.
-                    </p>
+            <div class="formulario__input">
+                <div class="input-box">
+                    <input type="email" autocomplete="off" placeholder name="correo" id="email">
+                    <label for="email">Email</label>
+                    <span class="box__icon"><i class="ri-check-line"></i></span>
+                    <span class="box__icon"><i class="ri-close-line"></i></span>
                 </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="password" autocomplete="off" placeholder
-                            name="password" id="password">
-                        <label for="password">Password</label>
-                        <span class="box__icon"><i
-                                class="ri-check-line"></i></span>
-                        <span class="box__icon"><i
-                                class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error">
-                        La contraseña tiene que ser de 4 a 15 digitos
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="remember-forgot">
-                        <label class="forgot__label"><input
-                                type="checkbox">Acepto Terminos y
-                            Condiciones</label>
-                        <a href>Recordar contraseña?</a>
-                    </div>
-                </div>
-
-                <p class="input__advertencia">
-                    <i class="ri-error-warning-line"></i> <b>Error:</b> Por
-                    favor rellene el formulario correctamente.
+                <p class="input__error error--changed2">
+                    El correo solo puede contener letras, numeros, puntos,
+                    guiones y guion bajo.
                 </p>
+            </div>
 
-                <div th:if="${mensajeError != null}">
-                    <p id="mensaje-password-error"
-                        class="input__error__interno"
-                        th:text="${mensajeError}">
-                    </p>
+            <div class="formulario__input">
+                <div class="input-box">
+                    <input type="password" autocomplete="off" placeholder name="password" id="password">
+                    <label for="password">Password</label>
+                    <span class="box__icon"><i class="ri-check-line"></i></span>
+                    <span class="box__icon"><i class="ri-close-line"></i></span>
                 </div>
+                <p class="input__error">
+                    La contraseña tiene que ser de 4 a 15 digitos
+                </p>
+            </div>
 
-                <div class="formulario__input formulario__btn-container">
-                    <button class="formulario__btn"
-                        type="submit">Registrar</button>
-                </div>
-
-                <div class="registre-link">
-                    <p>No tienes una cuenta?<a
-                            th:href="@{/auth/sign_up}">Registro</a></p>
+            <div class="formulario__input">
+                <div class="remember-forgot">
+                    <label class="forgot__label"><input type="checkbox">Acepto Terminos y
+                        Condiciones</label>
+                    <a href>Recordar contraseña?</a>
                 </div>
             </div>
 
-        </form>
+            <p class="input__advertencia">
+                <i class="ri-error-warning-line"></i> <b>Error:</b> Por
+                favor rellene el formulario correctamente.
+            </p>
 
-        <div class="imagen__container">
-            <img class="container__login" th:src="@{/Css/Img/baner/b18}" alt>
-        </div>
+            <div th:if="${mensajeError != null}">
+                <p id="mensaje-password-error" class="input__error__interno" th:text="${mensajeError}">
+                </p>
+            </div>
 
-        <div id="modalSuccess" class="modal" th:if="${mensajeExitoso != null}">
-            <div class="modal-content">
-                <span class="close-modal" onclick="closeModal()">&times;</span>
-                <i class="ri-check-line success-icon"></i>
-                <h2 th:text="${mensajeExitoso}">Inicio de sesión exitoso</h2>
+            <div class="formulario__input formulario__btn-container">
+                <button class="formulario__btn" type="submit">Registrar</button>
+            </div>
+
+            <div class="registre-link">
+                <p>No tienes una cuenta?<a th:href="@{/auth/sign_up}">Registro</a></p>
             </div>
         </div>
 
-        <script type="module" th:src="@{/Js/login.js}"></script>
-        <!-- Script para desvanecer el mensaje que proviene del servidor -->
-        <script>
-        setTimeout(function() {
+    </form>
+
+    <div class="imagen__container">
+        <img class="container__login" th:src="@{/Css/Img/baner/b18}" alt>
+    </div>
+
+    <div id="modalSuccess" class="modal" th:if="${mensajeExitoso != null}">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <i class="ri-check-line success-icon"></i>
+            <h2 th:text="${mensajeExitoso}">Inicio de sesión exitoso</h2>
+        </div>
+    </div>
+
+    <script type="module" th:src="@{/Js/login.js}"></script>
+    <!-- Script para desvanecer el mensaje que proviene del servidor -->
+    <script>
+        setTimeout(function () {
             const MENSAJE_PASSWORD_ERROR = document.getElementById('mensaje-password-error');
             if (MENSAJE_PASSWORD_ERROR) {
                 MENSAJE_PASSWORD_ERROR.style.display = 'none';
             }
         }, 5000);
     </script>
-    </body>
+</body>
+
 </html>
