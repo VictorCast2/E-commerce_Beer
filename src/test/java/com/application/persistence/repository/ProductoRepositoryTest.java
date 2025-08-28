@@ -1,7 +1,6 @@
 package com.application.persistence.repository;
 
-import com.application.ProductoDataProvider;
-import com.application.persistence.entity.pack.PackProducto;
+import com.application.provider.ProductoDataProvider;
 import com.application.persistence.entity.producto.Producto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

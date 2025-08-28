@@ -1,6 +1,6 @@
 package com.application.presentation.controller.categoria;
 
-import com.application.CategoriaDataProvider;
+import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;

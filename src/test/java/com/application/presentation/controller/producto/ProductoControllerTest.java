@@ -1,6 +1,6 @@
 package com.application.presentation.controller.producto;
 
-import com.application.ProductoDataProvider;
+import com.application.provider.ProductoDataProvider;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;

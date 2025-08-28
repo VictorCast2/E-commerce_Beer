@@ -48,6 +48,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                 .map(categoria -> {
                     long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
                     return new CategoriaResponse(
+                            categoria.getCategoriaId(),
                             categoria.getNombre(),
                             categoria.getDescripcion(),
                             cantidadPacks
@@ -70,6 +71,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                 .map(categoria -> {
                     long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
                     return new CategoriaResponse(
+                            categoria.getCategoriaId(),
                             categoria.getNombre(),
                             categoria.getDescripcion(),
                             cantidadPacks

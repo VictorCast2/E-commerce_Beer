@@ -1,6 +1,6 @@
 package com.application.persistence.repository;
 
-import com.application.CategoriaDataProvider;
+import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.categoria.Categoria;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

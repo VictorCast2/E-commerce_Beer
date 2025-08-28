@@ -1,4 +1,4 @@
-package com.application;
+package com.application.provider;
 
 import com.application.persistence.entity.pack.Pack;
 import com.application.persistence.entity.producto.Producto;

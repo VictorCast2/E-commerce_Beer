@@ -47,6 +47,7 @@ public class ProductoServiceImpl implements ProductoService {
         List<Producto> productos = productoRepository.findAll();
         return productos.stream()
                 .map(producto -> new ProductoResponse(
+                        producto.getProductoId(),
                         producto.getImagen(),
                         producto.getNombre(),
                         producto.getPrecio(),
@@ -55,7 +56,7 @@ public class ProductoServiceImpl implements ProductoService {
                         producto.getMarca(),
                         producto.getPresentacion()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -68,6 +69,7 @@ public class ProductoServiceImpl implements ProductoService {
         List<Producto> productos = productoRepository.findByActivoTrue();
         return productos.stream()
                 .map(producto -> new ProductoResponse(
+                        producto.getProductoId(),
                         producto.getImagen(),
                         producto.getNombre(),
                         producto.getPrecio(),
@@ -76,7 +78,7 @@ public class ProductoServiceImpl implements ProductoService {
                         producto.getMarca(),
                         producto.getPresentacion()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
