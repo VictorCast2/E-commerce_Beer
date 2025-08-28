@@ -1,5 +1,6 @@
 package com.application.service.implementation.usuario;
 
+import com.application.configuration.Custom.CustomUserDetails;
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
@@ -43,12 +44,13 @@ public class UsuarioServiceImpl implements UsuarioInterface, UserDetailsService 
      */
     @Override
     public UsuarioResponse crearUsuario(CreacionUsuarioRequest request) {
+        ERol eRol;
 
         if (request.getRol() == null || request.getRol().isBlank()) {
-            throw new IllegalArgumentException("El rol no puede ser nulo ni vacío");
+            eRol = ERol.valueOf("PERSONA_CONTACTO");
+        } else {
+            eRol = ERol.valueOf(request.getRol().toUpperCase());
         }
-
-        ERol eRol = ERol.valueOf(request.getRol().toUpperCase());
 
 
         // Buscar o crear el rol
@@ -113,65 +115,45 @@ public class UsuarioServiceImpl implements UsuarioInterface, UserDetailsService 
      * Si el usuario no existe, lanza una excepción.
      */
     @Override
-    public UsuarioResponse actualizarUsuario(String correo, EditarUsuarioRequest request) {
-        if (correo == null || correo.isBlank()) {
-            throw new IllegalArgumentException("El correo no puede ser nulo ni vacío");
+    public UsuarioResponse actualizarUsuario(EditarUsuarioRequest updateUsuarioRequest, CustomUserDetails customUserDetails) {
+        Usuario usuarioActualizado  = usuarioRepository.findByCorreo(customUserDetails.getCorreo())
+                .orElseThrow(() -> new UsernameNotFoundException("El correo no existe: " + customUserDetails.getCorreo()));
+        String correoAnterior = usuarioActualizado.getCorreo();
+        if (updateUsuarioRequest.getNombres() != null && !updateUsuarioRequest.getNombres().isBlank()) {
+            usuarioActualizado.setNombres(updateUsuarioRequest.getNombres());
         }
-
-        // Buscar usuario por correo
-        Usuario usuario = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new UsernameNotFoundException("El correo no existe: " + correo));
-
-        // 🔹 Manejo del Nombre
-        if (request.getNombres() != null && !request.getNombres().isBlank()) {
-            usuario.setNombres(request.getNombres());
+        if (updateUsuarioRequest.getApellidos() != null && !updateUsuarioRequest.getApellidos().isBlank()) {
+            usuarioActualizado.setApellidos(updateUsuarioRequest.getApellidos());
         }
-
-        // 🔹 Manejo del Apellido
-        if (request.getApellidos() != null && !request.getApellidos().isBlank()) {
-            usuario.setApellidos(request.getApellidos());
+        if (updateUsuarioRequest.getCedula() != null && !updateUsuarioRequest.getCedula().isBlank()) {
+            usuarioActualizado.setCedula(updateUsuarioRequest.getCedula());
         }
-
-        // 🔹 Manejo de la cedula
-        if (request.getCedula() != null && !request.getCedula().isBlank()) {
-            usuario.setCedula(request.getCedula());
+        if (updateUsuarioRequest.getTelefono() != null && !updateUsuarioRequest.getTelefono().isBlank()) {
+            usuarioActualizado.setTelefono(updateUsuarioRequest.getTelefono());
         }
-
-        // 🔹 Manejo del teléfono
-        if (request.getTelefono() != null && !request.getTelefono().isBlank()) {
-            usuario.setTelefono(request.getTelefono());
+        if (updateUsuarioRequest.getImagen() != null && !updateUsuarioRequest.getImagen().isBlank()) {
+            usuarioActualizado.setImagen(updateUsuarioRequest.getImagen());
         }
-
-        // 🔹 Manejo de la imagen
-        if (request.getImagen() != null && !request.getImagen().isBlank()) {
-            usuario.setImagen(request.getImagen());
+        if (updateUsuarioRequest.getPassword() != null && !updateUsuarioRequest.getPassword().isBlank()) {
+            usuarioActualizado.setPassword(encoder.encode(updateUsuarioRequest.getPassword()));
         }
-
-        // 🔹 Manejo de la contraseña
-        if (request.getPassword() != null && !request.getPassword().isBlank()) {
-            usuario.setPassword(encoder.encode(request.getPassword()));
-        }
-
-        // 🔹 Manejo de la empresa
-        if (request.getEmpresa() != null && !request.getEmpresa().isBlank()) {
-            Empresa empresa = empresaRepository.findByNit(request.getEmpresa())
+        if (updateUsuarioRequest.getEmpresa() != null && !updateUsuarioRequest.getEmpresa().isBlank()) {
+            Empresa empresa = empresaRepository.findByNit(updateUsuarioRequest.getEmpresa())
                     .orElseThrow(() -> new IllegalArgumentException(
-                            "No existe una empresa con NIT: " + request.getEmpresa()
+                            "No existe una empresa con NIT: " + updateUsuarioRequest.getEmpresa()
                     ));
-            usuario.setEmpresa(empresa);
+            usuarioActualizado.setEmpresa(empresa);
         }
-
-        // 🔹 Manejo del rol
-        if (request.getRol() != null && !request.getRol().isBlank()) {
-            ERol eRol = ERol.valueOf(request.getRol().toUpperCase());
+        if (updateUsuarioRequest.getRol() != null && !updateUsuarioRequest.getRol().isBlank()) {
+            ERol eRol = ERol.valueOf(updateUsuarioRequest.getRol().toUpperCase());
             Rol rol = rolRepository.findByName(eRol)
                     .orElseGet(() -> rolRepository.save(Rol.builder().name(eRol).build()));
-            usuario.setRol(rol);
+            usuarioActualizado.setRol(rol);
         }
 
         // Guardar el usuario actualizado
-        System.out.println("Actualizando usuario: " + usuario.getNombres());
-        usuarioRepository.save(usuario);
+        System.out.println("Actualizando usuario: " + updateUsuarioRequest.getNombres());
+        usuarioRepository.save(usuarioActualizado);
 
         return new UsuarioResponse("✏️ Usuario actualizado exitosamente");
     }
