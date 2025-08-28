@@ -1,6 +1,6 @@
 package com.application.service.implementation.categoria;
 
-import com.application.CategoriaDataProvider;
+import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.repository.CategoriaRepository;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;

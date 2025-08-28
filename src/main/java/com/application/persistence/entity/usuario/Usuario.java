@@ -3,6 +3,7 @@ package com.application.persistence.entity.usuario;
 import com.application.persistence.entity.compra.Compra;
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
+import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,7 +30,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
-
+    @Column(name = "tipo_identificacion")
+    @Enumerated(EnumType.STRING)
+    private EIdentificacion tipoIdentificacion;
     @Column(length = 15, nullable = false)
     private String cedula;
     @Column(length = 175, nullable = false)

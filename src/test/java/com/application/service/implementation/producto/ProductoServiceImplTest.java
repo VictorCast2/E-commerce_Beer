@@ -1,6 +1,6 @@
 package com.application.service.implementation.producto;
 
-import com.application.ProductoDataProvider;
+import com.application.provider.ProductoDataProvider;
 import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.repository.ProductoRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;

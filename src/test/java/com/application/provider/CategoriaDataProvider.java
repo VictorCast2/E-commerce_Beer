@@ -1,4 +1,4 @@
-package com.application;
+package com.application.provider;
 
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.pack.Pack;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class CategoriaDataProvider {
 
-    // Controller
+    // Repository
     public static List<Categoria> categoriaList() {
 
         // ===== Categorías =====
