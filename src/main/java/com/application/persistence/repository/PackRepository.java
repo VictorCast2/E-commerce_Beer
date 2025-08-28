@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface PackRepository extends JpaRepository<Pack, Long> {
     List<Pack> findByActivoTrue();
-
     List<Pack> findByCategorias_CategoriaId(Long categoriaId);
-
 }

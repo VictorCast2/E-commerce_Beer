@@ -1,0 +1,19 @@
+package com.application.presentation.dto.pack.response;
+
+import com.application.persistence.entity.pack.enums.ETipo;
+import com.application.presentation.dto.categoria.response.CategoriaResponse;
+
+import java.util.List;
+
+public record PackResponse(
+        Long id,
+        String imagen,
+        String nombre,
+        double precio,
+        int stock,
+        String descripcion,
+        ETipo tipo,
+        List<PackCategoriaResponse> categorias,
+        List<ProductoCantidadResponse> productos
+) {
+}

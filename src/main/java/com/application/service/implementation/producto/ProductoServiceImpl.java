@@ -8,12 +8,14 @@ import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.interfaces.producto.ProductoService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
@@ -44,6 +46,7 @@ public class ProductoServiceImpl implements ProductoService {
         List<Producto> productos = productoRepository.findAll();
         return productos.stream()
                 .map(producto -> new ProductoResponse(
+                        producto.getProductoId(),
                         producto.getImagen(),
                         producto.getNombre(),
                         producto.getPrecio(),
@@ -52,7 +55,7 @@ public class ProductoServiceImpl implements ProductoService {
                         producto.getMarca(),
                         producto.getPresentacion()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -65,6 +68,7 @@ public class ProductoServiceImpl implements ProductoService {
         List<Producto> productos = productoRepository.findByActivoTrue();
         return productos.stream()
                 .map(producto -> new ProductoResponse(
+                        producto.getProductoId(),
                         producto.getImagen(),
                         producto.getNombre(),
                         producto.getPrecio(),
@@ -73,7 +77,7 @@ public class ProductoServiceImpl implements ProductoService {
                         producto.getMarca(),
                         producto.getPresentacion()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
