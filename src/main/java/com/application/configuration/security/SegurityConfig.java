@@ -1,5 +1,6 @@
 package com.application.configuration.security;
 
+import com.application.configuration.Custom.CustomOAuth2UserService;
 import com.application.persistence.repository.EmpresaRepository;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
@@ -31,7 +32,10 @@ public class SegurityConfig {
      * Utiliza HttpSecurity para definir las reglas de seguridad de la aplicación
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            CustomOAuth2UserService customOAuth2UserService
+    ) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -57,11 +61,20 @@ public class SegurityConfig {
                                 "/Css/**"
                         ).permitAll()
                         .anyRequest().authenticated()
-                    )
+                )
                 .formLogin(form -> form
-                        .loginPage("/auth/login")        // ← Página personalizada de login
-                        .loginProcessingUrl("/auth/login") // ← Procesamiento del formulario
-                        .defaultSuccessUrl("/", true) // ← Redirige a la página principal después del login exitoso
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/auth/login")
+                        .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
+                        .failureUrl("/auth/login?error=true")
+                        .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/auth/login")
+                        .userInfoEndpoint(userInfo ->
+                                userInfo.userService(customOAuth2UserService)
+                        )
+                        .defaultSuccessUrl("/proteted", true)
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
@@ -77,24 +90,18 @@ public class SegurityConfig {
                         .accessDeniedPage("/error/403")
                 )
                 .headers(headers -> headers
-                        // 🔐 Política de seguridad del contenido (Content Security Policy)
+                        // 🔐 Content Security Policy (CSP)
                         .contentSecurityPolicy(csp -> csp
-                                // Esta directiva limita el origen de recursos (scripts, imágenes, estilos, etc.) solo al mismo dominio ('self')
-                                .policyDirectives("default-src 'self'")
+                                .policyDirectives("default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com")
                         )
-                        // 🛡️ Protección contra ataques de clickjacking
+                        // 🛡️ Protección contra clickjacking
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                        // Esto permite que la aplicación se muestre en un <iframe> SOLO si la petición proviene del mismo dominio
-                        // Previene que otros sitios web maliciosos puedan embeber tu app en un iframe para robar datos
-                        // 📅 HSTS (HTTP Strict Transport Security)
+                        // 📅 HSTS
                         .httpStrictTransportSecurity(hsts -> hsts
-                                        .includeSubDomains(true)
-                                        // Aplica HSTS también a todos los subdominios (por ejemplo, admin.tuapp.com)
-                                        .maxAgeInSeconds(31536000)
-                                // Fuerza que los navegadores accedan solo por HTTPS durante 1 año (31536000 segundos)
+                                .includeSubDomains(true)
+                                .maxAgeInSeconds(31536000)
                         )
                 )
-                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 
