@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="@{/Css/login.css}">
-    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logo/logoBeer.png}"
-        href="/Assets/Img/Logo/logoBeer.png">
+    <link rel="stylesheet" th:href="@{/Css/login.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logo/logoBeer.png}">
     <title>Iniciar sesión</title>
 </head>
 
@@ -92,7 +91,7 @@
     </form>
 
     <div class="imagen__container">
-        <img class="container__login" th:src="@{/Css/Img/baner/b18}" alt>
+        <img class="container__login" th:src="@{/Assets/Img/baner/b18}" alt>
     </div>
 
     <div id="modalSuccess" class="modal" th:if="${mensajeExitoso != null}">
