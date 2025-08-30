@@ -1,22 +1,33 @@
-// Función para abrir el modal
-window.addEventListener('DOMContentLoaded', (event) => {
+// --- Manejo del modal ---
+function openModal(message, redirect = null) {
     const modal = document.getElementById("modalSuccess");
     if (modal) {
-        modal.style.display = "block"; // Mostrar el modal
+        const h2 = modal.querySelector("h2");
+        if (message) h2.textContent = message; // Cambiar texto si se pasa
+        modal.style.display = "block";
 
-        // Después de 2 segundos (2000 milisegundos), redirigir a buques
-        setTimeout(() => {
-            window.location.href = '/buques/';
-        }, 2000);
+        // Redirigir si corresponde
+        if (redirect) {
+            setTimeout(() => window.location.href = redirect, 2000);
+        }
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById("modalSuccess");
+    if (modal) modal.style.display = "none";
+}
+
+// Mostrar modal si hay logout
+window.addEventListener("load", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("logout")) {
+        openModal("Has cerrado sesión correctamente");
+        setTimeout(closeModal, 4000);
     }
 });
 
-// Función para cerrar el modal
-function closeModal() {
-    const modal = document.getElementById("modalSuccess");
-    modal.style.display = "none"; // Ocultar el modal
-}
-
+// --- Validaciones ---
 const fields = {
     email: {
         regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
@@ -28,6 +39,11 @@ const fields = {
     }
 };
 
+const form = document.querySelector("form");
+const errorMessageBox = document.querySelector(".input__advertencia");
+const inputs = document.querySelectorAll("input:not([type='checkbox'])");
+const checkbox = document.querySelector(".remember-forgot input");
+
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     const inputBox = input.closest(".input-box");
@@ -37,23 +53,19 @@ Object.keys(fields).forEach(fieldId => {
 
     input.addEventListener("input", () => {
         const value = input.value.trim();
-
         if (value === "") {
-            // Si el input está vacío, restablecer estilos
             inputBox.classList.remove("input-error");
             checkIcon.style.display = "none";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "";
         } else if (fields[fieldId].regex.test(value)) {
-            // Si es válido
             checkIcon.style.display = "inline-block";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "2px solid #0034de";
             inputBox.classList.remove("input-error");
         } else {
-            // Si es inválido
             checkIcon.style.display = "none";
             errorIcon.style.display = "inline-block";
             errorMessage.style.display = "block";
@@ -63,49 +75,35 @@ Object.keys(fields).forEach(fieldId => {
     });
 });
 
-const form = document.querySelector("form");
-const errorMessageBox = document.querySelector(".input__advertencia");
-const errorMessages = document.querySelectorAll(".input__error");
-const inputs = document.querySelectorAll("input:not([type='checkbox'])"); // Todos los inputs excepto el checkbox
-const checkbox = document.querySelector(".remember-forgot input"); // Selecciona el checkbox
-
+// Validar envío
 form.addEventListener("submit", function (event) {
     let formValid = true;
 
-    // Verificar si algún campo está vacío o inválido
     inputs.forEach(input => {
         const value = input.value.trim();
         if (value === "" || !fields[input.id].regex.test(value)) {
             formValid = false;
         }
     });
-
-    // Verificar si el checkbox está marcado
-    if (!checkbox.checked) {
-        formValid = false;
-    }
+    if (!checkbox.checked) formValid = false;
 
     if (!formValid) {
-        // Si el formulario no es válido, mostrar el mensaje de advertencia
         errorMessageBox.style.display = "block";
-        event.preventDefault(); // Evitar el envío del formulario
+        event.preventDefault();
     } else {
-        // Si el formulario es válido, mostrar el modal de éxito
-        openModal();
-        event.preventDefault(); // Evitar el envío real hasta que el modal se cierre
-        setTimeout(function () {
-            form.submit(); // Enviar el formulario después de un tiempo (simulando un retardo de éxito)
-        }, 2000); // Ajusta el tiempo según necesites
+        event.preventDefault(); // detener envío
+        openModal("Inicio de sesión exitoso", "/buques/");
     }
 });
 
-// Ocultar el mensaje de advertencia cuando el usuario empieza a escribir o marca el checkbox
-inputs.forEach(input => {
-    input.addEventListener("input", function () {
-        errorMessageBox.style.display = "none";
-    });
-});
-
-checkbox.addEventListener("change", function () {
+// Ocultar advertencia al escribir o marcar checkbox
+inputs.forEach(input => input.addEventListener("input", () => {
     errorMessageBox.style.display = "none";
-});
+}));
+checkbox.addEventListener("change", () => errorMessageBox.style.display = "none");
+
+// --- Ocultar mensaje de error del backend ---
+setTimeout(() => {
+    const MENSAJE_PASSWORD_ERROR = document.getElementById('mensaje-password-error');
+    if (MENSAJE_PASSWORD_ERROR) MENSAJE_PASSWORD_ERROR.style.display = 'none';
+}, 5000);
