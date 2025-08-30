@@ -106,4 +106,3 @@ checkbox.addEventListener("change", () => errorMessageBox.style.display = "none"
 setTimeout(() => {
     const MENSAJE_PASSWORD_ERROR = document.getElementById('mensaje-password-error');
     if (MENSAJE_PASSWORD_ERROR) MENSAJE_PASSWORD_ERROR.style.display = 'none';
-}, 5000);
