@@ -4,7 +4,6 @@ import com.application.persistence.entity.categoria.Categoria;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface CategoriaService {

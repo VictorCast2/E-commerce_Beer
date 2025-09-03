@@ -22,16 +22,22 @@ public class Historia {
     @Column(name = "historia_id")
     private Long historiaId;
 
+    @Column(nullable = false)
     private String imagen;
+    @Column(length = 100, nullable = false)
     private String titulo;
+    @Column(nullable = false)
     private String descripcion;
-    @Column(name = "historia_completa")
+    @Column(name = "historia_completa", nullable = false)
     private String historiaCompleta;
+    @Column(nullable = false)
     private LocalDate fecha;
+    @Column(name = "is_enabled")
     private boolean activo;
 
     // Cardinalidad con la tabla comentario (relación bidireccional)
     @Builder.Default
     @OneToMany(mappedBy = "historia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comentario> comentarios = new HashSet<>();
+
 }
