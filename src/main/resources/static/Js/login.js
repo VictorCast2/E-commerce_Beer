@@ -46,7 +46,6 @@ Object.keys(fields).forEach(fieldId => {
 });
 
 const form = document.querySelector("form");
-const errorMessageBox = document.querySelector(".input__advertencia");
 const errorMessages = document.querySelectorAll(".input__error");
 const inputs = document.querySelectorAll("input:not([type='checkbox'])"); // Todos los inputs excepto el checkbox
 const checkbox = document.querySelector(".remember-forgot input"); // Selecciona el checkbox
@@ -69,7 +68,16 @@ form.addEventListener("submit", function (event) {
 
     if (!formValid) {
         // Si el formulario no es válido, mostrar el mensaje de advertencia
-        errorMessageBox.style.display = "block";
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            },
+            footer: '<a href="#">Why do I have this issue?</a>'
+        });
         event.preventDefault(); // Evitar el envío del formulario
     } else {
         // Guardamos bandera en sessionStorage
@@ -97,14 +105,17 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
-// Ocultar el mensaje de advertencia cuando el usuario empieza a escribir o marca el checkbox
-inputs.forEach(input => {
-    input.addEventListener("input", function () {
-        errorMessageBox.style.display = "none";
-    });
+// ventana modal de credenciales invalidas usuarios y constrenia no existe en la base de datos
+// te toca victor
+/* Swal.fire({
+    icon: "error",
+    title: "Credenciales Inválidas",
+    text: "Este usuario y contraseña no se encuentran en la base de datos.",
+    customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup'
+    },
+    footer: '<a href="#">Why do I have this issue?</a>'
 });
 
-checkbox.addEventListener("change", function () {
-    errorMessageBox.style.display = "none";
-});
+ */

@@ -10,7 +10,6 @@ const fields = {
 };
 
 const tipoIdentificacionSelect = document.getElementById("tipoIdentificacion");
-const advertencia = document.querySelector(".input__advertencia");
 
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
@@ -23,7 +22,6 @@ Object.keys(fields).forEach(fieldId => {
     const label = inputBox.querySelector("label");
 
     input.addEventListener("input", () => {
-        hideAdvertencia();
         const value = input.value.trim();
 
         if (value === "") {
@@ -68,6 +66,7 @@ Object.keys(fields).forEach(fieldId => {
     });
 });
 
+
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input:not([type='checkbox'])");
 const checkbox = document.querySelector(".remember-forgot input");
@@ -79,16 +78,9 @@ tipoIdentificacionSelect.addEventListener("change", () => {
         tipoIdentificacionError.style.display = "none";
         tipoIdentificacionSelect.style.border = "2px solid #0034de";
     }
-    hideAdvertencia();
 });
 
 
-[...inputs, tipoIdentificacionSelect].forEach(el => {
-    el.addEventListener("input", hideAdvertencia);
-    el.addEventListener("change", hideAdvertencia);
-});
-
-checkbox.addEventListener("change", hideAdvertencia);
 
 form.addEventListener("submit", function (event) {
     let valid = true;
@@ -116,7 +108,15 @@ form.addEventListener("submit", function (event) {
     const allFieldsEmpty = emptyCount === Object.keys(fields).length && tipoIdentificacionInvalido && !checkbox.checked;
 
     if (allFieldsEmpty) {
-        advertencia.style.display = "block";
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        });
         tipoIdentificacionError.style.display = "none";
         tipoIdentificacionSelect.style.border = "";
         event.preventDefault();
@@ -127,7 +127,15 @@ form.addEventListener("submit", function (event) {
     if (tipoIdentificacionInvalido && emptyCount === 0 && checkbox.checked) {
         tipoIdentificacionError.style.display = "block";
         tipoIdentificacionSelect.style.border = "2px solid #fd1f1f";
-        advertencia.style.display = "flex";
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        });
         event.preventDefault();
         return;
     }
@@ -149,7 +157,15 @@ form.addEventListener("submit", function (event) {
 
     // Si hay otros errores
     if (!valid) {
-        advertencia.style.display = "block";
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        });
         event.preventDefault();
     } else {
         // Guardamos bandera en sessionStorage
@@ -172,11 +188,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 popup: 'swal-popup'
             }
         });
-        //Eliminamos la bandera para que no vuelva a salir al refrescar
         sessionStorage.removeItem("loginSuccess");
     }
 });
-
 
 const passwordInput = document.getElementById("password");
 const repeatPasswordInput = document.getElementById("repeatPassword");
@@ -184,6 +198,98 @@ passwordInput.addEventListener("input", () => {
     repeatPasswordInput.dispatchEvent(new Event("input"));
 });
 
-function hideAdvertencia() {
-    advertencia.style.display = "none";
-}
+
+//abri el formulario de completar empresa
+const abirmodal = document.getElementById("formulario__complete");
+const modal = document.getElementById("modalnewadd");
+const closeModalBtn = document.querySelector(".modal__close");
+
+abirmodal.addEventListener("click", () => {
+    modal.classList.remove("newadd--hidden");
+})
+
+closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("newadd--hidden");
+});
+
+
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.add("newadd--hidden");
+    }
+});
+
+
+//validaciones de completar de empresas
+const fieldsEmpresa = {
+    phone: { regex: /^\d{1,10}$/, errorMessage: "El teléfono solo puede contener números (máx. 10)." },
+    correo: { regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, errorMessage: "El correo solo puede contener letras,numeros,puntos,guiones y guion bajo." },
+    nit: { regex: /^\d{9,10}$/, errorMessage: "El NIT debe tener entre 9 y 10 dígitos y solo contener números." },
+    razonsocial: { regex: /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9&.,\- ]{3,100}$/, errorMessage: "La Razón Social debe tener entre 3 y 100 caracteres" },
+    direccion: { regex: /^(?=.*\d)(?=.*[A-Za-z])[A-Za-z0-9\s#.,-]{5,}$/, errorMessage: "Ingresa una dirección válida (ej. Calle 45 #10-23, 130002 o San Fernando, Calle 45 #10-23, 130002)." },
+    sector: { regex: /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,50}$/, errorMessage: "El sector debe tener entre 3 y 50 caracteres y solo contener letras y espacios" }
+};
+
+Object.keys(fieldsEmpresa).forEach(fieldId => {
+    const input = document.getElementById(fieldId);
+    const inputBox = input.closest(".input-box");
+    const checkIcon = inputBox.querySelector(".ri-check-line");
+    const errorIcon = inputBox.querySelector(".ri-close-line");
+    const errorMessage = inputBox.nextElementSibling;
+
+    input.addEventListener("input", () => {
+        const value = input.value.trim();
+
+        if (value === "") {
+            inputBox.classList.remove("input-error");
+            checkIcon.style.display = "none";
+            errorIcon.style.display = "none";
+            errorMessage.style.display = "none";
+            input.style.border = "";
+        } else if (fieldsEmpresa[fieldId].regex.test(value)) {
+            checkIcon.style.display = "inline-block";
+            errorIcon.style.display = "none";
+            errorMessage.style.display = "none";
+            input.style.border = "2px solid #0034de";
+            inputBox.classList.remove("input-error");
+        } else {
+            checkIcon.style.display = "none";
+            errorIcon.style.display = "inline-block";
+            errorMessage.style.display = "block";
+            input.style.border = "2px solid #fd1f1f";
+            inputBox.classList.add("input-error");
+        }
+    });
+});
+
+const addform = document.querySelector(".add__formulario");
+const inputs2 = addform.querySelectorAll("input");
+
+addform.addEventListener("submit", function (event) {
+    let formValid = true;
+
+    inputs2.forEach(input => {
+        const value = input.value.trim();
+        if (value === "" || !fieldsEmpresa[input.id].regex.test(value)) {
+            formValid = false;
+        }
+    });
+
+    if (!formValid) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            },
+            footer: '<a href="#">Why do I have this issue?</a>'
+        });
+
+        event.preventDefault();
+    } else {
+        sessionStorage.setItem("loginSuccess", "true");
+        // El formulario se envía normalmente
+    }
+});

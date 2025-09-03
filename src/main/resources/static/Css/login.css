@@ -169,20 +169,6 @@ body {
     margin: 30px 0 0 33px;
 }
 
-.input__advertencia {
-    font: 700 1rem var(--typografiaUrbanist);
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 550px;
-    background-color: #fd1f1f;
-    padding: 20px 15px;
-    border-radius: 5px;
-    grid-column: span 2;
-    margin: 20px 0 0 30px;
-    display: flex;
-    justify-content: flex-start;
-    display: none;
-}
 
 .input__advertencia i {
     font-size: 1.7rem;

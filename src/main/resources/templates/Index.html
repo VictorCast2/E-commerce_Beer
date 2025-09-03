@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="../static/Css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,14 +65,14 @@
                         <i class="ri-user-line"></i>
                     </span>
 
-                    <span class="icon__item">
+                    <span class="icon__item" id="go-fav">
                         <i class="ri-heart-3-line"></i>
-                        <span class="icon__badge" id="fav-count">0</span>
+                        <span class="icon__badge" id="fav-count"></span>
                     </span>
 
-                    <span class="icon__item">
+                    <span class="icon__item" id="cart-icon">
                         <i class="ri-shopping-cart-2-line"></i>
-                        <span class="icon__badge" id="cart-count">0</span>
+                        <span class="icon__badge" id="cart-count"></span>
                     </span>
                 </div>
         </header>
@@ -376,7 +377,9 @@
                     <div class="flex__productos">
                         <div class="flex__productos-track">
                             <!-- Product 1 -->
-                            <div class="card">
+                            <div class="card" data-name="Vino Lambrusco Botticello Rosato Dolce
+                                    750 ml" data-price="39.000"
+                                data-image="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png">
                                 <div class="badge badge-green">28%</div>
                                 <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png"
                                     alt="" width="250" height="250" />
@@ -400,7 +403,7 @@
                                     <i class="ri-star-line"></i>
                                 </div>
                                 <div class="price-container">
-                                    <span class="price">$39.00</span>
+                                    <span class="price">$39.000</span>
                                     <span class="price-old">$27.900</span>
                                 </div>
 
@@ -409,6 +412,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -447,6 +451,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -485,6 +490,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -523,6 +529,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -560,6 +567,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -599,6 +607,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -636,6 +645,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -673,6 +683,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -710,6 +721,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -748,6 +760,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -785,6 +798,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -824,6 +838,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -862,6 +877,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -901,6 +917,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -940,6 +957,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -980,6 +998,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1041,6 +1060,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1077,6 +1097,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1113,6 +1134,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1149,6 +1171,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1187,6 +1210,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1224,6 +1248,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1261,6 +1286,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1297,6 +1323,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1337,6 +1364,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1373,6 +1401,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1412,6 +1441,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1450,6 +1480,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1510,6 +1541,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1547,6 +1579,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1583,6 +1616,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1619,6 +1653,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1655,6 +1690,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -1693,6 +1729,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1729,6 +1766,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1765,6 +1803,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1801,6 +1840,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1837,6 +1877,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1873,6 +1914,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1909,6 +1951,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -1970,6 +2013,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2008,6 +2052,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2046,6 +2091,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2084,6 +2130,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2121,6 +2168,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2159,6 +2207,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2195,6 +2244,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2233,6 +2283,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2271,6 +2322,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2308,6 +2360,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2345,6 +2398,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2382,6 +2436,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2443,6 +2498,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2483,6 +2539,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2521,6 +2578,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2558,6 +2616,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2595,6 +2654,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2633,6 +2693,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2672,6 +2733,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2709,6 +2771,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2746,6 +2809,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2783,6 +2847,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2820,6 +2885,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2857,6 +2923,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2919,6 +2986,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -2958,6 +3026,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -2996,6 +3065,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3033,6 +3103,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3072,6 +3143,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -3110,6 +3182,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3149,6 +3222,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3188,6 +3262,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3225,6 +3300,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -3264,6 +3340,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3302,6 +3379,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3340,6 +3418,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3402,6 +3481,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -3443,6 +3523,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3482,6 +3563,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3521,6 +3603,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3558,6 +3641,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
 
                             </div>
@@ -3596,6 +3680,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3633,6 +3718,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3669,6 +3755,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3705,7 +3792,9 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
+
 
                             </div>
 
@@ -3743,6 +3832,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3780,6 +3870,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3816,6 +3907,7 @@
                                     <i class="ri-heart-line" title="Favorito"></i>
                                     <i class="ri-shopping-cart-line" title="Agregar al carrito"></i>
                                     <i class="ri-eye-line" title="Ver"></i>
+                                    <i class="ri-share-line" title="Compartir"></i>
                                 </div>
                             </div>
 
@@ -3838,6 +3930,28 @@
 
         </section>
     </main>
+
+    <!-- ============= DRAWER DEL CARRITO ============= -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <header class="cart-header">
+            <h3 class="header__carrito">Carrito De Compras</h3>
+            <button id="cart-close"><i class="ri-close-line"></i></button>
+        </header>
+
+        <div class="cart-body">
+            <ul class="cart-list" id="cart-list"></ul>
+        </div>
+
+        <footer class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <button id="seguir-comprando" class="btn-primary">Seguir Comprando</button>
+            <button id="finalizar-compra" class="btn-primary">Finalizar compra</button>
+        </footer>
+    </aside>
 
     <section class="banner">
         <h4 class="banner__title">Promociones Especiales</h4>
@@ -4088,6 +4202,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../static/Js/main.js"></script>
 </body>

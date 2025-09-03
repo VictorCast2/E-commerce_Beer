@@ -22,20 +22,20 @@ body {
 
 
 
-.form .formulario__title{
+.form .formulario__title {
     font: 700 2.2rem var(--typografiaGeist);
     text-align: center;
     margin: 0 0 0.5rem 0;
 }
 
 
-.form .formulario__title2{
+.form .formulario__title2 {
     font: 700 1.1rem var(--typografiaUrbanist);
     text-align: center;
     margin: 0 0 0 35%;
 }
 
-.formulario{
+.formulario {
     margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -58,10 +58,15 @@ body {
     transition: all 0.3s ease;
 }
 
+.input-box .label--form2 {
+    left: 70px;
+}
+
+
 .input-box input {
     margin: 10px 0 20px 20px;
     background-color: transparent;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     font: 600 1rem var(--typografiaUrbanist);
     padding: 10px 15px;
     border-radius: 5px;
@@ -75,7 +80,7 @@ body {
 
 .input-box input:focus {
     outline: none;
-    border:2px solid #0034de;
+    border: 2px solid #0034de;
 }
 
 .input-box input:focus~label,
@@ -102,7 +107,7 @@ body {
     padding: 12px 16px;
     padding-right: 40px;
     background-color: transparent;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 8px;
     font: 600 1rem var(--typografiaUrbanist);
     color: #8d8d8d;
@@ -139,15 +144,19 @@ body {
 }
 
 
-.box__icon i{
+.box__icon i {
     position: absolute;
     top: 25px;
     left: 89%;
     font: 900 1.2rem var(--typografiaUrbanist);
-    
+
 }
 
-.box__icon .ri-check-line{
+.icon--form2 i {
+    left: 85%;
+}
+
+.box__icon .ri-check-line {
     background-color: #34A853;
     border-radius: 50%;
     padding: 1px 1px;
@@ -155,7 +164,7 @@ body {
     display: none;
 }
 
-.box__icon .ri-close-line{
+.box__icon .ri-close-line {
     background-color: #fd1f1f;
     border-radius: 50%;
     padding: 1px 1px;
@@ -163,7 +172,7 @@ body {
     display: none;
 }
 
-.input__error{
+.input__error {
     font: 600 1rem var(--typografiaUrbanist);
     width: 400px;
     margin: 0 0 10px 20px;
@@ -171,29 +180,27 @@ body {
 }
 
 
-.error--changed{
+.error--changed {
     margin: 30px 0 10px 20px;
 }
 
-.input__advertencia{
-    font: 700 1rem var(--typografiaUrbanist);
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 820px;
-    background-color: #fd1f1f;
-    padding: 20px 15px;
-    border-radius: 5px;
-    grid-column: span 2; 
-    margin: 20px 0 0 20px; 
-    display: flex;
-    justify-content: flex-start;
-    display:none ;
+.error--form2 {
+    width: 400px;
+    margin: 0 0 10px 25px;
 }
 
-.input__advertencia i {
-    font-size: 1.7rem; 
-    margin:-5px 10px 0 0; 
+.error--nit,
+.error--social,
+.error--tel {
+    margin: 0 0 10px 35px;
 }
+
+.error--email {
+    white-space: wrap;
+    width: 400px;
+    margin: 0 0 10px 30px;
+}
+
 
 .swal-title {
     font-family: 'Urbanist', sans-serif !important;
@@ -208,8 +215,9 @@ body {
 
 .formulario__input:nth-last-child(4) .input__error,
 .formulario__input:nth-last-child(2) .input__error {
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
+
 
 .remember-forgot .forgot__label {
     accent-color: #0034de;
@@ -221,8 +229,15 @@ body {
     margin-right: 15px;
 }
 
+.formulario .formulario__complete {
+    color: #48f;
+    cursor: pointer;
+    margin-left: 16.5rem;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
 .form .formulario__btn {
-    font: 700 1rem var(--typografiaUrbanist);
+    font: 700 1.2rem var(--typografiaUrbanist);
     background-color: #48f;
     color: #fff;
     width: 100%;
@@ -238,31 +253,31 @@ body {
     transition: background-color .7s ease;
 }
 
-.form .formulario__btn:hover{
+.form .formulario__btn:hover {
     background-color: #0034de;
 }
 
 .formulario__btn-container {
     grid-column: span 2;
-    margin: 5px 0 0 10em; 
+    margin: 5px 0 0 10em;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
 }
 
 
-.icono__back{
+.icono__back {
     position: absolute;
     top: 20px;
     left: 2em;
 }
 
-.icono__back .regresar{
+.icono__back .regresar {
     font: 500 1.2rem var(--typografiaUrbanist);
     text-decoration: none;
     color: #0034de;
 }
 
-.icono__back i{
+.icono__back i {
     font-size: 20px;
     color: #0034de;
 }
@@ -271,12 +286,133 @@ body {
 .imagen__container {
     position: absolute;
     top: 0;
-    left:56em;
+    left: 56em;
 }
 
-.imagen__container .container__login{
+.imagen__container .container__login {
     width: 100%;
     max-width: 640px;
     min-height: 100vh;
     border-radius: 0 0 0 190px;
+}
+
+
+/* Ventana modal */
+.modal__newadd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.newadd--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- CONTENIDO DEL MODAL --- */
+.modal__content {
+    background: #fff;
+    padding: 2rem 1.5rem 2rem 0;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    font-family: 'Urbanist', sans-serif;
+    text-align: center;
+    animation: swalIn 0.35s ease forwards;
+}
+
+.modal__content .content__titulo {
+    font: 600 1.5rem var(--typografiaGeist);
+    margin-bottom: 1rem;
+
+}
+
+.modal__newadd.newadd--hidden .modal__content {
+    animation: swalOut 0.3s ease forwards;
+}
+
+.swal2-container {
+    z-index: 99999 !important;
+}
+
+@keyframes swalIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    45% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    80% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes swalOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+}
+
+.modal__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.6rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.modal__close:hover {
+    color: #000;
+    transform: scale(1.2);
+}
+
+.formulario__button {
+    font: 700 1rem var(--typografiaUrbanist);
+    background-color: #48f;
+    color: #fff;
+    width: 100%;
+    width: 400px;
+    margin: 0 0 0 1rem;
+    height: 55px;
+    border-radius: 5px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    transition: background-color .7s ease;
+}
+
+.formulario__button:hover {
+    background-color: #0034de;
 }
