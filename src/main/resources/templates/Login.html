@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="@{/Css/login.css}">
-    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logo/logoBeer.png}"
-        href="/Assets/Img/Logo/logoBeer.png">
+    <link rel="stylesheet" th:href="@{/Css/login.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logo/logoBeer.png}">
     <title>Iniciar sesión</title>
 </head>
 
@@ -21,17 +20,15 @@
         <a class="regresar" th:href="@{/}">Regresar A Inicio</a>
     </div>
 
-    <form action="/auth/login" method="post" class="form">
+    <form th:action="@{/auth/login}" method="post" class="form">
         <h1 class="formulario__title">Iniciar sesión</h1>
 
-        <span class="formulario__title2">Use su contraseña para iniciar
-            sesión</span>
+        <span class="formulario__title2">Use su contraseña para iniciar sesión</span>
 
         <div class="container__google">
-            <a href="/oauth2/authorization/google" class="btn btn-google">
+            <a th:href="@{/oauth2/authorization/google}" class="btn btn-google">
                 <img class="google__imagen" th:src="@{/Assets/Img/Logo/Google/google.png}" alt="Google">
-                <p class="google__text">¿Iniciar sesión con otras
-                    cuentas?</p>
+                <p class="google__text">Iniciar sesión con Google</p>
             </a>
         </div>
 
@@ -39,7 +36,8 @@
 
             <div class="formulario__input">
                 <div class="input-box">
-                    <input type="email" autocomplete="off" placeholder name="correo" id="email">
+                    <!-- 🔑 Usa username -->
+                    <input type="email" name="username" id="email" autocomplete="off" placeholder required>
                     <label for="email">Email</label>
                     <span class="box__icon"><i class="ri-check-line"></i></span>
                     <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -52,7 +50,8 @@
 
             <div class="formulario__input">
                 <div class="input-box">
-                    <input type="password" autocomplete="off" placeholder name="password" id="password">
+                    <!-- 🔑 Usa password -->
+                    <input type="password" name="password" id="password" autocomplete="off" placeholder required>
                     <label for="password">Password</label>
                     <span class="box__icon"><i class="ri-check-line"></i></span>
                     <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -75,9 +74,23 @@
                 favor rellene el formulario correctamente.
             </p>
 
-            <div th:if="${mensajeError != null}">
-                <p id="mensaje-password-error" class="input__error__interno" th:text="${mensajeError}">
+            <!-- ⚠️ Mensaje de error -->
+            <div th:if="${param.error}">
+                <p id="mensaje-password-error" class="input__error__interno">
+                    <i class="ri-error-warning-line"></i> Usuario o contraseña incorrectos.
                 </p>
+            </div>
+
+            <!-- ✅ Modal de éxito/reutilizable -->
+            <div id="modalSuccess" class="modal"
+                 th:if="${#bools.isTrue(param.logout) or (mensajeExitoso != null)}">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                    <i class="ri-check-line success-icon"></i>
+                    <h2 th:text="${mensajeExitoso != null ? mensajeExitoso : 'Has cerrado sesión correctamente'}">
+                        Inicio de sesión exitoso
+                    </h2>
+                </div>
             </div>
 
             <div class="formulario__input formulario__btn-container">
@@ -88,20 +101,7 @@
                 <p>No tienes una cuenta?<a th:href="@{/auth/sign_up}">Registro</a></p>
             </div>
         </div>
-
     </form>
-
-    <div class="imagen__container">
-        <img class="container__login" th:src="@{/Css/Img/baner/b18}" alt>
-    </div>
-
-    <div id="modalSuccess" class="modal" th:if="${mensajeExitoso != null}">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <i class="ri-check-line success-icon"></i>
-            <h2 th:text="${mensajeExitoso}">Inicio de sesión exitoso</h2>
-        </div>
-    </div>
 
     <script type="module" th:src="@{/Js/login.js}"></script>
     <!-- Script para desvanecer el mensaje que proviene del servidor -->

@@ -65,6 +65,8 @@ public class SegurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
@@ -92,7 +94,12 @@ public class SegurityConfig {
                 .headers(headers -> headers
                         // 🔐 Content Security Policy (CSP)
                         .contentSecurityPolicy(csp -> csp
-                                .policyDirectives("default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com")
+                                .policyDirectives(
+                                        "default-src 'self'; " +
+                                                "script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; " +
+                                                "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; " +
+                                                "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:"
+                                )
                         )
                         // 🛡️ Protección contra clickjacking
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
