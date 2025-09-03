@@ -21,9 +21,13 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comentario_id")
     private Long comentarioId;
+    @Column(length = 100, nullable = false)
     private String titulo;
+    @Column(nullable = false)
     private String mensaje;
+    @Column(nullable = false)
     private int calificacion;
+    @Column(nullable = false)
     private LocalDate fecha;
 
     // Cardinalidad con la tabla usuario (relación unidireccional)
@@ -43,4 +47,5 @@ public class Comentario {
             foreignKey = @ForeignKey(name = "fk_comentario_historia")
     )
     private Historia historia;
+
 }
