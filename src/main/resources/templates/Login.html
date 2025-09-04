@@ -33,29 +33,29 @@
     </div>
 
     <div class="contenido__form">
-        <form class="form">
+        <form class="form" th:action="@{/auth/login}" method="post">
             <h1 class="formulario__title">Iniciar Sesion</h1>
 
-            <span class="formulario__title2">use su contraseña para Iniciar Sesion</span>
+            <span class="formulario__title2">Use su contraseña para Iniciar Sesion</span>
 
             <div class="formulario">
-
                 <div class="formulario__input input--margintop">
                     <div class="input-box">
-                        <input type="email" autocomplete="off" placeholder="" name="Email" id="email">
+                        <!-- 🔑 Usa Email -->
+                        <input type="email" autocomplete="off" placeholder="" name="username" id="email" required>
                         <label for="email">Email</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
                     </div>
                     <p class="input__error error--changed2">
-                        El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
+                        El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.
                     </p>
                 </div>
 
-
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="password" autocomplete="off" placeholder="" name="Password" id="password">
+                        <!-- 🔑 Usa Password -->
+                        <input type="password" autocomplete="off" placeholder="" name="password" id="password" required>
                         <label for="password">Password</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -67,8 +67,8 @@
 
                 <div class="formulario__input">
                     <div class="remember-forgot">
-                        <label class="forgot__label"><input type="checkbox">Acepto Terminos y Condiciones</label>
-                        <a class="forgot__color" href="">Recordar contraseña?</a>
+                        <label class="forgot__label"> <input type="checkbox">Acepto Terminos y Condiciones</label>
+                        <a class="forgot__color" th:href="@{/}">Recordar contraseña?</a>
                     </div>
                 </div>
 
@@ -77,18 +77,22 @@
                 </div>
 
                 <div class="registre-link">
-                    <p>No tienes una cuenta?<a href="Registro.html" target="_blank">Registro</a></p>
+                    <p>¿No tienes una cuenta?
+                        <a th:href="@{/auth/sign_up}">
+                            Registro
+                        </a>
+                    </p>
                 </div>
 
                 <div class="container__otrascuentas">
                     <span class="otrascuentas__titles">O con</span>
-                    <a href="" class="otrascuentas__btn">
-                        <img loading="lazy" src="../static/Assets/Img/logos/google.svg" alt="">
+                    <a th:href="@{/oauth2/authorization/google}" class="otrascuentas__btn">
+                        <img loading="lazy" th:src="@{/Assets/Img/Logos/google.svg}" alt="">
                         Continuar con google
                     </a>
 
-                    <a href="" class="otrascuentas__btn">
-                        <img loading="lazy" src="../static/Assets/Img/logos/Apple_light.svg" alt="">
+                    <a th:href="@{/}" class="otrascuentas__btn">
+                        <img loading="lazy" th:src="@{/Assets/Img/Logos/Apple_light.svg}" alt="">
                         Continuar con apple
                     </a>
 
@@ -98,11 +102,17 @@
         </form>
 
         <div class="imagen__container">
-            <img class="container__login" src="../static/Assets/Img/comprarNosotros/Elegirnos.png" alt="">
+            <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
         </div>
     </div>
 
     <script type="module" th:src="@{/Js/login.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const mensajeError = /*[[${mensajeError}]]*/ null;
+        const mensajeExitoso = /*[[${mensajeExitoso}]]*/ null;
+        /*]]>*/
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

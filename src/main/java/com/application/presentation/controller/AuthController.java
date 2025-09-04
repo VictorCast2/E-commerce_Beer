@@ -31,15 +31,21 @@ public class AuthController {
     @GetMapping("/auth/login")
     public String getLogin(Model model,
                            @RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout) {
+                           @RequestParam(value = "logout", required = false) String logout,
+                           @RequestParam(value = "success", required = false) String success) {
+
         if (error != null) {
             model.addAttribute("mensajeError", "Usuario o contraseña inválidos");
         }
         if (logout != null) {
             model.addAttribute("mensajeExitoso", "Sesión cerrada correctamente");
         }
+        if (success != null) {
+            model.addAttribute("loginSuccess", true);
+        }
         return "Login";
     }
+
 
     @GetMapping("/auth/sign_up")
     public String getSignUp(Model model) {
