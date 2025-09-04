@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+}
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -17,43 +23,62 @@ body {
 }
 
 
-.contenido__form {
-    margin: 0 0 0 6em;
+.contenido__form{
+    margin: -60px 0 0 6em;
 }
 
 .form .formulario__title {
-    font: 700 35px "Montserrat";
+    font: 700 2.2rem var(--typografiaGeist);
     text-align: center;
-    margin: 0 3.5em 20px 0;
+    margin: 0 8rem 0.5rem 0;
 }
 
-.container__google {
-    background-color: #F5FAFF;
+.container__otrascuentas{
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 2rem 0 0 2rem;
+}
+
+.otrascuentas__titles{
+    text-align: center;
+    font: 500 1rem var(--typografiaGeist);
+}
+
+.otrascuentas__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--colorDark);
+    font: 700 1.1rem var(--typografiaUrbanist);
+    border: none;
+    outline: none;
+    width: 100%;
     width: 550px;
     height: 55px;
     border-radius: 5px;
-    padding: 10px 15px;
-    margin: 20px 0 20px 30px;
-    position: relative;
+    background-color:#F5FAFF ;
 }
 
-.container__google .google__imagen {
-    width: 30px;
-    height: 30px;
-    margin: 3px 0 0 7em;
+.otrascuentas__btn img{
+    max-width: 100%;
+    width: 25px;
 }
 
-.google__text {
-    position: absolute;
-    top: 20px;
-    left: 11em;
-    font: 700 15px "Montserrat";
-}
 
 .form .formulario__title2 {
-    font: 900 15px "Montserrat";
+    font: 700 1.1rem var(--typografiaUrbanist);
     text-align: center;
-    margin: 0 0 0 21%;
+    margin: 0 0 0 22%;
+}
+
+.input--margintop{
+    margin-top: 1rem;
 }
 
 
@@ -62,7 +87,7 @@ body {
 }
 
 .input-box label {
-    font: 500 15px "Montserrat";
+    font: 600 1rem var(--typografiaUrbanist);
     position: absolute;
     color: #8d8d8d;
     pointer-events: none;
@@ -76,9 +101,9 @@ body {
 .input-box input {
     margin: 10px 0 25px 30px;
     background-color: transparent;
-    border: 1px solid #ccc;
+    border:1px solid #ccc;
     padding: 10px 15px;
-    font-size: 1em;
+    font: 600 1rem var(--typografiaUrbanist);
     border-radius: 5px;
     width: 550px;
     height: 55px;
@@ -94,7 +119,7 @@ body {
 .input-box input:focus~label,
 .input-box input:not(:placeholder-shown)~label {
     background-color: #fff;
-    transform: translateY(-80%) translateX(-10px) scale(0.8);
+    transform: translateY(-80%) translateX(-10px) scale(0.9);
     padding: 0 5px;
     color: #0034de;
     font-weight: bold;
@@ -108,7 +133,7 @@ body {
     position: absolute;
     top: 25px;
     left: 72%;
-    font: 900 18px "Montserrat";
+    font: 900 1.2rem var(--typografiaUrbanist);
 
 }
 
@@ -133,7 +158,7 @@ body {
 }
 
 .input__error {
-    font: 600 15px "Montserrat";
+    font: 600 1rem var(--typografiaUrbanist);
     width: 500px;
     margin: 0 0 15px 33px;
     display: none;
@@ -144,45 +169,25 @@ body {
     margin: 30px 0 0 33px;
 }
 
-.input__advertencia {
-    font: 700 15px "Montserrat";
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 550px;
-    background-color: #fd1f1f;
-    padding: 20px 15px;
-    border-radius: 5px;
-    grid-column: span 2;
-    margin: 20px 0 0 30px;
-    display: flex;
-    justify-content: flex-start;
-    display: none;
-}
 
 .input__advertencia i {
     font-size: 1.7rem;
     margin: -5px 10px 0 0;
 }
 
-/* Estilos para el mensaje que proviene del servidor */
-.input__error__interno {
-    font: 700 15px "Montserrat";
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 550px;
-    background-color: #fd1f1f;
-    padding: 20px 15px;
-    border-radius: 5px;
-    grid-column: span 2;
-    margin: 20px 0 0 30px;
-    display: flex;
-    justify-content: flex-start;
+.swal-title {
+    font-family: 'Urbanist', sans-serif !important;
+    font-weight: 600;
+}
+
+.swal-popup {
+    font-family: 'Urbanist', sans-serif !important;
 }
 
 
 .remember-forgot .forgot__label {
     accent-color: #0034de;
-    font: 700 15px "Montserrat";
+    font: 700 1rem var(--typografiaUrbanist);
     margin-left: 30px;
 }
 
@@ -205,7 +210,7 @@ body {
 
 
 .form .formulario__btn {
-    font: 700 20px "Montserrat";
+    font: 700 1rem var(--typografiaUrbanist);
     background-color: #48f;
     color: #fff;
     width: 100%;
@@ -213,8 +218,6 @@ body {
     height: 55px;
     margin: 30px 10em 30px 0;
     border-radius: 5px;
-    font-size: 15px;
-    font-family: inherit;
     border: none;
     position: relative;
     overflow: hidden;
@@ -223,13 +226,13 @@ body {
     transition: background-color .7s ease;
 }
 
-.form .formulario__btn:hover {
+.form .formulario__btn:hover{
     background-color: #0034de;
 }
 
 .formulario__btn-container {
     grid-column: span 2;
-    margin: 5px 0 0 30px;
+    margin:5px 0 0 30px;
     display: flex;
     justify-content: center;
 }
@@ -238,12 +241,20 @@ body {
     margin: 0 0 0 150px;
 }
 
-.remember-forgot .forgot__color {
+.remember-forgot .forgot__color{
     color: #48f;
+    margin-left: 120px;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+.registre-link a {
+    font: 600 1.1rem var(--typografiaUrbanist);
+    margin: 20px 0 0 20px;
+
 }
 
-.registre-link a {
-    margin: 20px 0 0 20px;
+
+.registre-link p{
+    font: 600 1.1rem var(--typografiaUrbanist);
 }
 
 .registre-link p a {
@@ -257,124 +268,33 @@ body {
     text-decoration: underline;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(3px);
-    animation: fadeBackground 0.3s ease-in;
-}
-
-.modal-content {
-    position: relative;
-    background: linear-gradient(145deg, #ffffff, #f0f0f0);
-    padding: 2.5rem 2rem;
-    border-radius: 20px;
-    margin: auto;
-    margin-top: 20%;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    animation: scaleIn 0.4s ease-in-out;
-}
-
-.success-icon {
-    font-size: 4rem;
-    color: #4CAF50;
-    margin-bottom: 1rem;
-    animation: popIn 0.4s ease-out;
-}
-
-.modal-content h2 {
-    color: #2e7d32;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 1.8rem;
-    color: #999;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-    color: #000;
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes popIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeBackground {
-    from {
-        background-color: rgba(0, 0, 0, 0);
-    }
-
-    to {
-        background-color: rgba(0, 0, 0, 0.6);
-    }
-}
-
-
 
 .imagen__container {
     position: absolute;
     top: 0;
-    left: 54.5em;
+    left:54.5em;
 }
 
-.imagen__container .container__login {
+.imagen__container .container__login{
     width: 100%;
     max-width: 670px;
     min-height: 100vh;
     border-radius: 0 0 0 190px;
 }
 
-.icono__back {
+.icono__back{
     position: absolute;
     top: 30px;
     left: 9em;
 }
 
-.icono__back .regresar {
-    font: 500 18px "Montserrat";
+.icono__back .regresar{
+    font: 500 1.2rem var(--typografiaUrbanist);
     text-decoration: none;
     color: #0034de;
 }
 
-.icono__back i {
+.icono__back i{
     font-size: 20px;
     color: #0034de;
 }
