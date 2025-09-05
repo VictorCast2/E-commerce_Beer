@@ -173,8 +173,8 @@ public class CategoriaDataProvider {
     // Controller
     public static List<CategoriaResponse> categoriaResponseListMock() {
         return List.of(
-                new CategoriaResponse("Categoria 1", "Primera Categoria de Pruebas", 5),
-                new CategoriaResponse("Categoria 2", "Segunda Categoria de Pruebas", 3)
+                new CategoriaResponse(1L,"Categoria 1", "Primera Categoria de Pruebas", 5),
+                new CategoriaResponse(2L,"Categoria 2", "Segunda Categoria de Pruebas", 3)
         );
     }
 }

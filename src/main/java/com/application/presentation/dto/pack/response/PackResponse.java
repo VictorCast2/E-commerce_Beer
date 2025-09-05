@@ -1,7 +1,6 @@
 package com.application.presentation.dto.pack.response;
 
 import com.application.persistence.entity.pack.enums.ETipo;
-import com.application.presentation.dto.categoria.response.CategoriaResponse;
 
 import java.util.List;
 

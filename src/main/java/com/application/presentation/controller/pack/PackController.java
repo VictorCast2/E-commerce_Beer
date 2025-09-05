@@ -1,5 +1,6 @@
 package com.application.presentation.controller.pack;
 
+import com.application.persistence.entity.pack.Pack;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.pack.request.PackCreateRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.util.UriUtils;
 
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -73,6 +76,24 @@ public class PackController {
         String mensaje = response.mensaje();
 
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    }
+
+    // Reasignar este método al controlador de la página principal
+    @PostMapping("/descripcion-pack/{id}")
+    public String getDescripcionPakc(@AuthenticationPrincipal UserDetails userDetails,
+                                     @PathVariable Long id,
+                                     Model model) {
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        PackResponse packResponse = packService.getPackResponseById(id);
+        List<PackResponse> packList = packService.getPacksActivos();
+        Collections.shuffle(packList);
+        List<PackResponse> packAleatorios = packList.stream().limit(4).toList();
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("pack", packResponse);
+        model.addAttribute("packList", packAleatorios);
+
+        return "descripcion";
     }
 
 }

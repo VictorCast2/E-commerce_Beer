@@ -41,6 +41,12 @@ public class PackServiceImpl implements PackService {
     }
 
     @Override
+    public PackResponse getPackResponseById(Long id) {
+        Pack pack = this.getPackById(id);
+        return this.toResponse(pack);
+    }
+
+    @Override
     public List<PackResponse> getPacks() {
         List<Pack> packs = packRepository.findAll();
         return packs.stream()
@@ -136,7 +142,7 @@ public class PackServiceImpl implements PackService {
                     .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado en el packActualizado"));
 
             if (producto.getStock() < productoRequest.cantidad() * packRequest.stock()) {
-                throw new IllegalArgumentException("No hay suficiente stock del producto: " + producto.getNombre());
+                return new GeneralResponse("No hay suficiente stock del producto: " + producto.getNombre());
             }
         }
 
