@@ -10,7 +10,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
               integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,16 +33,15 @@
     </div>
 
     <div class="contenido__form">
-        <form class="form">
+        <form class="form" th:action="@{/auth/sign_up}" method="post" th:object="${usuario}">
             <h1 class="formulario__title">Registro</h1>
 
             <span class="formulario__title2">Registre Todos Sus Datos Por Favor</span>
 
-
             <div class="formulario">
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Nombre" id="nombre">
+                        <input type="text" autocomplete="off" placeholder="" th:field="*{nombres}" id="nombre">
                         <label for="nombre">Nombre</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -55,7 +53,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Apellido" id="apellido">
+                        <input type="text" autocomplete="off" placeholder="" th:field="*{apellidos}" id="apellido">
                         <label for="apellido">Apellido</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -67,16 +65,16 @@
 
                 <div class="formulario__input">
                     <div class="custom-select-wrapper">
-                        <select class="styled-select" id="tipoIdentificacion">
+                        <select class="styled-select" th:field="*{tipoIdentificacion}">
                             <option disabled selected>Tipo De Identificación</option>
-                            <option value="Cedula">CC (Cédula de Ciudadanía)</option>
-                            <option value="C.Extranjeria">CE (Cédula de Extranjería)</option>
-                            <option value="D.Extranjería">DE (Documento de Extranjería)</option>
+                            <option value="CC">CC (Cédula de Ciudadanía)</option>
+                            <option value="CE">CE (Cédula de Extranjería)</option>
+                            <option value="DE">DE (Documento de Extranjería)</option>
                             <option value="NIT">NIT (Identificación Tributaria)</option>
                             <option value="PP">PP (Pasaporte)</option>
                             <option value="RUT">RUT (Registro Único Tributario)</option>
-                            <option value="TEC">TE (Tarjeta de Extranjería)</option>
-                            <option value="T">TI (Tarjeta de Identidad)</option>
+                            <option value="TE">TE (Tarjeta de Extranjería)</option>
+                            <option value="TI">TI (Tarjeta de Identidad)</option>
                         </select>
                         <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
                     </div>
@@ -87,7 +85,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Identificacion" id="identificacion">
+                        <input type="text" autocomplete="off" placeholder="" th:field="*{cedula}" id="identificacion">
                         <label for="identificacion">Identificacion</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -99,7 +97,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="email" autocomplete="off" placeholder="" name="Email" id="email">
+                        <input type="email" autocomplete="off" placeholder="" th:field="*{correo}" id="email">
                         <label for="email">Email</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -111,7 +109,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
+                        <input type="text" autocomplete="off" placeholder="" th:field="*{telefono}" id="telefono">
                         <label for="telefono">Telefono</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -123,7 +121,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="password" autocomplete="off" placeholder="" name="Password" id="password">
+                        <input type="password" autocomplete="off" placeholder="" th:field="*{password}" id="password">
                         <label for="password">Password</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -135,8 +133,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="password" autocomplete="off" placeholder="" name="RepetirPassword"
-                               id="repeatPassword">
+                        <input type="password" autocomplete="off" placeholder="" id="repeatPassword">
                         <label for="repeatPassword">Repetir Password</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -146,6 +143,10 @@
                     </p>
                 </div>
 
+                <!-- Hidden Fields para rol e imagen -->
+                <input type="hidden" th:field="*{rol}" value="PERSONA_CONTACTO"/>
+                <input type="hidden" th:field="*{imagen}" value="/Assets/Img/FotoPerfil/Perfil.jpg"/>
+
                 <div class="formulario__input">
                     <div class="remember-forgot">
                         <label class="forgot__label"><input type="checkbox" name="terminos">Acepto Terminos Y
@@ -154,7 +155,6 @@
                 </div>
 
                 <span class="formulario__complete" id="formulario__complete">Registrar Empresas</span>
-
 
                 <div class="formulario__input formulario__btn-container">
                     <button class="formulario__btn" type="submit">Registrar</button>
@@ -169,13 +169,12 @@
         <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
     </div>
 
-
     <!-- Ventana modal registrar empresas -->
     <div class="modal__newadd newadd--hidden" id="modalnewadd">
         <div class="modal__content">
             <span class="modal__close">&times;</span>
             <h2 class="content__titulo">Añadir Empresa</h2>
-            <form class="add__formulario" action="">
+            <form class="add__formulario" th:action="@{/auth/sign_up/empresa}" method="post">
 
                 <div class="formulario__input">
                     <div class="input-box">
@@ -254,7 +253,9 @@
             </form>
         </div>
     </div>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="module" th:src="@{/Js/registro.js}"></script>
+
     </body>
 </html>

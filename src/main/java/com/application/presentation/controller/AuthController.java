@@ -1,10 +1,10 @@
 package com.application.presentation.controller;
 
+import com.application.presentation.dto.empresa.request.CreacionEmpresaRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
+import com.application.service.implementation.empresa.EmpresaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,7 @@ public class AuthController {
 
     private final UsuarioServiceImpl usuarioServiceImpl;
 
-    @GetMapping("")
+    @GetMapping()
     public String index() {
         return "Index";
     }
@@ -46,10 +46,8 @@ public class AuthController {
         return "Login";
     }
 
-
     @GetMapping("/auth/sign_up")
-    public String getSignUp(Model model) {
-        model.addAttribute("usuario", new CreacionUsuarioRequest());
+    public String getSignUp() {
         return "Registro";
     }
 
@@ -62,10 +60,8 @@ public class AuthController {
             );
             return "Registro";
         }
-
         usuarioServiceImpl.crearUsuario(request);
         return "redirect:/auth/login";
-
     }
 
 }

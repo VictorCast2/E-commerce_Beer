@@ -25,7 +25,9 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body>
+<body th:data-mensaje-error="${mensajeError}"
+      th:data-mensaje-exitoso="${mensajeExitoso}"
+      th:data-login-success="${loginSuccess}">
 
     <div class="icono__back">
         <i class="ri-arrow-left-s-line"></i>
@@ -85,13 +87,15 @@
                 </div>
 
                 <div class="container__otrascuentas">
+
                     <span class="otrascuentas__titles">O con</span>
+
                     <a th:href="@{/oauth2/authorization/google}" class="otrascuentas__btn">
                         <img loading="lazy" th:src="@{/Assets/Img/Logos/google.svg}" alt="">
                         Continuar con google
                     </a>
 
-                    <a th:href="@{/}" class="otrascuentas__btn">
+                    <a th:href="@{/oauth2/authorization/apple}" class="otrascuentas__btn">
                         <img loading="lazy" th:src="@{/Assets/Img/Logos/Apple_light.svg}" alt="">
                         Continuar con apple
                     </a>
@@ -106,14 +110,9 @@
         </div>
     </div>
 
-    <script type="module" th:src="@{/Js/login.js}"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const mensajeError = /*[[${mensajeError}]]*/ null;
-        const mensajeExitoso = /*[[${mensajeExitoso}]]*/ null;
-        /*]]>*/
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" th:src="@{/Js/login.js}"></script>
+
 </body>
 
 </html>

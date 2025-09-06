@@ -1,3 +1,9 @@
+// === 🚨 Variables dinámicas de Thymeleaf ===
+const body = document.body;
+const mensajeError   = body.dataset.mensajeError || null;
+const mensajeExitoso = body.dataset.mensajeExitoso || null;
+const loginSuccess   = body.dataset.loginSuccess === "true";
+
 const fields = {
     email: {
         regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
@@ -78,13 +84,13 @@ form.addEventListener("submit", function (event) {
     }
 });
 
-// === 🚀 Flujo de login exitoso antes de ir a /proteted ===
+// === 🚀 Flujo de login exitoso antes de ir ===
 window.addEventListener("DOMContentLoaded", () => {
     if (typeof loginSuccess !== "undefined" && loginSuccess === true) {
         Swal.fire({
             title: "Inicio de sesión exitoso",
             icon: "success",
-            timer: 2000,
+            timer: 3000,
             timerProgressBar: true,
             allowOutsideClick: false,
             allowEscapeKey: false,
