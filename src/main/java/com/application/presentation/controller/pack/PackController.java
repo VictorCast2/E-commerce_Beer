@@ -1,6 +1,5 @@
 package com.application.presentation.controller.pack;
 
-import com.application.persistence.entity.pack.Pack;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.pack.request.PackCreateRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.util.UriUtils;
 
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +61,7 @@ public class PackController {
     }
 
     @PostMapping("/disable-pack/{id}")
-    public String updatePack(@PathVariable Long id) {
+    public String disablePack(@PathVariable Long id) {
         GeneralResponse response = packService.disablePack(id);
         String mensaje = response.mensaje();
 
@@ -80,7 +78,7 @@ public class PackController {
 
     // Reasignar este método al controlador de la página principal
     @PostMapping("/descripcion-pack/{id}")
-    public String getDescripcionPakc(@AuthenticationPrincipal UserDetails userDetails,
+    public String getDescripcionPack(@AuthenticationPrincipal UserDetails userDetails,
                                      @PathVariable Long id,
                                      Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());

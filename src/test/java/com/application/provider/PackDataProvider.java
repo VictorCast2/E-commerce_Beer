@@ -9,6 +9,8 @@ import com.application.presentation.dto.pack.request.ProductoCantidadRequest;
 import com.application.presentation.dto.pack.response.PackCategoriaResponse;
 import com.application.presentation.dto.pack.response.PackResponse;
 import com.application.presentation.dto.pack.response.ProductoCantidadResponse;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -272,65 +274,57 @@ public class PackDataProvider {
                 .build());
     }
 
-    /// Sin uso de momento
-    public static PackResponse packResponseMock() {
-        return new PackResponse(
+    // Controller
+    public static List<PackResponse> packResponseListMock() {
+
+        PackResponse pack1 = new PackResponse(
                 1L,
                 "imagen 1",
                 "Pack 1",
                 10000,
                 50,
-                "Primer pack de pruebas",
+                "Primer pack de prueba",
                 ETipo.PACK,
-                packCategoriaResponseUtil(),
-                productoCantidadResponseUtil());
-    }
+                List.of(new PackCategoriaResponse(1L, "Categoria 1")),
+                List.of(new ProductoCantidadResponse(1L, "Producto 1",5))
+        );
 
-    public static List<PackCategoriaResponse> packCategoriaResponseUtil() {
-        PackCategoriaResponse categoria1 = new PackCategoriaResponse(1L, "categoria 1");
-        PackCategoriaResponse categoria2 = new PackCategoriaResponse(2L, "categoria 2");
-        PackCategoriaResponse categoria3 = new PackCategoriaResponse(3L, "categoria 3");
+        PackResponse pack2 = new PackResponse(
+                2L,
+                "imagen 2",
+                "Pack 2",
+                20000,
+                30,
+                "Segundo pack de prueba",
+                ETipo.PACK,
+                List.of(new PackCategoriaResponse(2L, "Categoria 2")),
+                List.of(new ProductoCantidadResponse(2L, "Producto 2",3))
+        );
 
         return List.of(
-                categoria1, categoria2, categoria3
+                pack1, pack2
         );
     }
 
-    public static List<ProductoCantidadResponse> productoCantidadResponseUtil() {
-        ProductoCantidadResponse producto1 = new ProductoCantidadResponse(1L, "producto 1", 5);
-        ProductoCantidadResponse producto2 = new ProductoCantidadResponse(2L, "producto 2", 3);
-        ProductoCantidadResponse producto3 = new ProductoCantidadResponse(3L, "producto 3", 1);
+    public static MultiValueMap<String, String> packParameters() {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        // Datos base de Pack
+        params.add("imagen", "imagen1.png");
+        params.add("nombre", "Pack 1");
+        params.add("precio", "10000");
+        params.add("stock", "50");
+        params.add("descripcion", "Primer pack de prueba");
+        params.add("tipo", "PACK");
+        // Lista de Categorías
+        params.add("categoriaIds", "1");
+        params.add("categoriaIds", "2");
+        params.add("categoriaIds", "3");
+        // Lista de Productos con cantidades
+        params.add("productos[0].productoId", "1");
+        params.add("productos[0].cantidad", "5");
+        params.add("productos[1].productoId", "2");
+        params.add("productos[1].cantidad", "3");
 
-        return List.of(
-                producto1, producto2, producto3
-        );
-    }
-
-    public static List<Producto> productoListUtil() {
-
-        Producto producto1 = Producto.builder()
-                .productoId(1L)
-                .nombre("Producto 1")
-                .descripcion("Primer producto de pruebas")
-                .activo(true)
-                .build();
-
-        Producto producto2 = Producto.builder()
-                .productoId(2L)
-                .nombre("Producto 2")
-                .descripcion("Segundo producto de pruebas")
-                .activo(false)
-                .build();
-
-        Producto producto3 = Producto.builder()
-                .productoId(3L)
-                .nombre("Producto 3")
-                .descripcion("Tercer producto de pruebas")
-                .activo(true)
-                .build();
-
-        return new ArrayList<>(List.of(
-                producto1, producto2, producto3
-        ));
+        return params;
     }
 }

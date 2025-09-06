@@ -17,9 +17,9 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class ProductoServiceImpl implements ProductoService {
 
+    @Autowired
     private ProductoRepository productoRepository;
 
     /**
