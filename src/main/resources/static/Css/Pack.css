@@ -1,0 +1,126 @@
+@import url("./style.css");
+
+
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+    --colorCafe: #8e705c;
+    --colorWhite: #ffffff;
+}
+
+
+.productos {
+    min-height: 100vh;
+    padding: 100px 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex__productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-items: center;
+
+}
+
+.flex__productos-track {
+    display: contents;
+}
+
+@media (max-width: 1024px) {
+    .flex__productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .flex__productos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card */
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 16px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+/* Pagination */
+.pagination {
+    position: relative;
+    top: -20px;
+    left: -5%;
+    width: 200%;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+}
+
+.pagination__Numbers {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pagination__Numbers .button__pagination {
+    font: 600 1.2rem "Urbanist";
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--colorDark);
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    transition: background-color .4s ease, color .4s ease-in;
+
+}
+
+.pagination__Numbers .button__pagination.active{
+    background-color: var(--colorDark);
+    color: var(--colorWhite);
+}
+
+.pagination__Numbers .button__pagination:hover {
+    background-color: var(--colorDark);
+    color: #ffffff;
+}
+
+.pagination #prevBtn{
+    display: none;
+}
+
+.pagination button {
+    border: 1px solid var(--colorDark);
+    padding: 8px 12px;
+    background-color: transparent;
+    font: 700 1.4rem "Urbanist";
+    color: #000000;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color .4s ease, color .4s ease-in;
+}
+
+.pagination button:hover {
+    background-color: var(--colorDark);
+    color: #ffffff;
+}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/Favorito.css">
+    <link rel="stylesheet" href="../static/Css/Ver.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Favorito || E-ecommer Beer</title>
+    <title> Ver || E-ecommer Beer</title>
     <meta name="description" content="">
     <meta name="autor" content="">
     <meta name="keywords" content="">
@@ -62,9 +62,43 @@
 
                 <span class="icon__item">
                     <i class="ri-user-line"></i>
+
+                    <div class="nav__menu" id="SubMenu">
+                        <div class="menu__sub">
+                            <div class="sub__info">
+                                <i class="ri-user-line"></i>
+                                <h2 class="info__title">Keyner Reyes</h2>
+                            </div>
+                            <hr>
+
+                            <a href="" class="sub__link">
+                                <i class="ri-user-fill"></i>
+                                <p class="link__text">Perfil</p>
+                                <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+                            <a href="" class="sub__link">
+                                <i class="ri-settings-5-fill"></i>
+                                <p class="link__text">Configuracion</p>
+                                <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+                            <a href="" class="sub__link">
+                                <i class="ri-notification-2-fill"></i>
+                                <p class="link__text">Notificaciones</p>
+                                <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+                            <a href="" class="sub__link">
+                                <i class="ri-logout-box-r-fill"></i>
+                                <p class="link__text">Cerrar Sesion</p>
+                                <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+                        </div>
+                    </div>
                 </span>
 
-                <span class="icon__item">
+                <span class="icon__item" id="go-fav">
                     <i class="ri-heart-3-line"></i>
                     <span class="icon__badge" id="fav-count"></span>
                 </span>
@@ -76,47 +110,92 @@
             </div>
     </header>
 
-    <main class="main__content">
-        <section class="table__container">
+    <section class="section__ver">
+        <div class="ver__container">
 
-            <div class="container__enlaces">
+            <div class="details__enlaces">
                 <a href="Index.html">Inicio /</a>
                 <a href="">Licores /</a>
-                <a href="">Mi lista de deseos</a>
+                <a href="" class="breadcrumb-subcategory"></a>
+                <a href="" class="breadcrumb-category"></a>
+                <a href="" class="breadcrumb-name"></a>
             </div>
 
-            <h2 class="notification__title">Mi lista de deseos</h2>
-            <span class="notification__there" id="there?"></span>
+            <div class="container__flex">
 
-            <div class="container__table">
+                <figure class="flex__img">
+                    <img src="" alt="producto seleccionado">
+                </figure>
 
-                <div class="notification__table-container">
-                    <table class="notification__table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Productos</th>
-                                <th>Precio</th>
-                                <th>Estado</th>
-                                <th>Accion</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody id="favoritos-body">
-                            <!-- Aqui van los productos pero son cargados con js -->
-                        </tbody>
-                    </table>
+                <div class="flex__details">
 
-                    <div class="notification__pagination">
-                        <p class="pagination__text" id="pagination-text">Mostrando 1-4</p>
-                        <button class="pagination__flec" id="prev-page"><i class="ri-arrow-left-s-line"></i></button>
-                        <div id="pagination-buttons"></div>
-                        <button class="pagination__flec" id="next-page"><i class="ri-arrow-right-s-line"></i></button>
+                    <span class="details__category"></span>
+
+                    <span class="details__name"></span>
+
+                    <div class="details__precie">
+                        <span class="precie__total"></span>
+                        <span class="precie__total total--desct"></span>
                     </div>
+
+                    <div class="details__plus">
+
+                        <div class="quantity-control" data-index="${index}">
+                            <button class="minus">−</button>
+                            <span class="qty">0</span>
+                            <button class="plus">+</button>
+                        </div>
+
+                        <button class="details__addCard">Agregar Al Carrito</button>
+                    </div>
+
+                    <div class="details__informacionProd">
+
+                        <div class="informacionProd__titles">
+                            <span class="complemento__title active"><i class="fa-solid fa-plus"></i> Detalles</span>
+                            <span class="complemento__title"><i class="fa-solid fa-truck"></i> Envios</span>
+                            <span class="complemento__title"><i class="fa-solid fa-phone-flip"></i> Ayuda</span>
+                        </div>
+
+                        <!-- TEXTOS, debajo y ocupando 100% -->
+                        <div class="informacionProd__texts">
+                            <p class="complemento__text active">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+                            </p>
+                            <p class="complemento__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+
+                            </p>
+                            <p class="complemento__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore id aliquam, nihil illum
+                                qui eius laboriosam fuga consequuntur incidunt. Quidem quis voluptate autem eaque dicta
+                                corrupti cum eius reiciendis id.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <span id="calificar__abrir" class="details__calificar">¿Deseas calificar este producto?</span>
+
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+
 
     <!-- ============= DRAWER DEL CARRITO ============= -->
     <div class="cart-overlay" id="cart-overlay"></div>
@@ -139,7 +218,6 @@
             <button id="finalizar-compra" class="btn-primary">Finalizar compra</button>
         </footer>
     </aside>
-
 
     <footer class="footer">
         <div class="footer__subscripcion">
@@ -255,10 +333,82 @@
         </div>
     </footer>
 
+
+    <!-- Ventana modal registrar empresas -->
+    <div class="modal__newadd newadd--hidden" id="modalnewadd">
+        <div class="modal__content">
+            <span class="modal__close">&times;</span>
+            <h2 class="content__titulo">Comentarios</h2>
+            <form class="add__formulario" action="">
+
+                <div class="formulario__puntacion">
+                    <p class="puntacion__experencia">Califica Tu Experiencia</p>
+                    <p class="puntacion__tittle">Tu Puntuacion</p>
+
+                    <div class="stars">
+                        <i class="ri-star-line"></i>
+                        <i class="ri-star-line"></i>
+                        <i class="ri-star-line"></i>
+                        <i class="ri-star-line"></i>
+                        <i class="ri-star-line"></i>
+                    </div>
+                </div>
+
+                <div class="formulario__flex">
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="email" autocomplete="off" placeholder="" name="Asunto" id="asunto">
+                            <label for="asunto">Asunto</label>
+                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            
+                        </p>
+                    </div>
+                    
+                    <div class="formulario__input">
+                        <div class="input-box">
+                            <input type="email" autocomplete="off" placeholder="" name="Email" id="correo">
+                            <label for="correo">Email</label>
+                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                        </div>
+                        <p class="input__error">
+                            El correo solo puede contener letras,numeros,puntos,
+                            guiones y guion bajo.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="formulario__input">
+                    <div class="input-box">
+                        <textarea autocomplete="off" placeholder="" name="Comentario" id="comentario"></textarea>
+                        <label class="label label--area" for="comentario">Comentario</label>
+                        <span class="box__icon icon--area"><i class="ri-check-line"></i></span>
+                        <span class="box__icon icon--area"><i class="ri-close-line"></i></span>
+                    </div>
+                    <p class="input__error">
+                        Por favor, ingrese un comentario.
+                    </p>
+                </div>
+
+                <div class="formulario__input">
+                    <div class="remember-forgot">
+                        <input type="checkbox" id="remmeber">
+                        <label class="forgot__label" for="remmeber">Guardar mis datos para la próxima vez que comente.</label>
+                    </div>
+                </div>
+
+                <button class="formulario__button" type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../static/Js/Favorito.js"></script>
+    <script type="module" src="../static/Js/Ver.js"></script>
 </body>
 
 </html>

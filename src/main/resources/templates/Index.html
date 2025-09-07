@@ -34,10 +34,11 @@
                 <nav class="header__navbar">
                     <ul class="navbar__list">
                         <li class="list__item"><a href="" class="item__link">Inicio</a></li>
+                        <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
                         <li class="list__item"><a href="" class="item__link">Categorias</a></li>
                         <li class="list__item"><a href="" class="item__link">Productos</a></li>
                         <li class="list__item"><a href="" class="item__link">Blog</a></li>
-                        <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
+                        <li class="list__item"><a href="Contactos.html" class="item__link">Contactenos</a></li>
                     </ul>
                 </nav>
 
@@ -63,6 +64,40 @@
 
                     <span class="icon__item">
                         <i class="ri-user-line"></i>
+
+                        <div class="nav__menu" id="SubMenu">
+                            <div class="menu__sub">
+                                <div class="sub__info">
+                                    <i class="ri-user-line"></i>
+                                    <h2 class="info__title">Keyner Reyes</h2>
+                                </div>
+                                <hr>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-user-fill"></i>
+                                    <p class="link__text">Perfil</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-settings-5-fill"></i>
+                                    <p class="link__text">Configuracion</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-notification-2-fill"></i>
+                                    <p class="link__text">Notificaciones</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-logout-box-r-fill"></i>
+                                    <p class="link__text">Cerrar Sesion</p>
+                                    <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+                            </div>
+                        </div>
                     </span>
 
                     <span class="icon__item" id="go-fav">
@@ -377,9 +412,14 @@
                     <div class="flex__productos">
                         <div class="flex__productos-track">
                             <!-- Product 1 -->
-                            <div class="card" data-name="Vino Lambrusco Botticello Rosato Dolce
-                                    750 ml" data-price="39.000"
-                                data-image="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png">
+                            <div class="card" 
+                            data-name="Vino Lambrusco Botticello Rosato Dolce 750 ml" 
+                            data-price="39.000" 
+                            data-oldprice="27.900" 
+                            data-subcategory="Vino" 
+                            data-category="Vino Rosado"
+                            data-image="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png">
+
                                 <div class="badge badge-green">28%</div>
                                 <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png"
                                     alt="" width="250" height="250" />
@@ -418,7 +458,10 @@
                             </div>
 
                             <!-- Product 2 -->
-                            <div class="card">
+                            <div class="card" data-name=" Whisky Buchanan's 18 Años Special
+                                    Reserve 750 ml" data-price="$349.900" data-oldprice="$391.900" data-subcategory="Whisky" data-category="Blended Scotch"
+                            data-image="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__whisky.webp">
+                            
                                 <div class="badge badge-green">11%</div>
                                 <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__whisky.webp"
                                     alt="" width="250" height="250" />
@@ -4079,11 +4122,6 @@
                 <p><span>by</span> HomeStyleHarmony <span>on</span> Feb 25th, 2025</p>
             </div>
         </div>
-    </section>
-
-
-    <section class="">
-
     </section>
 
     <footer class="footer">
