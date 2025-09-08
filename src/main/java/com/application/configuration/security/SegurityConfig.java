@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,7 +38,7 @@ public class SegurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura la política de creación de sesiones como Stateless
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Crea sesión si es necesario
                         .invalidSessionUrl("/auth/login") // URL a la que redirigir si la sesión es inválida
                         .maximumSessions(2) // Número máximo de sesiones por usuario
                         .expiredUrl("/auth/login?expired") // Redirige si la sesión expiró
@@ -48,7 +47,7 @@ public class SegurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**",
-                                "/usuario/**",
+                                "/usuario/**", // Permitir acceso a las rutas de autenticación y usuario
                                 "/error/**",
                                 "/error/"
                         ).permitAll()
@@ -67,6 +66,10 @@ public class SegurityConfig {
                         .loginProcessingUrl("/auth/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
+                        .successHandler((request, response, authentication) -> {
+                            // Redirige con bandera success para que lo capture el JS
+                            response.sendRedirect("/auth/login?success=true");
+                        })
                         .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
@@ -103,7 +106,7 @@ public class SegurityConfig {
                         )
                         // 🛡️ Protección contra clickjacking
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                        // 📅 HSTS
+                        // 📅 HSTS - HTTP Strict Transport Security
                         .httpStrictTransportSecurity(hsts -> hsts
                                 .includeSubDomains(true)
                                 .maxAgeInSeconds(31536000)

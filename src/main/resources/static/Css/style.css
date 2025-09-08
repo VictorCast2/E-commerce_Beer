@@ -6,8 +6,6 @@
     --colorLigth: #71717a;
 }
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -39,7 +37,7 @@ body {
     gap: 2rem;
     justify-content: space-evenly;
     align-items: center;
-    z-index: 999999;
+    z-index: 999;
 }
 
 .header.scrolled {
@@ -556,6 +554,190 @@ body {
     margin-left: 3rem;
 }
 
+/* Drawer Carrito */
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s;
+    z-index: 90;
+}
+
+.cart-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 400px;
+    background: #fff;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, .3);
+    transform: translateX(100%);
+    transition: .3s;
+    z-index: 90000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer.is-open {
+    transform: translateX(0)
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd
+}
+
+.cart-header .header__carrito {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin: 0 0 0 1.8rem;
+    padding: 0.8rem 0;
+}
+
+.cart-header button {
+    background: none;
+    color: #bbb;
+    border: none;
+    font-size: 28px;
+    transition: color .7s ease;
+    cursor: pointer
+}
+
+.cart-header button:hover {
+    color: #000000;
+}
+
+.cart-body {
+    flex: 1;
+    overflow: auto;
+    padding: 12px;
+}
+
+.cart-list {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 20px 0;
+}
+
+.cart-item img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.empty-cart {
+    margin: 0 0 0 2rem;
+    font: 600 1.2rem var(--typografiaUrbanist);
+}
+
+.cart-item .info {
+    display: flex;
+    flex-direction: column
+}
+
+.cart-item .name {
+    font: 700 1rem var(--typografiaUrbanist);
+    margin: 0 0 4px
+}
+
+.cart-item .price {
+    font: 700 1rem var(--typografiaUrbanist);
+    color: #000000;
+}
+
+/* Controles de cantidad */
+.quantity-control {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+    width: 120px;
+    height: 36px;
+    margin: 10px 0;
+}
+
+.quantity-control button {
+    width: 36px;
+    height: 100%;
+    border: none;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.quantity-control span {
+    flex: 1;
+    font: 700 1.2rem var(--typografiaUrbanist);
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 12px;
+    border-top: 1px solid #ddd
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.cart-subtotal span {
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.btn-primary {
+    font: 600 1.1rem var(--typografiaUrbanist);
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    background: #7c5cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+
 /* Section Producto */
 .productos {
     min-height: 100vh;
@@ -685,7 +867,7 @@ body {
     position: absolute;
     top: 50%;
     right: -60px;
-    transform: translateY(-170%);
+    transform: translateY(-130%);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -1152,7 +1334,6 @@ body {
 .formulario__input {
     position: relative;
 }
-
 
 .formulario__input input {
     margin: 10px 0 25px 30px;
