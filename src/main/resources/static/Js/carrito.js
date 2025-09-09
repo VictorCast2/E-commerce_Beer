@@ -1,4 +1,4 @@
-import { activarGlassmorphism, inicialHeart, initCart, rederigirFav } from "./main.js";
+import { activarGlassmorphism, inicialHeart, initCart, rederigirFav } from "/Js/main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 

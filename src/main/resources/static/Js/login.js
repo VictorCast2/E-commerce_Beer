@@ -100,7 +100,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         }).then(() => {
             // después de la alerta, redirige al protegido
-            window.location.href = "/proteted";
+            window.location.href = "/";
         });
     }
 });

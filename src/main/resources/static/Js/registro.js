@@ -80,8 +80,6 @@ tipoIdentificacionSelect.addEventListener("change", () => {
     }
 });
 
-
-
 form.addEventListener("submit", function (event) {
     let valid = true;
     let emptyCount = 0;

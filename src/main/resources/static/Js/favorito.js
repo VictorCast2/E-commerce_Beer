@@ -1,5 +1,4 @@
-import { activarGlassmorphism, inicialHeart, initCart, finalizarCompra} from "./main.js";
-
+import { activarGlassmorphism, inicialHeart, initCart, finalizarCompra} from "/Js/main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -180,5 +179,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render inicial
     renderTable();
 
-    
 });
