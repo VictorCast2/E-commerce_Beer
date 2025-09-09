@@ -49,6 +49,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             // === Atributos de Apple ===
             email = oAuth2User.getAttribute("email");
 
+            // === Nombre y apellido vienen en un mapa anidado ===
             Map<String, Object> name = oAuth2User.getAttribute("name");
             if (name != null) {
                 nombre = (String) name.get("firstName");

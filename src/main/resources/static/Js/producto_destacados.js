@@ -1,4 +1,4 @@
-import { activarGlassmorphism } from "./main.js";
+import { activarGlassmorphism } from "/Js/main.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
