@@ -34,12 +34,39 @@ public class PackServiceImpl implements PackService {
     @Autowired
     private ProductoRepository productoRepository;
 
+    /**
+     * Obtiene un pack por su ID.
+     * Este método es de uso interno para otros métodos del servicio.
+     *
+     * @param id ID del pack a buscar
+     * @return La entidad pack encontrada
+     * @throws EntityNotFoundException si el pack no existe
+     */
     @Override
     public Pack getPackById(Long id) {
         return packRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Error: El pack con id: " + id + " no existe"));
     }
 
+    /**
+     * Obtiene un pack como DTO de respuesta por su ID.
+     * Este método es para la presentación del pack en la pagina de Pack-Descripción
+     *
+     * @param id ID del pack a buscar
+     * @return DTO con la información del pack, incluyendo categorías y productos
+     */
+    @Override
+    public PackResponse getPackResponseById(Long id) {
+        Pack pack = this.getPackById(id);
+        return this.toResponse(pack);
+    }
+
+    /**
+     * Obtiene todos los packs registrados (activos e inactivos).
+     * Uso común para el panel administrativo.
+     *
+     * @return Lista de DTOs con los datos de cada pack
+     */
     @Override
     public List<PackResponse> getPacks() {
         List<Pack> packs = packRepository.findAll();
@@ -48,6 +75,12 @@ public class PackServiceImpl implements PackService {
                 .toList();
     }
 
+    /**
+     * Obtiene únicamente los packs que están activos (disponibles para venta).
+     * Este método es para la vista del E-commerce
+     *
+     * @return Lista de DTOs con packs activos
+     */
     @Override
     public List<PackResponse> getPacksActivos() {
         List<Pack> packs = packRepository.findByActivoTrue();
@@ -56,6 +89,13 @@ public class PackServiceImpl implements PackService {
                 .toList();
     }
 
+    /**
+     * Obtiene los packs que pertenecen a una categoría específica.
+     * Este método sera de uso común para la pagina de Productos, en el filtro
+     *
+     * @param id ID de la categoría
+     * @return Lista de DTOs con packs que pertenecen a la categoría indicada
+     */
     @Override
     public List<PackResponse> getPacksByCategoriaId(Long id) {
         List<Pack> packs = packRepository.findByCategorias_CategoriaId(id);
@@ -64,6 +104,13 @@ public class PackServiceImpl implements PackService {
                 .toList();
     }
 
+    /**
+     * Crea un nuevo pack, validando el stock de los productos incluidos
+     * y descontando las cantidades necesarias.
+     *
+     * @param packRequest DTO con los datos del pack y sus relaciones
+     * @return Mensaje de éxito o error en caso de falta de stock
+     */
     @Override
     @Transactional
     public GeneralResponse addPack(PackCreateRequest packRequest) {
@@ -103,6 +150,14 @@ public class PackServiceImpl implements PackService {
         return new GeneralResponse("Pack creado exitosamente");
     }
 
+    /**
+     * Actualiza un pack existente, validando nuevamente el stock de los productos,
+     * devolviendo primero el stock anterior y aplicando los nuevos valores.
+     *
+     * @param packRequest DTO con los datos actualizados del pack
+     * @param id ID del pack a actualizar
+     * @return Mensaje de éxito o error en caso de falta de stock
+     */
     @Override
     @Transactional
     public GeneralResponse updatePack(PackCreateRequest packRequest, Long id) {
@@ -136,7 +191,7 @@ public class PackServiceImpl implements PackService {
                     .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado en el packActualizado"));
 
             if (producto.getStock() < productoRequest.cantidad() * packRequest.stock()) {
-                throw new IllegalArgumentException("No hay suficiente stock del producto: " + producto.getNombre());
+                return new GeneralResponse("No hay suficiente stock del producto: " + producto.getNombre());
             }
         }
 
@@ -153,6 +208,15 @@ public class PackServiceImpl implements PackService {
         return new GeneralResponse("Pack actualizado exitosamente");
     }
 
+    /**
+     * Deshabilita un pack (soft delete).
+     * El pack permanece en base de datos pero marcado como inactivo.
+     * Útil para no romper relaciones con ventas pasadas y
+     * evitar el uso del método deletePack(Long id).
+     *
+     * @param id ID del pack a deshabilitar
+     * @return Mensaje de confirmación
+     */
     @Override
     public GeneralResponse disablePack(Long id) {
         Pack pack = this.getPackById(id);
@@ -162,6 +226,14 @@ public class PackServiceImpl implements PackService {
         return new GeneralResponse("Producto deshabilitado exitosamente");
     }
 
+    /**
+     * Elimina un pack de forma permanente (hard delete).
+     * Se recomienda usarlo solo en casos administrativos, ya que puede
+     * afectar la integridad de los datos históricos (ventas).
+     *
+     * @param id ID del pack a eliminar
+     * @return Mensaje de confirmación
+     */
     @Override
     @Transactional
     public GeneralResponse deletePack(Long id) {
@@ -185,6 +257,14 @@ public class PackServiceImpl implements PackService {
         return new GeneralResponse("Pack eliminado exitosamente");
     }
 
+    /**
+     * Convierte una entidad Pack a su DTO de respuesta, incluyendo
+     * categorías y productos asociados.
+     * Para uso interno del servicio en los método de búsqueda
+     *
+     * @param pack Entidad pack a convertir
+     * @return DTO con la información completa del pack
+     */
     @Override
     public PackResponse toResponse(Pack pack) {
         return new PackResponse(

@@ -24,7 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SegurityConfig {
+public class SecurityConfig {
 
     /**
      * Configuración del filtro de seguridad para manejar la autenticación y autorización
@@ -51,7 +51,8 @@ public class SegurityConfig {
                                 "/error/**",
                                 "/error/"
                         ).permitAll()
-                        .requestMatchers("/admin/Categoria/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/producto/**").hasRole("ADMIN")
                         .requestMatchers(
                                 "/",
                                 "/Assets/**",

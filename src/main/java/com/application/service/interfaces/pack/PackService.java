@@ -9,6 +9,7 @@ import java.util.List;
 public interface PackService {
     // Consulta
     Pack getPackById(Long id);
+    PackResponse getPackResponseById(Long id);
     List<PackResponse> getPacks();
     List<PackResponse> getPacksActivos();
     List<PackResponse> getPacksByCategoriaId(Long id);

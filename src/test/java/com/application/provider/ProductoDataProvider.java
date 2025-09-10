@@ -87,21 +87,21 @@ public class ProductoDataProvider {
                 .productoId(1L)
                 .nombre("Producto 1")
                 .descripcion("Primer producto de pruebas")
-                .activo(false)
+                .activo(true)
                 .build();
 
         Producto producto2 = Producto.builder()
                 .productoId(2L)
                 .nombre("Producto 2")
                 .descripcion("Segundo producto de pruebas")
-                .activo(false)
+                .activo(true)
                 .build();
 
         Producto producto3 = Producto.builder()
                 .productoId(3L)
                 .nombre("Producto 3")
                 .descripcion("Tercer producto de pruebas")
-                .activo(false)
+                .activo(true)
                 .build();
 
         return new ArrayList<>(List.of(
@@ -132,17 +132,25 @@ public class ProductoDataProvider {
     }
 
     public static ProductoCreateRequest newProductoMock() {
-        return new ProductoCreateRequest("imagen 1", "Producto 1", 1000, 50, "Primer producto de pruebas", "marca 1", "350ml");
+        return new ProductoCreateRequest(
+                "imagen 1",
+                "Producto 1",
+                1000,
+                50,
+                "Primer producto de pruebas",
+                "marca 1",
+                "350ml"
+        );
     }
 
     // Controller
     public static List<ProductoResponse> productoResponseListMock() {
         return List.of(
-                new ProductoResponse("imagen 1", "Producto 1", 1000, 50,
+                new ProductoResponse(1L,"imagen 1", "Producto 1", 1000, 50,
                         "Primer producto de pruebas", "marca 1", "350ml"),
-                new ProductoResponse("imagen 2", "Producto 2", 2000, 50,
+                new ProductoResponse(2L, "imagen 2", "Producto 2", 2000, 50,
                         "Segundo producto de pruebas", "marca 2", "250ml"),
-                new ProductoResponse("imagen 3", "Producto 3", 3000, 50,
+                new ProductoResponse(3L, "imagen 3", "Producto 3", 3000, 50,
                         "Tercer producto de pruebas", "marca 3", "250ml")
         );
     }
