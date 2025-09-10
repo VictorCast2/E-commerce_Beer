@@ -2,6 +2,7 @@ package com.application.service.http;
 
 import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,11 @@ public class ChatOpenAISevices {
     public String responder(String pregunta, int maximoTokens) {
         Prompt prompt = new Prompt(pregunta,
                 OpenAiChatOptions.builder()
+                        .model("gpt-3.5-turbo")
                         .maxTokens(maximoTokens)
                         .build());
-        return chatModel.call();
+        ChatResponse chatResponse = chatModel.call(prompt);
+        return chatResponse.getResult().getOutput().getText();
     }
 
 }
