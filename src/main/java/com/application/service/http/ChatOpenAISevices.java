@@ -1,19 +1,19 @@
 package com.application.service.http;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.ai.chat.client.ChatClient;
+import lombok.AllArgsConstructor;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ChatOpenAISevices {
 
     // Este es un cliente de chat que se conecta a OpenAI
-    private ChatClient chatClient;
+    private final ChatModel chatModel;
 
-    // Método para responder preguntas utilizando el cliente de chat
+    // Método para crear primer Chat Bot IA de OpenAI
     public String responder(String pregunta) {
-        return "Respuesta a la pregunta: " + pregunta;
+        return chatModel.call(pregunta);
     }
 
 }
