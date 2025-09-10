@@ -68,10 +68,9 @@ public class SecurityConfig {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler((request, response, authentication) -> {
-                            // Redirige con bandera success para que lo capture el JS
                             response.sendRedirect("/auth/login?success=true");
                         })
-                        .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
+                        .defaultSuccessUrl("/", true)
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
