@@ -38,7 +38,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura la política de creación de sesiones como Stateless
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Crea sesión si es necesario
                         .invalidSessionUrl("/auth/login") // URL a la que redirigir si la sesión es inválida
                         .maximumSessions(2) // Número máximo de sesiones por usuario
                         .expiredUrl("/auth/login?expired") // Redirige si la sesión expiró
@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**",
-                                "/usuario/**",
+                                "/usuario/**", // Permitir acceso a las rutas de autenticación y usuario
                                 "/error/**",
                                 "/error/"
                         ).permitAll()
@@ -65,6 +65,12 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .successHandler((request, response, authentication) -> {
+                            // Redirige con bandera success para que lo capture el JS
+                            response.sendRedirect("/auth/login?success=true");
+                        })
                         .defaultSuccessUrl("/proteted", true) // ← Redirige a la página principal después del login exitoso
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
@@ -74,7 +80,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo ->
                                 userInfo.userService(customOAuth2UserService)
                         )
-                        .defaultSuccessUrl("/proteted", true)
+                        .defaultSuccessUrl("/", true)
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
@@ -92,11 +98,16 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         // 🔐 Content Security Policy (CSP)
                         .contentSecurityPolicy(csp -> csp
-                                .policyDirectives("default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com")
+                                .policyDirectives(
+                                        "default-src 'self'; " +
+                                                "script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; " +
+                                                "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; " +
+                                                "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:"
+                                )
                         )
                         // 🛡️ Protección contra clickjacking
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                        // 📅 HSTS
+                        // 📅 HSTS - HTTP Strict Transport Security
                         .httpStrictTransportSecurity(hsts -> hsts
                                 .includeSubDomains(true)
                                 .maxAgeInSeconds(31536000)

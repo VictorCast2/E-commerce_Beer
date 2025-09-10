@@ -23,9 +23,6 @@ class ProductoRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        List<Producto> productoList = ProductoDataProvider.productoList();
-        productoList.forEach(entityManager::persist);
-        entityManager.flush();
     }
 
     @Test

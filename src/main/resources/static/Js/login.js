@@ -1,21 +1,8 @@
-// Función para abrir el modal
-window.addEventListener('DOMContentLoaded', (event) => {
-    const modal = document.getElementById("modalSuccess");
-    if (modal) {
-        modal.style.display = "block"; // Mostrar el modal
-
-        // Después de 2 segundos (2000 milisegundos), redirigir a buques
-        setTimeout(() => {
-            window.location.href = '/buques/';
-        }, 2000);
-    }
-});
-
-// Función para cerrar el modal
-function closeModal() {
-    const modal = document.getElementById("modalSuccess");
-    modal.style.display = "none"; // Ocultar el modal
-}
+// === 🚨 Variables dinámicas de Thymeleaf ===
+const body = document.body;
+const mensajeError   = body.dataset.mensajeError || null;
+const mensajeExitoso = body.dataset.mensajeExitoso || null;
+const loginSuccess   = body.dataset.loginSuccess === "true";
 
 const fields = {
     email: {
@@ -28,6 +15,7 @@ const fields = {
     }
 };
 
+// Validación dinámica de inputs
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     const inputBox = input.closest(".input-box");
@@ -39,21 +27,21 @@ Object.keys(fields).forEach(fieldId => {
         const value = input.value.trim();
 
         if (value === "") {
-            // Si el input está vacío, restablecer estilos
+            // Resetear estilos si está vacío
             inputBox.classList.remove("input-error");
             checkIcon.style.display = "none";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "";
         } else if (fields[fieldId].regex.test(value)) {
-            // Si es válido
+            // Válido
             checkIcon.style.display = "inline-block";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "2px solid #0034de";
             inputBox.classList.remove("input-error");
         } else {
-            // Si es inválido
+            // Inválido
             checkIcon.style.display = "none";
             errorIcon.style.display = "inline-block";
             errorMessage.style.display = "block";
@@ -64,15 +52,13 @@ Object.keys(fields).forEach(fieldId => {
 });
 
 const form = document.querySelector("form");
-const errorMessageBox = document.querySelector(".input__advertencia");
-const errorMessages = document.querySelectorAll(".input__error");
-const inputs = document.querySelectorAll("input:not([type='checkbox'])"); // Todos los inputs excepto el checkbox
-const checkbox = document.querySelector(".remember-forgot input"); // Selecciona el checkbox
+const inputs = document.querySelectorAll("input:not([type='checkbox'])");
+const checkbox = document.querySelector(".remember-forgot input");
 
+// Validación antes de enviar
 form.addEventListener("submit", function (event) {
     let formValid = true;
 
-    // Verificar si algún campo está vacío o inválido
     inputs.forEach(input => {
         const value = input.value.trim();
         if (value === "" || !fields[input.id].regex.test(value)) {
@@ -80,32 +66,68 @@ form.addEventListener("submit", function (event) {
         }
     });
 
-    // Verificar si el checkbox está marcado
     if (!checkbox.checked) {
         formValid = false;
     }
 
     if (!formValid) {
-        // Si el formulario no es válido, mostrar el mensaje de advertencia
-        errorMessageBox.style.display = "block";
-        event.preventDefault(); // Evitar el envío del formulario
-    } else {
-        // Si el formulario es válido, mostrar el modal de éxito
-        openModal();
-        event.preventDefault(); // Evitar el envío real hasta que el modal se cierre
-        setTimeout(function () {
-            form.submit(); // Enviar el formulario después de un tiempo (simulando un retardo de éxito)
-        }, 2000); // Ajusta el tiempo según necesites
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Por favor rellene el formulario correctamente",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        });
+        event.preventDefault(); // Evita enviar si hay errores
     }
 });
 
-// Ocultar el mensaje de advertencia cuando el usuario empieza a escribir o marca el checkbox
-inputs.forEach(input => {
-    input.addEventListener("input", function () {
-        errorMessageBox.style.display = "none";
-    });
+// === 🚀 Flujo de login exitoso antes de ir ===
+window.addEventListener("DOMContentLoaded", () => {
+    if (typeof loginSuccess !== "undefined" && loginSuccess === true) {
+        Swal.fire({
+            title: "Inicio de sesión exitoso",
+            icon: "success",
+            timer: 3000,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        }).then(() => {
+            // después de la alerta, redirige al protegido
+            window.location.href = "/";
+        });
+    }
 });
 
-checkbox.addEventListener("change", function () {
-    errorMessageBox.style.display = "none";
-});
+// === 🚨 Mensajes dinámicos desde el backend ===
+if (typeof mensajeError !== "undefined" && mensajeError !== null) {
+    Swal.fire({
+        icon: "error",
+        title: "Credenciales inválidas",
+        text: mensajeError,
+        customClass: {
+            title: 'swal-title',
+            popup: 'swal-popup'
+        }
+    });
+}
+
+if (typeof mensajeExitoso !== "undefined" && mensajeExitoso !== null) {
+    Swal.fire({
+        icon: "success",
+        title: "Sesión cerrada",
+        text: mensajeExitoso,
+        timer: 3000,
+        timerProgressBar: true,
+        customClass: {
+            title: 'swal-title',
+            popup: 'swal-popup'
+        }
+    });
+}
