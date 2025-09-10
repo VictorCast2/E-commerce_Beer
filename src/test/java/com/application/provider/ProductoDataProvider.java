@@ -146,11 +146,11 @@ public class ProductoDataProvider {
     // Controller
     public static List<ProductoResponse> productoResponseListMock() {
         return List.of(
-                new ProductoResponse(1L,"imagen 1", "Producto 1", 1000, 50,
+                new ProductoResponse("imagen 1", "Producto 1", 1000, 50,
                         "Primer producto de pruebas", "marca 1", "350ml"),
-                new ProductoResponse(2L, "imagen 2", "Producto 2", 2000, 50,
+                new ProductoResponse("imagen 2", "Producto 2", 2000, 50,
                         "Segundo producto de pruebas", "marca 2", "250ml"),
-                new ProductoResponse(3L, "imagen 3", "Producto 3", 3000, 50,
+                new ProductoResponse("imagen 3", "Producto 3", 3000, 50,
                         "Tercer producto de pruebas", "marca 3", "250ml")
         );
     }
