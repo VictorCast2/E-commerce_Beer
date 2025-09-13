@@ -35,6 +35,11 @@ public class UsuarioServiceImpl implements UsuarioInterface, UserDetailsService 
     @Lazy
     private PasswordEncoder encoder;
 
+    /**
+     * Método para encontrar un usuario por su correo electrónico.
+     * Si el usuario no se encuentra, lanza una excepción.
+     */
+    @Override
     public Usuario encontrarCorreo(String correo) {
         return usuarioRepository.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("Error: el correo " + correo + " no existe."));

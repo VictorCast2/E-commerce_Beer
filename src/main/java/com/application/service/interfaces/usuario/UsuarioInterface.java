@@ -1,6 +1,7 @@
 package com.application.service.interfaces.usuario;
 
 import com.application.configuration.Custom.CustomUserDetails;
+import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.usuario.request.EditarPasswordRequest;
 import com.application.presentation.dto.usuario.request.EditarUsuarioRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
@@ -12,4 +13,5 @@ public interface UsuarioInterface {
     UsuarioResponse crearUsuario(@Valid CreacionUsuarioRequest request);
     UsuarioResponse actualizarUsuario(@Valid EditarUsuarioRequest updateUsuarioRequest, @Valid CustomUserDetails customUserDetails);
     UsuarioResponse actualizarPassword(@Valid EditarPasswordRequest editarPasswordRequest);
+    Usuario encontrarCorreo(@Valid String correo);
 }

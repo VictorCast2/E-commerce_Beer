@@ -1,8 +1,8 @@
 package com.application.presentation.controller;
 
-import com.application.presentation.dto.empresa.request.CreacionEmpresaRequest;
+import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
-import com.application.service.implementation.empresa.EmpresaServiceImpl;
+import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,11 +21,6 @@ public class AuthController {
     @GetMapping()
     public String index() {
         return "Index";
-    }
-
-    @GetMapping("/proteted")
-    public String proteted() {
-        return "Proteted";
     }
 
     @GetMapping("/auth/login")
@@ -47,7 +42,8 @@ public class AuthController {
     }
 
     @GetMapping("/auth/sign_up")
-    public String getSignUp() {
+    public String getSignUp(Model model) {
+        model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         return "Registro";
     }
 
@@ -60,7 +56,8 @@ public class AuthController {
             );
             return "Registro";
         }
-        usuarioServiceImpl.crearUsuario(request);
+        UsuarioResponse response = usuarioServiceImpl.crearUsuario(request);
+        model.addAttribute("mensajeExitoso", response.mensaje());
         return "redirect:/auth/login";
     }
 
