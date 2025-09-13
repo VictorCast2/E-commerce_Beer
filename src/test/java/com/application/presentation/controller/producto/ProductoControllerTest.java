@@ -53,7 +53,7 @@ class ProductoControllerTest {
         String mensaje = "Mensaje de Pruebas";
 
         // When
-        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(productoService.getProductos()).thenReturn(productoList);
 
         // Then

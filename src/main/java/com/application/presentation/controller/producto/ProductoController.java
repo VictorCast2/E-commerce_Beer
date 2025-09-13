@@ -34,7 +34,7 @@ public class ProductoController {
             Model model
             ) {
 
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
         List<ProductoResponse> productoList = productoService.getProductos();
 
         model.addAttribute("usuario", usuario);
