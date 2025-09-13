@@ -38,7 +38,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Crea sesión si es necesario
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .invalidSessionUrl("/auth/login") // URL a la que redirigir si la sesión es inválida
                         .maximumSessions(2) // Número máximo de sesiones por usuario
                         .expiredUrl("/auth/login?expired") // Redirige si la sesión expiró
@@ -47,8 +47,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/auth/**",
-                                "/usuario/**", // Permitir acceso a las rutas de autenticación y usuario
+                                "/usuario/**",
+                                "/producto/**",
                                 "/error/**",
+                                "/auth/logout",
                                 "/error/"
                         ).permitAll()
                         .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
@@ -93,24 +95,6 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(ex -> ex
                         .accessDeniedPage("/error/403")
-                )
-                .headers(headers -> headers
-                        // 🔐 Content Security Policy (CSP)
-                        .contentSecurityPolicy(csp -> csp
-                                .policyDirectives(
-                                        "default-src 'self'; " +
-                                                "script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; " +
-                                                "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; " +
-                                                "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:"
-                                )
-                        )
-                        // 🛡️ Protección contra clickjacking
-                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                        // 📅 HSTS - HTTP Strict Transport Security
-                        .httpStrictTransportSecurity(hsts -> hsts
-                                .includeSubDomains(true)
-                                .maxAgeInSeconds(31536000)
-                        )
                 )
                 .build();
     }

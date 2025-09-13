@@ -26,7 +26,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductoController.class)
+@WebMvcTest(ProductoAdminController.class)
 //@Import(SecurityConfig.class)
 class ProductoControllerTest {
 
@@ -54,7 +54,7 @@ class ProductoControllerTest {
         String mensaje = "Mensaje de Pruebas";
 
         // When
-        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(productoService.getProductos()).thenReturn(productoList);
 
         // Then

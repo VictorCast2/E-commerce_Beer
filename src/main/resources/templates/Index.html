@@ -78,16 +78,50 @@
 
                     <span class="icon__item">
                         <i class="ri-user-line"></i>
+
+                        <div class="nav__menu" id="SubMenu">
+                            <div class="menu__sub">
+                                <div class="sub__info">
+                                    <i class="ri-user-line"></i>
+                                    <h2 class="info__title">Keyner Reyes</h2>
+                                </div>
+                                <hr>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-user-fill"></i>
+                                    <p class="link__text">Perfil</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-settings-5-fill"></i>
+                                    <p class="link__text">Configuracion</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a href="" class="sub__link">
+                                    <i class="ri-notification-2-fill"></i>
+                                    <p class="link__text">Notificaciones</p>
+                                    <span class="link__flec"> <i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+
+                                <a th:href="@{/auth/logout}" class="sub__link">
+                                    <i class="ri-logout-box-r-fill"></i>
+                                    <p class="link__text">Cerrar Sesion</p>
+                                    <span class="link__flec"><i class="ri-arrow-right-s-line"></i></span>
+                                </a>
+                            </div>
+                        </div>
                     </span>
 
-                    <span class="icon__item">
+                    <span class="icon__item" id="go-fav">
                         <i class="ri-heart-3-line"></i>
-                        <span class="icon__badge" id="fav-count">0</span>
+                        <span class="icon__badge" id="fav-count"></span>
                     </span>
 
-                    <span class="icon__item">
+                    <span class="icon__item" id="cart-icon">
                         <i class="ri-shopping-cart-2-line"></i>
-                        <span class="icon__badge" id="cart-count">0</span>
+                        <span class="icon__badge" id="cart-count"></span>
                     </span>
                 </div>
             </header>
@@ -101,29 +135,22 @@
                             <h3 class="information__title">Paulaner</h3>
                             <h2 class="information__subtitulo">Weissbier</h2>
                             <p class="information__text">
-                                Desde Múnich, Alemania, llega esta tradicional
-                                cerveza de trigo con sabor suave y notas
+                                Desde Múnich, Alemania, llega esta tradicional cerveza de trigo con sabor suave y notas
                                 afrutadas de
-                                plátano y clavo de olor. Refrescante, turbia y
-                                con espuma cremosa, perfecta para disfrutar
+                                plátano y clavo de olor. Refrescante, turbia y con espuma cremosa, perfecta para disfrutar
                                 fría y
-                                acompañar platos ligeros. Una auténtica joya
-                                bávara elaborada según la Ley de Pureza de
+                                acompañar platos ligeros. Una auténtica joya bávara elaborada según la Ley de Pureza de
                                 1516.
                             </p>
 
                             <div class="information__button">
                                 <div class="button__precio">
-                                    <span
-                                        class="precio__shop shop--changed">Apartir
-                                        de</span>
-                                    <span
-                                        class="precio__shop shop--principal">$19.000</span>
-                                    <span
-                                        class="precio__shop shop--descuento">$15.000</span>
+                                    <span class="precio__shop shop--changed">Apartir de</span>
+                                    <span class="precio__shop shop--principal">$19.000</span>
+                                    <span class="precio__shop shop--descuento">$15.000</span>
                                 </div>
 
-                                <a href class="button__item">Comprame Ahora</a>
+                                <a href="" class="button__item">Comprame Ahora</a>
                             </div>
 
                             <div class="experencia__clientes">
@@ -379,6 +406,7 @@
                                     <span class="clientes__satisfied">Clientes
                                         Satisfechos</span>
                                 </div>
+
                             </div>
 
                         </div>
@@ -388,6 +416,7 @@
                                 th:src="@{/Assets/Img/CervezasHero/cervezaGuinness.png}"
                                 alt>
                         </figure>
+
                     </div>
 
                     <div class="carousel__arrows">
@@ -444,7 +473,6 @@
 
         <section class="innovacion">
             <div class="innovaccion__content">
-
                 <div class="content__item">
                     <h2 class="item__titulo">Licores Innovadores</h2>
                     <p class="item__texto">
@@ -514,16 +542,12 @@
 
         <main>
             <section class="productos">
-
                 <div class="productos__destacados">
-
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Productos Destacados</h2>
-
-                        <a href="ProductosDestacados.html"
+                        <a th:href="@{/producto/destacados}"
                             class="vertodos__enlaces">Ver Todos</a>
                     </div>
-
                     <div class="flex">
                         <div class="flex__productos">
                             <div class="flex__productos-track">
@@ -568,7 +592,6 @@
                                             title="Agregar al carrito"></i>
                                         <i class="ri-eye-line" title="Ver"></i>
                                     </div>
-
                                 </div>
 
                                 <!-- Product 2 -->
@@ -1246,7 +1269,7 @@
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Whiskys</h2>
 
-                        <a href="Whisky.html" class="vertodos__enlaces">Ver
+                        <a th:href="@{/producto/whiskys}" class="vertodos__enlaces">Ver
                             Todos</a>
                     </div>
 
@@ -1341,14 +1364,12 @@
 
                                 <!-- Product 3 -->
                                 <div class="card">
-                                    <img
-                                        src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado10.png}"
+                                    <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado10.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Single Malt</span>
 
                                     <figure class="pais">
-                                        <img
-                                            src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}"
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Escocia</figcaption>
@@ -1792,7 +1813,7 @@
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Tequila & Mezcal</h2>
 
-                        <a href="Tequila&Mezcal.html"
+                        <a th:href="@{/producto/tequila_mezcal}"
                             class="vertodos__enlaces">Ver Todos</a>
                     </div>
 
@@ -2013,20 +2034,19 @@
                                             title="Agregar al carrito"></i>
                                         <i class="ri-eye-line" title="Ver"></i>
                                     </div>
-
                                 </div>
 
                                 <!-- Product 6 -->
                                 <div class="card">
                                     <div class="badge badge-green">11%</div>
                                     <img
-                                        src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados20.png}"
+                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados20.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Tequila Blanco</span>
 
                                     <figure class="pais">
                                         <img
-                                            src="@{/Assets/Img/Paises/paisPertenecienteMexico.svg}"
+                                            th:src="@{/Assets/Img/Paises/paisPertenecienteMexico.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Mexico</figcaption>
@@ -2338,7 +2358,7 @@
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Vinos</h2>
 
-                        <a href="Vinos.html" class="vertodos__enlaces">Ver
+                        <a th:href="@{/producto/vinos}" class="vertodos__enlaces">Ver
                             Todos</a>
                     </div>
 
@@ -2885,8 +2905,7 @@
 
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Cervezas</h2>
-
-                        <a href="Cervezas.html" class="vertodos__enlaces">Ver
+                        <a th:href="@{/producto/cervezas}" class="vertodos__enlaces">Ver
                             Todos</a>
                     </div>
 
@@ -3426,7 +3445,6 @@
 
                     <div class="destacados__vertodos">
                         <h2 class="destacados__titles">Rones & Aguardientes</h2>
-
                         <a href class="vertodos__enlaces">Ver Todos</a>
                     </div>
 
@@ -3437,14 +3455,14 @@
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
                                     <img loading="lazy"
-                                        src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados43.png}"
+                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados43.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Aguardiente sin
                                         azúcar</span>
 
                                     <figure class="pais">
                                         <img
-                                            src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
+                                            th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Colombia</figcaption>
@@ -3570,14 +3588,12 @@
                                 <!-- Product 4 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img
-                                        src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados46.png}"
+                                    <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados46.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Ron Añejo</span>
 
                                     <figure class="pais">
-                                        <img
-                                            src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Colombia</figcaption>
@@ -3614,17 +3630,13 @@
                                 <!-- Product 5 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img loading="lazy"
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados47.png}"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados47.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Ron Añejo</span>
 
                                     <figure class="pais">
-                                        <img class="pais--changed"
-                                            th:src="@{/Assets/Img/Paises/paispertenecienteGuatemala.svg}"
-                                            alt>
-                                        <figcaption
-                                            class="pais__name">Guatemala</figcaption>
+                                        <img class="pais--changed" th:src="@{/Assets/Img/Paises/paispertenecienteGuatemala.svg}" alt>
+                                        <figcaption class="pais__name">Guatemala</figcaption>
                                     </figure>
 
                                     <p class="description">
@@ -3666,8 +3678,7 @@
                                         <img
                                             th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                             alt>
-                                        <figcaption
-                                            class="pais__name">Colombia</figcaption>
+                                        <figcaption class="pais__name">Colombia</figcaption>
                                     </figure>
 
                                     <p class="description">
@@ -3707,8 +3718,7 @@
                                         azucar</span>
 
                                     <figure class="pais">
-                                        <img
-                                            th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Colombia</figcaption>
@@ -3990,14 +4000,12 @@
                                 <!-- Product 1 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img loading="lazy"
-                                        src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado55.png}"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado55.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Ginebra</span>
 
                                     <figure class="pais">
-                                        <img loading="lazy"
-                                            src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}"
+                                        <img loading="lazy" th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}"
                                             alt>
                                         <figcaption class="pais__name">Reino
                                             Unido</figcaption>
@@ -4078,14 +4086,12 @@
                                 <!-- Product 3 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img loading="lazy"
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado57.png}"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado57.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Vodka Premium</span>
 
                                     <figure class="pais">
-                                        <img loading="lazy"
-                                            th:src="@{/Assets/Img/Paises/PaisPertenecienteSuecia.svg}"
+                                        <img loading="lazy" th:src="@{/Assets/Img/Paises/PaisPertenecienteSuecia.svg}"
                                             alt>
                                         <figcaption
                                             class="pais__name">Suecia</figcaption>
@@ -4122,15 +4128,12 @@
                                 <!-- Product 4 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img loading="lazy"
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado58.png}"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado58.png}"
                                         alt width="250" height="250" />
                                     <span class="category">Ginebra</span>
 
                                     <figure class="pais">
-                                        <img loading="lazy"
-                                            th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}"
-                                            alt>
+                                        <img loading="lazy" th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}" alt>
                                         <figcaption class="pais__name">Reino
                                             Unido</figcaption>
                                     </figure>
@@ -4167,15 +4170,11 @@
                                 <!-- Product 5 -->
                                 <div class="card">
                                     <div class="badge badge-green">28%</div>
-                                    <img
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado59.png}"
-                                        alt width="250" height="250" />
+                                    <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado59.png}" alt width="250" height="250" />
                                     <span class="category">Ginebra</span>
 
                                     <figure class="pais">
-                                        <img
-                                            th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}"
-                                            alt>
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}" alt>
                                         <figcaption
                                             class="pais__name">Escocia</figcaption>
                                     </figure>
@@ -4211,18 +4210,13 @@
                                 <!-- Product 6 -->
                                 <div class="card">
                                     <div class="badge badge-green">11%</div>
-                                    <img
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado60.png}"
-                                        alt width="250" height="250" />
+                                    <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado60.png}" alt width="250" height="250" />
                                     <span class="category">Vodka
                                         Artesanal</span>
 
                                     <figure class="pais">
-                                        <img
-                                            th:src="@{/Assets/Img/Paises/paisPertenecienteEEU.svg}"
-                                            alt>
-                                        <figcaption class="pais__name">Estados
-                                            Unidos</figcaption>
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteEEU.svg}" alt>
+                                        <figcaption class="pais__name">Estados Unidos</figcaption>
                                     </figure>
 
                                     <p class="description">
@@ -4259,15 +4253,13 @@
                                     <img
                                         th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado61.png}"
                                         alt width="250" height="250" />
-                                    <span class="category">Vodka
-                                        Saborizado</span>
+                                    <span class="category">Vodka Saborizado</span>
 
                                     <figure class="pais">
                                         <img
                                             th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}"
                                             alt>
-                                        <figcaption class="pais__name">Reino
-                                            Unido</figcaption>
+                                        <figcaption class="pais__name">Reino Unido</figcaption>
                                     </figure>
 
                                     <p class="description">
@@ -4300,10 +4292,8 @@
                                 <!-- Product 8 -->
                                 <div class="card">
                                     <img
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado62.png}"
-                                        alt width="250" height="250" />
-                                    <span class="category">Ginebra
-                                        Premium</span>
+                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado62.png}" alt width="250" height="250" />
+                                    <span class="category">GinebraPremium</span>
 
                                     <figure class="pais">
                                         <img
@@ -4344,16 +4334,12 @@
                                 <!-- Otros productos -->
                                 <!-- Product 9 -->
                                 <div class="card">
-                                    <img
-                                        th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado63.png}"
-                                        alt width="250" height="250" />
+                                    <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado63.png}" alt width="250" height="250" />
                                     <span class="category">Vodka
                                         Saborizado</span>
 
                                     <figure class="pais">
-                                        <img
-                                            th:src="@{/Assets/Img/Paises/paisPertenecienteRussia.svg}"
-                                            alt>
+                                        <img th:src="@{/Assets/Img/Paises/paisPertenecienteRussia.svg}" alt>
                                         <figcaption
                                             class="pais__name">Russia</figcaption>
                                     </figure>
@@ -4830,10 +4816,10 @@
             </div>
         </footer>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="module" th:src="@{/Js/main.js}"></script>
+        <script th:type="module" th:src="@{/Js/main.js}"></script>
     </body>
 
 </html>

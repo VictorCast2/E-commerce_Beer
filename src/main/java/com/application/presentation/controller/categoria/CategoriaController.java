@@ -34,7 +34,7 @@ public class CategoriaController {
             Model model
     ) {
 
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
         List<CategoriaResponse> categoriaResponses = categoriaService.getCategorias();
 
         model.addAttribute("usuario", usuario);

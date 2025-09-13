@@ -11,7 +11,6 @@ export function activarGlassmorphism() {
     });
 }
 
-
 export function initCart() {
     const drawer = document.getElementById("cart-drawer");
     const overlay = document.getElementById("cart-overlay");
@@ -131,7 +130,7 @@ export function initCart() {
                 const li = document.createElement("li");
                 li.className = "cart-item";
                 li.innerHTML = `
-                    <img src="${item.img}" alt="">
+                    <img th:src="${item.img}" alt="">
                     <div class="info">
                         <p class="name">${item.name}</p>
                         <div class="quantity-control" data-index="${index}">
@@ -205,7 +204,6 @@ export function initCart() {
     }
 }
 
-
 export function inicialHeart() {
     const favCount = document.getElementById("fav-count");
 
@@ -252,13 +250,13 @@ export function inicialHeart() {
     });
 }
 
-export function rederigirFav(){
+export function rederigirFav() {
     document.getElementById("go-fav").addEventListener("click", () => {
-        window.location.href = "Favorito.html";
+        window.location.href = "/producto/favoritos";
     });
 }
 
-export function finalizarCompra(){
+export function finalizarCompra() {
     //cuando presiona el boton de finalizar lo lleva
     // para el carrito junto con el producto agregado al carrito
     const btnFinalizarcompra = document.getElementById("finalizar-compra");
@@ -268,8 +266,130 @@ export function finalizarCompra(){
     });
 }
 
+export function desplegablePerfil() {
+    /* Menú desplegable del perfil */
+    const subMenu = document.getElementById("SubMenu");
+    const profileImage = document.querySelector(".ri-user-line");
+
+    if (subMenu && profileImage) {
+        profileImage.addEventListener("click", function (e) {
+            e.stopPropagation(); // 🔹 Evita que el click cierre el menú inmediatamente
+            subMenu.classList.toggle("open__menu");
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener("click", function (e) {
+            if (!subMenu.contains(e.target) && !profileImage.contains(e.target)) {
+                subMenu.classList.remove("open__menu");
+            }
+        });
+    }
+}
+
+export function carruselProductos() {
+    // mostrar los productos con carrusel
+    document.querySelectorAll(".flex").forEach(carrusel => {
+        const track = carrusel.querySelector(".flex__productos-track");
+        const prevBtn = carrusel.querySelector(".arrow--left");
+        const nextBtn = carrusel.querySelector(".arrow--right");
+
+        const cardWidth = 300; // ancho de cada card
+        const gap = 40;        // espacio entre cards
+        const visibles = 4;    // cuántos se muestran a la vez
+
+        let posicion = 0;
+        const totalProductos = track.querySelectorAll(".card").length;
+        const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
+
+        const paso = visibles * (cardWidth + gap); // mueve 4 productos
+
+        nextBtn.addEventListener("click", () => {
+            if (posicion < maxPosicion) {
+                posicion += paso;
+                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (posicion > 0) {
+                posicion -= paso;
+                if (posicion < 0) posicion = 0; // no pasar inicio
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+    });
+}
+
+export function verProductos() {
+    // mandar los productos a la pagina ver
+    const viewIcons = document.querySelectorAll(".card-icons .ri-eye-line");
+
+    viewIcons.forEach(icon => {
+        icon.addEventListener("click", (e) => {
+            const card = e.target.closest(".card");
+
+            // Capturamos los datos de la card
+            const productData = {
+                name: card.dataset.name,
+                price: card.dataset.price,
+                oldPrice: card.dataset.oldprice,
+                image: card.dataset.image,
+                category: card.dataset.category,
+                subcategory: card.dataset.subcategory
+            };
+
+            // Guardar en localStorage
+            localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+            // Redirigir a Ver.html
+            window.location.href = "Ver.html";
+        });
+    });
+
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    if (!localStorage.getItem("mayorDeEdadAceptado")) {
+        Swal.fire({
+            html: `
+        <div class="contenedor-imagen-modal">
+            <img th:src="@{/static/Assets/Img/logos/costaoroimport.png}"
+            alt="Mayor de edad" 
+            class="mi-imagen-modal">
+        </div>
+        <h2 class="swal2-title">¿ Eres Mayor De Edad ?</h2>
+        <p class="texto-advertencia">
+            "Prohíbese El Expendio De Bebidas Embriagantes A Menores De Edad"<br>
+            "El Exceso De Alcohol Es Perjudicial Para La Salud"
+        </p>
+        `,
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Soy Mayor De Edad',
+            cancelButtonText: 'No, Soy Menor De Edad',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            backdrop: `rgba(0,0,0,0.8)`,
+            width: '1000px',
+            customClass: {
+                popup: 'swal-popup'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Guardamos en localStorage que ya aceptó
+                localStorage.setItem("mayorDeEdadAceptado", "true");
+
+            } else {
+                // Si no acepta, lo manda a Google
+                window.location.href = "https://www.google.com";
+            }
+        });
+    }
+
+    //desplegar menu del usuario
+    desplegablePerfil();
+
     //rederigir a Favorito
     rederigirFav();
 
@@ -363,39 +483,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //finalizar compra
     finalizarCompra();
 
+    // mandar los productos a la pagina ver
+    verProductos();
 
     // mostrar los productos con carrusel
-    document.querySelectorAll(".flex").forEach(carrusel => {
-        const track = carrusel.querySelector(".flex__productos-track");
-        const prevBtn = carrusel.querySelector(".arrow--left");
-        const nextBtn = carrusel.querySelector(".arrow--right");
-
-        const cardWidth = 300; // ancho de cada card
-        const gap = 40;        // espacio entre cards
-        const visibles = 4;    // cuántos se muestran a la vez
-
-        let posicion = 0;
-        const totalProductos = track.querySelectorAll(".card").length;
-        const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
-
-        const paso = visibles * (cardWidth + gap); // mueve 4 productos
-
-        nextBtn.addEventListener("click", () => {
-            if (posicion < maxPosicion) {
-                posicion += paso;
-                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
-
-        prevBtn.addEventListener("click", () => {
-            if (posicion > 0) {
-                posicion -= paso;
-                if (posicion < 0) posicion = 0; // no pasar inicio
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
-    });
+    carruselProductos();
 
     //cambiar anio del footer automaticamente
     document.getElementById("anio__pagina").textContent = new Date().getFullYear();

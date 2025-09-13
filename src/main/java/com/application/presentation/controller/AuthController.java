@@ -1,8 +1,6 @@
 package com.application.presentation.controller;
 
-import com.application.presentation.dto.empresa.request.CreacionEmpresaRequest;
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
-import com.application.service.implementation.empresa.EmpresaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,13 +17,8 @@ public class AuthController {
     private final UsuarioServiceImpl usuarioServiceImpl;
 
     @GetMapping()
-    public String index() {
+    public String index(Model model) {
         return "Index";
-    }
-
-    @GetMapping("/proteted")
-    public String proteted() {
-        return "Proteted";
     }
 
     @GetMapping("/auth/login")
@@ -33,7 +26,6 @@ public class AuthController {
                            @RequestParam(value = "error", required = false) String error,
                            @RequestParam(value = "logout", required = false) String logout,
                            @RequestParam(value = "success", required = false) String success) {
-
         if (error != null) {
             model.addAttribute("mensajeError", "Usuario o contraseña inválidos");
         }
@@ -47,7 +39,11 @@ public class AuthController {
     }
 
     @GetMapping("/auth/sign_up")
-    public String getSignUp() {
+    public String getSignUp(Model model,
+                            @RequestParam(value = "error", required = false) String error) {
+        if (error != null) {
+            model.addAttribute("mensajeError", "Usuario ya existe en la base de datos");
+        }
         return "Registro";
     }
 
