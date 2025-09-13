@@ -6,8 +6,6 @@
     --colorLigth: #71717a;
 }
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -42,7 +40,6 @@ body {
     margin-top: 1rem;
 }
 
-
 .hero {
     min-height: 100vh;
     position: relative;
@@ -76,7 +73,6 @@ body {
     font: 700 1.5rem "Geist";
 }
 
-
 .header__navbar {
     display: flex;
     justify-content: center;
@@ -92,7 +88,6 @@ body {
     gap: 2.4em;
     list-style: none;
 }
-
 
 .item__link {
     text-decoration: none;
