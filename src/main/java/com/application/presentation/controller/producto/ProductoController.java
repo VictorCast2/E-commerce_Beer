@@ -8,6 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/producto")
 public class ProductoController {
 
+    private final ProductoServiceImpl productoService;
+    private final UsuarioServiceImpl usuarioService;
+
+    @GetMapping("/")
+    public String Producto(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            Model model
+            ) {
+
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        List<ProductoResponse> productoList = productoService.getProductos();
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("productoList", productoList);
+        model.addAttribute("mensaje", mensaje);
+
+        return "Producto";
+    }
+  
     @GetMapping("/destacados")
     public String productoDestacados() {
         return "ProductosDestacados";

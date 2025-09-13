@@ -33,43 +33,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest request) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(request);
 
-        String registrationId = request.getClientRegistration().getRegistrationId(); // "google" o "apple"
-
-        String email = null;
-        String nombre = null;
-        String apellido = null;
-        String imagen = null;
-
-        if ("google".equals(registrationId)) {
-            // === Atributos de Google ===
-            email = oAuth2User.getAttribute("email");
-            nombre = oAuth2User.getAttribute("given_name");
-            apellido = oAuth2User.getAttribute("family_name");
-            imagen = oAuth2User.getAttribute("picture");
-        } else if ("apple".equals(registrationId)) {
-            // === Atributos de Apple ===
-            email = oAuth2User.getAttribute("email");
-
-            // === Nombre y apellido vienen en un mapa anidado ===
-            Map<String, Object> name = oAuth2User.getAttribute("name");
-            if (name != null) {
-                nombre = (String) name.get("firstName");
-                apellido = (String) name.get("lastName");
-            }
-
-            // Apple no siempre envía nombre después del primer login
-            if (nombre == null) nombre = "Usuario";
-            if (apellido == null) apellido = "";
-        }
+        // === Atributos de Google ===
+        String email = oAuth2User.getAttribute("email");
+        String nombre = oAuth2User.getAttribute("given_name");
+        String apellido = oAuth2User.getAttribute("family_name");
+        String imagen = oAuth2User.getAttribute("picture");
 
         // Si no hay email no podemos autenticar
         if (email == null) {
-            throw new OAuth2AuthenticationException("No se pudo obtener el correo electrónico del usuario " + registrationId);
+            throw new OAuth2AuthenticationException(" No se pudo obtener el correo electrónico del usuario: " + email);
         }
 
         // === Verificar si ya existe ===
         Usuario existente = usuarioService.encontrarCorreo(email);
-
         ERol eRol = ERol.PERSONA_CONTACTO;
         Rol rol = rolRepository.findByName(eRol)
                 .orElseGet(() -> rolRepository.save(Rol.builder().name(eRol).build()));

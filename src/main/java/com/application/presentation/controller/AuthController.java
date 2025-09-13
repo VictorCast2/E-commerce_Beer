@@ -56,7 +56,8 @@ public class AuthController {
             );
             return "Registro";
         }
-        usuarioServiceImpl.crearUsuario(request);
+        UsuarioResponse response = usuarioServiceImpl.crearUsuario(request);
+        model.addAttribute("mensajeExitoso", response.mensaje());
         return "redirect:/auth/login";
     }
 
