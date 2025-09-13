@@ -32,11 +32,11 @@
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
-                    <li class="list__item"><a href="" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a href="" class="item__link">Categorias</a></li>
-                    <li class="list__item"><a href="" class="item__link">Productos</a></li>
-                    <li class="list__item"><a href="" class="item__link">Blog</a></li>
-                    <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
+                    <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
+                    <li class="list__item"><a href="productos.html" class="item__link">Productos</a></li>
+                    <li class="list__item"><a href="Blog.html" class="item__link">Blog</a></li>
+                    <li class="list__item"><a href="Contactos.html" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -140,10 +140,10 @@
 
                     <div class="details__plus">
 
-                        <div class="quantity-control" data-index="${index}">
-                            <button class="minus">−</button>
-                            <span class="qty">0</span>
-                            <button class="plus">+</button>
+                        <div class="plus__control" data-index="${index}">
+                            <button class="control__minus">−</button>
+                            <span class="control__qty">0</span>
+                            <button class="control__plus">+</button>
                         </div>
 
                         <button class="details__addCard">Agregar Al Carrito</button>
@@ -188,13 +188,10 @@
 
                     </div>
 
-                    <span id="calificar__abrir" class="details__calificar">¿Deseas calificar este producto?</span>
-
                 </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- ============= DRAWER DEL CARRITO ============= -->
@@ -332,78 +329,6 @@
                 - Creado por <a href="#"><strong>Nosotros</strong></a></p>
         </div>
     </footer>
-
-
-    <!-- Ventana modal registrar empresas -->
-    <div class="modal__newadd newadd--hidden" id="modalnewadd">
-        <div class="modal__content">
-            <span class="modal__close">&times;</span>
-            <h2 class="content__titulo">Comentarios</h2>
-            <form class="add__formulario" action="">
-
-                <div class="formulario__puntacion">
-                    <p class="puntacion__experencia">Califica Tu Experiencia</p>
-                    <p class="puntacion__tittle">Tu Puntuacion</p>
-
-                    <div class="stars">
-                        <i class="ri-star-line"></i>
-                        <i class="ri-star-line"></i>
-                        <i class="ri-star-line"></i>
-                        <i class="ri-star-line"></i>
-                        <i class="ri-star-line"></i>
-                    </div>
-                </div>
-
-                <div class="formulario__flex">
-                    <div class="formulario__input">
-                        <div class="input-box">
-                            <input type="email" autocomplete="off" placeholder="" name="Asunto" id="asunto">
-                            <label for="asunto">Asunto</label>
-                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                        </div>
-                        <p class="input__error">
-                            
-                        </p>
-                    </div>
-                    
-                    <div class="formulario__input">
-                        <div class="input-box">
-                            <input type="email" autocomplete="off" placeholder="" name="Email" id="correo">
-                            <label for="correo">Email</label>
-                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                        </div>
-                        <p class="input__error">
-                            El correo solo puede contener letras,numeros,puntos,
-                            guiones y guion bajo.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <textarea autocomplete="off" placeholder="" name="Comentario" id="comentario"></textarea>
-                        <label class="label label--area" for="comentario">Comentario</label>
-                        <span class="box__icon icon--area"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--area"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error">
-                        Por favor, ingrese un comentario.
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="remember-forgot">
-                        <input type="checkbox" id="remmeber">
-                        <label class="forgot__label" for="remmeber">Guardar mis datos para la próxima vez que comente.</label>
-                    </div>
-                </div>
-
-                <button class="formulario__button" type="submit">Enviar</button>
-            </form>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

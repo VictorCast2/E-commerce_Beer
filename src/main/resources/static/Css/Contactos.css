@@ -173,7 +173,7 @@
 .box__icon i {
     position: absolute;
     top: 25px;
-    left: 92%;
+    left: 95%;
     font: 900 1.2rem var(--typografiaUrbanist);
 
 }
@@ -217,12 +217,11 @@
 }
 
 .swal-title {
-    font-family: 'Urbanist', sans-serif !important;
-    font-weight: 600;
+    font: 600 2rem var(--typografiaUrbanist);
 }
 
 .swal-popup {
-    font-family: 'Urbanist', sans-serif !important;
+    font:var(--typografiaUrbanist) ;
 }
 
 

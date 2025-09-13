@@ -1,7 +1,6 @@
-import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra } from "./main.js";
+import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra, addProductToCart } from "./main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-
     activarGlassmorphism();
 
     inicialHeart();
@@ -12,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     finalizarCompra();
 
-    //cargar los datos en ver
+    // --- Cargar producto seleccionado
     const product = JSON.parse(localStorage.getItem("selectedProduct"));
 
     if (product) {
@@ -20,81 +19,100 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(".details__category").textContent = product.category;
         document.querySelector(".details__name").textContent = product.name;
 
-        // precios
         const prices = document.querySelectorAll(".details__precie .precie__total");
         if (prices.length > 0) {
             prices[0].textContent = "$" + product.price;
-            if (product.oldPrice) {
-                prices[1].textContent = "$" + product.oldPrice;
-            }
+            if (product.oldPrice) prices[1].textContent = "$" + product.oldPrice;
         }
 
-        // Breadcrumb dinámico (los 3 últimos)
         document.querySelector(".breadcrumb-subcategory").textContent = product.subcategory + " /";
         document.querySelector(".breadcrumb-category").textContent = product.category + " /";
         document.querySelector(".breadcrumb-name").textContent = product.name;
     }
 
+    // --- Contador (quantity-control)
+    const qtyContainer = document.querySelector(".plus__control");
+    const minusBtn = qtyContainer.querySelector(".control__minus");
+    const plusBtn = qtyContainer.querySelector(".control__plus");
+    const qtySpan = qtyContainer.querySelector(".control__qty");
 
-    // Seleccionamos todos los contenedores de quantity-control
-    document.querySelectorAll(".quantity-control").forEach(control => {
-        const minusBtn = control.querySelector(".minus");
-        const plusBtn = control.querySelector(".plus");
-        const qtySpan = control.querySelector(".qty");
+    let qty = 0; // inicializamos en 0
+    qtySpan.textContent = qty;
 
-        let quantity = 0; // valor inicial
-
-        plusBtn.addEventListener("click", () => {
-            quantity++;
-            qtySpan.textContent = quantity;
-        });
-
-        minusBtn.addEventListener("click", () => {
-            if (quantity > 0) {
-                quantity--;
-                qtySpan.textContent = quantity;
-            }
-        });
+    plusBtn.addEventListener("click", () => {
+        qty++;
+        qtySpan.textContent = qty;
     });
 
-    //texto de detalles,envio y ayuda
+    minusBtn.addEventListener("click", () => {
+        if (qty > 0) {
+            qty--;
+            qtySpan.textContent = qty;
+        }
+    });
+
+    // --- Botón "Agregar al carrito" desde Ver.html
+    const addBtn = document.querySelector(".details__addCard");
+    addBtn.addEventListener("click", () => {
+        if (!product || qty <= 0) return;
+
+        const numericPrice = typeof product.price === "string"
+            ? parseFloat(product.price.replace(/[^0-9.]/g, ""))
+            : product.price;
+
+        addProductToCart({
+            name: product.name,
+            price: numericPrice,
+            img: product.image,
+            qty: qty,          // cantidad del contador
+            openDrawer: true   // abrir drawer
+        });
+
+        // Reiniciamos el contador
+        qty = 0;
+        qtySpan.textContent = qty;
+    });
+
+    // --- Texto detalles / envíos / ayuda
     const titles = document.querySelectorAll(".complemento__title");
     const texts = document.querySelectorAll(".complemento__text");
-
-    // Mostrar siempre el primer texto (Detalles)
-    texts[0].classList.add("active");
+    texts[0].classList.add("active"); // mostrar primer texto
 
     titles.forEach((title, index) => {
         title.addEventListener("click", () => {
-            // Quitar active de todos los títulos y textos
             titles.forEach(t => t.classList.remove("active"));
             texts.forEach(t => t.classList.remove("active"));
-
-            // Poner active en el título clickeado
             title.classList.add("active");
             texts[index].classList.add("active");
         });
     });
 
-    //abrir modal
-    //abrir el formulario de envio y pago
+    // --- Modal calificar producto
     const abirmodal = document.getElementById("calificar__abrir");
     const modal = document.getElementById("modalnewadd");
     const closeModalBtn = document.querySelector(".modal__close");
 
-    abirmodal.addEventListener("click", () => {
-        modal.classList.remove("newadd--hidden");
-    })
+    abirmodal.addEventListener("click", () => modal.classList.remove("newadd--hidden"));
+    closeModalBtn.addEventListener("click", () => modal.classList.add("newadd--hidden"));
+    window.addEventListener("click", e => { if (e.target === modal) modal.classList.add("newadd--hidden"); });
 
-    closeModalBtn.addEventListener("click", () => {
-        modal.classList.add("newadd--hidden");
-    });
+    // --- Calificación estrellas
+    const stars = document.querySelectorAll(".stars i");
+    const ratingInput = document.getElementById("rating");
 
+    stars.forEach(star => {
+        star.addEventListener("click", () => {
+            const value = star.getAttribute("data-value");
+            ratingInput.value = value;
 
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.add("newadd--hidden");
-        }
+            stars.forEach(s => s.classList.remove("ri-star-fill"));
+            stars.forEach(s => s.classList.add("ri-star-line"));
+
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.remove("ri-star-line");
+                stars[i].classList.add("ri-star-fill");
+            }
+        });
     });
 
 

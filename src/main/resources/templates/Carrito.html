@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- CSS de Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="../static/Css/Carrito.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,11 +34,11 @@
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
-                    <li class="list__item"><a href="" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a href="" class="item__link">Categorias</a></li>
-                    <li class="list__item"><a href="" class="item__link">Productos</a></li>
-                    <li class="list__item"><a href="" class="item__link">Blog</a></li>
-                    <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
+                    <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
+                    <li class="list__item"><a href="productos.html" class="item__link">Productos</a></li>
+                    <li class="list__item"><a href="Blog.html" class="item__link">Blog</a></li>
+                    <li class="list__item"><a href="Contactos.html" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -131,7 +133,7 @@
                         </div>
 
                         <div class="total__carrito">
-                            <h2 class="carrito__title">Total del carrito</h2>
+                            <h2 class="carrito__title">Total Carrito</h2>
                             <div class="carrito__content">
                                 <span class="content__subtotal">Subtotal</span>
                                 <span id="content__precio" class="content__subtotal"></span>
@@ -142,14 +144,14 @@
                                 <span id="cupon__envio" class="cupon__subtotal">$0.00</span>
                             </div>
 
-                            <div class="carrito__cupon">
-                                <span class="cupon__subtotal">Envio:</span>
-                                <span id="cupon__envio" class="cupon__subtotal">Gratis</span>
+                            <div class="carrito__free">
+                                <span class="free__name">Envio:</span>
+                                <span class="free__subtotal">Gratis</span>
                             </div>
 
-                            <div class="carrito__cupon">
-                                <span class="cupon__subtotal">Total:</span>
-                                <span id="cupon__envio" class="cupon__subtotal">$0.00</span>
+                            <div class="carrito__total">
+                                <span class="total__name">Total:</span>
+                                <span id="total__all" class="total__subtotal">$0.00</span>
                             </div>
 
                             <button class="carrito__btn">Finalizar Compra</button>
@@ -401,7 +403,7 @@
                     </div>
                 </div>
 
-                <span class="formulario__pago">Ir al pago</span>
+                <span class="formulario__pago" id="btnIrPago">Ir al pago</span>
 
 
             </form>
@@ -409,7 +411,59 @@
         </div>
     </div>
 
+    <!-- Ventana modal de eligir la fecha y hora -->
+    <div class="modal__envio newadd--mostrar" id="modalEnvio">
+        <div class="envio__content">
+            <span class="envio__close">&times;</span>
+            <h2 class="envio__titulo">Recoge En Tienda</h2>
 
+            <p class="envio__subtitulo">Elige una fecha y hora</p>
+
+            <form id="formRecoge" class="formulario__recoge" action="">
+                <div class="formulario__input">
+                    <div class="input-box box--tiempo">
+                        <input 
+                        type="text" 
+                        autocomplete="off" 
+                        placeholder="" 
+                        name="FechaEntrega" 
+                        id="Fechaentrega">
+                        <label for="Fechaentrega">Fecha Entrega</label>
+                        <span class="box__icon"><i class="ri-check-line"></i></span>
+                        <span class="box__icon"><i class="ri-close-line"></i></span>
+                    </div>
+                    <p class="input__error error--fecha">
+                        Por favor eliga una fecha de entrega.
+                    </p>
+                </div>
+
+                <div class="formulario__input">
+                    <div class="input-box box--tiempo">
+                        <input 
+                        type="text" 
+                        autocomplete="off" 
+                        placeholder="" 
+                        name="HoraEntrega"
+                        id="Horaentrega">
+                        <label for="Horaentrega">Hora Entrega</label>
+                        <span class="box__icon"><i class="ri-check-line"></i></span>
+                        <span class="box__icon"><i class="ri-close-line"></i></span>
+                    </div>
+                    <p class="input__error error--hora">
+                        Por favor eliga una hora de entraga.
+                    </p>
+                </div>
+
+                <button class="btn__envio" type="submit">Continuar</button>
+            </form>
+
+            
+        </div>
+    </div>
+
+
+    <!-- JS de Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

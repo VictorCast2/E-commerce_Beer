@@ -1,821 +1,171 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url("./style.css");
 
-body {
-    overflow-x: hidden;
-}
-
-
-/** Hero section */
-.header {
-    width: 100%;
-    height: 100px;
-    position: fixed;
-    background-color: transparent;
-    display: flex;
-    gap: 2rem;
-    justify-content: space-evenly;
-    align-items: center;
-    z-index: 999999;
-}
-
-.header.scrolled {
-    background-color: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-}
-
-.header__logo {
-    font: 700 1.5rem "Geist";
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+    --colorCafe: #8e705c;
+    --colorWhite: #ffffff;
 }
 
 
-.header__navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 850px;
-    min-width: 350px;
-    min-height: 75px;
-}
-
-.navbar__list {
-    display: flex;
-    gap: 2.4em;
-    list-style: none;
-}
-
-
-.item__link {
-    text-decoration: none;
-    color: #000000;
-    font: 700 1.2rem "Urbanist";
-}
-
-.list__icon {
-    margin-left: 1.5rem;
-    display: flex;
-    gap: 1.3rem;
-}
-
-.icon__item {
-    position: relative;
-}
-
-.icon__item i {
-    cursor: pointer;
-    font: 500 2rem "Urbanist";
-}
-
-.icon__badge {
-    position: absolute;
-    top: -6px;
-    font: 500 0.3rem "Urbanist";
-    right: -10px;
-    background-color: red;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 1px 5px;
-    border-radius: 50%;
-    min-width: 18px;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.language-selector {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font: 700 1.2rem "Urbanist";
-    cursor: pointer;
-}
-
-.language-dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    background: none;
-    border: none;
-    font: inherit;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    cursor: pointer;
-    color: inherit;
-}
-
-.dropdown-toggle i {
-    font-size: 2rem;
-}
-
-.dropdown-menu {
-    list-style: none;
-    position: absolute;
-    top: 120%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 0.4rem;
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
-    padding: 0.3rem 0;
-    display: none;
-    z-index: 100;
-    min-width: 4rem;
-}
-
-.dropdown-menu li {
-    padding: 0.4rem 1rem;
-    font: 500 0.95rem "Urbanist";
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.dropdown-menu li:hover {
-    background-color: #f3f4f6;
-}
-
-.language-selector:hover .dropdown-menu {
-    display: block;
-}
-
-
-
-/* Producto categoria */
-/* Section Producto */
 .productos {
     min-height: 100vh;
-    padding-top: 50px;
-}
-
-.productos__content {
-    display: flex;
-    gap: 3rem;
-}
-
-.content__producto {
-    flex: 0 0 300px;
-    position: sticky;
-    top: 100px;
-    align-self: flex-start;
-}
-
-
-/* Producto categoria */
-.producto__categoria {
-    margin: 0 0 0.9rem 3rem;
-}
-
-
-.producto__categoria .categoria__list {
-    list-style: none;
-    border: 1px solid #e5e7eb;
-    min-width: 350px;
-    border-radius: 15px;
-    padding: 1rem 0 1rem 1rem;
-}
-
-.categoria__list .list__title {
-    font: 600 1.3rem "Geist";
-    margin: 0 0 0.7rem 0.7rem;
-}
-
-.item__despliegue {
+    padding-top: 250px;
     position: relative;
-    cursor: pointer;
 }
 
-.item__despliegue .despliegue__categoria {
-    font: 600 1.2rem "Urbanist";
-    color: #6B7280;
-    margin-left: 0.5rem;
-}
-
-
-.item__despliegue .despliegue__icon i {
+.container__enlaces {
     position: absolute;
-    top: 40%;
-    left: 85%;
-    color: #636465;
-    font: 700 1.1rem "Urbanist";
-    transition: transform 0.4s ease-in-out;
+    top: 15%;
+    left: 6.5%;
 }
 
-.item__despliegue img {
-    height: 70px;
-    max-width: 100%;
+.container__enlaces a {
+    font: 500 1.1rem var(--typografiaUrbanist);
+    text-decoration: none;
+    color: #000000;
+
 }
 
-.list__item .item__despliegue {
+.container__enlaces a:hover {
+    text-decoration: underline;
+}
+
+.container__enlaces .enlaces__titulos {
+    font: 700 3rem var(--typografiaGeist);
+    margin: 0 0 0 0;
+}
+
+.produtos__filter{
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.list__item .item__opciones {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 0;
-    transition:
-        max-height 0.8s cubic-bezier(0.65, 0, 0.35, 1),
-        padding 0.6s ease-in-out;
-    will-change: max-height, padding;
-}
-
-.list__item.active .item__opciones {
-    max-height: 1000px;
-    padding: 0.6rem 0;
-}
-
-.item__opciones hr {
-    height: 1px;
-    border: 0;
+    padding-left: 6.2rem;
+    gap: 2.5rem;
+    align-items: flex-end;
     position: relative;
-    right: 10px;
-    background-color: #e5e7eb;
-    max-width: 100%;
-    margin: 0.5rem 1rem;
+    top: -1rem;
+
 }
 
-.item__opciones .opciones__item {
-    list-style: none;
-    margin: 0.8rem 0 0.5rem 0.5rem;
-    font: 500 1.1rem "Urbanist";
-    color: #636465;
-    cursor: pointer;
-    transition: color .5s ease;
+.custom-select {
+    position: relative;
+    width: 300px;
 }
 
-.item__opciones .opciones__item:hover {
-    color: #000000;
-}
-
-/* Producto vendidos */
-.producto__vendidos {
-    margin: 2rem 0 0 2rem;
-}
-
-.vendidos__contenedor {
-    max-width: 20rem;
-    padding: 1rem;
-}
-
-.vendidos__titulo {
-    color: #000000;
-    margin: 0 0 0.5rem 1rem;
-    font: 600 1.3rem "Geist";
-    letter-spacing: 0.05em;
-}
-
-.vendidos__lista {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.vendidos__item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.vendidos__imagen {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 0.2rem;
-    background-color: #f5f6f8;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.vendidos__info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.vendidos__nombre {
-    color: #4a4a4a;
-    font: 500 1.2rem "Urbanist";
-    margin: 0 0 0.25rem 0;
-}
-
-.vendidos__estrellas {
-    color: #f59e0b;
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
-}
-
-.vendidos__precios {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.vendidos__precio--anterior {
-    color: #a3a3a3;
-    text-decoration: line-through;
-    margin: 0;
-    flex-shrink: 0;
-    font: 600 1rem "Urbanist";
-}
-
-.vendidos__precio--actual {
-    color: #3a3a3a;
-    font: 700 1.2rem "Urbanist";
-    margin: 0;
-    flex-shrink: 0;
-}
-
-/* Producto testimonio */
-.producto__testimonio {
-    margin: 0 0 0 3rem;
-}
-
-.producto__testimonio .testimonio__title {
-    border-bottom: 1px solid #e5e7eb;
-    font: 600 1.3rem "Geist";
-    margin: 0 0 2rem 0;
-    padding-bottom: 1rem;
-}
-
-.testimonio__card {
-    max-width: 30rem;
-    width: 100%;
-    background-color: white;
+.select-selected {
+    background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
-    padding: 2rem;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.avatar {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 9999px;
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
-}
-
-.name {
-    margin-top: 1.5rem;
-    color: #4b5563;
-    font: 800 1.125rem "Geist";
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.title {
-    margin-top: 0.25rem;
-    font: 400 1.2rem "Urbanist";
-    color: #4b5563;
-}
-
-.quote-icon {
-    margin-top: 1rem;
-    color: #f87171;
-    font-size: 5rem;
-    font-weight: 800;
-    line-height: 1;
+    border-radius: 5px;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    height: 55px;
+    font: 700 1.5rem var(--typografiaUrbanist);
+    padding-left: 1.5rem;
+    cursor: pointer;
     user-select: none;
 }
 
-.quote-text {
-    color: #4b5563;
-    margin-top: -1rem;
-    font: 400 1.1rem "Urbanist";
-    line-height: 1.5;
+.select-selected i{
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-.container {
-    max-width: 100%;
-    overflow-x: auto;
+.select-selected i.up {
+    transform: rotate(180deg);
 }
 
-.lists {
-    width: 1020px;
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
+.selected--marca i{
+    left: 10rem;
 }
 
-.list {
-    flex: 1;
-}
-
-.list__texto {
-    font: 600 1.125rem "Geist";
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 0.5rem;
-}
-
-.items__scroll {
-    width: 320px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 7px;
-    box-sizing: content-box;
-    scroll-behavior: smooth;
-}
-
-/* Ocultamos la barra por defecto */
-.items__scroll::-webkit-scrollbar {
-    height: 8px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-/* Cuando no está en hover, el thumb (barra) es invisible */
-.items__scroll::-webkit-scrollbar-thumb {
-    background-color: transparent;
-}
-
-/* Al hacer hover, mostramos el thumb (barra) */
-.items__scroll:hover::-webkit-scrollbar-thumb {
-    background-color: #cbd5e1;
-    /* puedes cambiar este color */
-    border-radius: 4px;
-}
-
-/* El track (fondo de la barra) siempre transparente */
-.items__scroll::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-.items {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    width: max-content;
-}
-
-.items__column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 250px;
+.selected--categoria i{
+    left: 8rem;
 
 }
 
+.selected--pais i{
+    left: 12rem;
 
-.item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    height: 100px;
+}
+
+.selected--ordenar i{
+    left: 6.2rem;
+
+}
+
+.select-items {
+    position: absolute;
+    background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    min-width: 320px;
-}
-
-.item img {
-    width: 3rem;
-    height: 3rem;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.item-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.item-title {
-    font: 600 1.2rem "Urbanist";
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-}
-
-.item-category {
-    font: 500 0.95rem "Urbanist";
-    color: #4b5563;
-    margin: 0.4rem 0 0.4rem;
-}
-
-.price-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.25rem;
-}
-
-.price-current {
-    color: #fca5a5;
-    font: 700 1.2rem "Urbanist";
-}
-
-.price-old {
-    color: #9ca3af;
-    font: 400 1rem "Urbanist";
-    text-decoration: line-through;
-}
-
-
-.deal {
-    max-width: 95%;
-    margin-top: 2rem;
-}
-
-.deal__heading {
-    margin: 1.5rem 0 1.75rem 0;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 0.8rem;
-    font: 600 1.5rem "Geist";
-}
-
-.deal__flex {
-    display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 7px;
-    box-sizing: content-box;
-    scroll-behavior: smooth;
-}
-
-.deal__flex::-webkit-scrollbar {
-    height: 11px;
-}
-
-
-.deal__flex::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-}
-
-
-.deal__flex:hover::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
-}
-
-
-.deal__flex::-webkit-scrollbar-thumb:hover {
-    background-color: #9ca3af;
-}
-
-
-.deal__flex::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.deal__card {
+    border-radius: 5px;
+    margin-top: 5px;
     width: 100%;
-    flex: 0 0 100%;
-    scroll-snap-align: start;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 99;
+}
+
+.select-items input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    outline: none;
     border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
+    margin: 1rem 0.9rem;
+    font: 600 1rem var(--typografiaUrbanist);
+}
+
+.option {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    align-items: center;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font: 600 1rem var(--typografiaUrbanist);
 }
 
-@media (min-width: 768px) {
-    .deal__card {
-        flex-direction: row;
-        gap: 2.5rem;
-    }
+
+
+.option input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #48f;
+    /* color del check */
 }
 
-.deal__card .deal__image-wrapper {
-    flex: 1;
+.select-hide {
+    display: none;
+}
+
+.flex {
     display: flex;
     justify-content: center;
-}
-
-@media (min-width: 768px) {
-    .deal__image-wrapper {
-        justify-content: flex-start;
-    }
-}
-
-.deal__image-wrapper .deal__image {
-    object-fit: contain;
-    max-width: 100%;
-    width: 600px;
-    height: 400px;
-}
-
-.deal__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.deal__stars {
-    display: flex;
     align-items: center;
-    gap: 0.25rem;
-    color: #f59e0b;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
 }
 
-.deal__title {
-    margin-bottom: 0.5rem;
-    color: #111827;
-    font: 700 1.2rem/1.25rem "Geist";
-}
-
-@media (min-width: 768px) {
-    .deal__title {
-        font-size: 1.125rem;
-        line-height: 1.5rem;
-    }
-}
-
-.deal__content .deal__description {
-    color: #6b7280;
-    margin-bottom: 1rem;
-    font: 400 1.2em/1.25 "Urbanist";
-}
-
-@media (min-width: 768px) {
-    .deal__description {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-}
-
-.deal__price-box {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-
-.deal__price-box .deal__price-current {
-    color: #fca5a5;
-    font: 800 1.7rem "Urbanist";
-}
-
-@media (min-width: 768px) {
-    .deal__price-current {
-        font-size: 1.25rem;
-    }
-}
-
-.deal__price-box .deal__price-old {
-    color: #6b7280;
-    font: 300 1.7rem "Urbanist";
-    text-decoration: line-through;
-}
-
-@media (min-width: 768px) {
-    .deal__price-old {
-        font-size: 1.125rem;
-    }
-}
-
-.deal__content .deal__btn-add {
-    background-color: #fca5a5;
-    color: white;
-    font: 900 1.4rem "Urbanist";
-    border-radius: 0.375rem;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 1.5rem;
-    transition: background-color 0.3s ease;
-    width: fit-content;
-}
-
-@media (min-width: 768px) {
-    .deal__btn-add {
-        font-size: 1rem;
-    }
-}
-
-.deal__btn-add:hover {
-    background-color: #f87171;
-}
-
-.deal__status {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.75rem;
-    margin-bottom: 0.25rem;
-    color: #111827;
-}
-
-.deal__status span {
-    font: 500 1rem "Urbanist";
-}
-
-.deal__status strong {
-    font: 900 1rem "Urbanist";
-}
-
-.deal__progress-bg {
-    width: 100%;
-    height: 0.5rem;
-    background-color: #e5e7eb;
-    border-radius: 9999px;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-}
-
-.deal__progress-fill {
-    height: 100%;
-    background-color: #fca5a5;
-    width: 33.33%;
-    border-radius: 9999px;
-}
-
-.deal__content .deal__offer-label {
-    margin-bottom: 0.5rem;
-    color: #111827;
-    font: 700 0.95rem "Urbanist";
-}
-
-.deal__timer {
-    display: flex;
-    gap: 1rem;
-}
-
-.deal__timer-box {
-    background-color: #e5e7eb;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    text-align: center;
-    min-width: 56px;
-}
-
-.deal__timer-box p:first-child {
-    color: #111827;
-    margin-bottom: 0.4rem;
-    font: 700 1.3rem/1.25rem "Urbanist";
-}
-
-.deal__timer-box p:last-child {
-    color: #6b7280;
-    margin: 0;
-    font: 500 0.75rem "Urbanist";
-}
-
-.newproduct {
-    max-width: 1020px;
-    margin: 2rem 0 0 0;
-}
-
-.newproduct .newproduct__title {
-    position: relative;
-    font: 700 1.42rem "Geist";
-    color: #111827;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 8px;
-}
-
-.newproduct .newproduct__title .newproduct__filter {
-    position: absolute;
-    left: 69%;
-}
-
-.newproduct__filter select {
-    position: absolute;
-    padding: 4px 8px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    font: 600 0.9rem "Urbanist";
-    background-color: white;
-    cursor: pointer;
-    margin-left: 0.5rem;
-}
-
-.grid {
+.flex__productos {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-items: center;
+
 }
 
-@media (min-width: 640px) {
-    .grid {
+.flex__productos-track {
+    display: contents;
+}
+
+@media (max-width: 1024px) {
+    .flex__productos {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(4, 1fr);
+@media (max-width: 600px) {
+    .flex__productos {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -824,7 +174,7 @@ body {
     border: 1px solid #e5e7eb;
     border-radius: 0.5rem;
     padding: 16px;
-    min-width: 235px;
+    width: 300px;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -834,131 +184,11 @@ body {
     text-align: left;
 }
 
-.card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.card-icons {
-    position: absolute;
-    top: 50%;
-    right: -60px;
-    transform: translateY(-140%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: right 0.4s ease;
-}
-
-.card-icons i {
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 8px;
-    font-size: 18px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-.card-icons i:hover {
-    transform: scale(1.1);
-    background-color: #000000;
-    color: #ffff;
-}
-
-.card:hover .card-icons {
-    right: 10px;
-}
-
-.card img {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 16px;
-}
-
-/* Badge */
-.badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    font: 600 1.1rem "Urbanist";
-    border-radius: 0.375rem;
-    padding: 2px 10px;
-    user-select: none;
-    color: white;
-}
-
-.badge-green {
-    background-color: #34d399;
-
-}
-
-.badge-pink {
-    background-color: #f472b6;
-    width: 72px;
-    height: 24px;
-    top: 0;
-    left: 0;
-    padding: 0;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 24px;
-    text-align: center;
-    transform-origin: top left;
-    transform: rotate(-45deg);
-}
-
-
-
-.card .category {
-    font: 500 1rem "Geist";
-    color: #f472b6;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-    margin: 0 0 0.5rem 0;
-}
-
-.description {
-    font: 400 1.1rem/1.4 "Urbanist";
-    margin-bottom: 8px;
-    text-align: left;
-    color: #636465;
-    width: 100%;
-}
-
-.stars {
-    color: #f59e0b;
-    margin-bottom: 8px;
-    font-size: 1.2rem;
-    width: 100%;
-    text-align: left;
-}
-
-.price-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    text-align: left;
-}
-
-.price {
-    font: 900 1rem "Urbanist";
-    color: #111827;
-}
-
-.price-old {
-    font: 600 0.975rem "Urbanist";
-    color: #9ca3af;
-    text-decoration: line-through;
-}
-
-
 /* Pagination */
 .pagination {
     position: relative;
-    left: 100%;
+    top: -20px;
+    left: -5%;
     width: 200%;
     overflow-x: hidden;
     display: flex;
@@ -970,44 +200,49 @@ body {
 
 .pagination__Numbers {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
-.pagination__Numbers #pageNumbers {
+.pagination__Numbers .button__pagination {
     font: 600 1.2rem "Urbanist";
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--colorDark);
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
+    border-radius: 3px;
     transition: background-color .4s ease, color .4s ease-in;
 
 }
 
-.pagination__Numbers #pageNumbers:hover {
-    background-color: #000000;
+.pagination__Numbers .button__pagination.active {
+    background-color: var(--colorDark);
+    color: var(--colorWhite);
+}
+
+.pagination__Numbers .button__pagination:hover {
+    background-color: var(--colorDark);
     color: #ffffff;
 }
 
+.pagination #prevBtn {
+    display: none;
+}
+
 .pagination button {
+    border: 1px solid var(--colorDark);
     padding: 8px 12px;
-    border: none;
     background-color: transparent;
     font: 700 1.4rem "Urbanist";
     color: #000000;
-    border-radius: 5px;
     cursor: pointer;
-    transition: color .5s ease;
+    border-radius: 3px;
+    transition: background-color .4s ease, color .4s ease-in;
 }
 
 .pagination button:hover {
-    color: #ccc;
-}
-
-
-/* Footer */
-.footer__enlaces {
-    display: flex;
+    background-color: var(--colorDark);
+    color: #ffffff;
 }

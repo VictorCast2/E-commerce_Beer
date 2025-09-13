@@ -151,8 +151,6 @@
                     </div>
                 </div>
 
-                <span class="formulario__complete" id="formulario__complete">Registrar Empresas</span>
-
 
                 <div class="formulario__input formulario__btn-container">
                     <button class="formulario__btn" type="submit">Registrar</button>
@@ -167,92 +165,6 @@
         <img class="container__login" src="../static/Assets/Img/comprarNosotros/Elegirnos.png" alt="">
     </div>
 
-
-    <!-- Ventana modal registrar empresas -->
-    <div class="modal__newadd newadd--hidden" id="modalnewadd">
-        <div class="modal__content">
-            <span class="modal__close">&times;</span>
-            <h2 class="content__titulo">Añadir Empresa</h2>
-            <form class="add__formulario" action="">
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Nit" id="nit">
-                        <label class="label--form2" for="nit">Nit</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--nit">
-                        El NIT debe tener entre 9 y 10 dígitos y solo contener números.
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="RazonSocial" id="razonsocial">
-                        <label class="label--form2" for="razonsocial">Razon Social</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--social">
-                        La Razón Social debe tener entre 3 y 100 caracteres
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Direccion" id="direccion">
-                        <label class="label--form2" for="direccion">Direccion</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--form2">
-                        Ingresa una dirección válida (ej. Calle 45 #10-23, 130002 o San Fernando, Calle 45 #10-23,
-                        130002).
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Sector" id="sector">
-                        <label class="label--form2" for="sector">Sector</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--form2">
-                        El sector debe tener entre 3 y 50 caracteres y solo contener letras y espacios
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="Telefono" id="phone">
-                        <label class="label--form2" for="phone">Telefono</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--tel">
-                        El teléfono solo puede contener numeros y el maximo son 10 digitos.
-                    </p>
-                </div>
-
-                <div class="formulario__input">
-                    <div class="input-box">
-                        <input type="email" autocomplete="off" placeholder="" name="Email" id="correo">
-                        <label class="label--form2" for="correo">Email</label>
-                        <span class="box__icon icon--form2"><i class="ri-check-line"></i></span>
-                        <span class="box__icon icon--form2"><i class="ri-close-line"></i></span>
-                    </div>
-                    <p class="input__error error--email">
-                        El correo solo puede contener letras,numeros,puntos,
-                        guiones y guion bajo.
-                    </p>
-                </div>
-
-                <button class="formulario__button" type="submit">Guardar Empresa</button>
-            </form>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../static/Js/registro.js"></script>

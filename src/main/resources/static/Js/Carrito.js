@@ -2,7 +2,7 @@ import { activarGlassmorphism, inicialHeart, initCart, rederigirFav } from "./ma
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* console.log("✅ JS cargado correctamente");
+    /* console.log("JS cargado correctamente");
     console.log("favTableBody:", favTableBody);
     console.log("prevPageBtn:", prevPageBtn);
     console.log("nextPageBtn:", nextPageBtn); */
@@ -29,8 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Calcular total del carrito ---
     function updateCartTotal() {
-        const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-        totalEl.textContent = `$${total.toFixed(2)}`;
+        const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+        totalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+        // Obtener cupón (siempre será número aunque empiece en $0.00)
+        const cuponEl = document.getElementById("cupon__envio");
+        const cuponValue = parseFloat(cuponEl.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+
+        // Envío (siempre gratis en tu HTML actual → 0)
+        const envio = 0;
+
+        // Calcular total final
+        const totalFinal = subtotal - cuponValue + envio;
+
+        // Actualizar el total en pantalla
+        const totalAllEl = document.getElementById("total__all");
+        totalAllEl.textContent = `$${totalFinal.toFixed(2)}`;
     }
 
     // --- Render tabla ---
@@ -92,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderPaginationButtons();
 
-        // 🔥 Actualizar el total del carrito
+        // Actualizar el total del carrito
         updateCartTotal();
     }
 
@@ -201,26 +215,61 @@ document.addEventListener('DOMContentLoaded', () => {
     //rederigir a Favorito
     rederigirFav();
 
-    //abrir el formulario de envio y pago
+    // --- MODAL ENVÍO Y PAGO ---
     const abirmodal = document.getElementById("btn__pagaryenviar");
-    const modal = document.getElementById("modalnewadd");
-    const closeModalBtn = document.querySelector(".modal__close");
+    const modalEnvioPago = document.getElementById("modalnewadd");
+    const closeModalBtn = modalEnvioPago.querySelector(".modal__close");
 
+    // --- MODAL RECOGE EN TIENDA ---
+    const modalRecoge = document.getElementById("modalEnvio");
+    const closeRecogeBtn = modalRecoge.querySelector(".envio__close");
+
+    // --- OPCIONES ---
+    const entregaAgendada = document.querySelector('input[value="programada"]').closest('.container__item');
+    const recogeTienda = document.querySelector('input[value="tienda"]').closest('.container__item');
+
+    // --- Abrir Envío y Pago ---
     abirmodal.addEventListener("click", () => {
-        modal.classList.remove("newadd--hidden");
-    })
-
-    closeModalBtn.addEventListener("click", () => {
-        modal.classList.add("newadd--hidden");
+        modalEnvioPago.classList.remove("newadd--hidden");
     });
 
+    // --- Cerrar Envío y Pago ---
+    closeModalBtn.addEventListener("click", () => {
+        modalEnvioPago.classList.add("newadd--hidden");
+    });
 
+    // Cerrar Envío y Pago haciendo clic fuera
     window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.add("newadd--hidden");
+        if (e.target === modalEnvioPago) {
+            modalEnvioPago.classList.add("newadd--hidden");
         }
     });
 
+    // --- Abrir Recoge en Tienda ---
+    function abrirRecoge() {
+        modalEnvioPago.classList.add("newadd--hidden"); // ocultar envío y pago
+        modalRecoge.classList.remove("newadd--mostrar"); // mostrar recoge en tienda
+    }
+
+    entregaAgendada.addEventListener("click", abrirRecoge);
+    recogeTienda.addEventListener("click", abrirRecoge);
+
+    // --- Cerrar Recoge en Tienda y volver a Envío y Pago ---
+    closeRecogeBtn.addEventListener("click", () => {
+        modalRecoge.classList.add("newadd--mostrar"); // ocultar recoge en tienda
+        modalEnvioPago.classList.remove("newadd--hidden"); // volver envío y pago
+    });
+
+    // Cerrar Recoge en Tienda haciendo clic fuera
+    window.addEventListener("click", (e) => {
+        if (e.target === modalRecoge) {
+            modalRecoge.classList.add("newadd--mostrar");
+            modalEnvioPago.classList.remove("newadd--hidden");
+        }
+    });
+
+
+    //select de departamentos
     const departamentos = {
         "Amazonas": ["Leticia", "Puerto Nariño"],
         "Antioquia": ["Medellín", "Bello", "Itagüí", "Envigado", "Rionegro", "Turbo"],
@@ -295,39 +344,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const form = document.querySelector(".formulario");
-
-    // Validar en tiempo real los inputs
-    Object.keys(fieldsEnvio).forEach(fieldId => {
+    // Función para validar un campo
+    function validateField(fieldId) {
         const input = document.getElementById(fieldId);
+        const value = input.value.trim();
         const inputBox = input.closest(".input-box");
         const checkIcon = inputBox.querySelector(".ri-check-line");
         const errorIcon = inputBox.querySelector(".ri-close-line");
         const errorMessage = inputBox.nextElementSibling;
 
-        input.addEventListener("input", () => {
-            const value = input.value.trim();
+        if (value === "" || !fieldsEnvio[fieldId].regex.test(value)) {
+            // Inválido
+            checkIcon.style.display = "none";
+            errorIcon.style.display = "inline-block";
+            errorMessage.style.display = "block";
+            input.style.border = "2px solid #fd1f1f";
+            inputBox.classList.add("input-error");
+            return false;
+        } else {
+            // Válido
+            checkIcon.style.display = "inline-block";
+            errorIcon.style.display = "none";
+            errorMessage.style.display = "none";
+            input.style.border = "2px solid #0034de";
+            inputBox.classList.remove("input-error");
+            return true;
+        }
+    }
 
-            if (value === "") {
-                inputBox.classList.remove("input-error");
-                checkIcon.style.display = "none";
-                errorIcon.style.display = "none";
-                errorMessage.style.display = "none";
-                input.style.border = "";
-            } else if (fieldsEnvio[fieldId].regex.test(value)) {
-                checkIcon.style.display = "inline-block";
-                errorIcon.style.display = "none";
-                errorMessage.style.display = "none";
-                input.style.border = "2px solid #0034de";
-                inputBox.classList.remove("input-error");
-            } else {
-                checkIcon.style.display = "none";
-                errorIcon.style.display = "inline-block";
-                errorMessage.style.display = "block";
-                input.style.border = "2px solid #fd1f1f";
-                inputBox.classList.add("input-error");
-            }
-        });
+    // Validar en tiempo real
+    Object.keys(fieldsEnvio).forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        input.addEventListener("input", () => validateField(fieldId));
     });
 
     // Selects
@@ -336,53 +384,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectCiudad = document.querySelector("#Ciudad");
     const errorCiudad = document.querySelector(".error--ciudad");
 
-
     // Ocultar advertencias y errores de select al interactuar
     [selectDepartamento, selectCiudad].forEach(select => {
         select.addEventListener("change", () => {
-
             if (select.selectedIndex > 0) {
                 select.style.border = "2px solid #0034de";
             } else {
                 select.style.border = "";
             }
-
             if (select === selectDepartamento && select.selectedIndex > 0) {
                 errorDepartamento.style.display = "none";
             }
             if (select === selectCiudad && select.selectedIndex > 0) {
                 errorCiudad.style.display = "none";
             }
-
         });
     });
 
+    // --- Radios (opciones de envío) ---
+    const opcionesEnvio = document.querySelectorAll("input[name='opcionEnvio']");
+    const contenedoresEnvio = document.querySelectorAll(".container__item");
+
+    // Botón
+    const btnIrPago = document.getElementById("btnIrPago");
+
     // Validación al enviar
-    form.addEventListener("submit", function (event) {
+    btnIrPago.addEventListener("click", function (event) {
         let valid = true;
 
-        // Validar inputs
+        // Validar inputs usando la misma función
         Object.keys(fieldsEnvio).forEach(fieldId => {
-            const input = document.getElementById(fieldId);
-            if (!fieldsEnvio[fieldId].regex.test(input.value.trim())) {
+            if (!validateField(fieldId)) {
                 valid = false;
             }
         });
 
+        //validar select
         const departamentoSeleccionada = selectDepartamento.selectedIndex > 0;
         const ciudadeleccionada = selectCiudad.selectedIndex > 0;
 
-        // Caso: Inputs válidos, pero selects incompletos
-        if (valid && (!departamentoSeleccionada || !ciudadeleccionada)) {
-            if (!departamentoSeleccionada) {
-                errorDepartamento.style.display = "block";
-                selectDepartamento.style.border = "2px solid #fd1f1f";
-            }
-            if (!ciudadeleccionada) {
-                errorCiudad.style.display = "block";
-                selectCiudad.style.border = "2px solid #fd1f1f";
-            }
+        if (!departamentoSeleccionada) {
+            errorDepartamento.style.display = "block";
+            selectDepartamento.style.border = "2px solid #fd1f1f";
+            valid = false;
+        }
+        if (!ciudadeleccionada) {
+            errorCiudad.style.display = "block";
+            selectCiudad.style.border = "2px solid #fd1f1f";
+            valid = false;
+        }
 
+        // Validar radios (opciones de envío)
+        const opcionSeleccionada = Array.from(opcionesEnvio).some(radio => radio.checked);
+
+        if (!opcionSeleccionada) {
+            contenedoresEnvio.forEach(c => {
+                c.style.border = "2px solid #fd1f1f";
+                c.style.borderRadius = "8px"; // opcional: redondear
+                c.style.padding = "8px"; // opcional: dar espacio
+            });
+            valid = false;
+        }
+
+
+        if (!valid) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -392,9 +457,110 @@ document.addEventListener('DOMContentLoaded', () => {
                     popup: 'swal-popup'
                 }
             });
-            event.preventDefault(); 
-            return;
+            event.preventDefault();
         }
+    });
+
+    // --- Quitar borde rojo cuando se seleccione una opción ---
+    opcionesEnvio.forEach(radio => {
+        radio.addEventListener("change", () => {
+            contenedoresEnvio.forEach(c => c.style.border = ""); // quitar todos los bordes
+            const seleccionado = radio.closest(".container__item");
+            if (seleccionado) {
+                seleccionado.style.border = "2px solid #0034de"; // marcar solo el elegido
+            }
+        });
+    });
+
+
+    // Selecciona todos los divs de opciones
+    document.querySelectorAll(".container__item").forEach(div => {
+        div.addEventListener("click", () => {
+            const radio = div.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                // Dispara el evento change (por si tienes lógica extra en radios)
+                radio.dispatchEvent(new Event("change"));
+            }
+        });
+    });
+
+    // Validaciones Recoge en tiendas 
+    const fieldRecoge = {
+        Fechaentrega: {
+            regex: /^(?!\s*$).+/,
+            errorMessage: "Por favor eliga una fecha de entrega."
+        },
+
+        Horaentrega: {
+            regex: /^(?!\s*$).+/,
+            errorMessage: "Por favor eliga una hora de entraga."
+        }
+    }
+
+    const formRecoge = document.querySelector(".formulario__recoge");
+
+    // Validar en tiempo real los inputs
+    Object.keys(fieldRecoge).forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        const inputBox = input.closest(".input-box");
+        const checkIcon = inputBox.querySelector(".ri-check-line");
+        const errorIcon = inputBox.querySelector(".ri-close-line");
+        const errorMessage = inputBox.nextElementSibling;
+
+        input.addEventListener("input", () => {
+            validarCampo(fieldId, input, inputBox, checkIcon, errorIcon, errorMessage);
+        });
+    });
+
+    // Función reutilizable para validar un campo
+    function validarCampo(fieldId, input, inputBox, checkIcon, errorIcon, errorMessage) {
+        const value = input.value.trim();
+
+        if (value === "") {
+            checkIcon.style.display = "none";
+            errorIcon.style.display = "inline-block";
+            errorMessage.textContent = fieldRecoge[fieldId].errorMessage;
+            errorMessage.style.display = "block";
+            input.style.border = "2px solid #fd1f1f";
+            inputBox.classList.add("input-error");
+            return false;
+        } else if (fieldRecoge[fieldId].regex.test(value)) {
+            checkIcon.style.display = "inline-block";
+            errorIcon.style.display = "none";
+            errorMessage.style.display = "none";
+            input.style.border = "2px solid #0034de";
+            inputBox.classList.remove("input-error");
+            return true;
+        } else {
+            checkIcon.style.display = "none";
+            errorIcon.style.display = "inline-block";
+            errorMessage.textContent = fieldRecoge[fieldId].errorMessage;
+            errorMessage.style.display = "block";
+            input.style.border = "2px solid #fd1f1f";
+            inputBox.classList.add("input-error");
+            return false;
+        }
+    }
+
+    // Validación al enviar
+    formRecoge.addEventListener("submit", function (event) {
+        let valid = true;
+
+        Object.keys(fieldRecoge).forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+            const inputBox = input.closest(".input-box");
+            const checkIcon = inputBox.querySelector(".ri-check-line");
+            const errorIcon = inputBox.querySelector(".ri-close-line");
+            const errorMessage = inputBox.nextElementSibling;
+
+            // Aquí aplicamos la validación también en el submit
+            const campoValido = validarCampo(fieldId, input, inputBox, checkIcon, errorIcon, errorMessage);
+
+            if (!campoValido) {
+                valid = false;
+            }
+        });
 
         if (!valid) {
             Swal.fire({
@@ -408,16 +574,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             event.preventDefault();
         } else {
-            // Guardamos bandera en sessionStorage
             sessionStorage.setItem("loginSuccess", "true");
         }
-    });
+    })
 
     // Mostrar mensaje al cargar si se registró correctamente
     window.addEventListener("DOMContentLoaded", () => {
         if (sessionStorage.getItem("loginSuccess") === "true") {
             Swal.fire({
-                title: "Envio rellenado exitosamente",
+                title: "Registro de fecha y hora exito",
                 icon: "success",
                 timer: 3000,
                 draggable: true,
@@ -431,7 +596,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    //inputs de fecha y hora con js son mas bonitos que los nativos
+    flatpickr("#Fechaentrega", {
+        dateFormat: "Y-m-d", // formato YYYY-MM-DD
+        minDate: "today",   // no dejar elegir fechas pasadas
 
+    });
+
+    flatpickr("#Horaentrega", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "h:i K",
+        minTime: "09:30",
+        maxTime: "20:30",
+        time_24hr: false,
+        minuteIncrement: 5
+
+    });
 
 
 });

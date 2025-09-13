@@ -35,9 +35,8 @@
                 <ul class="navbar__list">
                     <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
                     <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
-                    <li class="list__item"><a href="" class="item__link">Categorias</a></li>
-                    <li class="list__item"><a href="" class="item__link">Productos</a></li>
-                    <li class="list__item"><a href="" class="item__link">Blog</a></li>
+                    <li class="list__item"><a href="productos.html" class="item__link">Productos</a></li>
+                    <li class="list__item"><a href="Blog.html" class="item__link">Blog</a></li>
                     <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
@@ -195,7 +194,7 @@
                                 </p>
                             </div>
 
-                            <button class="formulario__btn" type="submit">Iniciar Sesion</button>
+                            <button class="formulario__btn" type="submit">Enviar</button>
 
                         </div>
 
@@ -247,6 +246,29 @@
             </div>
         </div>
     </section>
+
+    <!-- ============= DRAWER DEL CARRITO ============= -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <header class="cart-header">
+            <h3 class="header__carrito">Carrito De Compras</h3>
+            <button id="cart-close"><i class="ri-close-line"></i></button>
+        </header>
+
+        <div class="cart-body">
+            <ul class="cart-list" id="cart-list"></ul>
+        </div>
+
+        <footer class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <button id="seguir-comprando" class="btn-primary">Seguir Comprando</button>
+            <button id="finalizar-compra" class="btn-primary">Finalizar compra</button>
+        </footer>
+    </aside>
+
 
 
     <footer class="footer">

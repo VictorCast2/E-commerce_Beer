@@ -104,6 +104,40 @@
 .quantity-control {
     display: flex;
     gap: 0.3rem;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+    width: 120px;
+    height: 36px;
+    margin: 10px 0;
+}
+
+.quantity-control button {
+    width: 36px;
+    height: 100%;
+    border: none;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.quantity-control span {
+    flex: 1;
+    font: 700 1.2rem var(--typografiaUrbanist);
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+}
+
+/* Controles de cantidad */
+.plus__control {
+    display: flex;
+    gap: 0.3rem;
     justify-content: center;
     align-items: center;
     background: transparent;
@@ -113,7 +147,7 @@
     margin: 5px 0 0 0;
 }
 
-.quantity-control button {
+.plus__control button {
     width: 170px;
     height: 50px;
     border: none;
@@ -127,7 +161,7 @@
 }
 
 
-.quantity-control .qty {
+.plus__control .control__qty {
     flex: 1;
     font: 700 1.2rem var(--typografiaUrbanist);
     text-align: center;
@@ -201,332 +235,4 @@
     display: block;
 }
 
-.details__calificar {
-    cursor: pointer;
-    font: 700 1.3rem var(--typografiaUrbanist);
-    color: var(--colorDark);
-}
 
-/* Ventana modal */
-.modal__newadd {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(17, 17, 17, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    backdrop-filter: blur(4px);
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-}
-
-.newadd--hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-} 
-
-/* --- CONTENIDO DEL MODAL --- */
-.modal__content {
-    background: #fff;
-    padding: 2rem 1.5rem 2rem 0;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 700px;
-    position: relative;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    font-family: 'Urbanist', sans-serif;
-    text-align: center;
-    animation: swalIn 0.35s ease forwards;
-}
-
-.modal__content .content__titulo {
-    font: 600 1.9rem var(--typografiaGeist);
-    margin-bottom: 1rem;
-
-}
-
-.modal__newadd.newadd--hidden .modal__content {
-    animation: swalOut 0.3s ease forwards;
-}
-
-.swal2-container {
-    z-index: 99999 !important;
-}
-
-@keyframes swalIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-
-    45% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    80% {
-        transform: scale(0.95);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes swalOut {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-}
-
-.modal__close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.6rem;
-    color: #aaa;
-    cursor: pointer;
-    transition: 0.25s ease;
-}
-
-.modal__close:hover {
-    color: #000;
-    transform: scale(1.2);
-}
-
-.formulario__button {
-    font: 700 1rem var(--typografiaUrbanist);
-    background-color: #48f;
-    color: #fff;
-    width: 100%;
-    width: 400px;
-    margin: 0 0 0 1rem;
-    height: 55px;
-    border-radius: 5px;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
-    transition: background-color .7s ease;
-}
-
-.formulario__button:hover {
-    background-color: #0034de;
-}
-
-.formulario__puntacion {
-    display: flex;
-    flex-direction: column;
-    /* align-items: flex-start; */
-}
-
-.formulario__puntacion .puntacion__experencia {
-    font: 600 1.5rem var(--typografiaGeist);
-    margin: 0 0 0.5rem 0;
-}
-
-.stars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.3rem;
-}
-
-.stars i {
-    font-size: 1.4rem;
-}
-
-.formulario__puntacion .puntacion__tittle {
-    font: 600 1.3rem var(--typografiaUrbanist);
-    margin: 0 0 0.7rem 0;
-}
-
-
-.add__formulario {
-    margin-top: 1rem;
-
-}
-
-
-.input-box {
-    position: relative;
-}
-
-.input-box label {
-    font: 600 1rem var(--typografiaUrbanist);
-    position: absolute;
-    color: #8d8d8d;
-    pointer-events: none;
-    background-color: transparent;
-    left: 35px;
-    top: 18px;
-    transform: translateY(0.6rem);
-    transition: all 0.3s ease;
-}
-
-.input-box .label--area {
-    left: 55px;
-}
-
-.formulario__flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 8px;
-}
-
-.input-box input {
-    margin: 10px 0 10px 20px;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    font: 600 1rem var(--typografiaUrbanist);
-    padding: 10px 15px;
-    border-radius: 5px;
-    width: 300px;
-    height: 55px;
-    letter-spacing: 1px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-
-.input-box input:focus {
-    outline: none;
-    border: 2px solid #0034de;
-}
-
-.input-box input:focus~label,
-.input-box input:not(:placeholder-shown)~label {
-    background-color: #fff;
-    transform: translateY(-80%) translateX(-10px) scale(0.9);
-    padding: 0 5px;
-    color: #0034de;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 100px;
-}
-
-.input-box textarea {
-    margin: 10px 0 10px 25px;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    font: 600 1rem var(--typografiaUrbanist);
-    padding: 10px 15px;
-    border-radius: 5px;
-    width: 620px;
-    min-height: 150px;
-    letter-spacing: 1px;
-    outline: none;
-    field-sizing: content;
-    box-sizing: border-box;
-}
-
-
-.input-box textarea:focus {
-    outline: none;
-    border: 2px solid #0034de;
-}
-
-.input-box textarea:focus~label,
-.input-box textarea:not(:placeholder-shown)~label {
-    background-color: #fff;
-    transform: translateY(-80%) translateX(-10px) scale(0.9);
-    padding: 0 5px;
-    color: #0034de;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 100px;
-}
-
-
-.box__icon i {
-    position: absolute;
-    top: 25px;
-    left: 89%;
-    font: 900 1.2rem var(--typografiaUrbanist);
-
-}
-
-.icon--area i{
-    left: 92%;
-}
-
-
-.box__icon .ri-check-line {
-    background-color: #34A853;
-    border-radius: 50%;
-    padding: 1px 1px;
-    color: #fff;
-    display: none;
-}
-
-.box__icon .ri-close-line {
-    background-color: #fd1f1f;
-    border-radius: 50%;
-    padding: 1px 1px;
-    color: #fff;
-    display: none;
-}
-
-.input__error {
-    font: 600 1rem var(--typografiaUrbanist);
-    width: 100%;
-    margin: 0 0 10px 20px;
-    display: none;
-}
-
-
-
-.swal-title {
-    font-family: 'Urbanist', sans-serif !important;
-    font-weight: 600;
-}
-
-.swal-popup {
-    font-family: 'Urbanist', sans-serif !important;
-}
-
-
-
-.formulario__input:nth-last-child(4) .input__error,
-.formulario__input:nth-last-child(2) .input__error {
-    margin-bottom: 15px;
-}
-
-.remember-forgot {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: -5px 0 10px 0;
-    padding-left: 15px;
-}
-
-.remember-forgot .forgot__label {
-    accent-color: #0034de;
-    font: 700 1rem var(--typografiaUrbanist);
-    cursor: pointer;
-}
-
-.remember-forgot input {
-    width: 15px;
-    height: 15px;
-}
-
-.remember-forgot input[type="checkbox"] {
-  transform: translateY(7px); /* ajusta según se necesite */
-}
