@@ -35,7 +35,7 @@ public class UsuarioServiceImpl implements UsuarioInterface, UserDetailsService 
     @Lazy
     private PasswordEncoder encoder;
 
-    public Usuario getUsuarioByCorreo(String correo) {
+    public Usuario encontrarCorreo(String correo) {
         return usuarioRepository.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("Error: el correo " + correo + " no existe."));
     }

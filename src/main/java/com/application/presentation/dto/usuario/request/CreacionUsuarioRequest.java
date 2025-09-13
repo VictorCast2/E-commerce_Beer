@@ -1,6 +1,5 @@
 package com.application.presentation.dto.usuario.request;
 
-import com.application.persistence.entity.empresa.Empresa;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
