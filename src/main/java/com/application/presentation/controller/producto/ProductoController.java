@@ -1,15 +1,27 @@
 package com.application.presentation.controller.producto;
 
+import com.application.persistence.entity.usuario.Usuario;
+import com.application.presentation.dto.producto.response.ProductoResponse;
+import com.application.service.implementation.producto.ProductoServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
+import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/producto")
 public class ProductoController {
-
-    private final ProductoServiceImpl productoService;
-    private final UsuarioServiceImpl usuarioService;
+    @Autowired
+    private ProductoServiceImpl productoService;
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Producto(

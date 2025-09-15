@@ -1,8 +1,10 @@
 package com.application.presentation.controller;
 
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
+import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +15,8 @@ import javax.validation.Valid;
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class AuthController {
-
-    private final UsuarioServiceImpl usuarioServiceImpl;
+    @Autowired
+    private UsuarioServiceImpl usuarioServiceImpl;
 
     @GetMapping()
     public String index(Model model) {
