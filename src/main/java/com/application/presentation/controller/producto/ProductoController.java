@@ -21,11 +21,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/producto")
-@RequiredArgsConstructor
 public class ProductoController {
 
-    private final ProductoServiceImpl productoService;
-    private final UsuarioServiceImpl usuarioService;
+    @Autowired
+    private ProductoServiceImpl productoService;
+
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Producto(
