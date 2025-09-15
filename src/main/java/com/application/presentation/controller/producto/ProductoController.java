@@ -1,22 +1,18 @@
 package com.application.presentation.controller.producto;
 
 import com.application.persistence.entity.usuario.Usuario;
-import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.producto.request.ProductoCreateRequest;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriUtils;
-import javax.validation.Valid;
-import java.nio.charset.StandardCharsets;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @Controller
@@ -36,7 +32,7 @@ public class ProductoController {
             Model model
             ) {
 
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
         List<ProductoResponse> productoList = productoService.getProductos();
 
         model.addAttribute("usuario", usuario);
@@ -45,37 +41,36 @@ public class ProductoController {
 
         return "Producto";
     }
-
-    @PostMapping("/add-producto")
-    public String addProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest) {
-        GeneralResponse response = productoService.addProducto(productoRequest);
-        String mensaje = response.mensaje();
-
-        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+  
+    @GetMapping("/destacados")
+    public String productoDestacados() {
+        return "ProductosDestacados";
     }
 
-    @PostMapping("/update-producto/{id}")
-    public String updateProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest, @PathVariable Long id) {
-        GeneralResponse response = productoService.updateProducto(productoRequest, id);
-        String mensaje = response.mensaje();
-
-        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    @GetMapping("/favoritos")
+    public String productoFavoritos() {
+        return "Favorito";
     }
 
-    @PostMapping("disable-producto/{id}")
-    public String disableProducto(@PathVariable Long id) {
-        GeneralResponse response = productoService.disableProducto(id);
-        String mensaje = response.mensaje();
-
-        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    @GetMapping("/whiskys")
+    public String productoWhiskys() {
+        return "Whisky";
     }
 
-    @PostMapping("delete-producto/{id}")
-    public String deleteProducto(@PathVariable Long id) {
-        GeneralResponse response = productoService.deleteProducto(id);
-        String mensaje = response.mensaje();
-
-        return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    @GetMapping("/tequila_mezcal")
+    public String productoTequilaAndMezcal() {
+        return "Tequila&Mezcal";
     }
+
+    @GetMapping("/vinos")
+    public String productoVinos() {
+        return "Vinos";
+    }
+
+    @GetMapping("/cervezas")
+    public String productoCervezas() {
+        return "Cervezas";
+    }
+
 
 }

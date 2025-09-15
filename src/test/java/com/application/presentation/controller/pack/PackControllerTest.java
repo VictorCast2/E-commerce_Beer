@@ -52,7 +52,7 @@ class PackControllerTest {
 
         String mensaje = "Mensaje de Prueba";
 
-        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(packService.getPacks()).thenReturn(packList);
 
         // When - Then

@@ -1,8 +1,3 @@
-// === 🚨 Variables dinámicas de Thymeleaf ===
-const body = document.body;
-const mensajeError   = body.dataset.mensajeError || null;
-const mensajeExitoso = body.dataset.mensajeExitoso || null;
-const loginSuccess   = body.dataset.loginSuccess === "true";
 
 const fields = {
     email: {
@@ -15,7 +10,6 @@ const fields = {
     }
 };
 
-// Validación dinámica de inputs
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     const inputBox = input.closest(".input-box");
@@ -27,21 +21,21 @@ Object.keys(fields).forEach(fieldId => {
         const value = input.value.trim();
 
         if (value === "") {
-            // Resetear estilos si está vacío
+            // Si el input está vacío, restablecer estilos
             inputBox.classList.remove("input-error");
             checkIcon.style.display = "none";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "";
         } else if (fields[fieldId].regex.test(value)) {
-            // Válido
+            // Si es válido
             checkIcon.style.display = "inline-block";
             errorIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "2px solid #0034de";
             inputBox.classList.remove("input-error");
         } else {
-            // Inválido
+            // Si es inválido
             checkIcon.style.display = "none";
             errorIcon.style.display = "inline-block";
             errorMessage.style.display = "block";
@@ -52,13 +46,14 @@ Object.keys(fields).forEach(fieldId => {
 });
 
 const form = document.querySelector("form");
-const inputs = document.querySelectorAll("input:not([type='checkbox'])");
-const checkbox = document.querySelector(".remember-forgot input");
+const errorMessages = document.querySelectorAll(".input__error");
+const inputs = document.querySelectorAll("input:not([type='checkbox'])"); // Todos los inputs excepto el checkbox
+const checkbox = document.querySelector(".remember-forgot input"); // Selecciona el checkbox
 
-// Validación antes de enviar
 form.addEventListener("submit", function (event) {
     let formValid = true;
 
+    // Verificar si algún campo está vacío o inválido
     inputs.forEach(input => {
         const value = input.value.trim();
         if (value === "" || !fields[input.id].regex.test(value)) {
@@ -66,11 +61,13 @@ form.addEventListener("submit", function (event) {
         }
     });
 
+    // Verificar si el checkbox está marcado
     if (!checkbox.checked) {
         formValid = false;
     }
 
     if (!formValid) {
+        // Si el formulario no es válido, mostrar el mensaje de advertencia
         Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -78,56 +75,47 @@ form.addEventListener("submit", function (event) {
             customClass: {
                 title: 'swal-title',
                 popup: 'swal-popup'
-            }
+            },
+            footer: '<a href="#">Why do I have this issue?</a>'
         });
-        event.preventDefault(); // Evita enviar si hay errores
+        event.preventDefault(); // Evitar el envío del formulario
+    } else {
+        // Guardamos bandera en sessionStorage
+        sessionStorage.setItem("loginSuccess", "true");
+        // El formulario se envía normalmente
     }
 });
 
-// === 🚀 Flujo de login exitoso antes de ir ===
+// Al cargar la página, revisamos si hay bandera de login
 window.addEventListener("DOMContentLoaded", () => {
-    if (typeof loginSuccess !== "undefined" && loginSuccess === true) {
+    if (sessionStorage.getItem("loginSuccess") === "true") {
         Swal.fire({
             title: "Inicio de sesión exitoso",
             icon: "success",
             timer: 3000,
+            draggable: true,
             timerProgressBar: true,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
             customClass: {
                 title: 'swal-title',
                 popup: 'swal-popup'
             }
-        }).then(() => {
-            // después de la alerta, redirige al protegido
-            window.location.href = "/";
         });
+        //Eliminamos la bandera para que no vuelva a salir al refrescar
+        sessionStorage.removeItem("loginSuccess");
     }
 });
 
-// === 🚨 Mensajes dinámicos desde el backend ===
-if (typeof mensajeError !== "undefined" && mensajeError !== null) {
-    Swal.fire({
-        icon: "error",
-        title: "Credenciales inválidas",
-        text: mensajeError,
-        customClass: {
-            title: 'swal-title',
-            popup: 'swal-popup'
-        }
-    });
-}
+// ventana modal de credenciales invalidas usuarios y constrenia no existe en la base de datos
+// te toca victor
+/* Swal.fire({
+    icon: "error",
+    title: "Credenciales Inválidas",
+    text: "Este usuario y contraseña no se encuentran en la base de datos.",
+    customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup'
+    },
+    footer: '<a href="#">Why do I have this issue?</a>'
+});
 
-if (typeof mensajeExitoso !== "undefined" && mensajeExitoso !== null) {
-    Swal.fire({
-        icon: "success",
-        title: "Sesión cerrada",
-        text: mensajeExitoso,
-        timer: 3000,
-        timerProgressBar: true,
-        customClass: {
-            title: 'swal-title',
-            popup: 'swal-popup'
-        }
-    });
-}
+ */

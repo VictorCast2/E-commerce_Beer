@@ -39,7 +39,7 @@ public class UsuarioController {
 
     @GetMapping("/editar")
     public String getEditar(@AuthenticationPrincipal UserDetails userDetails, @RequestParam(value = "mensaje", required = false) String mensaje, Model model) {
-        Usuario usuario = usuarioServiceImpl.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioServiceImpl.encontrarCorreo(userDetails.getUsername());
         model.addAttribute("usuario", usuario);
         model.addAttribute("mensaje", mensaje);
         return "Editar";

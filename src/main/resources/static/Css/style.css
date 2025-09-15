@@ -6,6 +6,8 @@
     --colorLigth: #71717a;
 }
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +19,30 @@ body {
 }
 
 /** Hero section */
+.swal-title {
+    font-size: 44px;
+    font-family: 'Urbanist', sans-serif !important;
+    font-weight: 600;
+}
+
+.swal-popup {
+    font-size: 20px;
+    font-family: 'Urbanist', sans-serif !important;
+}
+
+.mi-imagen-modal {
+    width: 550px;
+    height: auto;
+    display: block;
+    margin: -60px auto -90px auto;
+    padding: 0 !important;
+}
+
+.texto-advertencia {
+    margin-top: 1rem;
+}
+
+
 .hero {
     min-height: 100vh;
     position: relative;
@@ -162,6 +188,92 @@ body {
 
 .language-selector:hover .dropdown-menu {
     display: block;
+}
+
+/* Usuario opciones */
+.nav__menu {
+    position: absolute;
+    top: 90%;
+    right: -80%;
+    width: 320px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.nav__menu.open__menu {
+    max-height: 400px;
+}
+
+.menu__sub {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+}
+
+.sub__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1.5rem;
+}
+
+.sub__info i {
+    font-size: 45px;
+}
+
+.sub__info .info__title {
+    font: 600 1.5rem var(--typografiaGeist);
+    color: #525252;
+}
+
+
+.menu__sub hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    margin: 15px 0 10px;
+
+}
+
+.sub__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+}
+
+.sub__link .link__text {
+    width: 100%;
+    font: 600 1.1rem var(--typografiaUrbanist);
+
+}
+
+.sub__link:hover .link__text {
+    font-weight: 700;
+
+}
+
+.sub__link i:not(.ri-arrow-right-s-line) {
+    font-size: 20px;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub__link .link__flec {
+    transition: transform .5s;
+    color: #555;
+    font: 900 1.4rem var(--typografiaUrbanist);
+
+}
+
+.sub__link:hover .link__flec {
+    transform: translateX(5px);
+
 }
 
 /**Section hero__content */
@@ -1238,12 +1350,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 6.1rem;
+    padding-right: 5.4rem;
 }
 
 .blog__encabezado .encabezado__title {
     font: 700 3rem var(--typografiaGeist);
-    margin: 0 0 0 5.5rem;
+    margin: 0 0 0 5rem;
 }
 
 .blog__encabezado .encabezado__btn {
@@ -1262,34 +1374,51 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
 }
 
 .blog__card img {
     max-width: 100%;
-    width: 400px;
+    width: 430px;
+    height: 250px;
     margin-bottom: 1rem;
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-.blog__card h4 {
+.blog__card .card__title {
     font-size: 1.2rem;
     font-weight: 600;
     font: 600 1.2rem var(--typografiaGeist);
     color: var(--colorDark);
+    margin-bottom:0.7rem;
 }
 
-.blog__card p {
-    font: 500 1.2rem var(--typografiaUrbanist);
+.blog__card .card__text{
+    width: 400px;
+    font: 400 1rem var(--typografiaGeist);
+    color: var(--colorLigth);
+    margin-bottom:1.5rem;
+}
+
+.blog__card .card__tiempo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card__tiempo .tiempo__item{
+    font: 500 0.8rem var(--typografiaGeist);
+    color: var(--colorLigth);
+}
+
+.tiempo__item strong{
     color: var(--colorDark);
 }
 
-.blog__card p span {
-    font-weight: 400;
-    font-style: italic;
-    color: var(--colorLigth);
-}
+
 
 
 /**Section Figuras */

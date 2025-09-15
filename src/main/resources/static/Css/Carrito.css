@@ -1,15 +1,26 @@
-@import url("/Css/style.css");
+@import url("./style.css");
+
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+    --colorCafe: #8e705c;
+    --colorWhite: #ffffff;
+}
+
 
 .table__container {
     min-height: 150vh;
     position: relative;
-    padding-top: 150px;
+    padding-top: 120px;
 }
 
 
 .container__enlaces {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 10%;
 }
 
@@ -26,7 +37,7 @@
 
 .container__add {
     position: absolute;
-    top: 15%;
+    top:13%;
     left: 78%;
     font: 600 1.2rem var(--typografiaUrbanist);
     width: 100%;
@@ -68,9 +79,10 @@
 }
 
 /* Tabla */
-.notification__table-container {
-    overflow-x: auto;
-}
+/* .notification__table-container {
+    
+} */
+
 
 .notification__table {
     width: 100%;
@@ -79,33 +91,6 @@
     min-width: 800px;
 }
 
-.estado {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.estado-stock {
-    background-color: #1e7e34;
-}
-
-.estado-agotado {
-    background-color: #dc3545;
-}
-
-.content__carrito {
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    font: 600 0.85rem var(--typografiaUrbanist);
-    color: #fff;
-    background-color: #1e7e34;
-}
 
 .notification__table tbody tr:hover {
     background-color: #f4fbff;
@@ -198,17 +183,19 @@
 }
 
 .swal-title {
-    font-family: 'Urbanist', sans-serif !important;
-    font-weight: 600;
+    font: 600 2rem var(--typografiaUrbanist);
 }
 
 .swal-popup {
-    font-family: 'Urbanist', sans-serif !important;
+    font:var(--typografiaUrbanist) ;
 }
+
+
 
 .table__cuponsubtotal {
     display: flex;
     justify-content: space-between;
+    margin-top: 50px;
 
 }
 
@@ -219,6 +206,7 @@
 
 .formulario__inputbox {
     position: relative;
+    left: -5px;
 }
 
 .formulario__inputbox input {
@@ -257,7 +245,6 @@
 
 
 .total__carrito {
-    margin: 9% 0 0 0;
     width: 100%;
     min-width: 250px;
     max-width: 450px;
@@ -272,7 +259,9 @@
 
 
 .carrito__content,
-.carrito__cupon {
+.carrito__cupon,
+.carrito__free,
+.carrito__total {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e0e0e0;
@@ -289,6 +278,15 @@
 
 
 }
+
+.carrito__free .free__name, .carrito__free .free__subtotal{
+    font: 700 1.5rem var(--typografiaUrbanist);
+}
+
+.carrito__total .total__name, .carrito__total .total__subtotal{
+    font: 700 1.5rem var(--typografiaUrbanist);
+}
+
 
 .total__carrito .carrito__btn {
     font: 600 1.1rem var(--typografiaUrbanist);
@@ -378,6 +376,11 @@
     margin: 10px 0 20px 25px;
 }
 
+.wrapper--hora{
+    width: 450px;
+    margin: 10px 0 20px 22px;
+}
+
 .styled-select {
     width: 100%;
     height: 55px;
@@ -454,7 +457,7 @@
     font: 600 1rem var(--typografiaUrbanist);
     width: 100%;  
     margin: 0 0 10px 20px;
-    display: none;
+    display:none ;
 }
 
 .error--direccion{
@@ -478,6 +481,10 @@
     margin: 0 0 10px -115px;
 }
 
+.error--fecha,
+.error--hora{
+    margin:0 0 10px -85px ;
+}
 
 .swal-title {
     font-family: 'Urbanist', sans-serif !important;
@@ -706,3 +713,128 @@
     width: 150px;
     font: 500 1.3rem var(--typografiaGeist);
 }
+
+/* Formulario De envio por fecha */
+.modal__envio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.newadd--mostrar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+} 
+
+/* --- CONTENIDO DEL MODAL --- */
+.envio__content {
+    background: #fff;
+    padding: 2rem 1.5rem 2rem 0;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    font-family: 'Urbanist', sans-serif;
+    text-align: center;
+    animation: swalIn 0.35s ease forwards;
+}
+
+.envio__content .envio__titulo {
+    font: 600 1.5rem var(--typografiaGeist);
+    margin-bottom: 1rem;
+
+}
+
+.envio__content .envio__subtitulo{
+    font: 500 1rem var(--typografiaUrbanist);
+    margin-bottom: 1rem;
+}
+
+.modal__envio.newadd--mostrar .envio__content {
+    animation: swalOut 0.3s ease forwards;
+}
+
+.swal2-container {
+    z-index: 99999 !important;
+}
+
+@keyframes swalIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    45% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    80% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes swalOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+} 
+
+.envio__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.6rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.envio__close:hover {
+    color: #000;
+    transform: scale(1.2);
+}
+
+.box--tiempo input{
+    width: 450px;
+}
+
+
+
+.btn__envio{
+    font: 600 1.3rem var(--typografiaUrbanist);
+    width: 100%;
+    max-width: 150px;
+    height: 50px;
+    padding: 10px;
+    background: #8e705c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0.5rem 0 0 -17.5rem;
+}
+

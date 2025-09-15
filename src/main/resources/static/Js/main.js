@@ -1,3 +1,4 @@
+
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -12,6 +13,36 @@ export function activarGlassmorphism() {
 }
 
 
+export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(p => p.name === name);
+    if (existing) {
+        existing.qty += qty;  // 🔥 ahora suma la cantidad correcta
+    } else {
+        cart.push({ name, price, img, qty });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Toast de confirmación
+    Toastify({
+        text: `${qty} x ${name} agregado al carrito`,
+        duration: 2000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)"
+        }
+    }).showToast();
+
+    // Disparamos evento para que initCart refresque la UI
+    document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
+}
+
+// Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
 export function initCart() {
     const drawer = document.getElementById("cart-drawer");
     const overlay = document.getElementById("cart-overlay");
@@ -39,39 +70,24 @@ export function initCart() {
     // Refrescar UI al cargar
     updateCart();
 
-    // Agregar productos desde los íconos en cada card
+    // ESCUCHAR cuando otro módulo agregue algo al carrito
+    document.addEventListener("cartUpdated", (e) => {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+        updateCart();
+        // Si quien disparó quiere abrir el drawer, lo hacemos
+        if (e?.detail?.openDrawer) openCart();
+    });
+
+    // Agregar productos desde los íconos en cada card (usa la función pública)
     document.querySelectorAll(".card-icons .ri-shopping-cart-line").forEach(icon => {
         icon.addEventListener("click", () => {
             const card = icon.closest(".card");
-
             const name = card.querySelector(".description").textContent.trim();
             const price = parseFloat(card.querySelector(".price").textContent.replace("$", ""));
             const img = card.querySelector("img").src;
 
-            // Si ya existe, solo incrementa qty
-            const existing = cart.find(p => p.name === name);
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({ name, price, img, qty: 1 }); // Empieza en 1
-            }
-
-            saveCart();
-            updateCart();
-            openCart();
-
-            // Toastify Notificación
-            Toastify({
-                text: `${name} agregado al carrito`,
-                duration: 2000,
-                close: true,
-                gravity: "top",
-                position: "right",
-                stopOnFocus: true,
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
+            // Llamamos la función pública que ya maneja localStorage, toast y evento
+            addProductToCart({ name, price, img, openDrawer: true });
         });
     });
 
@@ -91,7 +107,9 @@ export function initCart() {
     cartIcon.addEventListener("click", openCart);
 
     //cerrar el carrito cuando quiera seguir comprando
-    seguirComprandoBtn.addEventListener("click", closeCart);
+    if (seguirComprandoBtn) {
+        seguirComprandoBtn.addEventListener("click", closeCart);
+    }
 
     // Guardar en localStorage
     function saveCart() {
@@ -118,7 +136,6 @@ export function initCart() {
             // Ocultar botones de compra
             btnSeguir.style.display = "none";
             btnFinalizar.style.display = "none";
-
 
             // Agregar botón cerrar si no está
             if (!cartFooter.contains(btnCerrar)) {
@@ -201,10 +218,8 @@ export function initCart() {
 
         // Siempre actualizar contador del header
         updateCartCount();
-
     }
 }
-
 
 export function inicialHeart() {
     const favCount = document.getElementById("fav-count");
@@ -252,13 +267,13 @@ export function inicialHeart() {
     });
 }
 
-export function rederigirFav(){
+export function rederigirFav() {
     document.getElementById("go-fav").addEventListener("click", () => {
         window.location.href = "Favorito.html";
     });
 }
 
-export function finalizarCompra(){
+export function finalizarCompra() {
     //cuando presiona el boton de finalizar lo lleva
     // para el carrito junto con el producto agregado al carrito
     const btnFinalizarcompra = document.getElementById("finalizar-compra");
@@ -268,8 +283,130 @@ export function finalizarCompra(){
     });
 }
 
+export function desplegablePerfil() {
+    /* Menú desplegable del perfil */
+    const subMenu = document.getElementById("SubMenu");
+    const profileImage = document.querySelector(".ri-user-line");
+
+    if (subMenu && profileImage) {
+        profileImage.addEventListener("click", function (e) {
+            e.stopPropagation(); // 🔹 Evita que el click cierre el menú inmediatamente
+            subMenu.classList.toggle("open__menu");
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener("click", function (e) {
+            if (!subMenu.contains(e.target) && !profileImage.contains(e.target)) {
+                subMenu.classList.remove("open__menu");
+            }
+        });
+    }
+}
+
+export function carruselProductos() {
+    // mostrar los productos con carrusel
+    document.querySelectorAll(".flex").forEach(carrusel => {
+        const track = carrusel.querySelector(".flex__productos-track");
+        const prevBtn = carrusel.querySelector(".arrow--left");
+        const nextBtn = carrusel.querySelector(".arrow--right");
+
+        const cardWidth = 300; // ancho de cada card
+        const gap = 40;        // espacio entre cards
+        const visibles = 4;    // cuántos se muestran a la vez
+
+        let posicion = 0;
+        const totalProductos = track.querySelectorAll(".card").length;
+        const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
+
+        const paso = visibles * (cardWidth + gap); // mueve 4 productos
+
+        nextBtn.addEventListener("click", () => {
+            if (posicion < maxPosicion) {
+                posicion += paso;
+                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (posicion > 0) {
+                posicion -= paso;
+                if (posicion < 0) posicion = 0; // no pasar inicio
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
+    });
+}
+
+export function verProductos() {
+    // mandar los productos a la pagina ver
+    const viewIcons = document.querySelectorAll(".card-icons .ri-eye-line");
+
+    viewIcons.forEach(icon => {
+        icon.addEventListener("click", (e) => {
+            const card = e.target.closest(".card");
+
+            // Capturamos los datos de la card
+            const productData = {
+                name: card.dataset.name,
+                price: card.dataset.price,
+                oldPrice: card.dataset.oldprice,
+                image: card.dataset.image,
+                category: card.dataset.category,
+                subcategory: card.dataset.subcategory
+            };
+
+            // Guardar en localStorage
+            localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+            // Redirigir a Ver.html
+            window.location.href = "Ver.html";
+        });
+    });
+
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    if (!localStorage.getItem("mayorDeEdadAceptado")) {
+        Swal.fire({
+            html: `
+        <div class="contenedor-imagen-modal">
+            <img src="/static/Assets/Img/logos/costaoroimport.png"
+            alt="Mayor de edad"
+            class="mi-imagen-modal">
+        </div>
+        <h2 class="swal2-title">¿ Eres Mayor De Edad ?</h2>
+        <p class="texto-advertencia">
+            "Prohíbese El Expendio De Bebidas Embriagantes A Menores De Edad"<br>
+            "El Exceso De Alcohol Es Perjudicial Para La Salud"
+        </p>
+        `,
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Soy Mayor De Edad',
+            cancelButtonText: 'No, Soy Menor De Edad',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            backdrop: `rgba(0,0,0,0.8)`,
+            width: '1000px',
+            customClass: {
+                popup: 'swal-popup'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Guardamos en localStorage que ya aceptó
+                localStorage.setItem("mayorDeEdadAceptado", "true");
+
+            } else {
+                // Si no acepta, lo manda a Google
+                window.location.href = "https://www.google.com";
+            }
+        });
+    }
+
+    //desplegar menu del usuario
+    desplegablePerfil();
+
     //rederigir a Favorito
     rederigirFav();
 
@@ -358,44 +495,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //invocar el iniciar carrito y corazon
     inicialHeart();
+
     initCart();
 
     //finalizar compra
     finalizarCompra();
 
+    // mandar los productos a la pagina ver
+    verProductos();
 
     // mostrar los productos con carrusel
-    document.querySelectorAll(".flex").forEach(carrusel => {
-        const track = carrusel.querySelector(".flex__productos-track");
-        const prevBtn = carrusel.querySelector(".arrow--left");
-        const nextBtn = carrusel.querySelector(".arrow--right");
-
-        const cardWidth = 300; // ancho de cada card
-        const gap = 40;        // espacio entre cards
-        const visibles = 4;    // cuántos se muestran a la vez
-
-        let posicion = 0;
-        const totalProductos = track.querySelectorAll(".card").length;
-        const maxPosicion = (totalProductos - visibles) * (cardWidth + gap);
-
-        const paso = visibles * (cardWidth + gap); // mueve 4 productos
-
-        nextBtn.addEventListener("click", () => {
-            if (posicion < maxPosicion) {
-                posicion += paso;
-                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
-
-        prevBtn.addEventListener("click", () => {
-            if (posicion > 0) {
-                posicion -= paso;
-                if (posicion < 0) posicion = 0; // no pasar inicio
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
-    });
+    carruselProductos();
 
     //cambiar anio del footer automaticamente
     document.getElementById("anio__pagina").textContent = new Date().getFullYear();

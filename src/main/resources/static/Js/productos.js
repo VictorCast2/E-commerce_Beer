@@ -1,58 +1,67 @@
+import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra } from "./main.js";
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Efecto glassmorphism solo al hacer scroll
-    const header = document.querySelector('.header');
+    activarGlassmorphism();
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 10) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    inicialHeart();
 
+    initCart();
 
-    //despliegue de los item
-    const items = document.querySelectorAll('.list__item');
+    rederigirFav();
 
-    items.forEach(item => {
-        const icon = item.querySelector('.despliegue__icon i');
+    finalizarCompra();
 
-        item.addEventListener('click', () => {
-            // Cierra los demás ítems
-            items.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    const otherIcon = otherItem.querySelector('.despliegue__icon i');
-                    if (otherIcon) {
-                        otherIcon.classList.remove('ri-subtract-line');
-                        otherIcon.classList.add('ri-add-line');
-                    }
+    document.querySelectorAll(".custom-select").forEach(selectWrapper => {
+        const selectHeader = selectWrapper.querySelector(".select-selected");
+        const selectItems = selectWrapper.querySelector(".select-items");
+        const arrowIcon = selectHeader.querySelector("i");
+        const searchInput = selectWrapper.querySelector("input[type='text']");
+        const options = selectWrapper.querySelectorAll(".option");
+
+        // Abrir/cerrar el select
+        selectHeader.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            // Cierra los demás selects antes de abrir este
+            document.querySelectorAll(".custom-select").forEach(other => {
+                if (other !== selectWrapper) {
+                    other.querySelector(".select-items").classList.add("select-hide");
+                    other.querySelector(".select-selected i").classList.remove("up");
                 }
             });
 
-            // Alterna el ítem actual
-            item.classList.toggle('active');
+            // Alternar visibilidad del menú
+            selectItems.classList.toggle("select-hide");
 
-            // Cambia el ícono
-            if (item.classList.contains('active')) {
-                icon.classList.remove('ri-add-line');
-                icon.classList.add('ri-subtract-line');
-            } else {
-                icon.classList.remove('ri-subtract-line');
-                icon.classList.add('ri-add-line');
-            }
+            // Alternar flecha
+            arrowIcon.classList.toggle("up");
+        });
+
+        // 🚀 Evitar que se cierre al escribir en el buscador
+        if (searchInput) {
+            searchInput.addEventListener("click", (e) => e.stopPropagation());
+
+            // Filtrar opciones al escribir
+            searchInput.addEventListener("keyup", () => {
+                const filter = searchInput.value.toLowerCase();
+                options.forEach(option => {
+                    const text = option.textContent.toLowerCase();
+                    option.style.display = text.includes(filter) ? "flex" : "none";
+                });
+            });
+        }
+    });
+
+    // Cerrar todos si hago clic fuera
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".custom-select").forEach(selectWrapper => {
+            const selectItems = selectWrapper.querySelector(".select-items");
+            const arrowIcon = selectWrapper.querySelector(".select-selected i");
+
+            selectItems.classList.add("select-hide");
+            arrowIcon.classList.remove("up");
         });
     });
 
-    //Overflow de los productos
-    const scrollContainer = document.querySelector('.deal__flex');
-
-    scrollContainer.addEventListener('mouseenter', () => {
-        scrollContainer.classList.add('scroll-active');
-    });
-
-    scrollContainer.addEventListener('mouseleave', () => {
-        scrollContainer.classList.remove('scroll-active');
-    });
 
 });

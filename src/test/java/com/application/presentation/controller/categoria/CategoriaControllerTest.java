@@ -53,7 +53,7 @@ class CategoriaControllerTest {
         String mensaje = "Mensaje de prueba";
 
         // When
-        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(categoriaService.getCategorias()).thenReturn(categoriasMock);
 
         // Then

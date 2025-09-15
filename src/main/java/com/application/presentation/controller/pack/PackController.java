@@ -34,7 +34,7 @@ public class PackController {
                        @RequestParam(value = "mensaje", required = false) String mensaje,
                        Model model) {
 
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
         List<PackResponse> packList = packService.getPacks();
 
         model.addAttribute("usuario", usuario);
@@ -81,7 +81,7 @@ public class PackController {
     public String getDescripcionPack(@AuthenticationPrincipal UserDetails userDetails,
                                      @PathVariable Long id,
                                      Model model) {
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
         PackResponse packResponse = packService.getPackResponseById(id);
         List<PackResponse> packList = packService.getPacksActivos();
         Collections.shuffle(packList);

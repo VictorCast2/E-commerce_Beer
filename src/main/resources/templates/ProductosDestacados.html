@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/Css/productos_destacados.css">
+    <link rel="stylesheet" th:href="@{/Css/productos_destacados.css}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +86,7 @@
     </div>
 </section>
 
-<script type="module" src="../static/Js/producto_destacados.js"></script>
+<script type="module" th:src="@{/Js/producto_destacados.js}"></script>
 </body>
 
 </html>
