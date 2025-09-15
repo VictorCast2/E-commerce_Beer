@@ -6,6 +6,8 @@
     --colorLigth: #71717a;
 }
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -40,6 +42,7 @@ body {
     margin-top: 1rem;
 }
 
+
 .hero {
     min-height: 100vh;
     position: relative;
@@ -73,6 +76,7 @@ body {
     font: 700 1.5rem "Geist";
 }
 
+
 .header__navbar {
     display: flex;
     justify-content: center;
@@ -88,6 +92,7 @@ body {
     gap: 2.4em;
     list-style: none;
 }
+
 
 .item__link {
     text-decoration: none;
@@ -1345,12 +1350,12 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 6.1rem;
+    padding-right: 5.4rem;
 }
 
 .blog__encabezado .encabezado__title {
     font: 700 3rem var(--typografiaGeist);
-    margin: 0 0 0 5.5rem;
+    margin: 0 0 0 5rem;
 }
 
 .blog__encabezado .encabezado__btn {
@@ -1369,34 +1374,51 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
 }
 
 .blog__card img {
     max-width: 100%;
-    width: 400px;
+    width: 430px;
+    height: 250px;
     margin-bottom: 1rem;
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-.blog__card h4 {
+.blog__card .card__title {
     font-size: 1.2rem;
     font-weight: 600;
     font: 600 1.2rem var(--typografiaGeist);
     color: var(--colorDark);
+    margin-bottom:0.7rem;
 }
 
-.blog__card p {
-    font: 500 1.2rem var(--typografiaUrbanist);
+.blog__card .card__text{
+    width: 400px;
+    font: 400 1rem var(--typografiaGeist);
+    color: var(--colorLigth);
+    margin-bottom:1.5rem;
+}
+
+.blog__card .card__tiempo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card__tiempo .tiempo__item{
+    font: 500 0.8rem var(--typografiaGeist);
+    color: var(--colorLigth);
+}
+
+.tiempo__item strong{
     color: var(--colorDark);
 }
 
-.blog__card p span {
-    font-weight: 400;
-    font-style: italic;
-    color: var(--colorLigth);
-}
+
 
 
 /**Section Figuras */
