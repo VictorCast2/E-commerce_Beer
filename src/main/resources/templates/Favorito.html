@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/Favorito.css">
+    <link rel="stylesheet" th:href="@{/Css/Favorito.css}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,11 +32,11 @@
 
         <nav class="header__navbar">
             <ul class="navbar__list">
-                <li class="list__item"><a href="" class="item__link">Inicio</a></li>
-                <li class="list__item"><a href="" class="item__link">Categorias</a></li>
-                <li class="list__item"><a href="" class="item__link">Productos</a></li>
-                <li class="list__item"><a href="" class="item__link">Blog</a></li>
-                <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
+                <li class="list__item"><a th:href="@{/Index.html}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a th:href="@{/Pack.html}" class="item__link">Packs</a></li>
+                <li class="list__item"><a th:href="@{/productos.html}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{/Blog.html}" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{/Contactos.html}" class="item__link">Contactenos</a></li>
             </ul>
         </nav>
 
@@ -80,7 +80,7 @@
     <section class="table__container">
 
         <div class="container__enlaces">
-            <a href="Index.html">Inicio /</a>
+            <a th:href="@{/Index.html}">Inicio /</a>
             <a href="">Licores /</a>
             <a href="">Mi lista de deseos</a>
         </div>
@@ -230,10 +230,10 @@
 
             <div class="instalar__flex">
                 <figure>
-                    <img src="../static/Assets/Img/footer/app.jpg" alt="">
+                    <img th:src="@{/Assets/Img/footer/app.jpg}" alt="">
                 </figure>
                 <figure>
-                    <img src="../static/Assets/Img/footer/play.jpg" alt="">
+                    <img th:src="@{/Assets/Img/footer/play.jpg}" alt="">
                 </figure>
             </div>
 
@@ -242,7 +242,7 @@
             </ul>
 
             <figure>
-                <img src="../static/Assets/Img/footer/pay.png" alt="">
+                <img th:src="@{/Assets/Img/footer/pay.png}" alt="">
             </figure>
         </div>
 
@@ -258,7 +258,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="module" src="../static/Js/Favorito.js"></script>
+<script type="module" th:src="@{/Js/Favorito.js}"></script>
 </body>
 
 </html>

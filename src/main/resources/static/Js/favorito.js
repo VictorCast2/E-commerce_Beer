@@ -1,8 +1,9 @@
-import { activarGlassmorphism, inicialHeart, initCart, finalizarCompra} from "/Js/main.js";
+import { activarGlassmorphism, inicialHeart, initCart, finalizarCompra, addProductToCart } from "./main.js";
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* console.log("✅ JS cargado correctamente");
+    /* console.log("JS cargado correctamente");
     console.log("favTableBody:", favTableBody);
     console.log("prevPageBtn:", prevPageBtn);
     console.log("nextPageBtn:", nextPageBtn); */
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //finalizar compra
     finalizarCompra();
 
-    //rellenar la tabla con paginación 
+    //rellenar la tabla con paginación
     const favTableBody = document.getElementById("favoritos-body");
     const favCount = document.getElementById("fav-count");
     const paginationText = document.getElementById("pagination-text");
@@ -178,5 +179,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render inicial
     renderTable();
+
+
+    // Delegación de eventos: un único listener que maneje "Agregar al carrito" y "Eliminar"
+    favTableBody.addEventListener("click", (e) => {
+        // 1) AGREGAR AL CARRITO
+        const addBtn = e.target.closest(".content__carrito");
+        if (addBtn) {
+            const row = addBtn.closest("tr");
+            if (!row) return;
+
+            // Obtener valores desde las celdas (asegúrate del orden: imagen, nombre, precio, ...)
+            const imgEl = row.querySelector("img");
+            const img = imgEl ? imgEl.src : "";
+            const name = row.querySelectorAll("td")[1].textContent.trim();
+            const priceText = row.querySelectorAll("td")[2].textContent.trim();
+            // Normalizar precio (quita símbolos y coma decimal)
+            const price = parseFloat(priceText.replace(/[^0-9.,-]/g, "").replace(",", ".")) || 0;
+
+            // Llamamos la función pública
+            addProductToCart({ name, price, img, openDrawer: true });
+
+            // Opcional: si quieres quitar el producto de favoritos al agregar al carrito:
+            // const index = parseInt(addBtn.getAttribute("data-index"));
+            // favoritos.splice(index, 1);
+            // localStorage.setItem("favoritos", JSON.stringify(favoritos));
+            // renderTable();
+
+            return; // salir para no ejecutar el bloque de eliminar
+        }
+
+        // 2) ELIMINAR (tu código ya existente)
+        const btn = e.target.closest(".btn-delete");
+        if (!btn) return;
+
+        const index = parseInt(btn.getAttribute("data-index"));
+
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "¡No podrás revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Sí, ¡eliminalo!",
+            customClass: {
+                title: 'swal-title',
+                popup: 'swal-popup'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                favoritos.splice(index, 1);
+                localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+                if ((currentPage - 1) * rowsPerPage >= favoritos.length && currentPage > 1) {
+                    currentPage--;
+                }
+
+                renderTable();
+
+                Swal.fire({
+                    title: "¡Eliminado!",
+                    text: "El producto ha sido eliminado.",
+                    icon: "success",
+                    customClass: {
+                        title: 'swal-title',
+                        popup: 'swal-popup'
+                    }
+                });
+            }
+        });
+    });
+
+
 
 });

@@ -1,3 +1,4 @@
+
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -11,6 +12,37 @@ export function activarGlassmorphism() {
     });
 }
 
+
+export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(p => p.name === name);
+    if (existing) {
+        existing.qty += qty;  // 🔥 ahora suma la cantidad correcta
+    } else {
+        cart.push({ name, price, img, qty });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Toast de confirmación
+    Toastify({
+        text: `${qty} x ${name} agregado al carrito`,
+        duration: 2000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)"
+        }
+    }).showToast();
+
+    // Disparamos evento para que initCart refresque la UI
+    document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
+}
+
+// Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
 export function initCart() {
     const drawer = document.getElementById("cart-drawer");
     const overlay = document.getElementById("cart-overlay");
@@ -38,39 +70,24 @@ export function initCart() {
     // Refrescar UI al cargar
     updateCart();
 
-    // Agregar productos desde los íconos en cada card
+    // ESCUCHAR cuando otro módulo agregue algo al carrito
+    document.addEventListener("cartUpdated", (e) => {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+        updateCart();
+        // Si quien disparó quiere abrir el drawer, lo hacemos
+        if (e?.detail?.openDrawer) openCart();
+    });
+
+    // Agregar productos desde los íconos en cada card (usa la función pública)
     document.querySelectorAll(".card-icons .ri-shopping-cart-line").forEach(icon => {
         icon.addEventListener("click", () => {
             const card = icon.closest(".card");
-
             const name = card.querySelector(".description").textContent.trim();
             const price = parseFloat(card.querySelector(".price").textContent.replace("$", ""));
             const img = card.querySelector("img").src;
 
-            // Si ya existe, solo incrementa qty
-            const existing = cart.find(p => p.name === name);
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({ name, price, img, qty: 1 }); // Empieza en 1
-            }
-
-            saveCart();
-            updateCart();
-            openCart();
-
-            // Toastify Notificación
-            Toastify({
-                text: `${name} agregado al carrito`,
-                duration: 2000,
-                close: true,
-                gravity: "top",
-                position: "right",
-                stopOnFocus: true,
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
+            // Llamamos la función pública que ya maneja localStorage, toast y evento
+            addProductToCart({ name, price, img, openDrawer: true });
         });
     });
 
@@ -90,7 +107,9 @@ export function initCart() {
     cartIcon.addEventListener("click", openCart);
 
     //cerrar el carrito cuando quiera seguir comprando
-    seguirComprandoBtn.addEventListener("click", closeCart);
+    if (seguirComprandoBtn) {
+        seguirComprandoBtn.addEventListener("click", closeCart);
+    }
 
     // Guardar en localStorage
     function saveCart() {
@@ -118,7 +137,6 @@ export function initCart() {
             btnSeguir.style.display = "none";
             btnFinalizar.style.display = "none";
 
-
             // Agregar botón cerrar si no está
             if (!cartFooter.contains(btnCerrar)) {
                 cartFooter.appendChild(btnCerrar);
@@ -130,7 +148,7 @@ export function initCart() {
                 const li = document.createElement("li");
                 li.className = "cart-item";
                 li.innerHTML = `
-                    <img th:src="${item.img}" alt="">
+                    <img src="${item.img}" alt="">
                     <div class="info">
                         <p class="name">${item.name}</p>
                         <div class="quantity-control" data-index="${index}">
@@ -200,7 +218,6 @@ export function initCart() {
 
         // Siempre actualizar contador del header
         updateCartCount();
-
     }
 }
 
@@ -252,7 +269,7 @@ export function inicialHeart() {
 
 export function rederigirFav() {
     document.getElementById("go-fav").addEventListener("click", () => {
-        window.location.href = "/producto/favoritos";
+        window.location.href = "Favorito.html";
     });
 }
 
@@ -355,8 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img th:src="@{/static/Assets/Img/logos/costaoroimport.png}"
-            alt="Mayor de edad" 
+            <img src="/static/Assets/Img/logos/costaoroimport.png"
+            alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
         <h2 class="swal2-title">¿ Eres Mayor De Edad ?</h2>
@@ -478,6 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //invocar el iniciar carrito y corazon
     inicialHeart();
+
     initCart();
 
     //finalizar compra

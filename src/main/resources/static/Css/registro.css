@@ -20,6 +20,8 @@ body {
     overflow-y: hidden;
 }
 
+
+
 .form .formulario__title {
     font: 700 2.2rem var(--typografiaGeist);
     text-align: center;
@@ -38,6 +40,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
 
 .input-box {
     position: relative;
@@ -59,6 +62,7 @@ body {
     left: 70px;
 }
 
+
 .input-box input {
     margin: 10px 0 20px 20px;
     background-color: transparent;
@@ -71,6 +75,8 @@ body {
     letter-spacing: 1px;
     outline: none;
 }
+
+
 
 .input-box input:focus {
     outline: none;
@@ -111,6 +117,7 @@ body {
     cursor: pointer;
 }
 
+
 .styled-select option {
     color: #333;
     background-color: #ffffff;
@@ -135,6 +142,7 @@ body {
 .custom-arrow.rotate {
     transform: translateY(-50%) rotate(180deg);
 }
+
 
 .box__icon i {
     position: absolute;
@@ -203,10 +211,13 @@ body {
     font-family: 'Urbanist', sans-serif !important;
 }
 
+
+
 .formulario__input:nth-last-child(4) .input__error,
 .formulario__input:nth-last-child(2) .input__error {
     margin-bottom: 15px;
 }
+
 
 .remember-forgot .forgot__label {
     accent-color: #0034de;
@@ -286,104 +297,6 @@ body {
 }
 
 
-/* Ventana modal */
-.modal__newadd {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(17, 17, 17, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    backdrop-filter: blur(4px);
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-}
-
-.newadd--hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-/* --- CONTENIDO DEL MODAL --- */
-.modal__content {
-    background: #fff;
-    padding: 2rem 1.5rem 2rem 0;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    font-family: 'Urbanist', sans-serif;
-    text-align: center;
-    animation: swalIn 0.35s ease forwards;
-}
-
-.modal__content .content__titulo {
-    font: 600 1.5rem var(--typografiaGeist);
-    margin-bottom: 1rem;
-
-}
-
-.modal__newadd.newadd--hidden .modal__content {
-    animation: swalOut 0.3s ease forwards;
-}
-
-.swal2-container {
-    z-index: 99999 !important;
-}
-
-@keyframes swalIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-
-    45% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    80% {
-        transform: scale(0.95);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes swalOut {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-}
-
-.modal__close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.6rem;
-    color: #aaa;
-    cursor: pointer;
-    transition: 0.25s ease;
-}
-
-.modal__close:hover {
-    color: #000;
-    transform: scale(1.2);
-}
 
 .formulario__button {
     font: 700 1rem var(--typografiaUrbanist);

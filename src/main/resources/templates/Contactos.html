@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/Contactos.css">
+    <link rel="stylesheet" th:href="@{/Css/Contactos.css}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,11 +33,10 @@
 
         <nav class="header__navbar">
             <ul class="navbar__list">
-                <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
-                <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
-                <li class="list__item"><a href="" class="item__link">Categorias</a></li>
-                <li class="list__item"><a href="" class="item__link">Productos</a></li>
-                <li class="list__item"><a href="" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{Index.html}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a th:href="@{Pack.html}" class="item__link">Packs</a></li>
+                <li class="list__item"><a th:href="@{productos.html}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{Blog.html}" class="item__link">Blog</a></li>
                 <li class="list__item"><a href="" class="item__link">Contactenos</a></li>
             </ul>
         </nav>
@@ -195,7 +194,7 @@
                             </p>
                         </div>
 
-                        <button class="formulario__btn" type="submit">Iniciar Sesion</button>
+                        <button class="formulario__btn" type="submit">Enviar</button>
 
                     </div>
 
@@ -206,7 +205,7 @@
             <div class="contenidos__testimonios">
                 <div class="testimonios__card">
                     <figure class="card__img">
-                        <img src="../static/Assets/Img/ExperenciaUsuarios/rostroCinco.jpeg" alt="">
+                        <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCinco.jpeg}" alt="">
                     </figure>
 
                     <div class="testimonios__description">
@@ -219,7 +218,7 @@
 
                 <div class="testimonios__card">
                     <figure class="card__img">
-                        <img src="../static/Assets/Img/ExperenciaUsuarios/rostroDos.jpeg" alt="">
+                        <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroDos.jpeg}" alt="">
                     </figure>
 
                     <div class="testimonios__description">
@@ -232,7 +231,7 @@
 
                 <div class="testimonios__card">
                     <figure class="card__img">
-                        <img src="../static/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg" alt="">
+                        <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg}" alt="">
                     </figure>
 
                     <div class="testimonios__description">
@@ -247,6 +246,29 @@
         </div>
     </div>
 </section>
+
+<!-- ============= DRAWER DEL CARRITO ============= -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer">
+    <header class="cart-header">
+        <h3 class="header__carrito">Carrito De Compras</h3>
+        <button id="cart-close"><i class="ri-close-line"></i></button>
+    </header>
+
+    <div class="cart-body">
+        <ul class="cart-list" id="cart-list"></ul>
+    </div>
+
+    <footer class="cart-footer">
+        <div class="cart-subtotal">
+            <span>Subtotal:</span>
+            <strong id="cart-subtotal">$0.00</strong>
+        </div>
+        <button id="seguir-comprando" class="btn-primary">Seguir Comprando</button>
+        <button id="finalizar-compra" class="btn-primary">Finalizar compra</button>
+    </footer>
+</aside>
+
 
 
 <footer class="footer">
@@ -338,10 +360,10 @@
 
             <div class="instalar__flex">
                 <figure>
-                    <img src="../static/Assets/Img/footer/app.jpg" alt="">
+                    <img th:src="@{c/Assets/Img/footer/app.jpg}" alt="">
                 </figure>
                 <figure>
-                    <img src="../static/Assets/Img/footer/play.jpg" alt="">
+                    <img th:src="@{/Assets/Img/footer/play.jpg}" alt="">
                 </figure>
             </div>
 
@@ -350,7 +372,7 @@
             </ul>
 
             <figure>
-                <img src="../static/Assets/Img/footer/pay.png" alt="">
+                <img th:src="@{/Assets/Img/footer/pay.png}" alt="">
             </figure>
         </div>
 
