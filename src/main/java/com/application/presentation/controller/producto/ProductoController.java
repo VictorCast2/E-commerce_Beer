@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/producto")
+@RequestMapping("/admin/producto")
 public class ProductoController {
+
     @Autowired
     private ProductoServiceImpl productoService;
+
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
