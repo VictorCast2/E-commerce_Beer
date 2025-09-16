@@ -36,8 +36,8 @@
 
     <div class="contenido__form">
         <form class="form" th:action="@{/auth/login}" method="post">
-            <h1 class="formulario__title">Iniciar Sesion</h1>
 
+            <h1 class="formulario__title">Iniciar Sesion</h1>
             <span class="formulario__title2">Use su contraseña para Iniciar Sesion</span>
 
             <div class="formulario">
@@ -69,7 +69,7 @@
 
                 <div class="formulario__input">
                     <div class="remember-forgot">
-                        <label class="forgot__label"> <input type="checkbox">Acepto Terminos y Condiciones</label>
+                        <label class="forgot__label" id="terms-label"> <input type="checkbox">Acepto Terminos y Condiciones</label>
                         <a class="forgot__color" th:href="@{/}">Recordar contraseña?</a>
                     </div>
                 </div>
