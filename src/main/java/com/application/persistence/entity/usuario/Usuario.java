@@ -19,7 +19,7 @@ import java.util.*;
 @Table(
         name = "usuario",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "cedula", name = "uk_usuario_cedula"),
+                @UniqueConstraint(columnNames = "numeroIdentificacion", name = "uk_usuario_numero_identificacion"),
                 @UniqueConstraint(columnNames = "telefono", name = "uk_usuario_telefono"),
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
@@ -33,35 +33,33 @@ public class Usuario {
     @Column(name = "tipo_identificacion")
     @Enumerated(EnumType.STRING)
     private EIdentificacion tipoIdentificacion;
-    @Column(length = 15, nullable = false)
-    private String cedula;
+    @Column(name = "numero_identificacion", length = 15, nullable = false)
+    private String numeroIdentificacion;
     @Column(length = 175, nullable = false)
     private String nombres;
     @Column(length = 175, nullable = false)
     private String apellidos;
     @Column(length = 20, nullable = false)
     private String telefono;
-    @Column(nullable = false)
-    private String imagen;
     @Column(length = 100, nullable = false)
     private String correo;
     @Column(length = 100, nullable = false)
     private String password;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled;
+    private boolean isEnabled = true;
 
     @Column(name = "account_non_expired")
-    private boolean accountNonExpired;
+    private boolean accountNonExpired = true;
 
     @Column(name = "account_non_locked")
-    private boolean accountNonLocked;
+    private boolean accountNonLocked = true;
 
     @Column(name = "credentials_non_expired")
-    private boolean credentialsNonExpired;
+    private boolean credentialsNonExpired = true;
 
     // Cardinalidad con la tabla rol (relación unidireccional)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "rol_id",
             referencedColumnName = "rol_id",
@@ -79,7 +77,6 @@ public class Usuario {
     private Empresa empresa;
 
     // Cardinalidad con la tabla compra (relación bidireccional)
-    @Column(name = "compras")
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
 

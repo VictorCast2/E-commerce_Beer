@@ -84,4 +84,10 @@ public class Pack extends ItemProducto {
         packProductos.removeIf(pp -> pp.getProducto().equals(producto));
         producto.getPackProductos().removeIf(pp -> pp.getPack().equals(this));
     }
+
+    /**
+     * Nota: aunque el dueño real de la relación en JPA para los métodos addProducto() y deleteProducto()
+     * es PackProducto, estos métodos se definen aquí porque en el dominio del negocio, es Pack quien
+     * agrega o quita productos
+     */
 }

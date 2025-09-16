@@ -28,26 +28,22 @@ public class Empresa {
     @Column(name = "empresa_id")
     private Long empresaId;
 
-    @Column(name = "nit")
-    @Pattern(regexp = "", message = "El nit de la empresa debe ser válido")
+    @Column(length = 10, nullable = false)
     private String nit;
-    @Column(name = "razon_social")
+    @Column(length = 175, name = "razon_social", nullable = false)
     private String razonSocial;
-    @Column(name = "ciudad")
+    @Column(nullable = false)
     private String ciudad;
-    @Column(name = "direccion")
+    @Column(nullable = false)
     private String direccion;
-    @Column(name = "telefono")
-    @Pattern(regexp = "^(\\+\\d{1,3}[- ])?\\d{10}$", message = "El número de teléfono debe tener 10 dígitos y puede incluir un código de país opcional.")
+    @Column(length = 20, nullable = false)
     private String telefono;
-    @Column(name = "correo", length = 100)
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "El correo debe ser válido")
-    @Email(message = "El correo debe ser válido")
+    @Column(length = 100, nullable = false)
     private String correo;
-    @Column(name = "sector")
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ESector eSector;
-    @Column(name = "activo")
+    @Column(nullable = false)
     private boolean activo;
 
 }
