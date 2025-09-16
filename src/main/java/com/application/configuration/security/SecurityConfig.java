@@ -1,5 +1,6 @@
 package com.application.configuration.security;
 
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,7 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -57,15 +57,15 @@ public class SecurityConfig {
                         .failureUrl("/auth/login?error=true")
                         .permitAll()
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/auth/login")
-                        .userInfoEndpoint(userInfo ->
-                                userInfo.userService(customOAuth2UserService)
-                        )
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/auth/login?error=true")
-                        .permitAll()
-                )
+//                .oauth2Login(oauth2 -> oauth2
+//                        .loginPage("/auth/login")
+//                        .userInfoEndpoint(userInfo ->
+//                                userInfo.userService(customOAuth2UserService)
+//                        )
+//                        .defaultSuccessUrl("/", true)
+//                        .failureUrl("/auth/login?error=true")
+//                        .permitAll()
+//                )
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/auth/login?logout")
@@ -83,9 +83,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
+    public DaoAuthenticationProvider authenticationProvider(UsuarioServiceImpl usuario) {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(usuario);
+        authenticationProvider.setPasswordEncoder(this.passwordEncoder());
         return authenticationProvider;
     }
 
