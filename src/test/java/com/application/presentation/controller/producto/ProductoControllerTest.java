@@ -42,7 +42,7 @@ class ProductoControllerTest {
     void producto() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
-                .cedula("12345")
+                .numeroIdentificacion("12345")
                 .nombres("Theresa Andrea")
                 .correo("example@mail.com")
                 .rol(Rol.builder().name(ERol.ADMIN).build())
@@ -76,7 +76,7 @@ class ProductoControllerTest {
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
         // When
-        when(productoService.addProducto( any(ProductoCreateRequest.class) )).thenReturn(responseMock);
+        when(productoService.createProducto( any(ProductoCreateRequest.class) )).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/producto/add-producto")
@@ -85,7 +85,7 @@ class ProductoControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
 
-        verify(productoService).addProducto(any(ProductoCreateRequest.class));
+        verify(productoService).createProducto(any(ProductoCreateRequest.class));
     }
 
     @Test

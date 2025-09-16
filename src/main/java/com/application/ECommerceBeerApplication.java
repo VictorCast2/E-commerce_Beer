@@ -8,7 +8,6 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

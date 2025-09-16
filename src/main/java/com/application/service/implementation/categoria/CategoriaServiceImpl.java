@@ -84,7 +84,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @return DTO con mensaje de éxito
      */
     @Override
-    public GeneralResponse addCategoria(@NotNull CategoriaCreateRequest categoriaRequest) {
+    public GeneralResponse createCategoria(@NotNull CategoriaCreateRequest categoriaRequest) {
 
         Categoria categoria = Categoria.builder()
                 .nombre(categoriaRequest.nombre())

@@ -45,7 +45,7 @@ public class PackController {
 
     @PostMapping("/add-pack")
     public String addPack(@ModelAttribute @Valid PackCreateRequest packRequest) {
-        GeneralResponse response = packService.addPack(packRequest);
+        GeneralResponse response = packService.createPack(packRequest);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);

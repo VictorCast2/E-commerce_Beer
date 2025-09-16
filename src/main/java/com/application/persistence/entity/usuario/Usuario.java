@@ -6,8 +6,7 @@ import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.*;
 
 @Getter

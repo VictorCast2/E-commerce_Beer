@@ -43,7 +43,7 @@ public class ProductoAdminController {
 
     @PostMapping("/add-producto")
     public String addProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest) {
-        GeneralResponse response = productoService.addProducto(productoRequest);
+        GeneralResponse response = productoService.createProducto(productoRequest);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);

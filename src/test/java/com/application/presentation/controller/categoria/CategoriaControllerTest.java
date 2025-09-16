@@ -76,7 +76,7 @@ class CategoriaControllerTest {
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
         // When
-        when(categoriaService.addCategoria( any(CategoriaCreateRequest.class) )).thenReturn(responseMock);
+        when(categoriaService.createCategoria( any(CategoriaCreateRequest.class) )).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/categoria/add-categoria")
@@ -86,7 +86,7 @@ class CategoriaControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).addCategoria( any(CategoriaCreateRequest.class) );
+        verify(categoriaService).createCategoria( any(CategoriaCreateRequest.class) );
     }
 
     @Test

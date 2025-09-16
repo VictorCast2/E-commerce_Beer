@@ -1,6 +1,5 @@
 package com.application.presentation.controller;
 
-import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

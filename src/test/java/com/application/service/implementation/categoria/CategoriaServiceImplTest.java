@@ -99,12 +99,12 @@ class CategoriaServiceImplTest {
     }
 
     @Test
-    void addCategoria() {
+    void createCategoria() {
         // Given
         CategoriaCreateRequest categoriaRequest = CategoriaDataProvider.newCategoriaMock();
 
         // When
-        GeneralResponse resultado = categoriaService.addCategoria(categoriaRequest);
+        GeneralResponse resultado = categoriaService.createCategoria(categoriaRequest);
 
         // Then
         ArgumentCaptor<Categoria> argumentCaptor = ArgumentCaptor.forClass(Categoria.class);

@@ -2,9 +2,7 @@ package com.application.persistence.entity.empresa;
 
 import com.application.persistence.entity.empresa.enums.ESector;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter

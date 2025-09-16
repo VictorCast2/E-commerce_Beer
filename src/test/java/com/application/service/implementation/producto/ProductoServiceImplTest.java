@@ -95,12 +95,12 @@ class ProductoServiceImplTest {
     }
 
     @Test
-    void addProducto() {
+    void createProducto() {
         // Given
         ProductoCreateRequest productoRequest = ProductoDataProvider.newProductoMock();
 
         // When
-        GeneralResponse resultado = productoService.addProducto(productoRequest);
+        GeneralResponse resultado = productoService.createProducto(productoRequest);
 
         // Then
         ArgumentCaptor<Producto> argumentCaptor = ArgumentCaptor.forClass(Producto.class);

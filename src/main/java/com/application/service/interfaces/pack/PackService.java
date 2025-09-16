@@ -15,7 +15,7 @@ public interface PackService {
     List<PackResponse> getPacksByCategoriaId(Long id);
 
     // CRUD
-    GeneralResponse addPack(PackCreateRequest packRequest);
+    GeneralResponse createPack(PackCreateRequest packRequest);
     GeneralResponse updatePack(PackCreateRequest packRequest, Long id);
     GeneralResponse disablePack(Long id);
     GeneralResponse deletePack(Long id);

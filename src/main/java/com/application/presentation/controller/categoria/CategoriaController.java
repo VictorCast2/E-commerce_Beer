@@ -43,7 +43,7 @@ public class CategoriaController {
 
     @PostMapping("/add-categoria")
     public String addcategoria(@ModelAttribute @Valid CategoriaCreateRequest categoriaRequest) {
-        GeneralResponse response = categoriaService.addCategoria(categoriaRequest);
+        GeneralResponse response = categoriaService.createCategoria(categoriaRequest);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);

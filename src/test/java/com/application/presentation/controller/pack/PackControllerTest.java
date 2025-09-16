@@ -73,7 +73,7 @@ class PackControllerTest {
         GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
-        when(packService.addPack(any(PackCreateRequest.class))).thenReturn(responseMock);
+        when(packService.createPack(any(PackCreateRequest.class))).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/pack/add-pack")
@@ -82,7 +82,7 @@ class PackControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(packService).addPack(any(PackCreateRequest.class));
+        verify(packService).createPack(any(PackCreateRequest.class));
     }
 
     @Test
