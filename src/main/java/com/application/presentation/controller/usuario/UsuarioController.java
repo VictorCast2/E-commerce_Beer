@@ -1,10 +1,8 @@
 package com.application.presentation.controller.usuario;
 
-import com.application.configuration.Custom.CustomUserDetails;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.usuario.request.EditarUsuarioRequest;
 import com.application.presentation.dto.usuario.response.UsuarioResponse;
-import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,7 +2,6 @@ package com.application.presentation.controller;
 
 import com.application.presentation.dto.usuario.request.CreacionUsuarioRequest;
 import com.application.presentation.dto.usuario.response.UsuarioResponse;
-import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

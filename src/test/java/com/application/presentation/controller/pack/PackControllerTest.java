@@ -8,7 +8,6 @@ import com.application.presentation.dto.pack.request.PackCreateRequest;
 import com.application.presentation.dto.pack.response.PackResponse;
 import com.application.provider.PackDataProvider;
 import com.application.service.implementation.pack.PackServiceImpl;
-import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

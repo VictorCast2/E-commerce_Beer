@@ -2,7 +2,6 @@ package com.application.presentation.controller.empresa;
 
 import com.application.presentation.dto.empresa.request.CreacionEmpresaRequest;
 import com.application.service.implementation.empresa.EmpresaServiceImpl;
-import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -49,20 +49,16 @@ public class Usuario {
     private String password;
 
     @Column(name = "is_enabled")
-    @Builder.Default
-    private boolean isEnabled = true;
+    private boolean isEnabled;
 
     @Column(name = "account_non_expired")
-    @Builder.Default
-    private boolean accountNonExpired = true;
+    private boolean accountNonExpired;
 
     @Column(name = "account_non_locked")
-    @Builder.Default
-    private boolean accountNonLocked = true;
+    private boolean accountNonLocked;
 
     @Column(name = "credentials_non_expired")
-    @Builder.Default
-    private boolean credentialsNonExpired = true;
+    private boolean credentialsNonExpired;
 
     // Cardinalidad con la tabla rol (relación unidireccional)
     @ManyToOne
@@ -86,19 +82,5 @@ public class Usuario {
     @Column(name = "compras")
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
-
-    /**
-     * Método para obtener los roles del usuario como una colección de GrantedAuthority.
-     * Si el rol es nulo o su nombre es nulo, devuelve una lista vacía.
-     * De lo contrario, devuelve una lista con el rol del usuario.
-     *
-     * @return Colección de GrantedAuthority
-     */
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (rol == null || rol.getName() == null) {
-            return Collections.emptyList();
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
-    }
 
 }
