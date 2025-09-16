@@ -218,6 +218,3 @@ window.addEventListener("click", (e) => {
         modal.classList.add("newadd--hidden");
     }
 });
-
-
-

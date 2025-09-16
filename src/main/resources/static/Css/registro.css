@@ -20,8 +20,6 @@ body {
     overflow-y: hidden;
 }
 
-
-
 .form .formulario__title {
     font: 700 2.2rem var(--typografiaGeist);
     text-align: center;

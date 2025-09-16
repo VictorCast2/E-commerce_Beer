@@ -29,7 +29,7 @@ public class AuthController {
                            @RequestParam(value = "logout", required = false) String logout,
                            @RequestParam(value = "success", required = false) String success) {
         if (error != null) {
-            model.addAttribute("mensajeError", "Usuario o contraseña inválidos");
+            model.addAttribute("mensajeError", "Usuario y contraseña, no encontrados en la base de datos");
         }
         if (logout != null) {
             model.addAttribute("mensajeExitoso", "Sesión cerrada correctamente");
