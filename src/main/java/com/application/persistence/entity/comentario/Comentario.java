@@ -2,7 +2,6 @@ package com.application.persistence.entity.comentario;
 
 import com.application.persistence.entity.historia.Historia;
 import com.application.persistence.entity.usuario.Usuario;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 

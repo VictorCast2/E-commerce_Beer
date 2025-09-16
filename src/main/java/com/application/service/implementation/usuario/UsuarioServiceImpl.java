@@ -14,7 +14,6 @@ import com.application.presentation.dto.usuario.response.UsuarioResponse;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.service.interfaces.usuario.UsuarioInterface;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.User;
