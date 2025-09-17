@@ -6,6 +6,7 @@ import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
+import com.application.persistence.repository.EmpresaRepository;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ public class ECommerceBeerApplication {
     }
 
     @Bean
-    public CommandLineRunner init(UsuarioRepository usuarioRepository, RolRepository rolRepository) {
+    public CommandLineRunner init(UsuarioRepository usuarioRepository, RolRepository rolRepository, EmpresaRepository empresaRepository) {
         return args -> {
 
             /* Cargar roles a la base de datos a partir del ERol */
@@ -89,6 +90,7 @@ public class ECommerceBeerApplication {
             }
 
             if (!usuarioRepository.existsByCorreo(userTheresa.getCorreo())) {
+                empresaRepository.save(empresaTheresa);
                 usuarioRepository.save(userTheresa);
             }
 

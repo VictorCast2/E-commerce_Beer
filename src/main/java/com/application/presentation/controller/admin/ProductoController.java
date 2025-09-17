@@ -1,4 +1,4 @@
-package com.application.presentation.controller.producto;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
@@ -6,7 +6,7 @@ import com.application.presentation.dto.producto.request.ProductoCreateRequest;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,9 +19,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/producto")
-public class ProductoAdminController {
+public class ProductoController {
 
+    @Autowired
     private ProductoServiceImpl productoService;
+
+    @Autowired
     private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")

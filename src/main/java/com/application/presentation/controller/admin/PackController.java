@@ -1,4 +1,4 @@
-package com.application.presentation.controller.pack;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;

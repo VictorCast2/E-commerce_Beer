@@ -1,4 +1,4 @@
-package com.application.presentation.controller.categoria;
+package com.application.presentation.controller.admin;
 
 import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.rol.Rol;

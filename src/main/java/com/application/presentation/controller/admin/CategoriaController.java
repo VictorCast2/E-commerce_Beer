@@ -1,4 +1,4 @@
-package com.application.presentation.controller.categoria;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
@@ -6,7 +6,6 @@ import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;

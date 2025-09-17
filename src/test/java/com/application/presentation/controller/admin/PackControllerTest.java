@@ -1,13 +1,13 @@
-package com.application.presentation.controller.producto;
+package com.application.presentation.controller.admin;
 
-import com.application.provider.ProductoDataProvider;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.producto.request.ProductoCreateRequest;
-import com.application.presentation.dto.producto.response.ProductoResponse;
-import com.application.service.implementation.producto.ProductoServiceImpl;
+import com.application.presentation.dto.pack.request.PackCreateRequest;
+import com.application.presentation.dto.pack.response.PackResponse;
+import com.application.provider.PackDataProvider;
+import com.application.service.implementation.pack.PackServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductoAdminController.class)
-//@Import(SecurityConfig.class)
-class ProductoControllerTest {
+@WebMvcTest(PackController.class)
+class PackControllerTest {
 
     @MockitoBean
-    private ProductoServiceImpl productoService;
+    private PackServiceImpl packService;
 
     @MockitoBean
     private UsuarioServiceImpl usuarioService;
@@ -40,7 +39,7 @@ class ProductoControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void producto() throws Exception {
+    void pack() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
                 .numeroIdentificacion("12345")
@@ -49,104 +48,103 @@ class ProductoControllerTest {
                 .rol(Rol.builder().name(ERol.ADMIN).build())
                 .build();
 
-        List<ProductoResponse> productoList = ProductoDataProvider.productoResponseListMock();
+        List<PackResponse> packList = PackDataProvider.packResponseListMock();
 
-        String mensaje = "Mensaje de Pruebas";
+        String mensaje = "Mensaje de Prueba";
 
-        // When
         when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
-        when(productoService.getProductos()).thenReturn(productoList);
+        when(packService.getPacks()).thenReturn(packList);
 
-        // Then
-        mockMvc.perform(get("/admin/producto/")
+        // When - Then
+        mockMvc.perform(get("/admin/pack/")
                         .param("mensaje", mensaje)
                         .with(user("example@mail.com")
                                 .roles("ADMIN")))
                 .andExpect(status().isOk())
-                .andExpect(view().name("Producto"))
+                .andExpect(view().name("Pack"))
                 .andExpect(model().attribute("usuario", usuarioMock))
-                .andExpect(model().attribute("productoList", productoList))
+                .andExpect(model().attribute("packList", packList))
                 .andExpect(model().attribute("mensaje", mensaje));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void addProducto() throws Exception {
+    void addPack() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
-        // When
-        when(productoService.createProducto( any(ProductoCreateRequest.class) )).thenReturn(responseMock);
+        when(packService.createPack(any(PackCreateRequest.class))).thenReturn(responseMock);
 
         // Then
-        mockMvc.perform(post("/admin/producto/add-producto")
+        mockMvc.perform(post("/admin/pack/add-pack")
                         .with(csrf())
-                        .params(ProductoDataProvider.productoParameters()))
+                        .params(PackDataProvider.packParameters()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(productoService).createProducto(any(ProductoCreateRequest.class));
+        verify(packService).createPack(any(PackCreateRequest.class));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void updateProducto() throws Exception {
+    void updatePack() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
-        // When
-        when(productoService.updateProducto(any(ProductoCreateRequest.class), anyLong())).thenReturn(responseMock);
+        when(packService.updatePack(any(PackCreateRequest.class), anyLong())).thenReturn(responseMock);
 
-        // Then
-        mockMvc.perform(post("/admin/producto/update-producto/{id}", id)
+        // When - Then
+        mockMvc.perform(post("/admin/pack/update-pack/{id}", id)
                         .with(csrf())
-                        .params(ProductoDataProvider.productoParameters()))
+                        .params(PackDataProvider.packParameters()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(productoService).updateProducto(any(ProductoCreateRequest.class), anyLong());
+        verify(packService).updatePack(any(PackCreateRequest.class), anyLong());
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void disableProducto() throws Exception {
+    void disablePack() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
-        // When
-        when(productoService.disableProducto( anyLong() )).thenReturn(responseMock);
+        when(packService.disablePack(anyLong())).thenReturn(responseMock);
 
-        // Then
-        mockMvc.perform(post("/admin/producto/disable-producto/{id}", id)
+        // When - Then
+        mockMvc.perform(post("/admin/pack/disable-pack/{id}", id)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(productoService).disableProducto( anyLong() );
+        verify(packService).disablePack(anyLong());
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void deleteProducto() throws Exception {
+    void deletePack() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
+        GeneralResponse responseMock = new GeneralResponse("Mensaje de prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
-        // When
-        when(productoService.deleteProducto( anyLong() )).thenReturn(responseMock);
+        when(packService.deletePack(anyLong())).thenReturn(responseMock);
 
-        // Then
-        mockMvc.perform(post("/admin/producto/delete-producto/{id}", id)
+        // When - Then
+        mockMvc.perform(post("/admin/pack/delete-pack/{id}", id)
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
+                .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(productoService).deleteProducto( anyLong() );
+        verify(packService).deletePack( anyLong() );
+    }
+
+    @Test
+    void getDescripcionPack() {
     }
 }
