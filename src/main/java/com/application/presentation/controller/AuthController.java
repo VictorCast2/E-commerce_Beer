@@ -18,16 +18,16 @@ public class AuthController {
     @Autowired
     private UsuarioServiceImpl usuarioServiceImpl;
 
-    @GetMapping()
+    @GetMapping({ "/", "/home" })
     public String index(Model model) {
         return "Index";
     }
 
     @GetMapping("/auth/login")
     public String getLogin(Model model,
-                           @RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout,
-                           @RequestParam(value = "success", required = false) String success) {
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "success", required = false) String success) {
         if (error != null) {
             model.addAttribute("mensajeError", "Usuario y contraseña, no encontrados en la base de datos");
         }
@@ -42,7 +42,7 @@ public class AuthController {
 
     @GetMapping("/auth/sign_up")
     public String getSignUp(Model model,
-                            @RequestParam(value = "error", required = false) String error) {
+            @RequestParam(value = "error", required = false) String error) {
         if (error != null) {
             model.addAttribute("mensajeError", "Usuario ya existe en la base de datos");
         }
@@ -51,16 +51,44 @@ public class AuthController {
 
     @PostMapping("/auth/sign_up")
     public String postSignUp(@Valid @ModelAttribute("usuario") CreacionUsuarioRequest request,
-                             BindingResult result, Model model) {
+            BindingResult result, Model model) {
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(error ->
-                    System.out.println(error.getDefaultMessage())
-            );
+            result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             return "Registro";
         }
         UsuarioResponse response = usuarioServiceImpl.crearUsuario(request);
         model.addAttribute("mensajeExitoso", response.mensaje());
         return "redirect:/auth/login";
+    }
+
+    @GetMapping("/home/favoritos")
+    public String productoFavoritos() {
+        return "Favorito";
+    }
+
+    @GetMapping("/home/carrito")
+    public String productoCarrito() {
+        return "Carrito";
+    }
+
+    @GetMapping("/home/blog")
+    public String Blog() {
+        return "Blog";
+    }
+
+    @GetMapping("/home/contactenos")
+    public String Contactenos() {
+        return "Contactos";
+    }
+
+    @GetMapping("/home/productos")
+    public String Productos() {
+        return "Productos";
+    }
+
+    @GetMapping("/home/pack")
+    public String Pack() {
+        return "Pack";
     }
 
 }

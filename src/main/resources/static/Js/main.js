@@ -1,4 +1,3 @@
-
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -269,7 +268,7 @@ export function inicialHeart() {
 
 export function rederigirFav() {
     document.getElementById("go-fav").addEventListener("click", () => {
-        window.location.href = "Favorito.html";
+        window.location.href = "/home/favoritos";
     });
 }
 
@@ -279,7 +278,7 @@ export function finalizarCompra() {
     const btnFinalizarcompra = document.getElementById("finalizar-compra");
 
     btnFinalizarcompra.addEventListener("click", () => {
-        window.location.href = "Carrito.html"; // redirige a la página del carrito
+        window.location.href = "/home/carrito"; // redirige a la página del carrito
     });
 }
 
@@ -437,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentSlide = index;
     }
-
 
     // Siguiente slide
     function nextSlide() {

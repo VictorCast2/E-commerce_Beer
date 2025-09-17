@@ -25,86 +25,82 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomOAuth2UserService customOAuth2UserService) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .invalidSessionUrl("/auth/login")
-                        .maximumSessions(2)
-                        .expiredUrl("/auth/login?expired")
-                        .sessionRegistry(sessionRegistry())
-                )
-                .authorizeHttpRequests(auth -> auth
-                        // Configurar endpoints privados
-                        /* ----- Admin ----- */
-                        .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
-                        .requestMatchers("/admin/producto/**").hasRole("ADMIN")
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                        CustomOAuth2UserService customOAuth2UserService) throws Exception {
+                return http
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                                .invalidSessionUrl("/auth/login")
+                                                .maximumSessions(2)
+                                                .expiredUrl("/auth/login?expired")
+                                                .sessionRegistry(sessionRegistry()))
+                                .authorizeHttpRequests(auth -> auth
+                                                // Configurar endpoints privados
+                                                /* ----- Admin ----- */
+                                                .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
+                                                .requestMatchers("/admin/producto/**").hasRole("ADMIN")
 
-                        // Configurar endpoints públicos (sin autenticación)
-                        .requestMatchers(
-                                "/auth/**",
-                                "/usuario/**",
-                                "/producto/**",
-                                "/error/**",
-                                "/auth/logout",
-                                "/error/"
-                        ).permitAll()
+                                                // Configurar endpoints públicos (sin autenticación)
+                                                .requestMatchers(
+                                                                "/auth/**",
+                                                                "/usuario/**",
+                                                                "/home/**",
+                                                                "/error/**",
+                                                                "/auth/logout",
+                                                                "/error/")
+                                                .permitAll()
 
-                        // Configurar endpoints públicos estáticos (sin autenticación)
-                        .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
+                                                // Configurar endpoints públicos estáticos (sin autenticación)
+                                                .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
 
-                        // Configurar endpoints NO ESPECIFICADOS
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/auth/login")
-                        .loginProcessingUrl("/auth/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/auth/login?error=true")
-                        .permitAll()
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/auth/login")
-                        .userInfoEndpoint(userInfo ->
-                                userInfo.userService(customOAuth2UserService)
-                        )
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/auth/login?error=true")
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/auth/logout")
-                        .logoutSuccessUrl("/auth/login?logout")
-                        .deleteCookies("JSESSIONID", "access_token")
-                )
-                .exceptionHandling(ex -> ex
-                        .accessDeniedPage("/error/403")
-                )
-                .build();
-    }
+                                                // Configurar endpoints NO ESPECIFICADOS
+                                                .anyRequest().authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/auth/login")
+                                                .loginProcessingUrl("/auth/login")
+                                                .defaultSuccessUrl("/", true)
+                                                .failureUrl("/auth/login?error=true")
+                                                .permitAll())
+                                .oauth2Login(oauth2 -> oauth2
+                                                .loginPage("/auth/login")
+                                                .userInfoEndpoint(userInfo -> userInfo
+                                                                .userService(customOAuth2UserService))
+                                                .defaultSuccessUrl("/", true)
+                                                .failureUrl("/auth/login?error=true")
+                                                .permitAll())
+                                .logout(logout -> logout
+                                                .logoutUrl("/auth/logout")
+                                                .logoutSuccessUrl("/auth/login?logout")
+                                                .deleteCookies("JSESSIONID", "access_token"))
+                                .exceptionHandling(ex -> ex
+                                                .accessDeniedPage("/error/403"))
+                                .build();
+        }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+                        throws Exception {
+                return authenticationConfiguration.getAuthenticationManager();
+        }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        return authenticationProvider;
-    }
+        @Bean
+        public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
+                        PasswordEncoder passwordEncoder) {
+                DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
+                authenticationProvider.setPasswordEncoder(passwordEncoder);
+                return authenticationProvider;
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
+        @Bean
+        public SessionRegistry sessionRegistry() {
+                return new SessionRegistryImpl();
+        }
 
 }

@@ -51,8 +51,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         if (existente == null) {
             CreacionUsuarioRequest nuevoUsuarioRequest = new CreacionUsuarioRequest(
-                    null, "CC", nombre, apellido, imagen, null, email, "OAuth2", rol.getName().name()
-            );
+                    null, "CC", nombre, apellido, imagen, null, email, "OAuth2", rol.getName().name());
             usuarioService.crearUsuario(nuevoUsuarioRequest);
             System.out.println("✅ Usuario guardado en DB: " + nuevoUsuarioRequest.correo());
         } else {
@@ -64,14 +63,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         Set<GrantedAuthority> authorities = Set.of(
-                new SimpleGrantedAuthority("ROLE_" + rol.getName().name())
-        );
+                new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
 
         return new DefaultOAuth2User(
                 authorities,
                 oAuth2User.getAttributes(),
-                request.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName()
-        );
+                request.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName());
 
     }
 
