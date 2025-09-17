@@ -36,14 +36,11 @@ public class SecurityConfig {
                         .requestMatchers("/admin/producto/**").hasRole("ADMIN")
 
                         // Configurar endpoints públicos (sin autenticación)
-                        .requestMatchers(
-                                "/auth/**",
-                                "/usuario/**",
-                                "/producto/**",
-                                "/error/**",
-                                "/auth/logout",
-                                "/error/"
-                        ).permitAll()
+                        // Principal Controller
+                        .requestMatchers("/**").permitAll()
+
+                        // Autenticación Controller
+                        .requestMatchers("/auth/**").permitAll()
 
                         // Configurar endpoints públicos estáticos (sin autenticación)
                         .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
@@ -55,7 +52,6 @@ public class SecurityConfig {
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
                         .failureUrl("/auth/login?error=true")
-                        .permitAll()
                 )
 //                .oauth2Login(oauth2 -> oauth2
 //                        .loginPage("/auth/login")

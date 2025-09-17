@@ -31,7 +31,7 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(Usuario usuario) {
         this.correo = usuario.getCorreo();
         this.password = usuario.getPassword();
-        this.authorities.add(new SimpleGrantedAuthority(usuario.getRol().getName().name()));
+        this.authorities.add(new SimpleGrantedAuthority("ROLE_".concat(usuario.getRol().getName().name())));
         this.isEnabled = usuario.isEnabled();
         this.accountNonExpired = usuario.isAccountNonExpired();
         this.accountNonLocked = usuario.isAccountNonLocked();

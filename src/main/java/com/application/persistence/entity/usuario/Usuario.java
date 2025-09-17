@@ -46,15 +46,19 @@ public class Usuario {
     private String password;
 
     @Column(name = "is_enabled")
+    @Builder.Default
     private boolean isEnabled = true;
 
     @Column(name = "account_non_expired")
+    @Builder.Default
     private boolean accountNonExpired = true;
 
     @Column(name = "account_non_locked")
+    @Builder.Default
     private boolean accountNonLocked = true;
 
     @Column(name = "credentials_non_expired")
+    @Builder.Default
     private boolean credentialsNonExpired = true;
 
     // Cardinalidad con la tabla rol (relación unidireccional)

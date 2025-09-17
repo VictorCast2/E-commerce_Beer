@@ -26,7 +26,7 @@ public class Empresa {
     @Column(name = "empresa_id")
     private Long empresaId;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 12, nullable = false)
     private String nit;
     @Column(length = 175, name = "razon_social", nullable = false)
     private String razonSocial;
