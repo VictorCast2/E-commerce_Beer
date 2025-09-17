@@ -5,7 +5,9 @@ import com.application.presentation.dto.categoria.request.CategoriaCreateRequest
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/categoria")
-@RequiredArgsConstructor
 public class CategoriaController {
 
-    private final CategoriaServiceImpl categoriaService;
-    private final UsuarioServiceImpl usuarioService;
+    @Autowired
+    private CategoriaServiceImpl categoriaService;
+
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Categoria(
@@ -31,7 +35,7 @@ public class CategoriaController {
             Model model
     ) {
 
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<CategoriaResponse> categoriaResponses = categoriaService.getCategorias();
 
         model.addAttribute("usuario", usuario);

@@ -5,6 +5,7 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +19,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/producto")
-@RequiredArgsConstructor
 public class ProductoAdminController {
 
-    private final ProductoServiceImpl productoService;
-    private final UsuarioServiceImpl usuarioService;
+    private ProductoServiceImpl productoService;
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Producto(
@@ -31,7 +31,7 @@ public class ProductoAdminController {
             Model model
             ) {
 
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<ProductoResponse> productoList = productoService.getProductos();
 
         model.addAttribute("usuario", usuario);

@@ -5,6 +5,7 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.pack.request.PackCreateRequest;
 import com.application.presentation.dto.pack.response.PackResponse;
 import com.application.service.implementation.pack.PackServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +34,7 @@ public class PackController {
                        @RequestParam(value = "mensaje", required = false) String mensaje,
                        Model model) {
 
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<PackResponse> packList = packService.getPacks();
 
         model.addAttribute("usuario", usuario);
@@ -80,7 +81,7 @@ public class PackController {
     public String getDescripcionPack(@AuthenticationPrincipal UserDetails userDetails,
                                      @PathVariable Long id,
                                      Model model) {
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         PackResponse packResponse = packService.getPackResponseById(id);
         List<PackResponse> packList = packService.getPacksActivos();
         Collections.shuffle(packList);

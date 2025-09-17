@@ -8,6 +8,7 @@ import com.application.presentation.dto.categoria.request.CategoriaCreateRequest
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,7 +42,7 @@ class CategoriaControllerTest {
     void categoria() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
-                .cedula("12345")
+                .numeroIdentificacion("12345")
                 .nombres("Theresa Andrea")
                 .correo("example@mail.com")
                 .rol(Rol.builder().name(ERol.ADMIN).build())
@@ -52,7 +53,7 @@ class CategoriaControllerTest {
         String mensaje = "Mensaje de prueba";
 
         // When
-        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(categoriaService.getCategorias()).thenReturn(categoriasMock);
 
         // Then
