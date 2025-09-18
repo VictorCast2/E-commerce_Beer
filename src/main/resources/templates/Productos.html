@@ -35,7 +35,7 @@
                 <li class="list__item"><a th:href="@{/home/pack}" class="item__link">Packs</a></li>
                 <li class="list__item active"><a href="#" class="item__link active">Productos</a></li>
                 <li class="list__item"><a th:href="@{/home/blog}" class="item__link">Blog</a></li>
-                <li class="list__item"><a th:href="@{/home/contactenos}"class="item__link">Contactenos</a></li>
+                <li class="list__item"><a th:href="@{/home/contactenos}" class="item__link">Contactenos</a></li>
             </ul>
         </nav>
 
@@ -116,22 +116,22 @@
             </span>
 
             <span class="icon__item" id="go-fav">
-                    <i class="ri-heart-3-line"></i>
-                    <span class="icon__badge" id="fav-count"></span>
-                </span>
+                <i class="ri-heart-3-line"></i>
+                <span class="icon__badge" id="fav-count"></span>
+            </span>
 
-                <span class="icon__item" id="cart-icon">
-                    <i class="ri-shopping-cart-2-line"></i>
-                    <span class="icon__badge" id="cart-count"></span>
-                </span>
-            </div>
+            <span class="icon__item" id="cart-icon">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="icon__badge" id="cart-count"></span>
+            </span>
+        </div>
     </header>
 
     <main>
         <section class="productos">
 
             <div class="container__enlaces">
-                <a href="Index.html">Inicio /</a>
+                <a th:href="@{/home}">Inicio /</a>
                 <a href="">Licores /</a>
                 <a href="">Productos</a>
 
@@ -878,7 +878,7 @@
         </section>
 
     </main>
-<!-- ============= DRAWER DEL CARRITO ============= -->
+    <!-- ============= DRAWER DEL CARRITO ============= -->
     <div class="cart-overlay" id="cart-overlay"></div>
     <aside class="cart-drawer" id="cart-drawer">
         <header class="cart-header">
