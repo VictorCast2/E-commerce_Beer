@@ -1,10 +1,12 @@
 package com.application.configuration.security;
 
+import com.application.configuration.Custom.CustomOauth2UserService;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomOauth2UserService customOauth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -53,15 +55,13 @@ public class SecurityConfig {
                         .loginProcessingUrl("/auth/login")
                         .failureUrl("/auth/login?error=true")
                 )
-//                .oauth2Login(oauth2 -> oauth2
-//                        .loginPage("/auth/login")
-//                        .userInfoEndpoint(userInfo ->
-//                                userInfo.userService(customOAuth2UserService)
-//                        )
-//                        .defaultSuccessUrl("/", true)
-//                        .failureUrl("/auth/login?error=true")
-//                        .permitAll()
-//                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/auth/login")
+                        .failureUrl("/auth/login?error=true")
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOauth2UserService)
+                        )
+                )
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/auth/login?logout")
