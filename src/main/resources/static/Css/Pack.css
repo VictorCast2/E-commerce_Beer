@@ -1,6 +1,5 @@
 @import url("./style.css");
 
-
 :root {
     --typografiaGeist: "Geist";
     --typografiaUrbanist: "Urbanist";
@@ -128,4 +127,3 @@
     border: 1px solid var(--colorCafe);
     color: #ffffff;
 }
-

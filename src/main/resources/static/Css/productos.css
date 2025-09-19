@@ -13,13 +13,13 @@
 
 .productos {
     min-height: 100vh;
-    padding-top: 250px;
+    padding-top: 230px;
     position: relative;
 }
 
 .container__enlaces {
     position: absolute;
-    top: 15%;
+    top: 4%;
     left: 6.5%;
 }
 
@@ -39,7 +39,39 @@
     margin: 0 0 0 0;
 }
 
-.produtos__filter{
+#selected-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    top: -40px;
+    left: 6.5%;
+}
+
+.filter-chip {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font: 600 1rem var(--typografiaUrbanist);
+}
+
+.filter-chip span {
+    cursor: pointer;
+    color: #444;
+    font-weight: 100;
+    font-size: 15px;
+}
+
+.filter-chip span:hover {
+    color: red;
+}
+
+
+.produtos__filter {
     display: flex;
     padding-left: 6.2rem;
     gap: 2.5rem;
@@ -59,7 +91,7 @@
     border: 1px solid #e5e7eb;
     border-radius: 5px;
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-items: center;
     height: 55px;
     font: 700 1.5rem var(--typografiaUrbanist);
@@ -68,7 +100,7 @@
     user-select: none;
 }
 
-.select-selected i{
+.select-selected i {
     position: relative;
     transition: transform 0.3s ease;
 }
@@ -77,23 +109,27 @@
     transform: rotate(180deg);
 }
 
-.selected--marca i{
+.selected--marca i {
     left: 10rem;
 }
 
-.selected--categoria i{
+.selected--categoria i {
     left: 8rem;
 
 }
 
-.selected--pais i{
+.selected--pais i {
     left: 12rem;
 
 }
 
-.selected--ordenar i{
+.selected--ordenar i {
     left: 6.2rem;
 
+}
+
+.selected--precio i {
+    left: 5.7rem;
 }
 
 .select-items {
@@ -187,7 +223,7 @@
 /* Pagination */
 .pagination {
     position: relative;
-    top:-25px;
+    top: -25px;
     left: -18px;
     width: 200%;
     overflow-x: hidden;
