@@ -1,5 +1,6 @@
 package com.application.configuration.security;
 
+import com.application.configuration.Custom.CustomAuthFailureHandler;
 import com.application.configuration.Custom.CustomOauth2UserService;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomOauth2UserService customOauth2UserService) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomAuthFailureHandler customAuthFailureHandler, CustomOauth2UserService customOauth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -53,7 +54,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
-                        .failureUrl("/auth/login?error=true")
+                        .failureHandler(customAuthFailureHandler)
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/auth/login")

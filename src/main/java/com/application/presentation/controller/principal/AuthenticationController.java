@@ -17,7 +17,7 @@ public class AuthenticationController {
                            @RequestParam(value = "logout", required = false) String logout,
                            @RequestParam(value = "success", required = false) String success) {
         if (error != null) {
-            model.addAttribute("mensajeError", "Usuario o contraseña incorrectos");
+            model.addAttribute("mensajeError", error);
         }
         if (logout != null) {
             model.addAttribute("mensajeExitoso", "Sesión cerrada correctamente");
