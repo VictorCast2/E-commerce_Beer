@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Filtrar opciones al escribir
             searchInput.addEventListener("keyup", () => {
                 const filter = searchInput.value.toLowerCase();
-                // 🔥 volvemos a obtener todas las opciones cada vez (para incluir las dinámicas)
+                //volvemos a obtener todas las opciones cada vez (para incluir las dinámicas)
                 options = selectWrapper.querySelectorAll(".option");
 
                 options.forEach(option => {
@@ -199,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
             containerCategoria.appendChild(label);
         });
     });
+
+    //filtrar los productos
+    
 
 
 });

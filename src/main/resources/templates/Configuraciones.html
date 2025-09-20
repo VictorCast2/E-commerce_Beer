@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/Blog.css">
+    <link rel="stylesheet" href="../static/Css/Configuraciones.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Blog || E-ecommer Beer</title>
+    <title> Configuraciones || E-ecommer Beer</title>
     <meta name="description" content="">
     <meta name="autor" content="">
     <meta name="keywords" content="">
@@ -35,7 +35,7 @@
                     <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
                     <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
                     <li class="list__item"><a href="productos.html" class="item__link">Productos</a></li>
-                    <li class="list__item"><a href="" class="item__link active">Blog</a></li>
+                    <li class="list__item"><a href="Blog.html" class="item__link">Blog</a></li>
                     <li class="list__item"><a href="Contactos.html" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
@@ -63,23 +63,23 @@
                 <span class="icon__item">
                     <i class="ri-user-line"></i>
 
-                    <div class="nav__menu" id="SubMenu">
-                        <div class="menu__sub">
+                    <!-- <div class="nav__menu" id="SubMenu">
+                            <div class="menu__sub">
 
-                            <a href="login.html" class="sub__link">
-                                <p class="link__text">Iniciar Sesion</p>
-                            </a>
+                                <a href="login.html" class="sub__link">
+                                    <p class="link__text">Iniciar Sesion</p>                                  
+                                </a>
 
-                            <a href="registro.html" class="sub__link">
-                                <p class="link__text">Registro</p>
-                            </a>
+                                <a href="registro.html" class="sub__link">
+                                    <p class="link__text">Registro</p>
+                                </a>
 
-                            <a href="RecordarContrasena.html" class="sub__link">
-                                <p class="link__text">Recordar Contraseña</p>
-                            </a>
+                                <a href="RecordarContrasena.html" class="sub__link">
+                                    <p class="link__text">Recordar Contraseña</p>                                    
+                                </a>
 
-                        </div>
-                    </div>
+                            </div>
+                        </div> -->
 
                     <div class="nav__menu" id="SubMenu">
                         <div class="menu__sub">
@@ -93,7 +93,7 @@
                                 <p class="link__text">Perfil</p>
                             </a>
 
-                            <a href="Configuraciones.html" class="sub__link">
+                            <a href="" class="sub__link">
                                 <p class="link__text">Configuracion</p>
                             </a>
 
@@ -125,166 +125,185 @@
             </div>
     </header>
 
-    <section class="blog">
-        <div class="blog__container">
+    <section class="Configuraciones">
 
-            <h2 class="container__title">Costa Oro Import Blog</h2>
+        <hr class="hr__horinzontal">
 
-            <div class="container__home">
+        <div class="Configuraciones__container">
 
-                <figure class="home__img">
-                    <img src="../static/Assets/Img/blog/blogOne.png" alt="blog">
-                </figure>
+            <aside class="container__nav">
+                <div class="nav__opciones">
+                    <a href="Perfil.html" class="opciones__btn"><i class="ri-user-line"></i> Perfil</a>
+                    <a href="" class="opciones__btn active"><i class="ri-settings-2-line"></i> Configuracion</a>
+                    <a href="Notificaciones.html" class="opciones__btn"><i class="ri-notification-2-line"></i> Notificaciones</a>
+                    <a href="Pedidos.html" class="opciones__btn"> <i class="ri-shopping-bag-3-line"></i> Sus Pedidos</a>
+                    <hr class="hr__separar">
+                    <a href="Index.html" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar Sesion</a>
+                </div>
+            </aside>
 
-                <div class="home__description">
-                    <h2 class="description__titulo">
-                        La Elegancia de los Licores Importados y Tradición
-                    </h2>
-                    <p class="description__texto">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis nihil saepe optio amet
-                        inventore officiis placeat voluptatibus voluptas non, sequi aspernatur quisquam laudantium
-                        architecto totam
-                    </p>
+            <hr class="hr__vertical">
 
-                    <div class="description__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>6min</strong></span>
+            <main class="container__main">
+
+                <div class="main__formulario">
+
+                    <div class="formulario__autenticar">
+
+                        <h2 class="container__title">Activar autenticación en dos pasos</h2>
+                        <p class="container__text">Activa esta opción para proteger tu cuenta con una capa adicional de
+                            seguridad.</p>
+
+                        <div class="container__switch">
+                            <span class="switch__title">Activar autenticación en dos pasos?</span>
+                            <label class="switch__label">
+                                <input type="checkbox" id="autenticacion">
+                                <span class="slider__label"></span>
+                            </label>
+                        </div>
+
+                        <form class="formulario">
+                            <div class="formulario__input">
+                                <div class="custom-select-wrapper">
+                                    <select class="styled-select" id="pregunta1">
+                                        <option disabled selected>Selecciona una pregunta 1</option>
+                                        <option value="Mascota">¿Cuál es el nombre de tu mascota?</option>
+                                        <option value="Colegio">¿Cuál fue tu primer colegio?</option>
+                                        <option value="Nacimiento">¿En qué ciudad naciste?</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                </div>
+                                <p class="input__error error--pregunta1">
+                                    Por favor, seleccione una pregunta
+                                </p>
+                            </div>
+
+                            <div class="formulario__input">
+                                <div class="input-box">
+                                    <input type="text" autocomplete="off" placeholder="" name="Respuesta"
+                                        id="respuesta1">
+                                    <label class="label" for="respuesta1">Respuesta 1</label>
+                                    <span class="box__icon"><i class="ri-check-line"></i></span>
+                                    <span class="box__icon"><i class="ri-close-line"></i></span>
+                                </div>
+                                <p class="input__error error--respuesta1">
+                                    La respuesta de la pregunta es obligatoria
+                                </p>
+                            </div>
+
+                            <div class="formulario__input input--changed">
+                                <div class="custom-select-wrapper">
+                                    <select class="styled-select" id="pregunta2">
+                                        <option disabled selected>Selecciona una pregunta 2</option>
+                                        <option value="Comida">¿Cuál es tu comida favorita?</option>
+                                        <option value="Trabajo">¿Cuál fue tu primer trabajo?</option>
+                                        <option value="Amigo">¿Cómo se llama tu mejor amigo ?</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                </div>
+                                <p class="input__error error--pregunta2">
+                                    Por favor, seleccione una pregunta
+                                </p>
+                            </div>
+
+                            <div class="formulario__input input--changed">
+                                <div class="input-box">
+                                    <input type="text" autocomplete="off" placeholder="" name="Respuesta"
+                                        id="respuesta2">
+                                    <label class="label" for="respuesta2">Respuesta 2</label>
+                                    <span class="box__icon"><i class="ri-check-line"></i></span>
+                                    <span class="box__icon"><i class="ri-close-line"></i></span>
+                                </div>
+                                <p class="input__error error--respuesta2">
+                                    La respuesta de la pregunta es obligatoria
+                                </p>
+                            </div>
+
+
+                            <div class="formulario__input">
+                                <button class="input__btn" type="submit">Guardar configuración</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="formulario__pass">
+                    <h2 class="pass__title">Cambiar Contraseña</h2>
+
+                    <form class="formulario__contra" action="">
+
+                        <div class="formulario__input">
+                            <div class="input-box box--contra">
+                                <input type="password" autocomplete="off" placeholder="" name="ContraseñaAntigua"
+                                    id="contraseñaAntigua">
+                                <label class="label" for="contraseñaAntigua">Contraseña Antigua</label>
+                                <span class="box__icon icon--changed"><i class="ri-check-line"></i></span>
+                                <span class="box__icon icon--changed"><i class="ri-close-line"></i></span>
+                            </div>
+                            <p class="input__error error--pasword">
+                                La contraseña tiene que ser de 4 a 15 digitos
+                            </p>
+                        </div>
+
+                        <div class="formulario__input">
+                            <div class="input-box box--contra">
+                                <input type="password" autocomplete="off" placeholder="" name="NuevaContraseña"
+                                    id="nuevaContraseña">
+                                <label class="label" for="nuevaContraseña">Nueva Contraseña</label>
+                                <span class="box__icon icon--changed"><i class="ri-check-line"></i></span>
+                                <span class="box__icon icon--changed"><i class="ri-close-line"></i></span>
+                            </div>
+                            <p class="input__error error--pasword">
+                                La contraseña tiene que ser de 4 a 15 digitos
+                            </p>
+                        </div>
+
+                        <div class="formulario__input">
+                            <div class="input-box box--contra">
+                                <input type="password" autocomplete="off" placeholder="" name="ConfirmarNuevaContraseña"
+                                    id="CNContraseña">
+                                <label class="label" for="CNContraseña">Confirmar Nueva
+                                    Contraseña</label>
+                                <span class="box__icon icon--changed"><i class="ri-check-line"></i></span>
+                                <span class="box__icon icon--changed"><i class="ri-close-line"></i></span>
+                            </div>
+                            <p class="input__error error--pasword">
+                                Ambas contraseña tienen que ser iguales.
+                            </p>
+                        </div>
+
+                        <div class="registre__link">
+                            <p>No recuerdas tu contraseña actual?<a href="RecordarContrasena.html">Restablece tu contraseña</a>
+                            </p>
+                        </div>
+
+                        <button class="formulario__button" type="submit">Cambiar Contraseña</button>
+                    </form>
+                </div>
+
+                <div class="eliminar__cuenta">
+                    <div class="delete__container">
+                        <h2 class="container__title">Eliminar Cuenta</h2>
+                        
+                        <p class="container__text">
+                            ¿Quieres eliminar tu cuenta?
+                        </p>
+
+                        <p class="container__text">
+                            Esta cuenta contiene 12 pedidos. Al eliminar su cuenta se eliminarán todos los detalles del pedido asociados a ella.
+                        </p>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="confirm-delete">
+                            <label class="wrapper__text" for="confirm-delete">Confirmo la desactivación de mi
+                                cuenta</label>
+                        </div>
+                        <button class="btn-delete" id="delete-btn" disabled>Desactivar cuenta</button>
                     </div>
                 </div>
 
-            </div>
-
-            <div class="blog__flex">
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogOne.png" alt="blog" />
-                    <h4 class="card__title">Mastering Modern Minimalism</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>6min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTwo.png" alt="blog" />
-                    <h4 class="card__title">The Fusion of Tech and Design</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>0min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTree.png" alt="blog" />
-                    <h4 class="card__title">Eco-Friendly Modern Interiors</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>11min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogOne.png" alt="blog" />
-                    <h4 class="card__title">Mastering Modern Minimalism</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>12min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTwo.png" alt="blog" />
-                    <h4 class="card__title">The Fusion of Tech and Design</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>10min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTree.png" alt="blog" />
-                    <h4 class="card__title">Eco-Friendly Modern Interiors</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>3min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogOne.png" alt="blog" />
-                    <h4 class="card__title">Mastering Modern Minimalism</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>4min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTwo.png" alt="blog" />
-                    <h4 class="card__title">The Fusion of Tech and Design</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>5min</strong></span>
-                    </div>
-                </div>
-
-                <div class="blog__card">
-                    <img src="../static/Assets/Img/blog/blogTree.png" alt="blog" />
-                    <h4 class="card__title">Eco-Friendly Modern Interiors</h4>
-                    <p class="card__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ipsam illum fugiat obcaecati
-                        aut, repudiandae natus numquam eveniet nemo
-                    </p>
-                    <div class="card__tiempo">
-                        <span class="tiempo__item">25 Agosto 2024</span>
-                        <span class="tiempo__item">Tiempo De Lectura: <strong>1min</strong></span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="pagination" id="pagination">
-                <button id="prevBtn"><i class="ri-arrow-left-s-line"></i></button>
-                <div class="pagination__Numbers">
-                    <div class="button__pagination active" id="pageNumbers">1</div>
-                    <div class="button__pagination" id="pageNumbers">2</div>
-                    <div class="button__pagination" id="pageNumbers">3</div>
-                    <div class="button__pagination" id="pageNumbers">4</div>
-                </div>
-                <button id="nextBtn"><i class="ri-arrow-right-s-line"></i></button>
-            </div>
+            </main>
 
         </div>
     </section>
@@ -425,12 +444,10 @@
         </div>
     </footer>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../static/Js/Blog.js"></script>
+    <script type="module" src="../static/Js/Configuraciones.js"></script>
 </body>
 
 </html>
