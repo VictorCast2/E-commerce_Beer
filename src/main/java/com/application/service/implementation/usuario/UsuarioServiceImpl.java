@@ -1,6 +1,6 @@
 package com.application.service.implementation.usuario;
 
-import com.application.configuration.Custom.CustomUserDetails;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
@@ -33,7 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         Usuario usuario = usuarioRepository.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("ERROR: el correo '" + correo + "' no existe"));
 
-        return new CustomUserDetails(usuario);
+        return new CustomUserPrincipal(usuario);
     }
 
     @Override

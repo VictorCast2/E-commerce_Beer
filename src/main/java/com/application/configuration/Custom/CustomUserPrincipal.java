@@ -6,15 +6,14 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Getter
-public class CustomUserDetails implements UserDetails {
+public class CustomUserPrincipal implements UserDetails, OAuth2User {
 
-    // Atributos para la autenticación y autorización del usuario
+    // Atributos para la autenticación y autorización del usuario mediante UserDetails
     private final String correo;
     private final String password;
     private final List<GrantedAuthority> authorities = new ArrayList<>();
@@ -23,12 +22,21 @@ public class CustomUserDetails implements UserDetails {
     private final boolean accountNonLocked;
     private final boolean credentialNonExpired;
 
+    // Atributo para Oauth2User
+    private final Map<String, Object> attributes;
+
     // Atributos adicionales de la clase Usuario
     private final String nombres;
     private final String apellidos;
     private final Empresa empresa;
 
-    public CustomUserDetails(Usuario usuario) {
+    // Constructor usado cuando el usuario entre por .fromLogin()
+    public CustomUserPrincipal(Usuario usuario) {
+        this(usuario, Collections.emptyMap());
+    }
+
+    // Constructor usado cuando el usuario entra por .oauth2Login()
+    public CustomUserPrincipal(Usuario usuario, Map<String, Object> attributes) {
         this.correo = usuario.getCorreo();
         this.password = usuario.getPassword();
         this.authorities.add(new SimpleGrantedAuthority("ROLE_".concat(usuario.getRol().getName().name())));
@@ -39,6 +47,12 @@ public class CustomUserDetails implements UserDetails {
         this.nombres = usuario.getNombres();
         this.apellidos = usuario.getApellidos();
         this.empresa = usuario.getEmpresa();
+        this.attributes = attributes;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 
     @Override
@@ -74,5 +88,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    @Override
+    public String getName() {
+        return correo;
     }
 }

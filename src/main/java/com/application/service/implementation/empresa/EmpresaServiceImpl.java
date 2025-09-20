@@ -14,22 +14,4 @@ public class EmpresaServiceImpl implements EmpresaService {
 
     private final UsuarioRepository usuarioRepository;
     private final EmpresaRepository empresaRepository;
-
-    @Override
-    public EmpresaResponse crearEmpresa(String correo) {
-        Usuario usuarioActualizado  = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new UsernameNotFoundException("El correo no existe: " + correo));
-        return null;
-    }
-
-    @Override
-    public EmpresaResponse actualizarEmpresa(CreacionEmpresaRequest request) {
-        return null;
-    }
-
-    @Override
-    public EmpresaResponse deleteEmpresa(EditarEmpresaRequest request) {
-        return null;
-    }
-
 }

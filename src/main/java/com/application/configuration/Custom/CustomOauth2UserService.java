@@ -50,15 +50,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             usuarioRepository.save(usuario);
         }
 
-        Set<GrantedAuthority> authorities = Set.of(
-                new SimpleGrantedAuthority("ROLE_".concat(usuario.getRol().getName().name()))
-        );
-
-        return new DefaultOAuth2User(
-                authorities,
-                oAuth2User.getAttributes(),
-                userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName()
-        );
+        return new CustomUserPrincipal(usuario, oAuth2User.getAttributes());
     }
 }
 
