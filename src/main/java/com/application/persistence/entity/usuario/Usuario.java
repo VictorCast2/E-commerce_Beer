@@ -32,17 +32,17 @@ public class Usuario {
     @Column(name = "tipo_identificacion")
     @Enumerated(EnumType.STRING)
     private EIdentificacion tipoIdentificacion;
-    @Column(name = "numero_identificacion", length = 15, nullable = false)
+    @Column(name = "numero_identificacion", length = 15)
     private String numeroIdentificacion;
-    @Column(length = 175, nullable = false)
+    @Column(length = 175)
     private String nombres;
-    @Column(length = 175, nullable = false)
+    @Column(length = 175)
     private String apellidos;
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String telefono;
     @Column(length = 100, nullable = false)
     private String correo;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String password;
 
     @Column(name = "is_enabled")
@@ -62,7 +62,7 @@ public class Usuario {
     private boolean credentialsNonExpired = true;
 
     // Cardinalidad con la tabla rol (relación unidireccional)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(
             name = "rol_id",
             referencedColumnName = "rol_id",
@@ -71,7 +71,7 @@ public class Usuario {
     private Rol rol;
 
     // Cardinalidad con la tabla empresas (relación unidireccional)
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "empresa_id",
             referencedColumnName = "empresa_id",

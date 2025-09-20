@@ -6,6 +6,7 @@ import com.application.configuration.Custom.CustomOauth2UserService;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -48,7 +49,8 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
 
                         // Autenticación Controller
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
 
                         // Configurar endpoints públicos estáticos (sin autenticación)
                         .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
@@ -64,6 +66,7 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/auth/login")
+                        .successHandler(customAuthSuccessHandler)
                         .failureHandler(customAuthFailureHandler)
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOauth2UserService)

@@ -27,8 +27,8 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
 
-        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
-        String correo = principal.getAttribute("correo");
+        CustomUserPrincipal principal = (CustomUserPrincipal) authentication.getPrincipal();
+        String correo = principal.getCorreo();
 
         Usuario usuario = usuarioRepository.findByCorreo(correo)
                 .orElse(null);

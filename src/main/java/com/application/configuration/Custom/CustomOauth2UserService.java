@@ -6,16 +6,11 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +26,8 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2User.getAttribute("email");
         String nombre = oAuth2User.getAttribute("given_name");
         String apellido = oAuth2User.getAttribute("family_name");
+
+        System.out.println("MENSAJE DE PRUEBA");
 
         Usuario usuario = usuarioRepository.findByCorreo(email)
                 .orElse(null);

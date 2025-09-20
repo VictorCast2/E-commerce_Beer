@@ -33,6 +33,11 @@ public class DataLoader {
                         });
             }
 
+            // Recuperar roles persistidos
+            Rol rolAdmin = rolRepository.findByName(ERol.ADMIN).orElseThrow();
+            Rol rolContacto = rolRepository.findByName(ERol.PERSONA_CONTACTO).orElseThrow();
+            Rol rolNatural = rolRepository.findByName(ERol.PERSONA_NATURAL).orElseThrow();
+
             /* Crear Usuarios */
             // Admin
             Usuario userJose = Usuario.builder()
@@ -43,10 +48,10 @@ public class DataLoader {
                     .telefono("310 2233445")
                     .correo("jose@mail.com")
                     .password("$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq")
-                    .rol(Rol.builder().name(ERol.ADMIN).build())
+                    .rol(rolAdmin) // usar rol persistido
                     .build();
 
-            // Persona de Contacto
+            // Persona de Contacto con Empresa
             Empresa empresaTheresa = Empresa.builder()
                     .nit("987654321-0")
                     .razonSocial("Aurum Tech")
@@ -67,7 +72,7 @@ public class DataLoader {
                     .correo("theresa@mail.com")
                     .password("$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq")
                     .empresa(empresaTheresa)
-                    .rol(Rol.builder().name(ERol.PERSONA_CONTACTO).build())
+                    .rol(rolContacto) // usar rol persistido
                     .build();
 
             // Persona Natural
@@ -79,15 +84,15 @@ public class DataLoader {
                     .telefono("330 2233445")
                     .correo("elysia@mail.com")
                     .password("$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq")
-                    .rol(Rol.builder().name(ERol.PERSONA_NATURAL).build())
+                    .rol(rolNatural) // usar rol persistido
                     .build();
 
+            // Guardar usuarios si no existen
             if (!usuarioRepository.existsByCorreo(userJose.getCorreo())) {
                 usuarioRepository.save(userJose);
             }
 
             if (!usuarioRepository.existsByCorreo(userTheresa.getCorreo())) {
-                empresaRepository.save(empresaTheresa);
                 usuarioRepository.save(userTheresa);
             }
 
