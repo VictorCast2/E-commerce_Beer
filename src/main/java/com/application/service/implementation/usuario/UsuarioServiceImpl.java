@@ -1,7 +1,10 @@
 package com.application.service.implementation.usuario;
 
 import com.application.configuration.Custom.CustomUserDetails;
+import com.application.persistence.entity.rol.Rol;
+import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
+import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
@@ -50,6 +53,12 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuario.setApellidos(completeProfileRequest.apellidos());
         usuario.setTelefono(completeProfileRequest.telefono());
         usuario.setPassword(encryptedPassword);
+
+        if (completeProfileRequest.tipoIdentificacion().equals(EIdentificacion.NIT)) {
+            usuario.setRol(Rol.builder().name(ERol.PERSONA_JURIDICA).build());
+        } else {
+            usuario.setRol(Rol.builder().name(ERol.PERSONA_NATURAL).build());
+        }
 
         usuarioRepository.save(usuario);
         return new GeneralResponse("Registro completado exitosamente.");

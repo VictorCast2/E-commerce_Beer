@@ -70,7 +70,7 @@ public class DataLoader {
                     .rol(Rol.builder().name(ERol.PERSONA_CONTACTO).build())
                     .build();
 
-            // Invitado
+            // Persona Natural
             Usuario userElysia = Usuario.builder()
                     .tipoIdentificacion(EIdentificacion.CC)
                     .numeroIdentificacion("1234567890")
@@ -79,7 +79,7 @@ public class DataLoader {
                     .telefono("330 2233445")
                     .correo("elysia@mail.com")
                     .password("$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq")
-                    .rol(Rol.builder().name(ERol.INVITADO).build())
+                    .rol(Rol.builder().name(ERol.PERSONA_NATURAL).build())
                     .build();
 
             if (!usuarioRepository.existsByCorreo(userJose.getCorreo())) {
