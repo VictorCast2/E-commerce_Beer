@@ -1,4 +1,4 @@
-package com.application.presentation.controller.categoria;
+package com.application.presentation.controller.admin;
 
 import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.rol.Rol;
@@ -42,7 +42,7 @@ class CategoriaControllerTest {
     void categoria() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
-                .cedula("12345")
+                .numeroIdentificacion("12345")
                 .nombres("Theresa Andrea")
                 .correo("example@mail.com")
                 .rol(Rol.builder().name(ERol.ADMIN).build())
@@ -53,7 +53,7 @@ class CategoriaControllerTest {
         String mensaje = "Mensaje de prueba";
 
         // When
-        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(categoriaService.getCategorias()).thenReturn(categoriasMock);
 
         // Then
@@ -71,13 +71,13 @@ class CategoriaControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void addcategoria() throws Exception {
+    void createCategoria() throws Exception {
         // Given
         GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
         // When
-        when(categoriaService.addCategoria( any(CategoriaCreateRequest.class) )).thenReturn(responseMock);
+        when(categoriaService.createCategoria( any(CategoriaCreateRequest.class) )).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/categoria/add-categoria")
@@ -87,7 +87,7 @@ class CategoriaControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).addCategoria( any(CategoriaCreateRequest.class) );
+        verify(categoriaService).createCategoria( any(CategoriaCreateRequest.class) );
     }
 
     @Test

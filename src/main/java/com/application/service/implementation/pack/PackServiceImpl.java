@@ -113,7 +113,7 @@ public class PackServiceImpl implements PackService {
      */
     @Override
     @Transactional
-    public GeneralResponse addPack(PackCreateRequest packRequest) {
+    public GeneralResponse createPack(PackCreateRequest packRequest) {
 
         Pack pack = Pack.builder()
                 .imagen(packRequest.imagen())

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ECommerceBeerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ECommerceBeerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ECommerceBeerApplication.class, args);
+    }
 
 }

@@ -12,7 +12,7 @@ public interface CategoriaService {
     List<CategoriaResponse> getCategoriasActivas();
 
     // CRUD
-    GeneralResponse addCategoria(CategoriaCreateRequest categoriaRequest);
+    GeneralResponse createCategoria(CategoriaCreateRequest categoriaRequest);
     GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id);
     GeneralResponse disableCategoria(Long id);
     GeneralResponse deleteCategoria(Long id);

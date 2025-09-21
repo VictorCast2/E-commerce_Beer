@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
     Optional<Empresa> findByNit(String nit);
+    boolean existsByNit(String nit);
 }

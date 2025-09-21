@@ -12,7 +12,7 @@ public interface ProductoService {
     List<ProductoResponse> getProductosActivos();
 
     // CRUD
-    GeneralResponse addProducto(ProductoCreateRequest productoRequest);
+    GeneralResponse createProducto(ProductoCreateRequest productoRequest);
     GeneralResponse updateProducto(ProductoCreateRequest productoRequest, Long id);
     GeneralResponse disableProducto(Long id);
     GeneralResponse deleteProducto(Long id);

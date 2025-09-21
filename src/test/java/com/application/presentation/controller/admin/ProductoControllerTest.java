@@ -1,4 +1,4 @@
-package com.application.presentation.controller.producto;
+package com.application.presentation.controller.admin;
 
 import com.application.provider.ProductoDataProvider;
 import com.application.persistence.entity.rol.Rol;
@@ -26,7 +26,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(ProductoAdminController.class)
+@WebMvcTest(ProductoController.class)
 //@Import(SecurityConfig.class)
 class ProductoControllerTest {
 
@@ -43,7 +43,7 @@ class ProductoControllerTest {
     void producto() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
-                .cedula("12345")
+                .numeroIdentificacion("12345")
                 .nombres("Theresa Andrea")
                 .correo("example@mail.com")
                 .rol(Rol.builder().name(ERol.ADMIN).build())
@@ -54,7 +54,7 @@ class ProductoControllerTest {
         String mensaje = "Mensaje de Pruebas";
 
         // When
-        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(productoService.getProductos()).thenReturn(productoList);
 
         // Then
@@ -71,13 +71,13 @@ class ProductoControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void addProducto() throws Exception {
+    void createProducto() throws Exception {
         // Given
         GeneralResponse responseMock = new GeneralResponse("Mensaje de Pruebas");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
         // When
-        when(productoService.addProducto( any(ProductoCreateRequest.class) )).thenReturn(responseMock);
+        when(productoService.createProducto( any(ProductoCreateRequest.class) )).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/producto/add-producto")
@@ -86,7 +86,7 @@ class ProductoControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/producto/?mensaje=" + mensajeEncode));
 
-        verify(productoService).addProducto(any(ProductoCreateRequest.class));
+        verify(productoService).createProducto(any(ProductoCreateRequest.class));
     }
 
     @Test

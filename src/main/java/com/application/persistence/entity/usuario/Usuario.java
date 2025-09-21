@@ -6,8 +6,7 @@ import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.*;
 
 @Getter
@@ -19,7 +18,7 @@ import java.util.*;
 @Table(
         name = "usuario",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "cedula", name = "uk_usuario_cedula"),
+                @UniqueConstraint(columnNames = "numeroIdentificacion", name = "uk_usuario_numero_identificacion"),
                 @UniqueConstraint(columnNames = "telefono", name = "uk_usuario_telefono"),
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
@@ -33,19 +32,17 @@ public class Usuario {
     @Column(name = "tipo_identificacion")
     @Enumerated(EnumType.STRING)
     private EIdentificacion tipoIdentificacion;
-    @Column(length = 15, nullable = false)
-    private String cedula;
-    @Column(length = 175, nullable = false)
+    @Column(name = "numero_identificacion", length = 15)
+    private String numeroIdentificacion;
+    @Column(length = 175)
     private String nombres;
-    @Column(length = 175, nullable = false)
+    @Column(length = 175)
     private String apellidos;
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String telefono;
-    @Column(nullable = false)
-    private String imagen;
     @Column(length = 100, nullable = false)
     private String correo;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String password;
 
     @Column(name = "is_enabled")
@@ -74,7 +71,7 @@ public class Usuario {
     private Rol rol;
 
     // Cardinalidad con la tabla empresas (relación unidireccional)
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "empresa_id",
             referencedColumnName = "empresa_id",
@@ -83,22 +80,7 @@ public class Usuario {
     private Empresa empresa;
 
     // Cardinalidad con la tabla compra (relación bidireccional)
-    @Column(name = "compras")
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Set<Compra> compras = new HashSet<>();
-
-    /**
-     * Método para obtener los roles del usuario como una colección de GrantedAuthority.
-     * Si el rol es nulo o su nombre es nulo, devuelve una lista vacía.
-     * De lo contrario, devuelve una lista con el rol del usuario.
-     *
-     * @return Colección de GrantedAuthority
-     */
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (rol == null || rol.getName() == null) {
-            return Collections.emptyList();
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.getName().name()));
-    }
 
 }

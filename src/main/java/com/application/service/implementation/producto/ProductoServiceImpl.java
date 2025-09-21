@@ -83,7 +83,7 @@ public class ProductoServiceImpl implements ProductoService {
      * @return Respuesta con mensaje de confirmación
      */
     @Override
-    public GeneralResponse addProducto(@NotNull ProductoCreateRequest productoRequest) {
+    public GeneralResponse createProducto(@NotNull ProductoCreateRequest productoRequest) {
 
         Producto producto = Producto.builder()
                 .imagen(productoRequest.imagen())

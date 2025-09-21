@@ -1,4 +1,4 @@
-package com.application.presentation.controller.pack;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
@@ -34,7 +34,7 @@ public class PackController {
                        @RequestParam(value = "mensaje", required = false) String mensaje,
                        Model model) {
 
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<PackResponse> packList = packService.getPacks();
 
         model.addAttribute("usuario", usuario);
@@ -46,7 +46,7 @@ public class PackController {
 
     @PostMapping("/add-pack")
     public String addPack(@ModelAttribute @Valid PackCreateRequest packRequest) {
-        GeneralResponse response = packService.addPack(packRequest);
+        GeneralResponse response = packService.createPack(packRequest);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -81,7 +81,7 @@ public class PackController {
     public String getDescripcionPack(@AuthenticationPrincipal UserDetails userDetails,
                                      @PathVariable Long id,
                                      Model model) {
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         PackResponse packResponse = packService.getPackResponseById(id);
         List<PackResponse> packList = packService.getPacksActivos();
         Collections.shuffle(packList);

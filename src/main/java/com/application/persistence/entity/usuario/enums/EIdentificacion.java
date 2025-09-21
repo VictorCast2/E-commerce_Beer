@@ -9,7 +9,6 @@ public enum EIdentificacion {
     DE("Documento de Extranjería"),
     NIT("Número de Identificación Tributaria"),
     PP("Pasaporte"),
-    RUT("Registro Único Tributario"),
     TE("Tarjeta de Extranjería"),
     TI("Tarjeta de Identidad");
 

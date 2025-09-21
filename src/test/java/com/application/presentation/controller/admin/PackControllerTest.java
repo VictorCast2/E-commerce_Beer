@@ -1,4 +1,4 @@
-package com.application.presentation.controller.pack;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
@@ -42,7 +42,7 @@ class PackControllerTest {
     void pack() throws Exception {
         // Given
         Usuario usuarioMock = Usuario.builder()
-                .cedula("12345")
+                .numeroIdentificacion("12345")
                 .nombres("Theresa Andrea")
                 .correo("example@mail.com")
                 .rol(Rol.builder().name(ERol.ADMIN).build())
@@ -52,7 +52,7 @@ class PackControllerTest {
 
         String mensaje = "Mensaje de Prueba";
 
-        when(usuarioService.encontrarCorreo("example@mail.com")).thenReturn(usuarioMock);
+        when(usuarioService.getUsuarioByCorreo("example@mail.com")).thenReturn(usuarioMock);
         when(packService.getPacks()).thenReturn(packList);
 
         // When - Then
@@ -74,7 +74,7 @@ class PackControllerTest {
         GeneralResponse responseMock = new GeneralResponse("Mensaje de Prueba");
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
 
-        when(packService.addPack(any(PackCreateRequest.class))).thenReturn(responseMock);
+        when(packService.createPack(any(PackCreateRequest.class))).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/pack/add-pack")
@@ -83,7 +83,7 @@ class PackControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/pack/?mensaje=" + mensajeEncode));
 
-        verify(packService).addPack(any(PackCreateRequest.class));
+        verify(packService).createPack(any(PackCreateRequest.class));
     }
 
     @Test

@@ -143,7 +143,7 @@ class PackServiceImplTest {
     }
 
     @Test
-    void addPack() {
+    void createPack() {
         // Given
         PackCreateRequest packRequest = PackDataProvider.newPackMock();
 
@@ -151,7 +151,7 @@ class PackServiceImplTest {
         when(categoriaRepository.findAllById( anyList() )).thenReturn(PackDataProvider.categoriaListMock());
         when(productoRepository.findById( anyLong() )).thenReturn(PackDataProvider.productoMock());
 
-        GeneralResponse resultado = packService.addPack(packRequest);
+        GeneralResponse resultado = packService.createPack(packRequest);
 
         // Then
         ArgumentCaptor<Pack> argumentCaptor = ArgumentCaptor.forClass(Pack.class);
@@ -168,7 +168,7 @@ class PackServiceImplTest {
     }
 
     @Test
-    void addPack_StockInsuficiente() {
+    void createPack_StockInsuficiente() {
         // Given
         PackCreateRequest packRequest = PackDataProvider.newPackMock();
         Optional<Producto> producto = ProductoDataProvider.productoMock();
@@ -178,7 +178,7 @@ class PackServiceImplTest {
         when(categoriaRepository.findAllById( anyList() )).thenReturn(PackDataProvider.categoriaListMock());
         when(productoRepository.findById( anyLong() )).thenReturn(producto);
 
-        GeneralResponse resultado = packService.addPack(packRequest);
+        GeneralResponse resultado = packService.createPack(packRequest);
 
         // Then
         assertEquals("No hay suficiente stock del producto: " + producto.get().getNombre(), resultado.mensaje());
@@ -187,7 +187,7 @@ class PackServiceImplTest {
     }
 
     @Test
-    void addPack_ProductoNoEncontrado() {
+    void createPack_ProductoNoEncontrado() {
         // Given
         PackCreateRequest packRequest = PackDataProvider.newPackMock();
 
@@ -195,7 +195,7 @@ class PackServiceImplTest {
         when(productoRepository.findById( anyLong() )).thenReturn(Optional.empty());
 
         // When - Then
-        assertThrows(EntityNotFoundException.class, () -> packService.addPack(packRequest));
+        assertThrows(EntityNotFoundException.class, () -> packService.createPack(packRequest));
 
         verify(packRepository, never()).save( any(Pack.class) );
     }

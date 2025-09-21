@@ -1,4 +1,4 @@
-package com.application.presentation.controller.producto;
+package com.application.presentation.controller.admin;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
@@ -6,7 +6,7 @@ import com.application.presentation.dto.producto.request.ProductoCreateRequest;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,11 +19,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/producto")
-@RequiredArgsConstructor
-public class ProductoAdminController {
+public class ProductoController {
 
-    private final ProductoServiceImpl productoService;
-    private final UsuarioServiceImpl usuarioService;
+    @Autowired
+    private ProductoServiceImpl productoService;
+
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
     public String Producto(
@@ -32,7 +34,7 @@ public class ProductoAdminController {
             Model model
             ) {
 
-        Usuario usuario = usuarioService.encontrarCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<ProductoResponse> productoList = productoService.getProductos();
 
         model.addAttribute("usuario", usuario);
@@ -44,7 +46,7 @@ public class ProductoAdminController {
 
     @PostMapping("/add-producto")
     public String addProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest) {
-        GeneralResponse response = productoService.addProducto(productoRequest);
+        GeneralResponse response = productoService.createProducto(productoRequest);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
