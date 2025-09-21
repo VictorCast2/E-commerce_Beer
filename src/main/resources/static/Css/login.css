@@ -13,18 +13,17 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #ffff;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 150px 0 0 20px;
-    overflow-y: hidden;
-
-}
-
 
 .contenido__form{
-    margin: -60px 0 0 6em;
+    display: flex;
+}
+
+.form__login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 8%;
 }
 
 .form .formulario__title {
@@ -61,7 +60,7 @@ body {
     width: 100%;
     width: 550px;
     height: 55px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color:#F5FAFF ;
 }
 
@@ -104,7 +103,7 @@ body {
     border:1px solid #ccc;
     padding: 10px 15px;
     font: 600 1rem var(--typografiaUrbanist);
-    border-radius: 5px;
+    border-radius: 8px;
     width: 550px;
     height: 55px;
     letter-spacing: 1px;
@@ -217,7 +216,7 @@ body {
     width: 550px;
     height: 55px;
     margin: 30px 10em 30px 0;
-    border-radius: 5px;
+    border-radius: 8px;
     border: none;
     position: relative;
     overflow: hidden;
@@ -270,16 +269,15 @@ body {
 
 
 .imagen__container {
-    position: absolute;
-    top: 0;
-    left:54.5em;
+    position: relative;
+    top: -11%;
+    left: -1.1%;
 }
 
 .imagen__container .container__login{
     width: 100%;
-    max-width: 670px;
+    max-width: 650px;
     min-height: 100vh;
-    border-radius: 0 0 0 190px;
 }
 
 .icono__back{

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/Css/registro.css">
+    <link rel="stylesheet" href="../static/Css/CompletarRegistro.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Registro</title>
+    <title>Completar Registro</title>
     <meta name="description" content="">
     <meta name="autor" content="">
     <meta name="keywords" content="">
@@ -26,11 +26,6 @@
 </head>
 
 <body>
-    <!-- <div class="icono__back">
-        <i class="ri-arrow-left-s-line"></i>
-        <a class="regresar" href="index.html">Regresar A Inicio</a>
-    </div> -->
-
     <div class="contenido__form">
 
         <figure class="form__imagen">
@@ -39,11 +34,11 @@
 
         <div class="form__registro">
             <form class="form">
-                <h1 class="formulario__title">Registro</h1>
-            
-                <span class="formulario__title2">Registre Todos Sus Datos Por Favor</span>
-            
-            
+                <h1 class="formulario__title">Completa tu registro</h1>
+
+                <span class="formulario__title2">Para continuar necesitamos algunos datos adicionales</span>
+
+
                 <div class="formulario">
                     <div class="formulario__input">
                         <div class="input-box">
@@ -56,7 +51,7 @@
                             El nombre debe tener al menos 3 letras y no contener números.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
                             <input type="text" autocomplete="off" placeholder="" name="Apellido" id="apellido">
@@ -68,7 +63,7 @@
                             El nombre debe tener al menos 3 letras y no contener números.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="custom-select-wrapper">
                             <select class="styled-select" id="tipoIdentificacion">
@@ -88,10 +83,11 @@
                             Por favor, seleccione un tipo de identificación.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Identificacion" id="identificacion">
+                            <input type="text" autocomplete="off" placeholder="" name="Identificacion"
+                                id="identificacion">
                             <label for="identificacion">Identificacion</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -100,7 +96,7 @@
                             La cédula debe contener entre 6 y 10 dígitos numéricos.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
                             <input type="email" autocomplete="off" placeholder="" name="Email" id="email">
@@ -112,7 +108,7 @@
                             El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
                             <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
@@ -124,7 +120,7 @@
                             El teléfono solo puede contener numeros y el maximo son 10 digitos.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
                             <input type="password" autocomplete="off" placeholder="" name="Password" id="password">
@@ -136,7 +132,7 @@
                             La contraseña tiene que ser de 4 a 15 digitos
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="input-box">
                             <input type="password" autocomplete="off" placeholder="" name="RepetirPassword"
@@ -149,28 +145,28 @@
                             Ambas contraseña tienen que ser iguales.
                         </p>
                     </div>
-            
+
                     <div class="formulario__input">
                         <div class="remember-forgot">
                             <label class="forgot__label"><input type="checkbox" name="terminos">Acepto Terminos Y
                                 Condiciones</label>
                         </div>
                     </div>
-            
-            
-                    <div class="formulario__input formulario__btn-container">
-                        <button class="formulario__btn" type="submit">Registrar</button>
-            
-                        <span class="otrascuentas__titles">O con</span>
-                        
-                        <a href="" class="otrascuentas__btn">
-                            <img loading="lazy" src="../static/Assets/Img/logos/google.svg" alt="">
-                            Continuar con google
-                        </a>
+
+                    <div class="formulario__input">
+                        <div class="remember-forgot">
+                            <label class="forgot__label"><input type="checkbox" name="terminos">Pertenece a alguna empresa?</label>
+                        </div>
                     </div>
-            
+
+
+                    <div class="formulario__input formulario__btn-container">
+                        <button class="formulario__btn" type="submit">Enviar Registro</button>
+
+                    </div>
+
                 </div>
-            
+
             </form>
         </div>
     </div>
@@ -178,8 +174,8 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../static/Js/registro.js"></script>
+
+    <script src="../static/Js/CompleterRegistro.js"></script>
 </body>
 
 </html>
