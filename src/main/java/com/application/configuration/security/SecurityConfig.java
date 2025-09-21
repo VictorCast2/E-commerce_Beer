@@ -2,14 +2,13 @@ package com.application.configuration.security;
 
 import com.application.configuration.Custom.CustomAuthFailureHandler;
 import com.application.configuration.Custom.CustomAuthSuccessHandler;
-import com.application.configuration.Custom.CustomOauth2UserService;
+import com.application.configuration.Custom.CustomOAuth2UserService;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -28,7 +27,7 @@ public class SecurityConfig {
             HttpSecurity http,
             CustomAuthSuccessHandler customAuthSuccessHandler,
             CustomAuthFailureHandler customAuthFailureHandler,
-            CustomOauth2UserService customOauth2UserService) throws Exception {
+            CustomOAuth2UserService customOauth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -52,9 +51,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
 
-                        // Configurar endpoints públicos estáticos (sin autenticación)
-                        .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
-
+                                                // Configurar endpoints públicos estáticos (sin autenticación)
+                                                .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
                         // Configurar endpoints NO ESPECIFICADOS
                         .anyRequest().authenticated()
                 )
@@ -84,7 +82,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 

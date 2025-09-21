@@ -6,8 +6,6 @@
     --colorLigth: #71717a;
 }
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -76,7 +74,6 @@ body {
     font: 700 1.5rem "Geist";
 }
 
-
 .header__navbar {
     display: flex;
     justify-content: center;
@@ -95,10 +92,32 @@ body {
 
 
 .item__link {
+    position: relative;
     text-decoration: none;
     color: #000000;
     font: 700 1.2rem "Urbanist";
+    transition: color .4s ease;
 }
+
+.item__link:hover {
+    color: #A0522D;
+}
+
+.item__link.active {
+    color: #A0522D;
+}
+
+.item__link.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.3rem;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #A0522D, transparent);
+
+}
+
 
 .list__icon {
     margin-left: 1.5rem;
@@ -194,12 +213,13 @@ body {
 .nav__menu {
     position: absolute;
     top: 90%;
-    right: -80%;
-    width: 320px;
+    right: -300%;
+    width: 240px;
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.5s;
 }
+
 
 .nav__menu.open__menu {
     max-height: 400px;
@@ -207,26 +227,12 @@ body {
 
 .menu__sub {
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-
-.sub__info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 1.5rem;
-}
-
-.sub__info i {
-    font-size: 45px;
-}
-
-.sub__info .info__title {
-    font: 600 1.5rem var(--typografiaGeist);
-    color: #525252;
-}
-
 
 .menu__sub hr {
     border: 0;
@@ -237,12 +243,37 @@ body {
 
 }
 
+.sub__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1.5rem;
+}
+
+.sub__info i {
+    font-size: 35px;
+}
+
+.sub__info .info__title {
+    font: 600 1.2rem var(--typografiaGeist);
+    color: #525252;
+}
+
+
 .sub__link {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #525252;
-    margin: 12px 0;
+    color: var(--colorLigth);
+    margin: 1px 0;
+    transition: background-color .4s ease, color .4s ease;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+}
+
+.sub__link:hover {
+    color: #111827;
+    background-color: #f3f4f6;
 }
 
 .sub__link .link__text {
@@ -251,30 +282,6 @@ body {
 
 }
 
-.sub__link:hover .link__text {
-    font-weight: 700;
-
-}
-
-.sub__link i:not(.ri-arrow-right-s-line) {
-    font-size: 20px;
-    background-color: #e5e5e5;
-    border-radius: 50%;
-    padding: 8px;
-    margin-right: 15px;
-}
-
-.sub__link .link__flec {
-    transition: transform .5s;
-    color: #555;
-    font: 900 1.4rem var(--typografiaUrbanist);
-
-}
-
-.sub__link:hover .link__flec {
-    transform: translateX(5px);
-
-}
 
 /**Section hero__content */
 .content__information {
@@ -337,8 +344,6 @@ body {
     transition: background 0.3s;
 }
 
-
-
 .hero--paulaner {
     background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #f59e0b 100%);
 }
@@ -354,9 +359,6 @@ body {
 .hero--guinness {
     background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #000000 100%);
 }
-
-
-
 
 /* PAULANER - naranja */
 .hero--paulaner .carousel__dot.active,
@@ -500,7 +502,6 @@ body {
 .information__clientes img:first-child {
     margin-left: 0;
 }
-
 
 .cliente__satif {
     display: flex;
@@ -799,7 +800,6 @@ body {
     transition: background 0.3s;
 }
 
-
 .quantity-control span {
     flex: 1;
     font: 700 1.2rem var(--typografiaUrbanist);
@@ -847,8 +847,6 @@ body {
     border-radius: 6px;
     cursor: pointer;
 }
-
-
 
 /* Section Producto */
 .productos {
@@ -909,8 +907,6 @@ body {
     background: #eee;
 }
 
-
-
 /** Productos Destacados */
 .destacados__vertodos {
     position: relative;
@@ -920,17 +916,14 @@ body {
     margin: 2rem 6.2rem 2rem 6.2rem;
 }
 
-
 .destacados__vertodos .destacados__titles {
     font: 700 2rem "Geist";
 
 }
 
-
 .destacados__vertodos .vertodos__enlaces {
     font: 700 1.2rem "Geist";
     color: #e30712;
-
 }
 
 .flex {
@@ -1014,9 +1007,6 @@ body {
     margin-bottom: 16px;
 }
 
-
-
-
 /* Badge */
 .badge {
     position: absolute;
@@ -1049,8 +1039,6 @@ body {
     transform: rotate(-45deg);
 }
 
-
-
 .card .category {
     font: 500 1rem "Geist";
     color: #f472b6;
@@ -1068,7 +1056,6 @@ body {
     width: 100%;
 }
 
-
 .pais {
     display: flex;
     justify-content: center;
@@ -1077,13 +1064,11 @@ body {
 
 }
 
-
 .pais img {
     max-width: 100%;
     width: 30px;
     height: auto;
 }
-
 
 .pais .pais--changed {
     width: 35px;
@@ -1175,7 +1160,6 @@ body {
     color: #fff;
 }
 
-
 /* Por que deberias comprar con nosotros */
 .elegir__contenedor {
     min-height: 100vh;
@@ -1187,7 +1171,6 @@ body {
     gap: 2rem;
     align-items: center;
 }
-
 
 .elegir__fondo {
     position: absolute;
@@ -1266,12 +1249,9 @@ body {
     gap: 5rem;
 }
 
-
-
 .flex__img img {
     max-width: 100%;
 }
-
 
 .product__flex .flex__content {
     max-width: 600px;
@@ -1281,7 +1261,6 @@ body {
 .flex__content .content__name {
     font: 500 1.4rem var(--typografiaGeist);
     margin: 0 0.8rem 0 0;
-
 }
 
 .flex__content .content__descuento {
@@ -1391,17 +1370,17 @@ body {
     font-weight: 600;
     font: 600 1.2rem var(--typografiaGeist);
     color: var(--colorDark);
-    margin-bottom:0.7rem;
+    margin-bottom: 0.7rem;
 }
 
-.blog__card .card__text{
+.blog__card .card__text {
     width: 400px;
     font: 400 1rem var(--typografiaGeist);
     color: var(--colorLigth);
-    margin-bottom:1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.blog__card .card__tiempo{
+.blog__card .card__tiempo {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -1409,17 +1388,14 @@ body {
 
 }
 
-.card__tiempo .tiempo__item{
+.card__tiempo .tiempo__item {
     font: 500 0.8rem var(--typografiaGeist);
     color: var(--colorLigth);
 }
 
-.tiempo__item strong{
+.tiempo__item strong {
     color: var(--colorDark);
 }
-
-
-
 
 /**Section Figuras */
 
@@ -1483,7 +1459,6 @@ body {
     color: #374151;
 }
 
-
 .formulario__input button {
     position: absolute;
     bottom: 1.85rem;
@@ -1497,7 +1472,6 @@ body {
     border-radius: 5px;
     background-color: #8e705c;
 }
-
 
 .footer__enlaces {
     display: flex;

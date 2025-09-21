@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -31,59 +31,108 @@
 
 <body>
     <header class="header">
-        <h1 class="header__logo">HoreecarBeer</h2>
+        <h1 class="header__logo">HoreecarBeer</h1>
 
-            <nav class="header__navbar">
-                <ul class="navbar__list">
-                    <li class="list__item"><a th:href="@{/Index.html}" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a th:href="@{/Pack.html}" class="item__link">Packs</a></li>
-                    <li class="list__item"><a th:href="@{/productos.html}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{/Blog.html}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{/Contactos.html}" class="item__link">Contactenos</a></li>
-                </ul>
-            </nav>
+        <nav class="header__navbar">
+            <ul class="navbar__list">
+                <li class="list__item"><a th:href="@{/home}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a th:href="@{/home/pack}" class="item__link">Packs</a></li>
+                <li class="list__item"><a th:href="@{/home/productos}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{/home/blog}" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{/home/contactenos}" class="item__link">Contactenos</a></li>
+            </ul>
+        </nav>
 
-            <div class="list__icon">
+        <div class="list__icon">
 
-                <span class="icon__item language-selector">
-                    <div class="language-dropdown">
-                        <button class="dropdown-toggle">
-                            <i class="ri-translate-2"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>Español</li>
-                            <li>English</li>
-                            <li>France</li>
-                            <li>Portugues</li>
-                        </ul>
+            <span class="icon__item language-selector">
+                <div class="language-dropdown">
+                    <button class="dropdown-toggle">
+                        <i class="ri-translate-2"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>Español</li>
+                        <li>English</li>
+                        <li>France</li>
+                        <li>Portugues</li>
+                    </ul>
+                </div>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-search-line"></i>
+
+
+                <div class="nav__menu" id="SubMenu">
+                    <div class="menu__sub">
+
+                        <a th:href="@{/auth/login}" class="sub__link">
+                            <p class="link__text">Iniciar Sesion</p>
+                        </a>
+
+                        <a th:href="@{/auth/}" class="sub__link">
+                            <p class="link__text">Registro</p>
+                        </a>
+
+                        <a th:href="@{/auth/}" class="sub__link">
+                            <p class="link__text">Recordar Contraseña</p>
+                        </a>
+
                     </div>
-                </span>
+                </div>
 
-                <span class="icon__item">
-                    <i class="ri-search-line"></i>
-                </span>
+                <div class="nav__menu" id="SubMenu">
+                    <div class="menu__sub">
+                        <div class="sub__info">
+                            <i class="ri-user-line"></i>
+                            <h2 class="info__title">Keyner Reyes</h2>
+                        </div>
+                        <hr>
 
-                <span class="icon__item">
-                    <i class="ri-user-line"></i>
-                </span>
+                        <a href="" class="sub__link">
+                            <p class="link__text">Perfil</p>
+                        </a>
 
-                <span class="icon__item" id="go-fav">
-                    <i class="ri-heart-3-line"></i>
-                    <span class="icon__badge" id="fav-count"></span>
-                </span>
+                        <a href="" class="sub__link">
+                            <p class="link__text">Configuracion</p>
+                        </a>
 
-                <span class="icon__item" id="cart-icon">
-                    <i class="ri-shopping-cart-2-line"></i>
-                    <span class="icon__badge" id="cart-count"></span>
-                </span>
-            </div>
+                        <a href="" class="sub__link">
+                            <p class="link__text">Notificaciones</p>
+                        </a>
+
+                        <a href="" class="sub__link">
+                            <p class="link__text">Sus Pedidos</p>
+                        </a>
+
+                        <a th:href="@{/auth/logout}" class="sub__link">
+                            <p class="link__text">Cerrar Seccion</p>
+                        </a>
+                    </div>
+                </div>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-user-line"></i>
+            </span>
+
+            <span class="icon__item" id="go-fav">
+                <i class="ri-heart-3-line"></i>
+                <span class="icon__badge" id="fav-count"></span>
+            </span>
+
+            <span class="icon__item" id="cart-icon">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="icon__badge" id="cart-count"></span>
+            </span>
+        </div>
     </header>
 
     <main class="main__content">
         <section class="table__container">
 
             <div class="container__enlaces">
-                <a th:href="@{/Index.html}">Inicio /</a>
+                <a th:href="@{/}">Inicio /</a>
                 <a href="">Licores /</a>
                 <a href="">Mi Carrito</a>
             </div>
@@ -423,12 +472,7 @@
             <form id="formRecoge" class="formulario__recoge" action="">
                 <div class="formulario__input">
                     <div class="input-box box--tiempo">
-                        <input 
-                        type="text" 
-                        autocomplete="off" 
-                        placeholder="" 
-                        name="FechaEntrega" 
-                        id="Fechaentrega">
+                        <input type="text" autocomplete="off" placeholder="" name="FechaEntrega" id="Fechaentrega">
                         <label for="Fechaentrega">Fecha Entrega</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -440,12 +484,7 @@
 
                 <div class="formulario__input">
                     <div class="input-box box--tiempo">
-                        <input 
-                        type="text" 
-                        autocomplete="off" 
-                        placeholder="" 
-                        name="HoraEntrega"
-                        id="Horaentrega">
+                        <input type="text" autocomplete="off" placeholder="" name="HoraEntrega" id="Horaentrega">
                         <label for="Horaentrega">Hora Entrega</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -458,17 +497,16 @@
                 <button class="btn__envio" type="submit">Continuar</button>
             </form>
 
-            
+
         </div>
     </div>
 
-
     <!-- JS de Flatpickr -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../static/Js/Carrito.js"></script>
+    <script type="module" th:src="@{/Js/Carrito.js}"></script>
 </body>
 
 </html>

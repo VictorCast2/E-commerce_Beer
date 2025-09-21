@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-              rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-              integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
-              integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" th:href="@{/Css/Registro.css}">
-        <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/logoBeer.png}">
-        <title>Registro</title>
-        <meta name="description" content="">
-        <meta name="autor" content="">
-        <meta name="keywords" content="">
-        <meta name="robots" content="index,follow">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/Css/Registro.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/logoBeer.png}">
+    <title>Registro</title>
+    <meta name="description" content="">
+    <meta name="autor" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index,follow">
+</head>
 
-    <body>
+<body>
     <div class="icono__back">
         <i class="ri-arrow-left-s-line"></i>
         <a class="regresar" th:href="@{/}">Regresar A Inicio</a>
@@ -134,7 +134,7 @@
                 <div class="formulario__input">
                     <div class="input-box">
                         <input type="password" autocomplete="off" placeholder="" name="RepetirPassword"
-                               id="repeatPassword">
+                            id="repeatPassword">
                         <label for="repeatPassword">Repetir Password</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -146,7 +146,8 @@
 
                 <div class="formulario__input">
                     <div class="remember-forgot">
-                        <label class="forgot__label" id="terms-label"><input type="checkbox" name="terminos">Acepto Terminos Y
+                        <label class="forgot__label" id="terms-label"><input type="checkbox" name="terminos">Acepto
+                            Terminos Y
                             Condiciones</label>
                     </div>
                 </div>
@@ -164,7 +165,8 @@
         <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="module" th:src="@{/Js/registro.js}"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" th:src="@{/Js/registro.js}"></script>
+</body>
+
 </html>
