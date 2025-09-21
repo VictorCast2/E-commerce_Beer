@@ -27,15 +27,15 @@
 
 <body>
     <header class="header">
-        <h1 class="header__logo">HoreecarBeer</h2>
+        <h1 class="header__logo">HoreecarBeer</h1>
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
-                    <li class="list__item"><a href="Index.html" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a href="Pack.html" class="item__link">Packs</a></li>
+                    <li class="list__item"><a th:href="@{Index.html}" class="item__link">Inicio</a></li>
+                    <li class="list__item"><a th:href="@{Pack.html}" class="item__link">Packs</a></li>
                     <li class="list__item"><a href="" class="item__link active">Productos</a></li>
-                    <li class="list__item"><a href="Blog.html" class="item__link">Blog</a></li>
-                    <li class="list__item"><a href="Contactos.html" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a th:href="@{Blog.html}" class="item__link">Blog</a></li>
+                    <li class="list__item"><a th:href="@{Contactos.html}" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -62,18 +62,18 @@
                 <span class="icon__item">
                     <i class="ri-user-line"></i>
 
-                    <div class="nav__menu" id="SubMenu">
+                    <div class="nav__menu" id="SubMenu1">
                         <div class="menu__sub">
 
-                            <a href="login.html" class="sub__link">
+                            <a th:href="@{login.html}" class="sub__link">
                                 <p class="link__text">Iniciar Sesion</p>
                             </a>
 
-                            <a href="registro.html" class="sub__link">
+                            <a th:href="@{registro.html}" class="sub__link">
                                 <p class="link__text">Registro</p>
                             </a>
 
-                            <a href="RecordarContrasena.html" class="sub__link">
+                            <a th:href="@{RecordarContrasena.html}" class="sub__link">
                                 <p class="link__text">Recordar Contraseña</p>
                             </a>
 
@@ -88,19 +88,19 @@
                             </div>
                             <hr>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{Perfil.html}" class="sub__link">
                                 <p class="link__text">Perfil</p>
                             </a>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{Configuraciones.html}" class="sub__link">
                                 <p class="link__text">Configuracion</p>
                             </a>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{Pedidos.html}" class="sub__link">
                                 <p class="link__text">Sus Pedidos</p>
                             </a>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{Notificaciones.html}" class="sub__link">
                                 <p class="link__text">Notificaciones</p>
                             </a>
 
@@ -128,7 +128,7 @@
         <section class="productos">
 
             <div class="container__enlaces">
-                <a href="Index.html">Inicio /</a>
+                <a th:href="@{Index.html}">Inicio /</a>
                 <a href="">Licores /</a>
                 <a href="">Productos</a>
 
@@ -227,12 +227,12 @@
                                 data-image="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png">
 
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado__vino.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino rosado</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteItalia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteItalia.svg}" alt="">
                                     <figcaption class="pais__name">Italia</figcaption>
                                 </figure>
 
@@ -270,12 +270,12 @@
                                 data-image="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__whisky.webp">
 
                                 <div class="badge badge-green">11%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__whisky.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__whisky.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Blended Scotch</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteEscocia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}" alt="">
                                     <figcaption class="pais__name">Escocia</figcaption>
                                 </figure>
 
@@ -308,12 +308,12 @@
                             <!-- Product 3 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino2.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino2.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Blanco</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteItalia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteItalia.svg}" alt="">
                                     <figcaption class="pais__name">Italia</figcaption>
                                 </figure>
 
@@ -347,12 +347,12 @@
                             <!-- Product 4 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino3.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino3.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Espumoso</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteItalia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteItalia.svg}" alt="">
                                     <figcaption class="pais__name">Italia</figcaption>
                                 </figure>
 
@@ -387,12 +387,12 @@
                             <!-- Product 5 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado1.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado1.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Single Malt</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteEscocia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}" alt="">
                                     <figcaption class="pais__name">Escocia</figcaption>
                                 </figure>
 
@@ -426,12 +426,12 @@
                             <div class="card">
                                 <div class="badge badge-green">11%</div>
                                 <img class="img--changed"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado2.webp"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado2.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Single Malt </span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteEscocia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}" alt="">
                                     <figcaption class="pais__name">Escocia</figcaption>
                                 </figure>
 
@@ -464,12 +464,12 @@
                             <!-- Product 7 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado3.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado3.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Añejo Cristalino</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteMexico.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteMexico.svg}" alt="">
                                     <figcaption class="pais__name">Mexico</figcaption>
                                 </figure>
 
@@ -502,12 +502,12 @@
                             <!-- Product 8 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado67.png"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado67.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Tinto</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteChile.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteChile.svg}" alt="">
                                     <figcaption class="pais__name">Chile</figcaption>
                                 </figure>
 
@@ -540,12 +540,12 @@
                             <!-- Product 9 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado4.webp"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado4.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Tinto</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteChile.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteChile.svg}" alt="">
                                     <figcaption class="pais__name">Chile</figcaption>
                                 </figure>
 
@@ -579,12 +579,12 @@
                             <!-- Product 10 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado5.png"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado5.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Blanco</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteChile.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteChile.svg}" alt="">
                                     <figcaption class="pais__name">Chile</figcaption>
                                 </figure>
 
@@ -617,12 +617,12 @@
                             <!-- Product 11 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado6.png"
+                                <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado6.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Vino Tinto</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteChile.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteChile.svg}" alt="">
                                     <figcaption class="pais__name">Chile</figcaption>
                                 </figure>
 
@@ -656,12 +656,12 @@
                             <div class="card">
                                 <div class="badge badge-green">11%</div>
                                 <img class="img--changed"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado7.png"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado7.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Blended Malt</span>
 
                                 <figure class="pais">
-                                    <img src="../static/Assets/Img/Paises/paisPertenecienteEscocia.svg" alt="">
+                                    <img th:src="@{/Assets/Img/Paises/paisPertenecienteEscocia.svg}" alt="">
                                     <figcaption class="pais__name">Escocia</figcaption>
                                 </figure>
 
@@ -696,13 +696,13 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado55.png"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado55.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Ginebra</span>
 
                                 <figure class="pais">
                                     <img loading="lazy"
-                                        src="../static/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg" alt="">
+                                         th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}" alt="">
                                     <figcaption class="pais__name">Reino Unido</figcaption>
                                 </figure>
 
@@ -736,12 +736,12 @@
                             <div class="card">
                                 <div class="badge badge-green">38%</div>
                                 <img loading="lazy"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacados70.png"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados70.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 
                                 <figure class="pais">
-                                    <img loading="lazy" src="../static/Assets/Img/Paises/paisPertenecienteColombia.svg"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                         alt="">
                                     <figcaption class="pais__name">Colombia</figcaption>
                                 </figure>
@@ -776,12 +776,12 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacados71.webp"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados71.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 
                                 <figure class="pais">
-                                    <img loading="lazy" src="../static/Assets/Img/Paises/paisPertenecienteColombia.svg"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                         alt="">
                                     <figcaption class="pais__name">Colombia</figcaption>
                                 </figure>
@@ -816,12 +816,12 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                    src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacados68.webp"
+                                     th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacados68.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 
                                 <figure class="pais">
-                                    <img loading="lazy" src="../static/Assets/Img/Paises/paisPertenecienteColombia.svg"
+                                    <img loading="lazy" th:src="@{/Assets/Img/Paises/paisPertenecienteColombia.svg}"
                                         alt="">
                                     <figcaption class="pais__name">Colombia</figcaption>
                                 </figure>
@@ -987,10 +987,10 @@
 
                 <div class="instalar__flex">
                     <figure>
-                        <img src="../static/Assets/Img/footer/app.jpg" alt="">
+                        <img th:src="@{/Assets/Img/footer/app.jpg}" alt="">
                     </figure>
                     <figure>
-                        <img src="../static/Assets/Img/footer/play.jpg" alt="">
+                        <img th:src="@{/Assets/Img/footer/play.jpg}" alt="">
                     </figure>
                 </div>
 
@@ -999,7 +999,7 @@
                 </ul>
 
                 <figure>
-                    <img src="../static/Assets/Img/footer/pay.png" alt="">
+                    <img th:src="@{/Assets/Img/footer/pay.png}" alt="">
                 </figure>
             </div>
 
