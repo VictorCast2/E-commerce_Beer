@@ -2,7 +2,7 @@ package com.application.configuration.security;
 
 import com.application.configuration.Custom.CustomAuthFailureHandler;
 import com.application.configuration.Custom.CustomAuthSuccessHandler;
-import com.application.configuration.Custom.CustomOAuth2UserService;
+import com.application.configuration.Custom.CustomOauth2UserService;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class SecurityConfig {
             HttpSecurity http,
             CustomAuthSuccessHandler customAuthSuccessHandler,
             CustomAuthFailureHandler customAuthFailureHandler,
-            CustomOAuth2UserService customOauth2UserService) throws Exception {
+            CustomOauth2UserService customOauth2UserService) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
