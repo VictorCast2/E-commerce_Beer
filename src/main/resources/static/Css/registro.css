@@ -12,13 +12,28 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #fff;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 70px 0 0 15px;
-    overflow-y: hidden;
+
+.contenido__form{
+    display: flex;
 }
+
+.form__imagen {
+    position: relative;
+    top: -11%;
+    left: -1.1%;
+}
+
+.form__imagen .imagen__login{
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+
+}
+
+.form__registro{
+    margin-top: 60px;
+}
+
 
 .form .formulario__title {
     font: 700 2.2rem var(--typografiaGeist);
@@ -67,7 +82,7 @@ body {
     border: 1px solid #ccc;
     font: 600 1rem var(--typografiaUrbanist);
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 400px;
     height: 55px;
     letter-spacing: 1px;
@@ -187,12 +202,6 @@ body {
     margin: 0 0 10px 25px;
 }
 
-.error--nit,
-.error--social,
-.error--tel {
-    margin: 0 0 10px 35px;
-}
-
 .error--email {
     white-space: wrap;
     width: 400px;
@@ -234,6 +243,7 @@ body {
     font: 600 1.1rem var(--typografiaUrbanist);
 }
 
+
 .form .formulario__btn {
     font: 700 1.2rem var(--typografiaUrbanist);
     background-color: #48f;
@@ -242,7 +252,7 @@ body {
     width: 550px;
     height: 55px;
     margin: 30px 10em 30px 0;
-    border-radius: 5px;
+    border-radius: 8px;
     border: none;
     position: relative;
     overflow: hidden;
@@ -260,7 +270,41 @@ body {
     margin: 5px 0 0 10em;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 550px;
+    gap: 0.8rem;
 }
+
+.otrascuentas__titles{
+    text-align: center;
+    font: 500 1rem var(--typografiaGeist);
+    margin: -25px 0 0 0;
+}
+
+.otrascuentas__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--colorDark);
+    font: 700 1.1rem var(--typografiaUrbanist);
+    border: none;
+    outline: none;
+    width: 100%;
+    width: 550px;
+    height: 55px;
+    border-radius:8px;
+    background-color:#F5FAFF ;
+}
+
+.otrascuentas__btn img{
+    max-width: 100%;
+    width: 25px;
+}
+
 
 
 .icono__back {
@@ -281,38 +325,7 @@ body {
 }
 
 
-.imagen__container {
-    position: absolute;
-    top: 0;
-    left: 56em;
-}
-
-.imagen__container .container__login {
-    width: 100%;
-    max-width: 640px;
-    min-height: 100vh;
-    border-radius: 0 0 0 190px;
-}
 
 
 
-.formulario__button {
-    font: 700 1rem var(--typografiaUrbanist);
-    background-color: #48f;
-    color: #fff;
-    width: 100%;
-    width: 400px;
-    margin: 0 0 0 1rem;
-    height: 55px;
-    border-radius: 5px;
-    border: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    cursor: pointer;
-    transition: background-color .7s ease;
-}
 
-.formulario__button:hover {
-    background-color: #0034de;
-}
