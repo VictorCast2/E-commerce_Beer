@@ -35,10 +35,10 @@
             <nav class="header__navbar">
                 <ul class="navbar__list">
                     <li class="item__link active"><a href="#" class="item__link active">Inicio</a></li>
-                    <li class="list__item"><a th:href="@{/home/pack}" class="item__link">Packs</a></li>
-                    <li class="list__item"><a th:href="@{/home/productos}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{/home/blog}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{/home/contactenos}" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a th:href="@{/paks}" class="item__link">Packs</a></li>
+                    <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                    <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                    <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -68,7 +68,7 @@
                     <!--  <div class="nav__menu" id="SubMenu1">
                          <div class="menu__sub">
 
-                             <a th:href="@{/auth/}" class="sub__link">
+                             <a th:href="@{/auth/login}" class="sub__link">
                                  <p class="link__text">Iniciar Sesion</p>
                              </a>
 
@@ -91,19 +91,19 @@
                              </div>
                              <hr>
 
-                             <a href="Perfil.html" class="sub__link">
+                             <a th:href="@{Perfil.html}" class="sub__link">
                                  <p class="link__text">Perfil</p>
                              </a>
 
-                             <a href="Configuraciones.html" class="sub__link">
+                             <a th:href="@{Configuraciones.html}" class="sub__link">
                                  <p class="link__text">Configuracion</p>
                              </a>
 
-                             <a href="Notificaciones.html" class="sub__link">
+                             <a th:href="@{Notificaciones.html}" class="sub__link">
                                  <p class="link__text">Notificaciones</p>
                              </a>
 
-                            <a href="Pedidos.html" class="sub__link">
+                            <a th:href="@{Pedidos.html}" class="sub__link">
                                     <p class="link__text">Sus Pedidos</p>
                                 </a>
 
