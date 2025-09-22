@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
 
     <div class="icono__back">
         <i class="ri-arrow-left-s-line"></i>
-        <a class="regresar" href="Index.html">Regresar a inicio</a>
+        <a class="regresar" th:href="@{/}">Regresar a inicio</a>
     </div>
 
     <div class="contenido__form">
@@ -37,7 +37,7 @@
             <h1 class="formulario__title">¿Olvidaste Tu Contraseña?</h1>
 
             <p class="formulario__title2">
-                Ingrese la dirección de correo electrónico asociada a su cuenta y le 
+                Ingrese la dirección de correo electrónico asociada a su cuenta y le
                 enviaremos un enlace para restablecer su contraseña.
             </p>
 
@@ -65,7 +65,7 @@
         </form>
 
         <div class="imagen__container">
-            <img class="container__login" src="../static/Assets/Img/comprarNosotros/Elegirnos.png" alt="">
+            <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
         </div>
     </div>
 

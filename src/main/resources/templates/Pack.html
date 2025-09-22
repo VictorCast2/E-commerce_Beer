@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,15 +28,15 @@
 
 <body>
     <header class="header">
-        <h1 class="header__logo">HoreecarBeer</h2>
+        <h1 class="header__logo">HoreecarBeer</h1>
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
-                    <li class="list__item"><a th:href="@{Index.html}" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a href="" class="item__link active">Packs</a></li>
-                    <li class="list__item"><a th:href="@{productos.html}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{Blog.html}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{Contactos.html}" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
+                    <li class="list__item"><a href="#" class="item__link active">Packs</a></li>
+                    <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                    <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                    <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -67,15 +66,15 @@
                     <div class="nav__menu" id="SubMenu1">
                         <div class="menu__sub">
 
-                            <a th:href="@{login.html}" class="sub__link">
+                            <a th:href="@{/auth/login}" class="sub__link">
                                 <p class="link__text">Iniciar Sesion</p>
                             </a>
 
-                            <a th:href="@{registro.html}" class="sub__link">
+                            <a th:href="@{/auth/registro}" class="sub__link">
                                 <p class="link__text">Registro</p>
                             </a>
 
-                            <a th:href="@{RecordarContrasena.html}" class="sub__link">
+                            <a th:href="@{/auth/remember-password}" class="sub__link">
                                 <p class="link__text">Recordar Contraseña</p>
                             </a>
 
@@ -90,11 +89,11 @@
                             </div>
                             <hr>
 
-                            <a th:href="@{Perfil.html" class="sub__link">
+                            <a th:href="@{Perfil.html}" class="sub__link">
                                 <p class="link__text">Perfil</p>
                             </a>
 
-                            <a th:href="@{Configuraciones.html" class="sub__link">
+                            <a th:href="@{Configuraciones.html}" class="sub__link">
                                 <p class="link__text">Configuracion</p>
                             </a>
 
@@ -106,12 +105,12 @@
                                 <p class="link__text">Sus Pedidos</p>
                             </a>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{/auth/logout}" class="sub__link">
                                 <p class="link__text">Cerrar Seccion</p>
                             </a>
                         </div>
                     </div>
-                    
+
                 </span>
 
                 <span class="icon__item" id="go-fav">
@@ -304,8 +303,8 @@
                             <!-- Product 5 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img th:src="@{/Assets/Img/Productos//ProdusctoDestacado1.webp}"
-                                    alt="" width="250" height="250" />
+                                <img th:src="@{/Assets/Img/Productos//ProdusctoDestacado1.webp}" alt="" width="250"
+                                    height="250" />
                                 <span class="category">Single Malt</span>
 
                                 <figure class="pais">
@@ -343,7 +342,7 @@
                             <div class="card">
                                 <div class="badge badge-green">11%</div>
                                 <img class="img--changed"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProdusctoDestacado2.webp}"
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProdusctoDestacado2.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Single Malt </span>
 
@@ -573,8 +572,8 @@
                             <div class="card">
                                 <div class="badge badge-green">11%</div>
                                 <img class="img--changed"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado7.png}"
-                                    alt="" width="250" height="250" />
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado7.png}" alt=""
+                                    width="250" height="250" />
                                 <span class="category">Blended Malt</span>
 
                                 <figure class="pais">
@@ -613,13 +612,13 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado55.png}"
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado55.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Ginebra</span>
 
                                 <figure class="pais">
-                                    <img loading="lazy"
-                                         th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}" alt="">
+                                    <img loading="lazy" th:src="@{/Assets/Img/Paises/PaisPertenecienteReinoUnido.svg}"
+                                        alt="">
                                     <figcaption class="pais__name">Reino Unido</figcaption>
                                 </figure>
 
@@ -653,7 +652,7 @@
                             <div class="card">
                                 <div class="badge badge-green">38%</div>
                                 <img loading="lazy"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados70.png}"
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados70.png}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 
@@ -693,7 +692,7 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados71.webp}"
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados71.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 
@@ -733,7 +732,7 @@
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
                                 <img loading="lazy"
-                                     th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados68.webp}"
+                                    th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacados68.webp}"
                                     alt="" width="250" height="250" />
                                 <span class="category">Nacional</span>
 

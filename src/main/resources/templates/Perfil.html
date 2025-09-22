@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -30,99 +30,99 @@
     <header class="header">
         <h1 class="header__logo">HoreecarBeer</h1>
 
-            <nav class="header__navbar">
-                <ul class="navbar__list">
-                    <li class="list__item"><a th:href="@{Index.html}" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a th:href="@{Pack.html}" class="item__link">Packs</a></li>
-                    <li class="list__item"><a th:href="@{productos.html}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{Blog.html}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{Contactos.html}" class="item__link">Contactenos</a></li>
-                </ul>
-            </nav>
+        <nav class="header__navbar">
+            <ul class="navbar__list">
+                <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a th:href="@{/paks}" class="item__link">Packs</a></li>
+                <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
+            </ul>
+        </nav>
 
-            <div class="list__icon">
+        <div class="list__icon">
 
-                <span class="icon__item language-selector">
-                    <div class="language-dropdown">
-                        <button class="dropdown-toggle">
-                            <i class="ri-translate-2"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>Español</li>
-                            <li>English</li>
-                            <li>France</li>
-                            <li>Portugues</li>
-                        </ul>
+            <span class="icon__item language-selector">
+                <div class="language-dropdown">
+                    <button class="dropdown-toggle">
+                        <i class="ri-translate-2"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>Español</li>
+                        <li>English</li>
+                        <li>France</li>
+                        <li>Portugues</li>
+                    </ul>
+                </div>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-search-line"></i>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-user-line"></i>
+
+                <div class="nav__menu" id="SubMenu">
+                    <div class="menu__sub">
+
+                        <a th:href="@{/auth/login}" class="sub__link">
+                            <p class="link__text">Iniciar Sesion</p>
+                        </a>
+
+                        <a th:href="@{/auth/registro}" class="sub__link">
+                            <p class="link__text">Registro</p>
+                        </a>
+
+                        <a th:href="@{/auth/remember-password}" class="sub__link">
+                            <p class="link__text">Recordar Contraseña</p>
+                        </a>
+
                     </div>
-                </span>
+                </div>
 
-                <span class="icon__item">
-                    <i class="ri-search-line"></i>
-                </span>
-
-                <span class="icon__item">
-                    <i class="ri-user-line"></i>
-
-                    <!-- <div class="nav__menu" id="SubMenu">
-                            <div class="menu__sub">
-
-                                <a th:href="@{login.html}" class="sub__link">
-                                    <p class="link__text">Iniciar Sesion</p>                                  
-                                </a>
-
-                                <a th:href="@{registro.html}" class="sub__link">
-                                    <p class="link__text">Registro</p>
-                                </a>
-
-                                <a th:href="@{RecordarContrasena.html}" class="sub__link">
-                                    <p class="link__text">Recordar Contraseña</p>                                    
-                                </a>
-
-                            </div>
-                        </div> -->
-
-                    <div class="nav__menu" id="SubMenu">
-                        <div class="menu__sub">
-                            <div class="sub__info">
-                                <i class="ri-user-line"></i>
-                                <h2 class="info__title">Keyner Reyes</h2>
-                            </div>
-                            <hr>
-
-                            <a href="" class="sub__link">
-                                <p class="link__text">Perfil</p>
-                            </a>
-
-                            <a th:href="@{Configuraciones.html}" class="sub__link">
-                                <p class="link__text">Configuracion</p>
-                            </a>
-
-                            <a th:href="@{Notificaciones.html}" class="sub__link">
-                                <p class="link__text">Notificaciones</p>
-                            </a>
-
-                            <a th:href="@{Pedidos.html}" class="sub__link">
-                                <p class="link__text">Sus Pedidos</p>
-                            </a>
-
-                            <a href="" class="sub__link">
-                                <p class="link__text">Cerrar Seccion</p>
-                            </a>
+                <div class="nav__menu" id="SubMenu">
+                    <div class="menu__sub">
+                        <div class="sub__info">
+                            <i class="ri-user-line"></i>
+                            <h2 class="info__title">Keyner Reyes</h2>
                         </div>
+                        <hr>
+
+                        <a href="" class="sub__link">
+                            <p class="link__text">Perfil</p>
+                        </a>
+
+                        <a th:href="@{Configuraciones.html}" class="sub__link">
+                            <p class="link__text">Configuracion</p>
+                        </a>
+
+                        <a th:href="@{Notificaciones.html}" class="sub__link">
+                            <p class="link__text">Notificaciones</p>
+                        </a>
+
+                        <a th:href="@{Pedidos.html}" class="sub__link">
+                            <p class="link__text">Sus Pedidos</p>
+                        </a>
+
+                        <a th:href="@{/auth/logout}" class="sub__link">
+                            <p class="link__text">Cerrar Seccion</p>
+                        </a>
                     </div>
+                </div>
 
-                </span>
+            </span>
 
-                <span class="icon__item" id="go-fav">
-                    <i class="ri-heart-3-line"></i>
-                    <span class="icon__badge" id="fav-count"></span>
-                </span>
+            <span class="icon__item" id="go-fav">
+                <i class="ri-heart-3-line"></i>
+                <span class="icon__badge" id="fav-count"></span>
+            </span>
 
-                <span class="icon__item" id="cart-icon">
-                    <i class="ri-shopping-cart-2-line"></i>
-                    <span class="icon__badge" id="cart-count"></span>
-                </span>
-            </div>
+            <span class="icon__item" id="cart-icon">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="icon__badge" id="cart-count"></span>
+            </span>
+        </div>
     </header>
 
     <section class="perfil">
@@ -138,9 +138,11 @@
                         Configuracion</a>
                     <a th:href="@{Notificaciones.html}" class="opciones__btn"><i class="ri-notification-2-line"></i>
                         Notificaciones</a>
-                    <a th:href="@{Pedidos.html}" class="opciones__btn"> <i class="ri-shopping-bag-3-line"></i> Sus Pedidos</a>
+                    <a th:href="@{Pedidos.html}" class="opciones__btn"> <i class="ri-shopping-bag-3-line"></i> Sus
+                        Pedidos</a>
                     <hr class="hr__separar">
-                    <a th:href="@{Index.html}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar Sesion</a>
+                    <a th:href="@{/auth/logout}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar
+                        Sesion</a>
                 </div>
             </aside>
 
@@ -155,12 +157,13 @@
                         <div class="perfil__card">
                             <h2 class="card__title">Cambiar perfil</h2>
                             <p class="card__text">Cambia tu foto de perfil desde aquí</p>
-                        
+
                             <div class="card__img">
                                 <figure class="img__user">
-                                    <img id="preview" th:src="@{/Assets/Img/ExperenciaUsuarios/imagen__user.jpg}" alt="">
+                                    <img id="preview" th:src="@{/Assets/Img/ExperenciaUsuarios/imagen__user.jpg}"
+                                        alt="">
                                 </figure>
-                        
+
                                 <div class="img__btn">
                                     <div class="btn__item">
 
@@ -169,7 +172,7 @@
                                         <button class="item__button button--subir">Subir</button>
                                         <button class="item__button button--restablecer">Restablecer</button>
                                     </div>
-                        
+
                                     <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                 </div>
                             </div>
@@ -179,11 +182,14 @@
                             <h2 class="informacion__title">Información del perfil</h2>
 
                             <p class="informacion__text">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse pariatur architecto praesentium, id rem molestias similique.
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero
+                                quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse
+                                pariatur architecto praesentium, id rem molestias similique.
                             </p>
 
                             <div class="informacion__datos">
-                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes Tejedor</span>
+                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes
+                                    Tejedor</span>
                                 <span class="datos__telelfono"><strong>Telefono:</strong> (+57) 313643769</span>
                                 <span class="datos__correo"> <strong>Correo:</strong> Keiner@gmail.com</span>
                                 <span class="datos__identificacion"> <strong>Tipo identificacion:</strong> Cedula</span>
@@ -295,12 +301,12 @@
                         <div class="perfil__card">
                             <h2 class="card__title title--empresa">Cambiar Empresa</h2>
                             <p class="card__text">Cambia la foto de perfil de la empresa</p>
-                        
+
                             <div class="card__img">
                                 <figure class="img__user user--empresar">
                                     <img id="preview1" th:src="@{/Assets/Img/logos/logo__hotel2.png}" alt="">
                                 </figure>
-                        
+
                                 <div class="img__btn">
                                     <div class="btn__item">
 
@@ -309,7 +315,7 @@
                                         <button class="item__button button--subir">Subir</button>
                                         <button class="item__button button--restablecer">Restablecer</button>
                                     </div>
-                        
+
                                     <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                 </div>
                             </div>
@@ -319,7 +325,9 @@
                             <h2 class="informacion__title">Información de la empresa</h2>
 
                             <p class="informacion__text">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse pariatur architecto praesentium, id rem molestias similique.
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero
+                                quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse
+                                pariatur architecto praesentium, id rem molestias similique.
                             </p>
 
                             <div class="empresas__datos">
@@ -362,7 +370,8 @@
                                     <span class="box__icon"><i class="ri-close-line"></i></span>
                                 </div>
                                 <p class="input__error">
-                                    La razón social solo puede contener letras, espacios y debe tener entre 3 y 50 caracteres.
+                                    La razón social solo puede contener letras, espacios y debe tener entre 3 y 50
+                                    caracteres.
                                 </p>
                             </div>
 

@@ -30,7 +30,7 @@ public class PrincipalController {
 
     @GetMapping("/contacto")
     public String contacto() {
-        return "Contactenos";
+        return "Contactos";
     }
 
     @GetMapping("/carrito")
@@ -42,4 +42,5 @@ public class PrincipalController {
     public String favorito() {
         return "Favorito";
     }
+    
 }

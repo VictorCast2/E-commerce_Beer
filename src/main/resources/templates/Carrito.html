@@ -35,11 +35,11 @@
 
         <nav class="header__navbar">
             <ul class="navbar__list">
-                <li class="list__item"><a th:href="@{/home}" class="item__link">Inicio</a></li>
-                <li class="list__item"><a th:href="@{/home/pack}" class="item__link">Packs</a></li>
-                <li class="list__item"><a th:href="@{/home/productos}" class="item__link">Productos</a></li>
-                <li class="list__item"><a th:href="@{/home/blog}" class="item__link">Blog</a></li>
-                <li class="list__item"><a th:href="@{/home/contactenos}" class="item__link">Contactenos</a></li>
+                <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a th:href="@{/paks}" class="item__link">Packs</a></li>
+                <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
             </ul>
         </nav>
 
@@ -70,11 +70,11 @@
                             <p class="link__text">Iniciar Sesion</p>
                         </a>
 
-                        <a th:href="@{/auth/}" class="sub__link">
+                        <a th:href="@{/auth/registro}" class="sub__link">
                             <p class="link__text">Registro</p>
                         </a>
 
-                        <a th:href="@{/auth/}" class="sub__link">
+                        <a th:href="@{/auth/remember-password}" class="sub__link">
                             <p class="link__text">Recordar Contraseña</p>
                         </a>
 

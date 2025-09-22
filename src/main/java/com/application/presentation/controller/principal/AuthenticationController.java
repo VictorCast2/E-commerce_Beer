@@ -10,7 +10,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @Controller
@@ -25,9 +24,9 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String getLogin(Model model,
-                           @RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout,
-                           @RequestParam(value = "success", required = false) String success) {
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "success", required = false) String success) {
         if (error != null) {
             model.addAttribute("mensajeError", error);
         }
@@ -48,15 +47,12 @@ public class AuthenticationController {
 
     @PostMapping("/completar-perfil")
     public String postCompletarPerfil(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                  @ModelAttribute @Valid CompleteUsuarioProfileRequest completeProfileRequest,
-                                  boolean registrarEmpresa) {
-
+            @ModelAttribute @Valid CompleteUsuarioProfileRequest completeProfileRequest,
+            boolean registrarEmpresa) {
         usuarioService.completeUserProfile(principal, completeProfileRequest);
-
         if (registrarEmpresa) {
             return "redirect:/auth/registrar-empresa";
         }
-
         return "redirect:/";
     }
 
@@ -68,10 +64,8 @@ public class AuthenticationController {
 
     @PostMapping("/registrar-empresa")
     public String postCreateEmpresa(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                   @ModelAttribute @Valid CreateEmpresaRequest createEmpresaRequest) {
-
+            @ModelAttribute @Valid CreateEmpresaRequest createEmpresaRequest) {
         empresaService.createEmpresa(principal, createEmpresaRequest);
-
         return "redirect:/";
     }
 
@@ -84,4 +78,5 @@ public class AuthenticationController {
     public String rememberPassword() {
         return "";
     }
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -32,11 +32,11 @@
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
-                    <li class="list__item"><a th:href="@{Index.html}" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a th:href="@{Pack.html}" class="item__link">Packs</a></li>
-                    <li class="list__item"><a th:href="@{productos.html}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{Blog.html}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{Contactos.html}" class="item__link">Contactenos</a></li>
+                    <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
+                    <li class="list__item"><a th:href="@{/paks}" class="item__link">Packs</a></li>
+                    <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                    <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                    <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
                 </ul>
             </nav>
 
@@ -63,23 +63,23 @@
                 <span class="icon__item">
                     <i class="ri-user-line"></i>
 
-                    <!-- <div class="nav__menu" id="SubMenu">
+                    <div class="nav__menu" id="SubMenu">
                             <div class="menu__sub">
 
-                                <a th:href="@{login.html}" class="sub__link">
+                                <a th:href="@{/auth/login}" class="sub__link">
                                     <p class="link__text">Iniciar Sesion</p>                                  
                                 </a>
 
-                                <a th:href="@{registro.html}" class="sub__link">
+                                <a th:href="@{/auth/registro}" class="sub__link">
                                     <p class="link__text">Registro</p>
                                 </a>
 
-                                <a th:href="@{RecordarContrasena.html}" class="sub__link">
+                                <a th:href="@{/auth/remember-password}" class="sub__link">
                                     <p class="link__text">Recordar Contraseña</p>                                    
                                 </a>
 
                             </div>
-                        </div> -->
+                        </div>
 
                     <div class="nav__menu" id="SubMenu">
                         <div class="menu__sub">
@@ -105,7 +105,7 @@
                                 <p class="link__text">Sus Pedidos</p>
                             </a>
 
-                            <a href="" class="sub__link">
+                            <a th:href="@{/auth/logout}" class="sub__link">
                                 <p class="link__text">Cerrar Seccion</p>
                             </a>
                         </div>
@@ -139,7 +139,7 @@
                     <a href="" class="opciones__btn active"><i class="ri-notification-2-line"></i> Notificaciones</a>
                     <a th:href="@{Pedidos.html}" class="opciones__btn"> <i class="ri-shopping-bag-3-line"></i> Sus Pedidos</a>
                     <hr class="hr__separar">
-                    <a th:href="@{Index.html}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar Sesion</a>
+                    <a th:href="@{/auth/logout}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar Sesion</a>
                 </div>
             </aside>
 

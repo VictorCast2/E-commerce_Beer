@@ -268,7 +268,7 @@ export function inicialHeart() {
 
 export function rederigirFav() {
     document.getElementById("go-fav").addEventListener("click", () => {
-        window.location.href = "/home/favoritos";
+        window.location.href = "/favorito";
     });
 }
 
@@ -278,7 +278,7 @@ export function finalizarCompra() {
     const btnFinalizarcompra = document.getElementById("finalizar-compra");
 
     btnFinalizarcompra.addEventListener("click", () => {
-        window.location.href = "/home/carrito"; // redirige a la página del carrito
+        window.location.href = "/carrito"; // redirige a la página del carrito
     });
 }
 

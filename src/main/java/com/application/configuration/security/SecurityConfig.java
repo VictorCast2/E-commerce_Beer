@@ -50,7 +50,6 @@ public class SecurityConfig {
                         // Autenticación Controller
                         .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-
                                                 // Configurar endpoints públicos estáticos (sin autenticación)
                                                 .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
                         // Configurar endpoints NO ESPECIFICADOS

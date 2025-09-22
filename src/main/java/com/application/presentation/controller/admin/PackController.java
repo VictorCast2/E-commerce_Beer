@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
-
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -31,16 +30,13 @@ public class PackController {
 
     @GetMapping("/")
     public String Pack(@AuthenticationPrincipal UserDetails userDetails,
-                       @RequestParam(value = "mensaje", required = false) String mensaje,
-                       Model model) {
-
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<PackResponse> packList = packService.getPacks();
-
         model.addAttribute("usuario", usuario);
         model.addAttribute("packList", packList);
         model.addAttribute("mensaje", mensaje);
-
         return "Pack";
     }
 
@@ -48,7 +44,6 @@ public class PackController {
     public String addPack(@ModelAttribute @Valid PackCreateRequest packRequest) {
         GeneralResponse response = packService.createPack(packRequest);
         String mensaje = response.mensaje();
-
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
@@ -56,7 +51,6 @@ public class PackController {
     public String updatePack(@ModelAttribute @Valid PackCreateRequest packRequest, @PathVariable Long id) {
         GeneralResponse response = packService.updatePack(packRequest, id);
         String mensaje = response.mensaje();
-
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
@@ -64,7 +58,6 @@ public class PackController {
     public String disablePack(@PathVariable Long id) {
         GeneralResponse response = packService.disablePack(id);
         String mensaje = response.mensaje();
-
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
@@ -72,25 +65,22 @@ public class PackController {
     public String deletePack(@PathVariable Long id) {
         GeneralResponse response = packService.deletePack(id);
         String mensaje = response.mensaje();
-
         return "redirect:/admin/pack/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
     // Reasignar este método al controlador de la página principal
     @PostMapping("/descripcion-pack/{id}")
     public String getDescripcionPack(@AuthenticationPrincipal UserDetails userDetails,
-                                     @PathVariable Long id,
-                                     Model model) {
+            @PathVariable Long id,
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         PackResponse packResponse = packService.getPackResponseById(id);
         List<PackResponse> packList = packService.getPacksActivos();
         Collections.shuffle(packList);
         List<PackResponse> packAleatorios = packList.stream().limit(4).toList();
-
         model.addAttribute("usuario", usuario);
         model.addAttribute("pack", packResponse);
         model.addAttribute("packList", packAleatorios);
-
         return "descripcion";
     }
 

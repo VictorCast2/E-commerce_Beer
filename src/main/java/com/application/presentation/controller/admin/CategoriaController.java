@@ -31,8 +31,7 @@ public class CategoriaController {
     public String Categoria(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam(value = "mensaje", required = false) String mensaje,
-            Model model
-    ) {
+            Model model) {
 
         Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<CategoriaResponse> categoriaResponses = categoriaService.getCategorias();
@@ -55,8 +54,7 @@ public class CategoriaController {
     @PostMapping("update-categoria/{id}")
     public String updateCategoria(
             @ModelAttribute @Valid CategoriaCreateRequest categoriaRequest,
-            @PathVariable Long id
-    ) {
+            @PathVariable Long id) {
         GeneralResponse response = categoriaService.updateCategoria(categoriaRequest, id);
         String mensaje = response.mensaje();
 
