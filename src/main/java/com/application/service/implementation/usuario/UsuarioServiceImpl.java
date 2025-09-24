@@ -8,7 +8,9 @@ import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.presentation.dto.general.response.RegisterResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
+import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
@@ -70,4 +74,39 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuarioRepository.save(usuario);
         return new GeneralResponse("Registro completado exitosamente.");
     }
+
+    @Override
+    public RegisterResponse createUser(@Valid CreateUsuarioRequest usuarioRequest) {
+
+        String correo = usuarioRequest.correo();
+        if (usuarioRepository.existsByCorreo(correo)) {
+            return new RegisterResponse("El correo " + correo + " ya está registrado", false);
+        }
+
+        Usuario usuario = Usuario.builder()
+                .tipoIdentificacion(usuarioRequest.tipoIdentificacion())
+                .numeroIdentificacion(usuarioRequest.numeroIdentificacion())
+                .nombres(usuarioRequest.nombres())
+                .apellidos(usuarioRequest.apellidos())
+                .telefono(usuarioRequest.telefono())
+                .correo(usuarioRequest.correo())
+                .password(encoder.encode(usuarioRequest.password()))
+                .build();
+
+        if (usuarioRequest.tipoIdentificacion().equals(EIdentificacion.NIT)) {
+            Rol rolPersonaJuridica = rolRepository.findByName(ERol.PERSONA_JURIDICA)
+                    .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_JURIDICA no existe en la BD"));
+            usuario.setRol(rolPersonaJuridica);
+        } else {
+            Rol rolPersonaNatural = rolRepository.findByName(ERol.PERSONA_NATURAL)
+                    .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_NATURAL no exite en la BD"));
+            usuario.setRol(rolPersonaNatural);
+        }
+
+        usuarioRepository.save(usuario);
+
+        return new RegisterResponse("Usuario creado exitosamente", true);
+    }
+
+
 }
