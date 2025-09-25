@@ -122,6 +122,7 @@ const checkbox = document.querySelector(".remember-forgot input");
 
 // Validación antes de enviar
 form.addEventListener("submit", function (event) {
+    event.preventDefault();
     let formValid = true;
 
     inputs.forEach(input => {
@@ -145,9 +146,17 @@ form.addEventListener("submit", function (event) {
                 popup: 'swal-popup'
             }
         });
-        event.preventDefault(); // Evita enviar si hay errores
+        return; // Evita enviar si hay errores
     }
+
+    grecaptcha.execute();
 });
+
+// 🚀 Callback de Google reCAPTCHA
+function onSubmit(token) {
+    // Enviamos el formulario
+    form.submit();
+}
 
 // === 🚀 Flujo de login exitoso antes de ir ===
 window.addEventListener("DOMContentLoaded", () => {

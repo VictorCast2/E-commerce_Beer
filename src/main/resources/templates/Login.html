@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -75,7 +75,11 @@
                 </div>
 
                 <div class="formulario__input formulario__btn-container">
-                    <button class="formulario__btn" type="submit">Iniciar Sesion</button>
+                    <button class="formulario__btn g-recaptcha"
+                            data-sitekey="6LdB_NMrAAAAABGNY2Deel7-qC2NYxKfpgfcpDkU"
+                            data-callback="onSubmit"
+                            type="submit">Iniciar Sesion
+                    </button>
                 </div>
 
                 <div class="registre-link">
@@ -107,6 +111,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" th:src="@{/Js/login.js}"></script>
+    <script th:src="@{https://www.google.com/recaptcha/api.js}" async defer></script>
 
 </body>
 
