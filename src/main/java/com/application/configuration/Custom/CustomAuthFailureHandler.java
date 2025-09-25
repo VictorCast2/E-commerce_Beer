@@ -31,6 +31,7 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
             case AccountExpiredException e -> mensajeError = "Tu sesión ha expirado";
             case CredentialsExpiredException e -> mensajeError = "Tu contraseña ha expirado";
             case BadCredentialsException e -> mensajeError = "Usuario o contraseña incorrectos";
+            case AuthenticationServiceException e -> mensajeError = e.getMessage(); // Mensaje en caso no se valide el reCAPTCHA
             default -> mensajeError = "Error de Autenticación";
         }
 
@@ -38,7 +39,7 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
         if (exception instanceof OAuth2AuthenticationException oAuth2Ex) {
             String codigoError = oAuth2Ex.getError().getErrorCode();
 
-            switch (mensajeError) {
+            switch (codigoError) {
                 case "access_denied" -> mensajeError = "Has cancelado el inicio del sesión con Google";
                 case "invalid_token" -> mensajeError = "El token de acceso de Google no es válido";
                 case "invalid_user_info_response" -> mensajeError = "No pudimos obtener tu perfil desde Google";

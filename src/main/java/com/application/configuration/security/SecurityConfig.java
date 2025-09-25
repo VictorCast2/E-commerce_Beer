@@ -3,6 +3,7 @@ package com.application.configuration.security;
 import com.application.configuration.Custom.CustomAuthFailureHandler;
 import com.application.configuration.Custom.CustomAuthSuccessHandler;
 import com.application.configuration.Custom.CustomOauth2UserService;
+import com.application.configuration.filter.RecaptchaFilter;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -27,7 +29,8 @@ public class SecurityConfig {
             HttpSecurity http,
             CustomAuthSuccessHandler customAuthSuccessHandler,
             CustomAuthFailureHandler customAuthFailureHandler,
-            CustomOauth2UserService customOauth2UserService) throws Exception {
+            CustomOauth2UserService customOauth2UserService,
+            RecaptchaFilter recaptchaFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
@@ -55,6 +58,7 @@ public class SecurityConfig {
                         // Configurar endpoints NO ESPECIFICADOS
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(form -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/auth/login")
