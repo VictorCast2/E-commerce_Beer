@@ -242,19 +242,28 @@ form.addEventListener("submit", function (event) {
 
 // Al cargar la página, revisamos si hay bandera de login
 window.addEventListener("DOMContentLoaded", () => {
-    if (sessionStorage.getItem("loginSuccess") === "true") {
+    const body = document.body;
+    const mensaje = body.getAttribute("data-mensaje");
+    const success = body.getAttribute("data-success");
+
+    if (mensaje) {
         Swal.fire({
-            title: "Registro exitoso",
-            icon: "success",
+            icon: success === "true" ? "success" : "error",
+            title: success === "true" ? "Registro exitoso" : "Error",
+            text: mensaje,
             timer: 3000,
-            draggable: true,
             timerProgressBar: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             customClass: {
                 title: 'swal-title',
                 popup: 'swal-popup'
             }
+        }).then(() =>  {
+            if (success === "true") {
+                window.location.href = "/auth/login";
+            }
         });
-        sessionStorage.removeItem("loginSuccess");
     }
 });
 
