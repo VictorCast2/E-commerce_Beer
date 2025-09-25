@@ -11,20 +11,20 @@ import org.springframework.web.client.RestTemplate;
 public class RecaptchaService {
 
     @Value("${spring.google.recaptcha.url}")
-    private static String VERIFY_URL;
+    private String verifyURL;
 
     @Value("${spring.google.recaptcha.secret-key}")
-    private static String SECRET_KEY;
+    private String secretKey;
 
     public boolean validateRecaptcha(String token) {
 
         RestTemplate restTemplate = new RestTemplate();
 
         MultiValueMap<String, String> request = new LinkedMultiValueMap<>();
-        request.add("secret", SECRET_KEY);
+        request.add("secret", secretKey);
         request.add("response", token);
 
-        RecaptchaResponse apiResponse = restTemplate.postForObject(VERIFY_URL, request, RecaptchaResponse.class);
+        RecaptchaResponse apiResponse = restTemplate.postForObject(verifyURL, request, RecaptchaResponse.class);
 
         return Boolean.TRUE.equals(apiResponse.success());
     }

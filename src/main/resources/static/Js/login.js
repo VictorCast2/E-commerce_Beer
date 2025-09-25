@@ -119,43 +119,47 @@ Object.keys(fields).forEach(fieldId => {
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input:not([type='checkbox'])");
 const checkbox = document.querySelector(".remember-forgot input");
+const loginBtn = document.querySelector("#loginBtn")
+        || document.querySelector(".formulario__btn.g-recaptcha");
 
 // Validación antes de enviar
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
+// === 🚀 Validación completa ===
+function validateForm() {
     let formValid = true;
-
     inputs.forEach(input => {
         const value = input.value.trim();
         if (value === "" || !fields[input.id].regex.test(value)) {
             formValid = false;
         }
     });
-
     if (!checkbox.checked) {
         formValid = false;
     }
+    return formValid;
+}
 
-    if (!formValid) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Por favor rellene el formulario correctamente",
-            customClass: {
-                title: 'swal-title',
-                popup: 'swal-popup'
-            }
-        });
-        return; // Evita enviar si hay errores
-    }
-
-    grecaptcha.execute();
-});
-
-// 🚀 Callback de Google reCAPTCHA
-function onSubmit(token) {
-    // Enviamos el formulario
+// === 🚀 Callback de Google reCAPTCHA ===
+window.onSubmit = function (token) {
     form.submit();
+};
+
+// === 🚀 Evento en el botón de login ===
+if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+        if (!validateForm()) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Por favor rellene el formulario correctamente",
+                customClass: {
+                    title: 'swal-title',
+                    popup: 'swal-popup'
+                }
+            });
+            return;
+        }
+        grecaptcha.execute();
+    });
 }
 
 // === 🚀 Flujo de login exitoso antes de ir ===
