@@ -34,7 +34,7 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
                 .orElse(null);
 
         if (usuario != null && (usuario.getPassword() == null)) {
-            this.getRedirectStrategy().sendRedirect(request, response, "/auth/completar-perfil");
+            this.getRedirectStrategy().sendRedirect(request, response, "/auth/completar-registro");
             return;
         }
 

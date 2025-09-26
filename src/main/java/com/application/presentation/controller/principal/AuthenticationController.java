@@ -39,13 +39,13 @@ public class AuthenticationController {
         return "Login";
     }
 
-    @GetMapping("/completar-perfil")
-    public String getCompletarPerfil(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
+    @GetMapping("/completar-registro")
+    public String CompletarRegistro(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
-        return "CompletarPerfil";
+        return "CompletarRegistro";
     }
 
-    @PostMapping("/completar-perfil")
+    @PostMapping("/completar-registro")
     public String postCompletarPerfil(@AuthenticationPrincipal CustomUserPrincipal principal,
             @ModelAttribute @Valid CompleteUsuarioProfileRequest completeProfileRequest,
             boolean registrarEmpresa) {
@@ -57,9 +57,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/registrar-empresa")
-    public String getCreateEmpresa(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
+    public String RegistrarEmpresa(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
-        return "FormularioEmpresa";
+        return "RegistrarEmpresa";
     }
 
     @PostMapping("/registrar-empresa")

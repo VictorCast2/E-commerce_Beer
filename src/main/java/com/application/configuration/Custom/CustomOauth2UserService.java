@@ -27,8 +27,6 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         String nombre = oAuth2User.getAttribute("given_name");
         String apellido = oAuth2User.getAttribute("family_name");
 
-        System.out.println("MENSAJE DE PRUEBA");
-
         Usuario usuario = usuarioRepository.findByCorreo(email)
                 .orElse(null);
 
