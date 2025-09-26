@@ -359,7 +359,7 @@ export function verProductos() {
             localStorage.setItem("selectedProduct", JSON.stringify(productData));
 
             // Redirigir a Ver.html
-            window.location.href = "Ver.html";
+            window.location.href = "/ver";
         });
     });
 
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img src="/static/Assets/Img/logos/costaoroimport.png"
+            <img src="/Assets/Img/logos/costaoroimport.png"
             alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
