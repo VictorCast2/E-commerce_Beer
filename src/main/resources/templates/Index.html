@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -32,7 +31,6 @@
     <div class="hero">
         <header class="header">
             <h1 class="header__logo">HoreecarBeer</h1>
-
             <nav class="header__navbar">
                 <ul class="navbar__list">
                     <li class="item__link active"><a href="#" class="item__link active">Inicio</a></li>
@@ -60,37 +58,27 @@
                 </span>
 
                 <!-- Buscar -->
-                <span class="icon__item search__container">
-  <i class="ri-search-line" id="searchToggle"></i>
-  <div class="search__box" id="searchBox">
-    <input type="text" placeholder="Buscar en Costa De Oro Imports..." />
-    <button type="submit"><i class="ri-search-line"></i></button>
-  </div>
-</span>
-
+                <span class="icon__item">
+                    <i class="ri-search-line"></i>
+                </span>
 
                 <!-- Usuario -->
                 <span class="icon__item">
                     <i class="ri-user-line"></i>
-
                     <!-- Cuando el usuario NO está autenticado -->
                     <div class="nav__menu" id="SubMenu1" sec:authorize="isAnonymous()">
                         <div class="menu__sub">
                             <a th:href="@{/auth/login}" class="sub__link">
-                                <i class="ri-user-add-line"></i>
                                 <p class="link__text">Iniciar Sesión</p>
                             </a>
                             <a th:href="@{/auth/registro}" class="sub__link">
-                                <i class="ri-user-add-line"></i>
                                 <p class="link__text">Registro</p>
                             </a>
                             <a th:href="@{/auth/recordar-contrasenna}" class="sub__link">
-                                <i class="ri-key-line"></i>
                                 <p class="link__text">Recordar Contraseña</p>
                             </a>
                         </div>
                     </div>
-
                     <!-- Cuando el usuario SÍ está autenticado -->
                     <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
                         <div class="menu__sub">
@@ -101,15 +89,18 @@
                             </div>
                             <hr>
                             <a th:href="@{/perfil/}" class="sub__link">
-                                <i class="ri-user-fill"></i>
                                 <p class="link__text">Perfil</p>
                             </a>
+                            <a th:href="@{/perfil/configuration}" class="sub__link">
+                                <p class="link__text">Configuracion</p>
+                            </a>
+                            <a th:href="@{/perfil/notificaciones}" class="sub__link">
+                                <p class="link__text">Notificaciones</p>
+                            </a>
                             <a th:href="@{/perfil/pedidos}" class="sub__link">
-                                <i class="ri-shopping-bag-line"></i>
                                 <p class="link__text">Sus Pedidos</p>
                             </a>
                             <a th:href="@{/auth/logout}" class="sub__link">
-                                <i class="ri-logout-box-r-fill"></i>
                                 <p class="link__text">Cerrar Seccion</p>
                             </a>
                         </div>
@@ -133,7 +124,6 @@
 
         <section class="hero__carousel">
             <div class="carousel__container">
-
                 <!-- Slide 1: Paulaner -->
                 <div class="carousel__slide active" data-theme="paulaner">
                     <div class="content__information">
@@ -147,17 +137,14 @@
                             acompañar platos ligeros. Una auténtica joya bávara elaborada según la Ley de Pureza de
                             1516.
                         </p>
-
                         <div class="information__button">
                             <div class="button__precio">
                                 <span class="precio__shop shop--changed">Apartir de</span>
                                 <span class="precio__shop shop--principal">$19.000</span>
                                 <span class="precio__shop shop--descuento">$15.000</span>
                             </div>
-
                             <a href="" class="button__item">Comprame Ahora</a>
                         </div>
-
                         <div class="experencia__clientes">
                             <figure class="information__clientes">
                                 <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg}" alt="">
@@ -167,13 +154,11 @@
                                 <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCinco.jpeg}" alt="">
                                 <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg}" alt="">
                             </figure>
-
                             <div class="cliente__satif">
                                 <span class="clientes__count">100<i class="ri-add-line"></i></span>
                                 <span class="clientes__satisfied">Clientes Satisfechos</span>
                             </div>
                         </div>
-
                     </div>
 
                     <figure class="information__img">
@@ -298,7 +283,6 @@
                                 <span class="precio__shop shop--principal">$50.000</span>
                                 <span class="precio__shop shop--descuento">$45.000</span>
                             </div>
-
                             <a href="" class="button__item item--colorBlack">Comprame Ahora</a>
                         </div>
 

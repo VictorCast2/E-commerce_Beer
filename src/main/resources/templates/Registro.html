@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +26,7 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body th:data-mensaje="${mensaje}" th:data-success="${success}">
+<body th:data-mensaje="${mensaje}" th:data-success="${success}" th:data-mensaje-existe="${mensajeExiste}" th:data-mensaje-error="${mensajeError}">
     <div class="icono__back">
         <i class="ri-arrow-left-s-line"></i>
         <a class="regresar" th:href="@{/}">Regresar A Inicio</a>

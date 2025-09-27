@@ -1,172 +1,188 @@
 :root {
-    --typografiaGeist: "Geist", sans-serif;
-    --typografiaUrbanist: "Urbanist", sans-serif;
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
     --colorPrincipal: #f59e0b;
     --colorDark: #18181b;
     --colorLigth: #71717a;
-    --colorAccent: #0034de;
-    --colorError: #fd1f1f;
-    --colorSuccess: #34A853;
 }
 
-/* === Reset === */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: var(--typografiaUrbanist);
-    background: #fff;
-    color: var(--colorDark);
+
+.contenido__form{
+    display: flex;
 }
 
-/* === CONTENEDOR PRINCIPAL === */
-.contenido__form {
+.form__login{
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    gap: 3rem;
-    padding: 2rem;
-}
-
-.form__login,
-.form {
-    flex: 1;
-    max-width: 550px;
-    width: 100%;
     position: relative;
+    left: 8%;
 }
 
-/* === IMAGEN LATERAL === */
-.imagen__container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.imagen__container .container__login {
-    width: 100%;
-    max-width: 650px;
-    min-height: 100vh;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-/* === TITULOS === */
 .form .formulario__title {
     font: 700 2.2rem var(--typografiaGeist);
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin: 0 8rem 0.5rem 0;
 }
+
+.container__otrascuentas{
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 2rem 0 0 2rem;
+}
+
+.otrascuentas__titles{
+    text-align: center;
+    font: 500 1rem var(--typografiaGeist);
+}
+
+.otrascuentas__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--colorDark);
+    font: 700 1.1rem var(--typografiaUrbanist);
+    border: none;
+    outline: none;
+    width: 100%;
+    width: 550px;
+    height: 55px;
+    border-radius: 8px;
+    background-color:#F5FAFF ;
+}
+
+.otrascuentas__btn img{
+    max-width: 100%;
+    width: 25px;
+}
+
 
 .form .formulario__title2 {
-    font: 500 1rem var(--typografiaUrbanist);
+    font: 700 1.1rem var(--typografiaUrbanist);
     text-align: center;
-    color: var(--colorLigth);
-    margin-bottom: 3.5rem;
+    margin: 0 0 0 22%;
 }
 
-/* === INPUTS === */
+.input--margintop{
+    margin-top: 1rem;
+}
+
+
 .input-box {
     position: relative;
-    margin-bottom: 2rem;
-    width: 100%;
-}
-
-.input-box input {
-    width: 100%;
-    height: 55px;
-    padding: 15px;
-    padding-right: 48px; /* espacio para iconos */
-    border: 1.8px solid #ccc;
-    border-radius: 10px;
-    background: transparent;
-    font: 600 1rem var(--typografiaUrbanist);
-    letter-spacing: 1px;
-    outline: none;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-.input-box input:focus {
-    border: 2px solid var(--colorAccent);
-    box-shadow: 0 0 6px rgba(0, 52, 222, 0.3);
 }
 
 .input-box label {
+    font: 600 1rem var(--typografiaUrbanist);
     position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #fff;
     color: #8d8d8d;
-    font: 500 0.95rem var(--typografiaUrbanist);
     pointer-events: none;
-    padding: 0 6px;
-    transition: 0.3s ease;
+    background-color: transparent;
+    left: 50px;
+    top: 20px;
+    transform: translateY(0.6rem);
+    transition: all 0.3s ease;
 }
 
-.input-box input:focus ~ label,
-.input-box input:not(:placeholder-shown) ~ label {
-    top: -8px;
-    left: 12px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--colorAccent);
+.input-box input {
+    margin: 10px 0 25px 30px;
+    background-color: transparent;
+    border:1px solid #ccc;
+    padding: 10px 15px;
+    font: 600 1rem var(--typografiaUrbanist);
+    border-radius: 8px;
+    width: 550px;
+    height: 55px;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.input-box input:focus {
+    outline: none;
+    border: 2px solid #0034de;
+}
+
+.input-box input:focus~label,
+.input-box input:not(:placeholder-shown)~label {
+    background-color: #fff;
+    transform: translateY(-80%) translateX(-10px) scale(0.9);
+    padding: 0 5px;
+    color: #0034de;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
     border-radius: 100px;
 }
 
-/* === ICONOS DE VALIDACIÓN === */
+
 .box__icon i {
     position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    display: none;
+    top: 25px;
+    left: 72%;
+    font: 900 1.2rem var(--typografiaUrbanist);
+
 }
 
 .box__icon .ri-check-line {
-    background: var(--colorSuccess);
-    color: #fff;
+    background-color: #34A853;
     border-radius: 50%;
-    padding: 2px;
-}
-
-.box__icon .ri-close-line {
-    background: var(--colorError);
+    padding: 1px 1px;
     color: #fff;
-    border-radius: 50%;
-    padding: 2px;
-}
-
-.input-box.input-valid .ri-check-line { display: inline-block; }
-.input-box.input-error .ri-close-line { display: inline-block; }
-
-/* === MENSAJE DE ERROR === */
-.input__error {
-    font: 500 0.85rem var(--typografiaUrbanist);
-    color: var(--colorError);
-    margin: -1rem 0 1rem 0;
     display: none;
 }
 
-.input-box.input-error ~ .input__error {
-    display: block;
+.box__icon .ri-close-line {
+    background-color: #fd1f1f;
+    border-radius: 50%;
+    padding: 1px 1px;
+    color: #fff;
+    display: none;
 }
 
-/* === RECORDAR & OLVIDAR === */
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    width: 100%;
+.input-box.input-error label {
+    color: #fd1f1f !important;
 }
+
+.input__error {
+    font: 600 1rem var(--typografiaUrbanist);
+    width: 500px;
+    margin: 0 0 15px 33px;
+    display: none;
+}
+
+
+.error--changed {
+    margin: 30px 0 0 33px;
+}
+
+
+.input__advertencia i {
+    font-size: 1.7rem;
+    margin: -5px 10px 0 0;
+}
+
+.swal-title {
+    font-family: 'Urbanist', sans-serif !important;
+    font-weight: 600;
+}
+
+.swal-popup {
+    font-family: 'Urbanist', sans-serif !important;
+}
+
 
 .remember-forgot .forgot__label {
     accent-color: #0034de;
@@ -180,161 +196,103 @@ body {
 }
 
 .remember-forgot a {
-    color: var(--colorAccent);
-    font-weight: 600;
+    color: gray;
     text-decoration: none;
-    white-space: nowrap;
-    transition: color .2s ease;
+    font-weight: 600;
+    position: relative;
+    margin: 0 0 0 90px;
 }
 
 .remember-forgot a:hover {
     text-decoration: underline;
-    color: #002bb5;
 }
 
-/* === BOTÓN LOGIN === */
+
 .form .formulario__btn {
     font: 700 1rem var(--typografiaUrbanist);
-    background: #48f;
+    background-color: #48f;
     color: #fff;
     width: 100%;
+    width: 550px;
     height: 55px;
+    margin: 30px 10em 30px 0;
     border-radius: 8px;
     border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     cursor: pointer;
-    transition: background .3s ease;
+    transition: background-color .7s ease;
 }
 
-.form .formulario__btn:hover {
-    background: var(--colorAccent);
+.form .formulario__btn:hover{
+    background-color: #0034de;
 }
 
-/* === LINK DE REGISTRO === */
+.formulario__btn-container {
+    grid-column: span 2;
+    margin:5px 0 0 30px;
+    display: flex;
+    justify-content: center;
+}
+
 .registre-link {
-    text-align: center;
-    margin: 1.5rem 0;
-    font: 500 0.95rem var(--typografiaUrbanist);
+    margin: 0 0 0 150px;
 }
 
-.registre-link a {
+.remember-forgot .forgot__color{
     color: #48f;
+    margin-left: 120px;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+.registre-link a {
+    font: 600 1.1rem var(--typografiaUrbanist);
+    margin: 20px 0 0 20px;
+
+}
+
+
+.registre-link p{
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.registre-link p a {
+    color: #48f;
+    text-decoration: none;
     font-weight: 600;
-    text-decoration: none;
+    margin: 20px 0 0 20px;
 }
 
-.registre-link a:hover {
+.registre-link p a:hover {
     text-decoration: underline;
 }
 
-/* === OTRAS CUENTAS === */
-.container__otrascuentas {
-    text-align: center;
-    margin-top: 1rem;
+
+.imagen__container {
+    position: relative;
+    top: -11%;
+    left: -1.1%;
 }
 
-.otrascuentas__titles {
-    font: 500 1rem var(--typografiaGeist);
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.otrascuentas__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+.imagen__container .container__login{
     width: 100%;
-    height: 55px;
-    border-radius: 8px;
-    background: #F5FAFF;
-    font: 600 1rem var(--typografiaUrbanist);
-    color: var(--colorDark);
-    text-decoration: none;
-    transition: background 0.3s ease;
+    max-width: 650px;
+    min-height: 100vh;
 }
 
-.otrascuentas__btn:hover {
-    background: #eaf3ff;
-}
-
-.otrascuentas__btn img {
-    width: 22px;
-    height: auto;
-}
-
-/* === ICONO REGRESAR === */
-.icono__back {
+.icono__back{
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 30px;
+    left: -100%;
 }
 
-.icono__back .regresar {
-    font: 500 1rem var(--typografiaUrbanist);
+.icono__back .regresar{
+    font: 500 1.2rem var(--typografiaUrbanist);
     text-decoration: none;
-    color: var(--colorAccent);
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    color: #000000;
 }
 
-.icono__back .regresar:hover {
-    text-decoration: underline;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 992px) {
-    .contenido__form { flex-direction: column; padding: 1rem; }
-    .imagen__container { display: none; }
-    .form { max-width: 100%; }
-}
-
-@media (max-width: 520px) {
-    .remember-forgot { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-    .remember-forgot a { align-self: flex-end; }
-}
-
-.formulario__title {
-    font-size: 28px;
-    margin-bottom: 12px; /* espacio con el subtítulo */
-    text-align: center;
-}
-
-.formulario__title2 {
-    display: block;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 30px; /* 🔥 aquí das más espacio hacia los inputs */
-    text-align: center;
-    line-height: 1.5;
-}
-/* 🔘 Botón de mostrar/ocultar contraseña */
-.input-box {
-    position: relative; /* importante para posicionar el botón */
-}
-
-/* Botón mostrar/ocultar contraseña */
-.toggle-password {
-    position: absolute;
-    right: 55px; /* 👈 lo movemos un poco más a la izquierda */
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
+.icono__back i{
     font-size: 20px;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-}
-
-.toggle-password:hover {
-    color: #111;
-}
-
-/* Ocultamos uno de los dos iconos por defecto */
-.toggle-password .ri-eye-off-line {
-    display: none;
+    color: #000000;
 }
