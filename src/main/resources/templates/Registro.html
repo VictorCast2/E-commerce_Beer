@@ -26,7 +26,7 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body th:data-mensaje="${mensaje}" th:data-success="${success}">
+<body th:data-mensaje="${mensaje}" th:data-success="${success}" th:data-mensaje-existe="${mensajeExiste}" th:data-mensaje-error="${mensajeError}">
     <div class="icono__back">
         <i class="ri-arrow-left-s-line"></i>
         <a class="regresar" th:href="@{/}">Regresar A Inicio</a>

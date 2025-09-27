@@ -77,6 +77,32 @@ termsLabel.addEventListener("click", (e) => {
     });
 });
 
+// Verifica si el usuario ya existe
+if (typeof mensajeExiste !== "undefined" && mensajeExiste !== null) {
+    Swal.fire({
+        icon: "error",
+        title: "El usuario ya existe en la base de datos",
+        text: mensajeExiste, // Usamos la variable mensajeExiste
+        customClass: {
+            title: 'swal-title',
+            popup: 'swal-popup'
+        }
+    });
+}
+
+// Verifica si hubo error en credenciales
+if (typeof mensajeError !== "undefined" && mensajeError !== null) {
+    Swal.fire({
+        icon: "error",
+        title: "Credenciales inválidas",
+        text: mensajeError, // Usamos la variable mensajeError
+        customClass: {
+            title: 'swal-title',
+            popup: 'swal-popup'
+        }
+    });
+}
+
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     if (!input) return;
