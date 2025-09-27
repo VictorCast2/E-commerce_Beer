@@ -283,16 +283,16 @@
 .icono__back{
     position: absolute;
     top: 30px;
-    left: 9em;
+    left: -100%;
 }
 
 .icono__back .regresar{
     font: 500 1.2rem var(--typografiaUrbanist);
     text-decoration: none;
-    color: #0034de;
+    color: #000000;
 }
 
 .icono__back i{
     font-size: 20px;
-    color: #0034de;
+    color: #000000;
 }
