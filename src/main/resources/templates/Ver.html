@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -56,66 +57,63 @@
                 </div>
             </span>
 
+            <!-- Buscar -->
             <span class="icon__item">
                 <i class="ri-search-line"></i>
             </span>
 
+            <!-- Usuario -->
             <span class="icon__item">
                 <i class="ri-user-line"></i>
-                <div class="nav__menu" id="SubMenu1">
+                <!-- Cuando el usuario NO está autenticado -->
+                <div class="nav__menu" id="SubMenu1" sec:authorize="isAnonymous()">
                     <div class="menu__sub">
-
                         <a th:href="@{/auth/login}" class="sub__link">
-                            <p class="link__text">Iniciar Sesion</p>
+                            <p class="link__text">Iniciar Sesión</p>
                         </a>
-
-                        <a th:href="@{/auth/}" class="sub__link">
+                        <a th:href="@{/auth/registro}" class="sub__link">
                             <p class="link__text">Registro</p>
                         </a>
-
-                        <a th:href="@{/auth/}" class="sub__link">
+                        <a th:href="@{/auth/recordar-contrasenna}" class="sub__link">
                             <p class="link__text">Recordar Contraseña</p>
                         </a>
-
                     </div>
                 </div>
-
-                <div class="nav__menu" id="SubMenu">
+                <!-- Cuando el usuario SÍ está autenticado -->
+                <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
                     <div class="menu__sub">
                         <div class="sub__info">
                             <i class="ri-user-line"></i>
-                            <h2 class="info__title">Keyner Reyes</h2>
+                            <h2 class="info__title" th:text="${#authentication.principal?.nombres}">Nombre Usuario
+                            </h2>
                         </div>
                         <hr>
-
-                        <a th:href="@{Perfil.html}" class="sub__link">
+                        <a th:href="@{/perfil/}" class="sub__link">
                             <p class="link__text">Perfil</p>
                         </a>
-
-                        <a th:href="@{Configuraciones.html}" class="sub__link">
+                        <a th:href="@{/perfil/configuration}" class="sub__link">
                             <p class="link__text">Configuracion</p>
                         </a>
-
-                        <a th:href="@{Notificaciones.html}" class="sub__link">
+                        <a th:href="@{/perfil/notificaciones}" class="sub__link">
                             <p class="link__text">Notificaciones</p>
                         </a>
-
-                        <a th:href="@{Pedidos.html}" class="sub__link">
+                        <a th:href="@{/perfil/pedidos}" class="sub__link">
                             <p class="link__text">Sus Pedidos</p>
                         </a>
-
                         <a th:href="@{/auth/logout}" class="sub__link">
-                            <p class="link__text">Cerrar Sesion</p>
+                            <p class="link__text">Cerrar Seccion</p>
                         </a>
                     </div>
                 </div>
             </span>
 
+            <!-- Favorito -->
             <span class="icon__item" id="go-fav">
                 <i class="ri-heart-3-line"></i>
                 <span class="icon__badge" id="fav-count"></span>
             </span>
 
+            <!-- Carrito -->
             <span class="icon__item" id="cart-icon">
                 <i class="ri-shopping-cart-2-line"></i>
                 <span class="icon__badge" id="cart-count"></span>

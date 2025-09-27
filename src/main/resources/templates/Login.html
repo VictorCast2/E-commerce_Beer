@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,89 +15,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Iniciar Sesión</title>
-    <meta name="description" content="Página de inicio de sesión">
+    <meta name="description" content="">
     <meta name="autor" content="">
-    <meta name="keywords" content="login, inicio sesión">
+    <meta name="keywords" content="">
     <meta name="robots" content="index,follow">
 </head>
 
 <body th:data-mensaje-error="${mensajeError}" th:data-mensaje-exitoso="${mensajeExitoso}" th:data-login-success="${loginSuccess}">
-<div class="container">
-    <div class="icono__back">
-        <a class="regresar" th:href="@{/}">
-            <i class="ri-arrow-left-s-line"></i>Regresar A Inicio
-        </a>
-    </div>
+<div class="contenido__form">
 
-    <div class="contenido__form">
-        <form class="form" th:action="@{/auth/login}" method="post">
-            <h1 class="formulario__title">Iniciar Sesión</h1>
+    <figure class="imagen__container">
+        <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
+    </figure>
+
+    <div class="form__login">
+
+        <div class="icono__back">
+            <i class="ri-arrow-left-s-line"></i>
+            <a class="regresar" th:href="@{/}">Regresar a inicio</a>
+        </div>
+
+        <form class="form">
+            <h1 class="formulario__title">Iniciar Sesion</h1>
+
             <span class="formulario__title2">Use su correo y contraseña para iniciar sesión</span>
 
             <div class="formulario">
-                <div class="formulario__input">
+
+                <div class="formulario__input input--margintop">
                     <div class="input-box">
                         <!-- 🔑 Usa Email -->
-                        <input type="email" autocomplete="email" placeholder=" " name="username" id="email" required>
+                        <input type="email" autocomplete="username" placeholder="" name="username" id="email" required>
                         <label for="email">Email</label>
-                        <span class="box__icon valid-icon"><i class="ri-check-line"></i></span>
-                        <span class="box__icon invalid-icon"><i class="ri-close-line"></i></span>
+                        <span class="box__icon"><i class="ri-check-line"></i></span>
+                        <span class="box__icon"><i class="ri-close-line"></i></span>
                     </div>
                     <p class="input__error error--changed2">
                         El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.
                     </p>
                 </div>
 
+
                 <div class="formulario__input">
                     <div class="input-box">
                         <!-- 🔑 Usa Password -->
-                        <input type="password" autocomplete="current-password" placeholder=" " name="password" id="password" required>
-                        <label for="password">Contraseña</label>
-                        <span class="box__icon valid-icon"><i class="ri-check-line"></i></span>
-                        <span class="box__icon invalid-icon"><i class="ri-close-line"></i></span>
-                        <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
-                            <i class="ri-eye-line eye-icon"></i>
-                            <i class="ri-eye-off-line eye-icon"></i>
-                        </button>
+                        <input type="password" autocomplete="current-password" placeholder="" name="password" id="password" required>
+                        <label for="password">Password</label>
+                        <span class="box__icon"><i class="ri-check-line"></i></span>
+                        <span class="box__icon"><i class="ri-close-line"></i></span>
                     </div>
                     <p class="input__error">
-                        La contraseña debe tener entre 4 y 15 caracteres
+                        La contraseña tiene que ser de 4 a 15 digitos.
                     </p>
                 </div>
 
-                <div class="formulario__input remember-forgot-container">
+                <div class="formulario__input">
                     <div class="remember-forgot">
-                        <label class="forgot__label" id="terms-label">
-                            <input type="checkbox" name="remember-me"> Acepto Terminos y Condiciones
-                        </label>
-                        <a class="forgot__color" th:href="@{/auth/recordar-contrasenna}">¿Olvidaste tu contraseña?</a>
+                        <label class="forgot__label"><input type="checkbox">Acepto Terminos y Condiciones</label>
+                        <a class="forgot__color" th:href="@{/auth/recordar-contrasenna}" >Recordar contraseña?</a>
                     </div>
                 </div>
 
                 <div class="formulario__input formulario__btn-container">
                     <button class="formulario__btn g-recaptcha" data-sitekey="6LdB_NMrAAAAABGNY2Deel7-qC2NYxKfpgfcpDkU"
-                            data-callback="onSubmit" type="button">Iniciar Sesión</button>
+                            data-callback="onSubmit" type="button">Iniciar Sesion</button>
                 </div>
 
                 <div class="registre-link">
-                    <p>¿No tienes una cuenta?
+                    <p>No tienes una cuenta?
                         <a th:href="@{/auth/registro}">Regístrate</a>
                     </p>
                 </div>
 
                 <div class="container__otrascuentas">
-                    <span class="otrascuentas__titles">O inicia sesión con</span>
+                    <span class="otrascuentas__titles">O con</span>
                     <a th:href="@{/oauth2/authorization/google}" class="otrascuentas__btn">
-                        <img loading="lazy" th:src="@{/Assets/Img/Logos/google.svg}" alt="Logo de Google">
-                        Continuar con Google
+                        <img loading="lazy" th:src="@{/Assets/Img/logos/google.svg}" alt="Logo de Google">
+                        Continuar con google
                     </a>
                 </div>
             </div>
         </form>
-
-        <div class="imagen__container">
-            <img class="container__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="Imagen decorativa de login">
-        </div>
     </div>
 </div>
 
