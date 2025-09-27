@@ -245,20 +245,21 @@ body {
 
 .sub__info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 1.5rem;
+    align-items: center;        /* centra verticalmente */
+    gap: 0.8rem;                /* espacio entre icono y texto */
+    padding: 0.8rem 1.5rem;     /* un poco de aire */
 }
 
 .sub__info i {
-    font-size: 35px;
+    font-size: 35px;            /* tamaño del icono */
+    color: #525252;
 }
 
 .sub__info .info__title {
     font: 600 1.2rem var(--typografiaGeist);
     color: #525252;
+    margin: 0;                  /* quita márgenes de h2 */
 }
-
 
 .sub__link {
     display: flex;
@@ -1606,4 +1607,77 @@ body {
 
 .instalar__copyright .copyright__text a {
     text-decoration: none;
+}
+/* Contenedor del buscador */
+.search__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Caja del buscador */
+.search__box {
+    display: none;                  /* Oculta por defecto */
+    position: absolute;
+    top: 120%;                      /* justo debajo del icono */
+    right: 0;
+    background: #fff;
+    border-radius: 24px;            /* más natural como Google */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 0.4rem 0.6rem;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 200;
+
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estado activo (cuando JS añade .active) */
+.search__box.active {
+    display: flex;
+    width: 320px;                   /* tamaño cómodo como Google */
+    opacity: 1;
+}
+
+/* Input */
+.search__box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    font-family: var(--typografiaGeist, Arial, sans-serif);
+    border-radius: 24px;
+    background: #f8f9fa;
+    color: #202124;
+    transition: background 0.2s ease;
+}
+
+/* Hover y focus del input */
+.search__box input:hover,
+.search__box input:focus {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #dadce0;
+}
+
+/* Botón de búsqueda */
+.search__box button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #5f6368;
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover en botón */
+.search__box button:hover {
+    background: #f1f3f4;
+    color: #202124;
 }

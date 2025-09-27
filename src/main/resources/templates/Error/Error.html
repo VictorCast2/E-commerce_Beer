@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Error</title>
-        <link rel="stylesheet" href="/Css/Error/Error.css"
-            th:href="@{/Css/Error/Error.css}">
-        <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
-    </head>
-    <body>
-        <div class="container">
-            <h1>En Actualización</h1>
-            <p>Estamos en proceso de actualización ... </p>
-            <div class="loader"></div>
-            <a href="javascript:history.back()" class="button">Volver</a>
-        </div>
-    </body>
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/Css/Error/Error.css"
+          th:href="@{/Css/Error/Error.css}">
+    <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
+</head>
+<body>
+<div class="container">
+    <h1>En Actualización 🚧</h1>
+    <p>Estamos trabajando para mejorar tu experiencia. <br>
+        Vuelve a intentarlo en unos minutos.</p>
+
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+        <span class="loader-text">Cargando...</span>
+    </div>
+
+    <!-- Botón -->
+    <a href="javascript:history.back()" class="button">Volver</a>
+
+    <!-- Mensaje adicional -->
+    <div class="additional-info">
+        Si el problema persiste, contacta con el administrador.
+    </div>
+</div>
+</body>
 </html>

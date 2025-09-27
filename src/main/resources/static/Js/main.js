@@ -1,3 +1,10 @@
+const searchToggle = document.getElementById("searchToggle");
+const searchBox = document.getElementById("searchBox");
+
+searchToggle.addEventListener("click", () => {
+    searchBox.classList.toggle("active");
+});
+
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');

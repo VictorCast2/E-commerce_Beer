@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="https://www.thymeleaf.org">
-  <head>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>403</title>
-    <link rel="stylesheet" href="/Css/Error/Error.css"
-      th:href="@{/Css/Error/Error.css}">
-      <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Motivos de seguridad</h1>
-      <p>No podemos permitirte acceso</p>
-      <div class="loader"></div>
-      <a href="javascript:history.back()" class="button">Volver</a>
+    <title>Error 403 - Prohibido</title>
+    <link rel="stylesheet" th:href="@{/Css/Error/Error.css}">
+    <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
+</head>
+<body>
+<div class="container">
+    <!-- Representación visual del 403 -->
+    <div class="error-403">
+        <span class="error-num">4</span>
+
+        <div class="beer-container" aria-hidden="true">
+            <div class="beer-pitcher forbidden" role="img" aria-label="Jarra prohibida">
+                <div class="pitcher-body">
+                    <div class="bubbles"></div>
+                    <div class="beer-liquid blocked" id="beer-liquid"></div>
+                </div>
+                <div class="pitcher-base"></div>
+                <div class="glass-effects"></div>
+                <div class="forbidden-icon" aria-hidden="true">🚫</div>
+            </div>
+        </div>
+
+        <span class="error-num">0</span>
+        <span class="error-num">3</span>
     </div>
-  </body>
+
+    <h1>Acceso prohibido</h1>
+    <p>No tienes autorización para acceder a este recurso. Si crees que esto es un error, contacta con el administrador del sitio.</p>
+
+    <!-- Loader temático -->
+    <div class="loader-container">
+        <div class="loader" aria-hidden="true"></div>
+        <span class="loader-text">Revisando restricciones...</span>
+    </div>
+
+    <!-- Botones -->
+    <div class="buttons">
+        <a href="javascript:history.back()" class="button">Volver</a>
+        <a th:href="@{/auth/login}" class="button secondary">Iniciar sesión</a>
+    </div>
+
+    <!-- Mensaje adicional -->
+    <div class="additional-info">
+        <p>¡Ups! Esta cerveza está fuera de tu alcance. Solicita permisos si corresponde.</p>
+    </div>
+</div>
+
+<script th:src="@{/Js/Error/Error.js}"></script>
+</body>
 </html>
