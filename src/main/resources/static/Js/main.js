@@ -11,7 +11,6 @@ export function activarGlassmorphism() {
     });
 }
 
-
 export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -283,20 +282,48 @@ export function finalizarCompra() {
 }
 
 export function desplegablePerfil() {
-    /* Menú desplegable del perfil */
-    const subMenu = document.getElementById("SubMenu");
-    const profileImage = document.querySelector(".ri-user-line");
+    /* Menú desplegable del perfil - Versión corregida */
 
-    if (subMenu && profileImage) {
-        profileImage.addEventListener("click", function (e) {
-            e.stopPropagation(); // 🔹 Evita que el click cierre el menú inmediatamente
-            subMenu.classList.toggle("open__menu");
+    // Buscar ambos menús (autenticado y no autenticado)
+    const subMenuAutenticado = document.getElementById("SubMenu");
+    const subMenuAnonimo = document.getElementById("SubMenu1");
+
+    // Seleccionar correctamente el ícono de usuario (está dentro del span con clase icon__item)
+    const profileIcon = document.querySelector(".icon__item .ri-user-line");
+
+    if (profileIcon) {
+        profileIcon.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Cerrar el otro menú si está abierto
+            if (subMenuAutenticado && subMenuAnonimo) {
+                if (subMenuAutenticado.classList.contains("open__menu")) {
+                    subMenuAutenticado.classList.remove("open__menu");
+                }
+                if (subMenuAnonimo.classList.contains("open__menu")) {
+                    subMenuAnonimo.classList.remove("open__menu");
+                }
+            }
+
+            // Abrir el menú correspondiente
+            if (subMenuAutenticado) {
+                subMenuAutenticado.classList.toggle("open__menu");
+            }
+            if (subMenuAnonimo) {
+                subMenuAnonimo.classList.toggle("open__menu");
+            }
         });
 
         // Cerrar menú al hacer clic fuera
         document.addEventListener("click", function (e) {
-            if (!subMenu.contains(e.target) && !profileImage.contains(e.target)) {
-                subMenu.classList.remove("open__menu");
+            const isClickInsideMenu =
+                (subMenuAutenticado && subMenuAutenticado.contains(e.target)) ||
+                (subMenuAnonimo && subMenuAnonimo.contains(e.target)) ||
+                (profileIcon && profileIcon.contains(e.target));
+
+            if (!isClickInsideMenu) {
+                if (subMenuAutenticado) subMenuAutenticado.classList.remove("open__menu");
+                if (subMenuAnonimo) subMenuAnonimo.classList.remove("open__menu");
             }
         });
     }

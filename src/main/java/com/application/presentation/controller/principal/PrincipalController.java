@@ -47,5 +47,5 @@ public class PrincipalController {
     public String ver() {
         return "Ver";
     }
-    
+
 }

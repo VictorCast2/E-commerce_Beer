@@ -30,99 +30,99 @@
     <header class="header">
         <h1 class="header__logo">HoreecarBeer</h1>
 
-            <nav class="header__navbar">
-                <ul class="navbar__list">
-                    <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
-                    <li class="list__item"><a href="#" class="item__link active">Packs</a></li>
-                    <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
-                    <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
-                    <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
-                </ul>
-            </nav>
+        <nav class="header__navbar">
+            <ul class="navbar__list">
+                <li class="list__item"><a th:href="@{/}" class="item__link">Inicio</a></li>
+                <li class="list__item"><a href="#" class="item__link active">Packs</a></li>
+                <li class="list__item"><a th:href="@{/productos}" class="item__link">Productos</a></li>
+                <li class="list__item"><a th:href="@{/blog}" class="item__link">Blog</a></li>
+                <li class="list__item"><a th:href="@{/contacto}" class="item__link">Contactenos</a></li>
+            </ul>
+        </nav>
 
-            <div class="list__icon">
+        <div class="list__icon">
 
-                <span class="icon__item language-selector">
-                    <div class="language-dropdown">
-                        <button class="dropdown-toggle">
-                            <i class="ri-translate-2"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>Español</li>
-                            <li>English</li>
-                            <li>France</li>
-                            <li>Portugues</li>
-                        </ul>
+            <span class="icon__item language-selector">
+                <div class="language-dropdown">
+                    <button class="dropdown-toggle">
+                        <i class="ri-translate-2"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>Español</li>
+                        <li>English</li>
+                        <li>France</li>
+                        <li>Portugues</li>
+                    </ul>
+                </div>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-search-line"></i>
+            </span>
+
+            <span class="icon__item">
+                <i class="ri-user-line"></i>
+
+                <div class="nav__menu" id="SubMenu1">
+                    <div class="menu__sub">
+
+                        <a th:href="@{/auth/login}" class="sub__link">
+                            <p class="link__text">Iniciar Sesion</p>
+                        </a>
+
+                        <a th:href="@{/auth/registro}" class="sub__link">
+                            <p class="link__text">Registro</p>
+                        </a>
+
+                        <a th:href="@{/auth/remember-password}" class="sub__link">
+                            <p class="link__text">Recordar Contraseña</p>
+                        </a>
+
                     </div>
-                </span>
+                </div>
 
-                <span class="icon__item">
-                    <i class="ri-search-line"></i>
-                </span>
-
-                <span class="icon__item">
-                    <i class="ri-user-line"></i>
-
-                    <div class="nav__menu" id="SubMenu1">
-                        <div class="menu__sub">
-
-                            <a th:href="@{/auth/login}" class="sub__link">
-                                <p class="link__text">Iniciar Sesion</p>
-                            </a>
-
-                            <a th:href="@{/auth/registro}" class="sub__link">
-                                <p class="link__text">Registro</p>
-                            </a>
-
-                            <a th:href="@{/auth/remember-password}" class="sub__link">
-                                <p class="link__text">Recordar Contraseña</p>
-                            </a>
-
+                <div class="nav__menu" id="SubMenu">
+                    <div class="menu__sub">
+                        <div class="sub__info">
+                            <i class="ri-user-line"></i>
+                            <h2 class="info__title">Keyner Reyes</h2>
                         </div>
+                        <hr>
+
+                        <a th:href="@{Perfil.html}" class="sub__link">
+                            <p class="link__text">Perfil</p>
+                        </a>
+
+                        <a th:href="@{Configuraciones.html}" class="sub__link">
+                            <p class="link__text">Configuracion</p>
+                        </a>
+
+                        <a th:href="@{Notificaciones.html}" class="sub__link">
+                            <p class="link__text">Notificaciones</p>
+                        </a>
+
+                        <a th:href="@{Pedidos.html}" class="sub__link">
+                            <p class="link__text">Sus Pedidos</p>
+                        </a>
+
+                        <a th:href="@{/auth/logout}" class="sub__link">
+                            <p class="link__text">Cerrar Seccion</p>
+                        </a>
                     </div>
+                </div>
 
-                    <div class="nav__menu" id="SubMenu">
-                        <div class="menu__sub">
-                            <div class="sub__info">
-                                <i class="ri-user-line"></i>
-                                <h2 class="info__title">Keyner Reyes</h2>
-                            </div>
-                            <hr>
+            </span>
 
-                            <a th:href="@{Perfil.html}" class="sub__link">
-                                <p class="link__text">Perfil</p>
-                            </a>
+            <span class="icon__item" id="go-fav">
+                <i class="ri-heart-3-line"></i>
+                <span class="icon__badge" id="fav-count"></span>
+            </span>
 
-                            <a th:href="@{Configuraciones.html}" class="sub__link">
-                                <p class="link__text">Configuracion</p>
-                            </a>
-
-                            <a th:href="@{Notificaciones.html}" class="sub__link">
-                                <p class="link__text">Notificaciones</p>
-                            </a>
-
-                            <a th:href="@{Pedidos.html}" class="sub__link">
-                                <p class="link__text">Sus Pedidos</p>
-                            </a>
-
-                            <a th:href="@{/auth/logout}" class="sub__link">
-                                <p class="link__text">Cerrar Seccion</p>
-                            </a>
-                        </div>
-                    </div>
-
-                </span>
-
-                <span class="icon__item" id="go-fav">
-                    <i class="ri-heart-3-line"></i>
-                    <span class="icon__badge" id="fav-count"></span>
-                </span>
-
-                <span class="icon__item" id="cart-icon">
-                    <i class="ri-shopping-cart-2-line"></i>
-                    <span class="icon__badge" id="cart-count"></span>
-                </span>
-            </div>
+            <span class="icon__item" id="cart-icon">
+                <i class="ri-shopping-cart-2-line"></i>
+                <span class="icon__badge" id="cart-count"></span>
+            </span>
+        </div>
     </header>
 
     <main>
@@ -303,8 +303,8 @@
                             <!-- Product 5 -->
                             <div class="card">
                                 <div class="badge badge-green">28%</div>
-                                <img th:src="@{/Assets/Img/Productos/Productos_Destacados/ProdusctoDestacado1.webp}" alt="" width="250"
-                                    height="250" />
+                                <img th:src="@{/Assets/Img/Productos/Productos_Destacados/ProdusctoDestacado1.webp}"
+                                    alt="" width="250" height="250" />
                                 <span class="category">Single Malt</span>
 
                                 <figure class="pais">
