@@ -1618,29 +1618,22 @@ body {
 
 /* Caja del buscador */
 .search__box {
-    display: none;                  /* Oculta por defecto */
+    display: none;
     position: absolute;
-    top: 120%;                      /* justo debajo del icono */
+    top: 60px; /* ajusta según el alto de tu header */
     right: 0;
-    background: #fff;
-    border-radius: 24px;            /* más natural como Google */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 0.4rem 0.6rem;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 200;
-
-    width: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 999;
 }
 
 /* Estado activo (cuando JS añade .active) */
 .search__box.active {
     display: flex;
-    width: 320px;                   /* tamaño cómodo como Google */
-    opacity: 1;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Input */

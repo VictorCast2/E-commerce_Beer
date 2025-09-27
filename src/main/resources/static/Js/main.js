@@ -1,10 +1,3 @@
-const searchToggle = document.getElementById("searchToggle");
-const searchBox = document.getElementById("searchBox");
-
-searchToggle.addEventListener("click", () => {
-    searchBox.classList.toggle("active");
-});
-
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -336,6 +329,33 @@ export function desplegablePerfil() {
     }
 }
 
+export function desplegableBusqueda() {
+    /* Menú desplegable de búsqueda (lupa) */
+
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBox = document.getElementById("searchBox");
+
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Alternar visibilidad del buscador
+            searchBox.classList.toggle("active");
+        });
+
+        // Cerrar la caja de búsqueda si se hace clic fuera
+        document.addEventListener("click", function (e) {
+            const isClickInside =
+                searchBox.contains(e.target) ||
+                searchToggle.contains(e.target);
+
+            if (!isClickInside) {
+                searchBox.classList.remove("active");
+            }
+        });
+    }
+}
+
 export function carruselProductos() {
     // mostrar los productos con carrusel
     document.querySelectorAll(".flex").forEach(carrusel => {
@@ -405,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img src="/Assets/Img/logos/costaoroimport.png"
+            <img th:src="@{/Assets/Img/logos/costaoroimport.png}"
             alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
@@ -440,6 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //desplegar menu del usuario
     desplegablePerfil();
 
+    //desplegar menu de busqueda
+    desplegableBusqueda();
+
     //rederigir a Favorito
     rederigirFav();
 
@@ -457,13 +480,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar slide por índice
     function showSlide(index) {
+        if (slides.length === 0) return; // 🚨 prevenir error si no hay slides
+
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             dots[i]?.classList.toggle('active', i === index);
         });
 
         const activeSlide = slides[index];
-        const theme = activeSlide.getAttribute('data-theme');
+        if (!activeSlide) return; // otra protección extra
+
+        const theme = activeSlide.getAttribute('data-theme') || "default";
 
         hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
         hero.classList.add(`hero--${theme}`);
