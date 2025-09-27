@@ -30,7 +30,8 @@ public class SecurityConfig {
             CustomAuthSuccessHandler customAuthSuccessHandler,
             CustomAuthFailureHandler customAuthFailureHandler,
             CustomOauth2UserService customOauth2UserService,
-            RecaptchaFilter recaptchaFilter) throws Exception {
+            RecaptchaFilter recaptchaFilter
+    ) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session

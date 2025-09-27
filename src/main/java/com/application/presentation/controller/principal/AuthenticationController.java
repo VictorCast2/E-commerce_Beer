@@ -99,9 +99,9 @@ public class AuthenticationController {
         return "redirect:/auth/registro?mensaje=" + mensaje + "&success=" + response.success();
     }
 
-    @GetMapping("/remember-password")
-    public String rememberPassword() {
-        return "";
+    @GetMapping("/recordar-contrasenna")
+    public String recordarContrasenna() {
+        return "RecordarContrasena";
     }
 
 }

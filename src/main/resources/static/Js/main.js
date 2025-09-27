@@ -11,7 +11,6 @@ export function activarGlassmorphism() {
     });
 }
 
-
 export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -283,20 +282,75 @@ export function finalizarCompra() {
 }
 
 export function desplegablePerfil() {
-    /* Menú desplegable del perfil */
-    const subMenu = document.getElementById("SubMenu");
-    const profileImage = document.querySelector(".ri-user-line");
+    /* Menú desplegable del perfil - Versión corregida */
 
-    if (subMenu && profileImage) {
-        profileImage.addEventListener("click", function (e) {
-            e.stopPropagation(); // 🔹 Evita que el click cierre el menú inmediatamente
-            subMenu.classList.toggle("open__menu");
+    // Buscar ambos menús (autenticado y no autenticado)
+    const subMenuAutenticado = document.getElementById("SubMenu");
+    const subMenuAnonimo = document.getElementById("SubMenu1");
+
+    // Seleccionar correctamente el ícono de usuario (está dentro del span con clase icon__item)
+    const profileIcon = document.querySelector(".icon__item .ri-user-line");
+
+    if (profileIcon) {
+        profileIcon.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Cerrar el otro menú si está abierto
+            if (subMenuAutenticado && subMenuAnonimo) {
+                if (subMenuAutenticado.classList.contains("open__menu")) {
+                    subMenuAutenticado.classList.remove("open__menu");
+                }
+                if (subMenuAnonimo.classList.contains("open__menu")) {
+                    subMenuAnonimo.classList.remove("open__menu");
+                }
+            }
+
+            // Abrir el menú correspondiente
+            if (subMenuAutenticado) {
+                subMenuAutenticado.classList.toggle("open__menu");
+            }
+            if (subMenuAnonimo) {
+                subMenuAnonimo.classList.toggle("open__menu");
+            }
         });
 
         // Cerrar menú al hacer clic fuera
         document.addEventListener("click", function (e) {
-            if (!subMenu.contains(e.target) && !profileImage.contains(e.target)) {
-                subMenu.classList.remove("open__menu");
+            const isClickInsideMenu =
+                (subMenuAutenticado && subMenuAutenticado.contains(e.target)) ||
+                (subMenuAnonimo && subMenuAnonimo.contains(e.target)) ||
+                (profileIcon && profileIcon.contains(e.target));
+
+            if (!isClickInsideMenu) {
+                if (subMenuAutenticado) subMenuAutenticado.classList.remove("open__menu");
+                if (subMenuAnonimo) subMenuAnonimo.classList.remove("open__menu");
+            }
+        });
+    }
+}
+
+export function desplegableBusqueda() {
+    /* Menú desplegable de búsqueda (lupa) */
+
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBox = document.getElementById("searchBox");
+
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Alternar visibilidad del buscador
+            searchBox.classList.toggle("active");
+        });
+
+        // Cerrar la caja de búsqueda si se hace clic fuera
+        document.addEventListener("click", function (e) {
+            const isClickInside =
+                searchBox.contains(e.target) ||
+                searchToggle.contains(e.target);
+
+            if (!isClickInside) {
+                searchBox.classList.remove("active");
             }
         });
     }
@@ -359,7 +413,7 @@ export function verProductos() {
             localStorage.setItem("selectedProduct", JSON.stringify(productData));
 
             // Redirigir a Ver.html
-            window.location.href = "Ver.html";
+            window.location.href = "/ver";
         });
     });
 
@@ -371,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img src="/static/Assets/Img/logos/costaoroimport.png"
+            <img th:src="@{/Assets/Img/logos/costaoroimport.png}"
             alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
@@ -406,6 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //desplegar menu del usuario
     desplegablePerfil();
 
+    //desplegar menu de busqueda
+    desplegableBusqueda();
+
     //rederigir a Favorito
     rederigirFav();
 
@@ -423,13 +480,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar slide por índice
     function showSlide(index) {
+        if (slides.length === 0) return; // 🚨 prevenir error si no hay slides
+
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             dots[i]?.classList.toggle('active', i === index);
         });
 
         const activeSlide = slides[index];
-        const theme = activeSlide.getAttribute('data-theme');
+        if (!activeSlide) return; // otra protección extra
+
+        const theme = activeSlide.getAttribute('data-theme') || "default";
 
         hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
         hero.classList.add(`hero--${theme}`);

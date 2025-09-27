@@ -68,7 +68,7 @@
                         <select class="styled-select" name="tipoIdentificacion" id="tipoIdentificacion">
                             <option disabled selected>Tipo De Identificación</option>
                             <option th:each="tipo : ${tiposIdentificacion}" th:value="${tipo.name()}"
-                                    th:text="${tipo.descripcion}"></option>
+                                th:text="${tipo.descripcion}"></option>
                         </select>
                         <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
                     </div>
@@ -79,7 +79,8 @@
 
                 <div class="formulario__input">
                     <div class="input-box">
-                        <input type="text" autocomplete="off" placeholder="" name="numeroIdentificacion" id="identificacion">
+                        <input type="text" autocomplete="off" placeholder="" name="numeroIdentificacion"
+                            id="identificacion">
                         <label for="identificacion">Identificacion</label>
                         <span class="box__icon"><i class="ri-check-line"></i></span>
                         <span class="box__icon"><i class="ri-close-line"></i></span>

@@ -42,5 +42,10 @@ public class PrincipalController {
     public String favorito() {
         return "Favorito";
     }
-    
+
+    @GetMapping("/ver")
+    public String ver() {
+        return "Ver";
+    }
+
 }

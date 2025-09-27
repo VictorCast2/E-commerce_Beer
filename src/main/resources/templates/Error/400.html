@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="https://www.thymeleaf.org">
-  <head>
+      xmlns:th="https://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>400</title>
-    <link rel="stylesheet" href="/Css/Error/Error.css"
-      th:href="@{/Css/Error/Error.css}">
-      <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Problemas en la comunicacion</h1>
-      <p>Estamos teniendo problemas para resolver tu solicitud</p>
-      <div class="loader"></div>
-      <a href="javascript:history.back()" class="button">Volver</a>
+    <title>Error 400 - Solicitud incorrecta</title>
+    <link rel="stylesheet" th:href="@{/Css/Error/Error.css}">
+    <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
+</head>
+
+<body>
+<div class="container">
+    <!-- 400 con temática de jarra medio vacía -->
+    <div class="error-400">
+        <span class="error-num">4</span>
+        <div class="beer-container">
+            <div class="beer-pitcher">
+                <!-- Cuerpo principal de la jarra -->
+                <div class="pitcher-body">
+                    <!-- Burbujas en el interior -->
+                    <div class="bubbles" id="bubbles"></div>
+                    <!-- Líquido de cerveza reducido, simulando error -->
+                    <div class="beer-liquid half" id="beer-liquid"></div>
+                </div>
+                <!-- Base de la jarra -->
+                <div class="pitcher-base"></div>
+                <!-- Efectos de vidrio -->
+                <div class="glass-effects"></div>
+            </div>
+        </div>
+        <span class="error-num">0</span>
+        <span class="error-num">0</span>
     </div>
-  </body>
+
+    <h1>¡Ups! Problemas en la comunicación</h1>
+    <p>La solicitud enviada no pudo ser procesada correctamente.
+        Tal vez se nos derramó un poco la cerveza.</p>
+
+    <!-- Loader temático -->
+    <div class="loader-container">
+        <div class="loader"></div>
+        <span class="loader-text">Intentando arreglarlo...</span>
+    </div>
+
+    <!-- Botón de volver -->
+    <a href="javascript:history.back()" class="button">
+        Volver a la página anterior
+    </a>
+
+    <!-- Mensaje divertido -->
+    <div class="additional-info">
+        <p>No pasa nada, vuelve a intentarlo con un sorbo de paciencia.</p>
+    </div>
+</div>
+
+<script th:src="@{/Js/Error/Error.js}"></script>
+</body>
 </html>

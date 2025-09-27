@@ -84,8 +84,8 @@ termsLabel.addEventListener("click", (e) => {
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     const inputBox = input.closest(".input-box");
-    const checkIcon = inputBox.querySelector(".ri-check-line");
-    const errorIcon = inputBox.querySelector(".ri-close-line");
+    const validIcon = inputBox.querySelector(".valid-icon");
+    const invalidIcon = inputBox.querySelector(".invalid-icon");
     const errorMessage = inputBox.nextElementSibling;
 
     input.addEventListener("input", () => {
@@ -93,25 +93,27 @@ Object.keys(fields).forEach(fieldId => {
 
         if (value === "") {
             // Resetear estilos si está vacío
-            inputBox.classList.remove("input-error");
-            checkIcon.style.display = "none";
-            errorIcon.style.display = "none";
+            inputBox.classList.remove("input-error", "input-valid");
+            validIcon.style.display = "none";
+            invalidIcon.style.display = "none";
             errorMessage.style.display = "none";
-            input.style.border = "";
+            input.style.border = "1px solid #ccc";
         } else if (fields[fieldId].regex.test(value)) {
             // Válido
-            checkIcon.style.display = "inline-block";
-            errorIcon.style.display = "none";
+            inputBox.classList.add("input-valid");
+            inputBox.classList.remove("input-error");
+            validIcon.style.display = "block";
+            invalidIcon.style.display = "none";
             errorMessage.style.display = "none";
             input.style.border = "2px solid #0034de";
-            inputBox.classList.remove("input-error");
         } else {
             // Inválido
-            checkIcon.style.display = "none";
-            errorIcon.style.display = "inline-block";
+            inputBox.classList.add("input-error");
+            inputBox.classList.remove("input-valid");
+            validIcon.style.display = "none";
+            invalidIcon.style.display = "block";
             errorMessage.style.display = "block";
             input.style.border = "2px solid #fd1f1f";
-            inputBox.classList.add("input-error");
         }
     });
 });
@@ -123,7 +125,6 @@ const loginBtn = document.querySelector("#loginBtn")
         || document.querySelector(".formulario__btn.g-recaptcha");
 
 // Validación antes de enviar
-// === 🚀 Validación completa ===
 function validateForm() {
     let formValid = true;
     inputs.forEach(input => {
@@ -207,5 +208,17 @@ if (typeof mensajeExitoso !== "undefined" && mensajeExitoso !== null) {
             title: 'swal-title',
             popup: 'swal-popup'
         }
+    });
+}
+
+// === 👁 Mostrar / ocultar contraseña ===
+const passwordInput = document.getElementById("password");
+const togglePasswordBtn = document.querySelector(".toggle-password");
+
+if (togglePasswordBtn) {
+    togglePasswordBtn.addEventListener("click", () => {
+        const isText = passwordInput.type === "text";
+        passwordInput.type = isText ? "password" : "text";
+        togglePasswordBtn.classList.toggle("active", !isText);
     });
 }
