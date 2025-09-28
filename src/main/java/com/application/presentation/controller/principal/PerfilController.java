@@ -4,6 +4,7 @@ import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.empresa.enums.ESector;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
+import com.application.presentation.dto.empresa.request.UpdateEmpresaRequest;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.usuario.request.UpdateUsuarioRequest;
 import com.application.service.implementation.empresa.EmpresaServiceImpl;
@@ -44,6 +45,14 @@ public class PerfilController {
     public String updateUsuario(@AuthenticationPrincipal CustomUserPrincipal principal,
                                 @ModelAttribute @Valid UpdateUsuarioRequest usuarioRequest) {
         GeneralResponse response = usuarioService.updateUser(principal, usuarioRequest);
+        String mensaje = response.mensaje();
+        return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    }
+
+    @PostMapping("/actualizar-empresa")
+    public String updateEmpresa(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                @ModelAttribute @Valid UpdateEmpresaRequest empresaRequest) {
+        GeneralResponse response = empresaService.updateEmpresa(principal, empresaRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }

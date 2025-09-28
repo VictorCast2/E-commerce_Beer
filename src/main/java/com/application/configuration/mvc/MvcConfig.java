@@ -1,5 +1,6 @@
 package com.application.configuration.mvc;
 
+import jakarta.annotation.PostConstruct;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -40,8 +41,20 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
+        // recorremos los directorios y le enseñamos la ruta y ubicación a spring para que sepa donde buscar
+        directorios.forEach( (tipo, ruta) -> {
+            registry.addResourceHandler(tipo + "/**")
+                    .addResourceLocations("file:/" + ruta);
+        } );
+    }
 
-        // recorremos los directorios
+    /**
+     * Método para crear los directorios y cargar las imágenes en las rutas especificadas
+     *
+     *  Este método se inicializa automáticamente
+     */
+    @PostConstruct
+    public void init() {
         directorios.forEach( (tipo, ruta) -> {
             try {
                 // Si el directorio físico no existe, lo creamos automáticamente
@@ -49,19 +62,16 @@ public class MvcConfig implements WebMvcConfigurer {
                 if (!Files.exists(path)) {
                     Files.createDirectories(path);
                 }
-
-                // Creamos laa imágenes por defecto dentro de del directorio 'C:/gestion-ventas/**'
-                // imagen de usuario
-                copiarImagen("static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg", "perfil-user.jpg", "perfil-usuario");
-                // imagen de empresa
-                copiarImagen("static/Assets/Img/ExperenciaUsuarios/logo__hotel2.png", "perfil-empresa.png", "perfil-empresa");
             } catch (IOException e) {
                 throw new RuntimeException( "Error: no se ha podido crear el directorios de imágenes " + ruta + " " +  e.getMessage() + e);
             }
+        });
 
-            registry.addResourceHandler(tipo + "/**")
-                    .addResourceLocations("files:/" + ruta);
-        } );
+        // Creamos laa imágenes por defecto dentro de del directorio 'C:/gestion-ventas/**'
+        // imagen de usuario
+        copiarImagen("static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg", "perfil-user.jpg", "perfil-usuario");
+        // imagen de empresa
+        copiarImagen("static/Assets/Img/ExperenciaUsuarios/logo__hotel2.png", "perfil-empresa.png", "perfil-empresa");
     }
 
     /**
