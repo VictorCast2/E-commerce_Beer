@@ -45,6 +45,7 @@ public class EmpresaServiceImpl implements EmpresaService {
         }
 
         Empresa empresa = Empresa.builder()
+                .imagen("perfil-empresa.png")
                 .nit(empresaRequest.nit())
                 .razonSocial(empresaRequest.razonSocial())
                 .ciudad(empresaRequest.ciudad())
