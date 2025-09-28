@@ -129,14 +129,14 @@
 
             <aside class="container__nav">
                 <div class="nav__opciones">
-                    <a th:href="@{Perfil.html}" class="opciones__btn"><i class="ri-user-line"></i> Perfil</a>
-                    <a th:href="@{Configuraciones.html}" class="opciones__btn"><i class="ri-settings-2-line"></i>
+                    <a th:href="@{/perfil/}" class="opciones__btn"><i class="ri-user-line"></i> Perfil</a>
+                    <a th:href="@{/perfil/configuration}" class="opciones__btn"><i class="ri-settings-2-line"></i>
                         Configuracion</a>
-                    <a th:href="@{Notificaciones.html}" class="opciones__btn"><i class="ri-notification-2-line"></i>
+                    <a th:href="@{/perfil/notificaciones}" class="opciones__btn"><i class="ri-notification-2-line"></i>
                         Notificaciones</a>
-                    <a href="" class="opciones__btn active"> <i class="ri-shopping-bag-3-line"></i> Sus Pedidos</a>
+                    <a href="#" class="opciones__btn active"> <i class="ri-shopping-bag-3-line"></i> Sus Pedidos</a>
                     <hr class="hr__separar">
-                    <a th:href="@{Index.html}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar
+                    <a th:href="@{/auth/logout}" class="opciones__btn"> <i class="ri-logout-box-r-line"></i> Cerrar
                         Sesion</a>
                 </div>
             </aside>
