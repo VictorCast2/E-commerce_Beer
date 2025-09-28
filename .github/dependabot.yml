@@ -5,7 +5,26 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Dependencias de Maven (Java / Spring Boot)
+  - package-ecosystem: "maven"
+    directory: "/" # raíz del proyecto, donde está pom.xml
+    schedule:
+      interval: "weekly"
+
+  # Dependencias de Dockerfile
+  - package-ecosystem: "docker"
+    directory: "/" # raíz, si tu Dockerfile está ahí
+    schedule:
+      interval: "weekly"
+
+  # Dependencias de docker-compose
+  - package-ecosystem: "docker-compose"
+    directory: "/" # raíz, donde está docker-compose.yaml
+    schedule:
+      interval: "weekly"
+
+  # (Opcional) Dependencias de GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/" # workflows en .github/workflows
     schedule:
       interval: "weekly"
