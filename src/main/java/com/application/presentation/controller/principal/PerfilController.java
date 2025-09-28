@@ -38,7 +38,7 @@ public class PerfilController {
     }
 
     @GetMapping("/pedidos")
-    public String susPedidos() {
+    public String Pedidos() {
         return "Pedidos";
     }
 
