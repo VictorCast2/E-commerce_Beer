@@ -155,7 +155,13 @@
 
                     <div class="formulario__input">
                         <div class="remember-forgot">
-                            <label class="forgot__label"><input type="checkbox" name="terminos">Pertenece a alguna empresa?</label>
+                            <!-- Campo oculto para garantizar false -->
+                            <input type="hidden" name="perteneceAEmpresas" value="false">
+
+                            <label class="forgot__label">
+                                <input type="checkbox" name="pertenece a empresas" value="true">Pertenece a alguna
+                                empresa?
+                            </label>
                         </div>
                     </div>
 
@@ -171,10 +177,7 @@
         </div>
     </div>
 
-
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../static/Js/CompleterRegistro.js"></script>
 </body>
 
