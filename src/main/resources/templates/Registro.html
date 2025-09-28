@@ -30,7 +30,7 @@
 <div class="contenido__form">
 
     <figure class="form__imagen">
-        <img class="imagen__login" src="../static/Assets/Img/comprarNosotros/Elegirnos.png" alt="">
+        <img class="imagen__login" th:src="@{/Assets/Img/comprarNosotros/Elegirnos.png}" alt="">
     </figure>
 
     <div class="form__registro">
@@ -105,7 +105,7 @@
                         <span class="box__icon"><i class="ri-close-line"></i></span>
                     </div>
                     <p class="input__error error--changed2">
-                        El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
+                        El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.
                     </p>
                 </div>
 
@@ -148,7 +148,7 @@
 
                 <div class="formulario__input">
                     <div class="remember-forgot">
-                        <label class="forgot__label"><input type="checkbox" name="terminos">Acepto Terminos Y
+                        <label class="forgot__label" id="terms-label"><input type="checkbox" name="terminos">Acepto Terminos Y
                             Condiciones</label>
                     </div>
                 </div>
