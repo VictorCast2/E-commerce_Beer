@@ -35,7 +35,7 @@
             <a class="regresar" th:href="@{/}">Regresar a inicio</a>
         </div>
 
-        <form class="form">
+        <form class="form" th:action="@{/auth/login}" method="post">
             <h1 class="formulario__title">Iniciar Sesion</h1>
 
             <span class="formulario__title2">Use su correo y contraseña para iniciar sesión</span>
