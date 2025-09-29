@@ -40,7 +40,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 
         String nit = empresaRequest.nit();
         boolean existeEmpresa = empresaRepository.existsByNit(nit);
-
         if (existeEmpresa) {
             return new GeneralResponse("Error: La empresa con el nit '" + nit + "' ya tiene un usuario asignado.\n" +
                     "Si usted es el nuevo representante, escriba a admin@mail.com\n" +
