@@ -1,6 +1,7 @@
 package com.application.presentation.controller.principal;
 
 import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
 import com.application.presentation.dto.general.response.GeneralResponse;
@@ -48,7 +49,12 @@ public class AuthenticationController {
     }
 
     @GetMapping("/completar-registro")
-    public String CompletarRegistro(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
+    public String CompletarRegistro(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                    @RequestParam(value = "mensaje", required = false) String mensaje,
+                                    Model model) {
+        Usuario usuario = this.usuarioService.getUsuarioByCorreo(principal.getCorreo());
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
         return "CompletarRegistro";
     }
@@ -56,7 +62,7 @@ public class AuthenticationController {
     @PostMapping("/completar-registro")
     public String postCompletarPerfil(@AuthenticationPrincipal CustomUserPrincipal principal,
             @ModelAttribute @Valid CompleteUsuarioProfileRequest completeProfileRequest,
-            boolean registrarEmpresa) {
+            @RequestParam(name = "registrarEmpresa", defaultValue = "false") boolean registrarEmpresa) {
         usuarioService.completeUserProfile(principal, completeProfileRequest);
         if (registrarEmpresa) {
             return "redirect:/auth/registrar-empresa";

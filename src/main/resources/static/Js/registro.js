@@ -298,24 +298,3 @@ const repeatPasswordInput = document.getElementById("repeatPassword");
 passwordInput.addEventListener("input", () => {
     repeatPasswordInput.dispatchEvent(new Event("input"));
 });
-
-
-//abri el formulario de completar empresa
-const abirmodal = document.getElementById("formulario__complete");
-const modal = document.getElementById("modalnewadd");
-const closeModalBtn = document.querySelector(".modal__close");
-
-abirmodal.addEventListener("click", () => {
-    modal.classList.remove("newadd--hidden");
-})
-
-closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("newadd--hidden");
-});
-
-
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.add("newadd--hidden");
-    }
-});
