@@ -43,6 +43,7 @@ public class DataLoader {
             Usuario userJose = Usuario.builder()
                     .tipoIdentificacion(EIdentificacion.CC)
                     .numeroIdentificacion("123456789")
+                    .imagen("perfil-user.jpg")
                     .nombres("Jose Andres")
                     .apellidos("Torres Diaz")
                     .telefono("310 2233445")
@@ -53,6 +54,7 @@ public class DataLoader {
 
             // Persona de Contacto con Empresa
             Empresa empresaTheresa = Empresa.builder()
+                    .imagen("perfil-empresa.png")
                     .nit("987654321-0")
                     .razonSocial("Aurum Tech")
                     .ciudad("Cartagena")
@@ -66,6 +68,7 @@ public class DataLoader {
             Usuario userTheresa = Usuario.builder()
                     .tipoIdentificacion(EIdentificacion.CC)
                     .numeroIdentificacion("987654321")
+                    .imagen("perfil-user.jpg")
                     .nombres("Theresa Andrea")
                     .apellidos("Torres Diaz")
                     .telefono("320 2233445")
@@ -79,6 +82,7 @@ public class DataLoader {
             Usuario userElysia = Usuario.builder()
                     .tipoIdentificacion(EIdentificacion.CC)
                     .numeroIdentificacion("1234567890")
+                    .imagen("perfil-user.jpg")
                     .nombres("Elysia Andrea")
                     .apellidos("Torres Diaz")
                     .telefono("330 2233445")

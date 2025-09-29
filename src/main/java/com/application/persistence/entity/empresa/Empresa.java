@@ -26,6 +26,7 @@ public class Empresa {
     @Column(name = "empresa_id")
     private Long empresaId;
 
+    private String imagen;
     @Column(length = 12, nullable = false)
     private String nit;
     @Column(length = 175, name = "razon_social", nullable = false)

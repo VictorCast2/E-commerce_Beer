@@ -44,7 +44,7 @@ public class PrincipalController {
     }
 
     @GetMapping("/ver")
-    public String ver() {
+    public String Ver() {
         return "Ver";
     }
 

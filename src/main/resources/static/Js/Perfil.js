@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         apellido: { regex: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/, errorMessage: "El apellido debe tener al menos 3 letras." },
         identificacion: { regex: /^\d{6,10}$/, errorMessage: "La cédula debe contener entre 6 y 10 dígitos." },
         telefono: { regex: /^\d{1,10}$/, errorMessage: "El teléfono solo puede contener números (máx. 10)." },
-        email: { regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, errorMessage: "El correo solo puede contener letras,numeros,puntos,guiones y guion bajo." },
+        email1: { regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, errorMessage: "El correo solo puede contener letras,numeros,puntos,guiones y guion bajo." },
     };
 
     const selectTipoIdentificacion = document.getElementById("tipoIdentificacion");
@@ -29,7 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Object.keys(fields).forEach(fieldId => {
         const input = document.getElementById(fieldId);
+        if (!input) return; // no existe
+
         const inputBox = input.closest(".input-box");
+        if (!inputBox) return; // este campo no usa .input-box ni iconos
+
         const checkIcon = inputBox.querySelector(".ri-check-line");
         const errorIcon = inputBox.querySelector(".ri-close-line");
         const errorMessage = inputBox.nextElementSibling;
@@ -40,25 +44,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (value === "") {
                 inputBox.classList.remove("input-error");
-                checkIcon.style.display = "none";
-                errorIcon.style.display = "none";
-                errorMessage.style.display = "none";
+                if (checkIcon) checkIcon.style.display = "none";
+                if (errorIcon) errorIcon.style.display = "none";
+                if (errorMessage) errorMessage.style.display = "none";
                 input.style.border = "";
-                if (label) label.classList.remove("error"); //lo reseteas
+                if (label) label.classList.remove("error");
             } else if (fields[fieldId].regex.test(value)) {
-                checkIcon.style.display = "inline-block";
-                errorIcon.style.display = "none";
-                errorMessage.style.display = "none";
+                if (checkIcon) checkIcon.style.display = "inline-block";
+                if (errorIcon) errorIcon.style.display = "none";
+                if (errorMessage) errorMessage.style.display = "none";
                 input.style.border = "2px solid #0034de";
                 inputBox.classList.remove("input-error");
-                if (label) label.classList.remove("error"); //quitar rojo cuando es válido
+                if (label) label.classList.remove("error");
             } else {
-                checkIcon.style.display = "none";
-                errorIcon.style.display = "inline-block";
-                errorMessage.style.display = "block";
+                if (checkIcon) checkIcon.style.display = "none";
+                if (errorIcon) errorIcon.style.display = "inline-block";
+                if (errorMessage) errorMessage.style.display = "block";
                 input.style.border = "2px solid #fd1f1f";
                 inputBox.classList.add("input-error");
-                if (label) label.classList.add("error"); // marcar rojo cuando es inváli
+                if (label) label.classList.add("error");
             }
         });
     });
@@ -352,7 +356,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ejecutar al cargar
     poblarSelectCiudades();
-
-
 
 });

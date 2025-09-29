@@ -1,7 +1,7 @@
 # ============================
 # Etapa 1: Construcción
 # ============================
-FROM eclipse-temurin:21-jdk-jammy AS builder
+FROM eclipse-temurin:25-jdk-jammy AS builder
 
 WORKDIR /app
 
@@ -21,7 +21,7 @@ RUN ./mvnw clean package -DskipTests --batch-mode
 # ============================
 # Etapa 2: Producción
 # ============================
-FROM eclipse-temurin:21-jre-jammy
+FROM eclipse-temurin:25-jre-jammy
 
 WORKDIR /app
 
