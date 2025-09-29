@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img th:src="@{/Assets/Img/logos/costaoroimport.png}"
+            <img th:src="@{/Assets/Img/Logos/costaoroimport.png}"
             alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
@@ -573,5 +573,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //cambiar anio del footer automaticamente
     document.getElementById("anio__pagina").textContent = new Date().getFullYear();
-
 });
