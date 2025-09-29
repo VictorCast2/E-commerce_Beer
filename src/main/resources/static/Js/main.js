@@ -549,8 +549,13 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
 
     //duplicacion de los logos
-    const logos = document.getElementById("slider").cloneNode(true);
-    document.getElementById("logos").appendChild(logos);
+    const slider = document.getElementById("slider");
+    const logos = document.getElementById("logos");
+
+    if (slider && logos) {
+        const clone = slider.cloneNode(true);
+        logos.appendChild(clone);
+    }
 
     //invocar el iniciar carrito y corazon
     inicialHeart();

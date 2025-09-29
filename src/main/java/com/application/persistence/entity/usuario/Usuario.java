@@ -34,6 +34,7 @@ public class Usuario {
     private EIdentificacion tipoIdentificacion;
     @Column(name = "numero_identificacion", length = 15)
     private String numeroIdentificacion;
+    private String imagen;
     @Column(length = 175)
     private String nombres;
     @Column(length = 175)

@@ -11,6 +11,8 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.general.response.RegisterResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
 import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
+import com.application.presentation.dto.usuario.request.UpdateUsuarioRequest;
+import com.application.service.implementation.ImagenServiceImpl;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -30,6 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     private RolRepository rolRepository;
+
+    @Autowired
+    private ImagenServiceImpl imagenService;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -56,6 +62,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         usuario.setTipoIdentificacion(completeProfileRequest.tipoIdentificacion());
         usuario.setNumeroIdentificacion(completeProfileRequest.numeroIdentificacion());
+        usuario.setImagen("perfil-user.jpg");
         usuario.setNombres(completeProfileRequest.nombres());
         usuario.setApellidos(completeProfileRequest.apellidos());
         usuario.setTelefono(completeProfileRequest.telefono());
@@ -86,6 +93,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         Usuario usuario = Usuario.builder()
                 .tipoIdentificacion(usuarioRequest.tipoIdentificacion())
                 .numeroIdentificacion(usuarioRequest.numeroIdentificacion())
+                .imagen("perfil-user.jpg")
                 .nombres(usuarioRequest.nombres())
                 .apellidos(usuarioRequest.apellidos())
                 .telefono(usuarioRequest.telefono())
@@ -108,5 +116,27 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         return new RegisterResponse("Usuario creado exitosamente", true);
     }
 
+    @Override
+    public GeneralResponse updateUser(CustomUserPrincipal principal, UpdateUsuarioRequest usuarioRequest) {
+
+        Usuario usuarioActualizado = this.getUsuarioByCorreo(principal.getCorreo());
+
+        usuarioActualizado.setTipoIdentificacion(usuarioRequest.tipoIdentificacion());
+        usuarioActualizado.setNumeroIdentificacion(usuarioRequest.numeroIdentificacion());
+        usuarioActualizado.setNombres(usuarioRequest.nombres());
+        usuarioActualizado.setApellidos(usuarioRequest.apellidos());
+        usuarioActualizado.setTelefono(usuarioRequest.telefono());
+        usuarioActualizado.setCorreo(usuarioRequest.correo());
+
+        String imagen = imagenService.asignarImagen(usuarioRequest.imagen(), "perfil-usuario");
+        if (imagen != null) {
+            usuarioActualizado.setImagen(imagen);
+        } else {
+            usuarioActualizado.setImagen(usuarioRequest.imagenOriginal());
+        }
+
+        usuarioRepository.save(usuarioActualizado);
+        return new GeneralResponse("Sus datos se han actualizado exitosamente");
+    }
 
 }
