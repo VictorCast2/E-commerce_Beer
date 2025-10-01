@@ -1,1 +1,0 @@
-[![Automatic Dependency Submission](https://github.com/VictorCast2/E-commerce_Beer/actions/workflows/dependency-graph/auto-submission/badge.svg?branch=main&event=status)](https://github.com/VictorCast2/E-commerce_Beer/actions/workflows/dependency-graph/auto-submission)
