@@ -1,4 +1,4 @@
-package com.application.persistence.entity.pack.enums;
+package com.application.persistence.entity.producto.enums;
 
 public enum ETipo {
     UNIDAD,         // Pack con una sola unidad (poco común pero posible)

@@ -1,6 +1,6 @@
 package com.application.presentation.dto.pack.request;
 
-import com.application.persistence.entity.pack.enums.ETipo;
+import com.application.persistence.entity.producto.enums.ETipo;
 import jakarta.validation.constraints.*;
 import org.springframework.validation.annotation.Validated;
 

@@ -1,6 +1,5 @@
 package com.application.service.interfaces.pack;
 
-import com.application.persistence.entity.pack.Pack;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.pack.request.PackCreateRequest;
 import com.application.presentation.dto.pack.response.PackResponse;

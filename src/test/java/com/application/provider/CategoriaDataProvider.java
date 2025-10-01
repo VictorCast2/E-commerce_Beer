@@ -1,7 +1,6 @@
 package com.application.provider;
 
 import com.application.persistence.entity.categoria.Categoria;
-import com.application.persistence.entity.pack.Pack;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 

@@ -1,6 +1,6 @@
 package com.application.persistence.entity.compra;
 
-import com.application.persistence.entity.pack.Pack;
+import com.application.persistence.entity.producto.Producto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,14 +26,14 @@ public class DetalleVenta {
     private int cantidad;
     private int subtotal;
 
-    // Cardinalidad con la tabla pack
+    // Cardinalidad con la tabla producto
     @ManyToOne
     @JoinColumn(
-            name = "pack_id",
-            referencedColumnName = "pack_id",
-            foreignKey = @ForeignKey(name = "fk_detalleVenta_pack")
+            name = "producto_id",
+            referencedColumnName = "producto_id",
+            foreignKey = @ForeignKey(name = "fk_detalleVenta_producto")
     )
-    private Pack pack;
+    private Producto producto;
 
     // Cardinalidad con la table compra (relación unidireccional)
     @ManyToOne

@@ -1,11 +1,8 @@
 package com.application.service.implementation.pack;
 
 import com.application.persistence.entity.categoria.Categoria;
-import com.application.persistence.entity.pack.Pack;
-import com.application.persistence.entity.pack.PackProducto;
 import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.repository.CategoriaRepository;
-import com.application.persistence.repository.PackRepository;
 import com.application.persistence.repository.ProductoRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.pack.request.PackCreateRequest;
