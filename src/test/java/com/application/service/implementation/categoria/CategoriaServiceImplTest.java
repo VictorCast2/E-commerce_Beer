@@ -64,7 +64,7 @@ class CategoriaServiceImplTest {
     void getCategorias() {
         // When
         when(categoriaRepository.findAll()).thenReturn(CategoriaDataProvider.categoriaListMock());
-        when(categoriaRepository.countPacksByCategoriaId( anyLong() )).thenReturn(CategoriaDataProvider.cantidadPackPorCategoria());
+        when(categoriaRepository.countProductosByCategoriaId( anyLong() )).thenReturn(CategoriaDataProvider.cantidadPackPorCategoria());
         List<CategoriaResponse> resultado = categoriaService.getCategorias();
 
         // Then
@@ -76,14 +76,14 @@ class CategoriaServiceImplTest {
         assertEquals(2, resultado.getFirst().totalPacks());
 
         verify(categoriaRepository).findAll();
-        verify(categoriaRepository, times(5)).countPacksByCategoriaId( anyLong() );
+        verify(categoriaRepository, times(5)).countProductosByCategoriaId( anyLong() );
     }
 
     @Test
     void getCategoriasActivas() {
         // When
         when(categoriaRepository.findByActivoTrue()).thenReturn(CategoriaDataProvider.categoriaActivaListMock());
-        when(categoriaRepository.countPacksByCategoriaId( anyLong() )).thenReturn(CategoriaDataProvider.cantidadPackPorCategoria());
+        when(categoriaRepository.countProductosByCategoriaId( anyLong() )).thenReturn(CategoriaDataProvider.cantidadPackPorCategoria());
         List<CategoriaResponse> resultado = categoriaService.getCategoriasActivas();
 
         // Then
@@ -95,7 +95,7 @@ class CategoriaServiceImplTest {
         assertEquals(2, resultado.getFirst().totalPacks());
 
         verify(categoriaRepository).findByActivoTrue();
-        verify(categoriaRepository, times(3)).countPacksByCategoriaId( anyLong() );
+        verify(categoriaRepository, times(3)).countProductosByCategoriaId( anyLong() );
     }
 
     @Test
@@ -168,7 +168,7 @@ class CategoriaServiceImplTest {
         verify(categoriaRepository).delete(argumentCaptor.capture());
 
         assertNotNull(argumentCaptor.getValue());
-        assertTrue(argumentCaptor.getValue().getPacks().isEmpty());
+        assertTrue(argumentCaptor.getValue().getProductos().isEmpty());
         assertEquals(1L, argumentCaptor.getValue().getCategoriaId());
         assertEquals("Categoria 1", argumentCaptor.getValue().getNombre());
         assertEquals("categoria eliminada exitosamente", resultado.mensaje());
@@ -189,19 +189,5 @@ class CategoriaServiceImplTest {
         assertEquals("No es posible eliminar una categoria con productos", ex.getMessage());
 
         verify(categoriaRepository).findById( anyLong() );
-    }
-
-    @Test
-    void countPacksByCategoriaId() {
-        // Given
-        Long id = 3L;
-
-        // When
-        when(categoriaRepository.countPacksByCategoriaId( anyLong() )).thenReturn(CategoriaDataProvider.cantidadPackPorCategoria());
-        long resultado = categoriaService.countPacksByCategoriaId(id);
-
-        // Then
-        assertEquals(2, resultado);
-        verify(categoriaRepository).countPacksByCategoriaId( anyLong() );
     }
 }

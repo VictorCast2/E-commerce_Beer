@@ -17,5 +17,4 @@ public interface CategoriaService {
     GeneralResponse disableCategoria(Long id);
     GeneralResponse deleteCategoria(Long id);
 
-    long countPacksByCategoriaId(Long id);
 }
