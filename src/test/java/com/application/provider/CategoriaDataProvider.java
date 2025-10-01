@@ -33,32 +33,6 @@ public class CategoriaDataProvider {
                 .activo(true)
                 .build();
 
-        // ===== Packs =====
-        Pack pack1 = Pack.builder()
-                .nombre("Pack 1")
-                .precio(1000)
-                .build();
-
-        Pack pack2 = Pack.builder()
-                .nombre("Pack 2")
-                .precio(1200)
-                .build();
-
-        Pack pack3 = Pack.builder()
-                .nombre("Pack 3")
-                .precio(1500)
-                .build();
-
-        // ===== Relacionar packs con categorías =====
-        // Categoría 1 → Pack 1 y Pack 2
-        pack1.addCategoria(categoria1);
-        pack2.addCategoria(categoria1);
-
-        // Categoría 2 e inactiva → sin packs
-
-        // Categoría 3 → Pack 3
-        pack3.addCategoria(categoria3);
-
         return new ArrayList<>(List.of(
                 categoria1, categoria2, categoria3
         ));
@@ -153,11 +127,6 @@ public class CategoriaDataProvider {
                 .descripcion("Primera categoria de prueba")
                 .activo(true)
                 .build();
-        Pack pack1 = Pack.builder()
-                .nombre("Pack 1")
-                .precio(1000)
-                .build();
-        pack1.addCategoria(categoria1);
 
         return Optional.of(categoria1);
     }
