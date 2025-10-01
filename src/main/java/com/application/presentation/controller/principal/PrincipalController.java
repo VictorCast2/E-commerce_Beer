@@ -1,12 +1,35 @@
 package com.application.presentation.controller.principal;
 
+import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.persistence.entity.producto.Producto;
+import com.application.persistence.entity.usuario.Usuario;
+import com.application.presentation.dto.pack.response.PackResponse;
+import com.application.presentation.dto.producto.response.ProductoResponse;
+import com.application.service.implementation.producto.ProductoServiceImpl;
+import com.application.service.implementation.usuario.UsuarioServiceImpl;
+import com.application.service.interfaces.usuario.UsuarioService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class PrincipalController {
+
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
+
+    @Autowired
+    private ProductoServiceImpl productoService;
 
     @GetMapping
     public String index() {
@@ -46,6 +69,23 @@ public class PrincipalController {
     @GetMapping("/ver")
     public String Ver() {
         return "Ver";
+    }
+
+    @GetMapping("/descripcion-producto/{productoId}")
+    public String getDescripcionProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                         @PathVariable Long productoId,
+                                         Model model) {
+        Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
+        ProductoResponse productoResponse = productoService.getProductoResponseById(productoId);
+
+        List<ProductoResponse> productosActivos = productoService.getProductosActivos();
+        Collections.shuffle(productosActivos);
+        List<ProductoResponse> productosAleatorios = productosActivos.stream().limit(4).toList();
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("producto", productoResponse);
+        model.addAttribute("productoList", productosAleatorios);
+        return "Aqui la vista de desccripcion del producto";
     }
 
 }

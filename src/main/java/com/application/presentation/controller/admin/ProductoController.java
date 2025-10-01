@@ -1,5 +1,6 @@
 package com.application.presentation.controller.admin;
 
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
@@ -28,13 +29,11 @@ public class ProductoController {
     private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
-    public String Producto(
-            @AuthenticationPrincipal UserDetails userDetails,
+    public String Producto(@AuthenticationPrincipal CustomUserPrincipal principal,
             @RequestParam(value = "mensaje", required = false) String mensaje,
-            Model model
-            ) {
+            Model model) {
 
-        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
         List<ProductoResponse> productoList = productoService.getProductos();
 
         model.addAttribute("usuario", usuario);
