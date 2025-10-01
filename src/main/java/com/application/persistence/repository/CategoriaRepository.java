@@ -13,7 +13,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
     List<Categoria> findByActivoTrue();
 
-    @Query("select count(p) from Categoria c join c.packs p where c.id = :categoriaId")
-    long countPacksByCategoriaId(@Param("categoriaId") Long categoriaId);
+    @Query("select count(p) from Categoria c join c.productos p where c.id = :categoriaId")
+    long countProductosByCategoriaId(@Param("categoriaId") Long categoriaId);
 
 }

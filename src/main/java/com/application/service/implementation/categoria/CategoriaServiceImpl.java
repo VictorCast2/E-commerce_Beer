@@ -45,7 +45,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categorias
                 .stream()
                 .map(categoria -> {
-                    long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
+                    long cantidadPacks = categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId());
                     return new CategoriaResponse(
                             categoria.getNombre(),
                             categoria.getDescripcion(),
@@ -67,7 +67,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriasActivas
                 .stream()
                 .map(categoria -> {
-                    long cantidadPacks = categoriaRepository.countPacksByCategoriaId(categoria.getCategoriaId());
+                    long cantidadPacks = categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId());
                     return new CategoriaResponse(
                             categoria.getNombre(),
                             categoria.getDescripcion(),
@@ -144,7 +144,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public GeneralResponse deleteCategoria(Long id) {
         Categoria categoria = this.getCategoriaById(id);
 
-        if (!categoria.getPacks().isEmpty()) {
+        if (!categoria.getProductos().isEmpty()) {
             throw new IllegalArgumentException("No es posible eliminar una categoria con productos");
         }
 
@@ -152,17 +152,4 @@ public class CategoriaServiceImpl implements CategoriaService {
 
         return new GeneralResponse("categoria eliminada exitosamente");
     }
-
-    /**
-     * Cuenta los packs de una categoría.
-     * Este método es de uso interno para otros métodos del servicio.
-     *
-     * @param id ID de la categoría a buscar
-     * @return el total de packs de esa categoría
-     */
-    @Override
-    public long countPacksByCategoriaId(Long id) {
-        return categoriaRepository.countPacksByCategoriaId(id);
-    }
-
 }
