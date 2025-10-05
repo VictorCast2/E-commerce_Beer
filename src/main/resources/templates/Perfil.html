@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
@@ -154,18 +154,21 @@
                         <h2 class="card__title">Cambiar perfil</h2>
                         <p class="card__text">Cambia tu foto de perfil desde aquí</p>
 
-                        <form id="formFoto" action="" method="" enctype="">
+                        <form id="formFoto" th:action="@{/perfil/colocar-imagen-usuario}" method="post" enctype="multipart/form-data">
                             <div class="card__img">
                                 <figure class="img__user">
-                                    <img id="preview" th:src="@{/Assets/Img/ExperenciaUsuarios/imagen__user.jpg}"
-                                         alt="">
+                                    <img id="preview" th:src="@{'/perfil-usuario/' + ${usuario.imagen}}"
+                                         th:alt="${usuario.imagen}">
                                 </figure>
 
                                 <div class="img__btn">
                                     <div class="btn__item">
                                         <!-- Input de tipo file -->
-                                        <input type="file" id="fileInput" name="fotoPerfil" accept="image/*"
+                                        <input type="file" id="fileInput" name="imagenUsuarioNueva" accept="image/*"
                                                hidden>
+
+                                        <!-- Input oculto con el nombre de la imagen original -->
+                                        <input type="hidden" id="imagenUsuario" name="imagenUsuarioOriginal" th:value="${usuario.imagen}">
 
                                         <button type="button" class="item__button button--subir"
                                                 id="btnSubir">Subir
@@ -305,7 +308,7 @@
                     <h2 class="card__title title--empresa">Cambiar Empresa</h2>
                     <p class="card__text">Cambia la foto de perfil de la empresa</p>
 
-                    <form id="formFotoEmpresa" action="" method=""
+                    <form id="formFotoEmpresa" action="" method="post"
                           enctype="">
                         <div class="card__img">
                             <figure class="img__user user--empresar">

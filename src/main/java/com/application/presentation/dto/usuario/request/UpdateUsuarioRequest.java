@@ -10,8 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Validated
 public record UpdateUsuarioRequest(
         @NotNull EIdentificacion tipoIdentificacion,
-        MultipartFile imagen,
-        String imagenOriginal,
         @NotBlank String numeroIdentificacion,
         @NotBlank String nombres,
         @NotBlank String apellidos,

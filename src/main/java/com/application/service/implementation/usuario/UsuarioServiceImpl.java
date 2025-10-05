@@ -11,10 +11,12 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.general.response.RegisterResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
 import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
+import com.application.presentation.dto.usuario.request.SetUsuarioPhotoRequest;
 import com.application.presentation.dto.usuario.request.UpdateUsuarioRequest;
 import com.application.service.implementation.ImagenServiceImpl;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,19 +28,14 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final RolRepository rolRepository;
 
-    @Autowired
-    private RolRepository rolRepository;
-
-    @Autowired
-    private ImagenServiceImpl imagenService;
-
-    @Autowired
-    private PasswordEncoder encoder;
+    private final ImagenServiceImpl imagenService;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
@@ -128,15 +125,25 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuarioActualizado.setTelefono(usuarioRequest.telefono());
         usuarioActualizado.setCorreo(usuarioRequest.correo());
 
-        String imagen = imagenService.asignarImagen(usuarioRequest.imagen(), "perfil-usuario");
-        if (imagen != null) {
-            usuarioActualizado.setImagen(imagen);
-        } else {
-            usuarioActualizado.setImagen(usuarioRequest.imagenOriginal());
-        }
-
         usuarioRepository.save(usuarioActualizado);
         return new GeneralResponse("Sus datos se han actualizado exitosamente");
+    }
+
+    @Override
+    public GeneralResponse setUserPhoto(CustomUserPrincipal principal, SetUsuarioPhotoRequest usuarioPhotoRequest) {
+
+        Usuario usuarioPhoto = this.getUsuarioByCorreo(principal.getCorreo());
+
+        String imagen = imagenService.asignarImagen(usuarioPhotoRequest.imagenUsuarioNueva(), "perfil-usuario");
+        if (imagen != null) {
+            usuarioPhoto.setImagen(imagen);
+        } else {
+            usuarioPhoto.setImagen(usuarioPhotoRequest.imagenUsuarioOriginal());
+        }
+
+        usuarioRepository.save(usuarioPhoto);
+
+        return new GeneralResponse("Imagen asignada exitosamente");
     }
 
 }
