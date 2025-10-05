@@ -8,8 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Validated
 public record UpdateEmpresaRequest(
-        MultipartFile imagen,
-        String imagenOriginal,
         @NotBlank String ciudad,
         @NotBlank String direccion,
         @NotBlank String telefono,

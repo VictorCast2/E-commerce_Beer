@@ -194,12 +194,26 @@
                         </p>
 
                         <div class="informacion__datos">
-                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes
-                                    Tejedor</span>
-                            <span class="datos__telelfono"><strong>Telefono:</strong> (+57) 313643769</span>
-                            <span class="datos__correo"> <strong>Correo:</strong> Keiner@gmail.com</span>
-                            <span class="datos__identificacion"> <strong>Tipo identificacion:</strong> Cedula</span>
-                            <span class="datos__ubicacion"><strong>Identificacion:</strong> 1043658213</span>
+                            <span class="datos__nombre">
+                                <strong>Nombre completo:</strong>
+                                <span th:text="${usuario.nombres} + ' ' + ${usuario.apellidos}"></span>
+                            </span>
+                            <span class="datos__telelfono">
+                                <strong>Telefono:</strong>
+                                <span th:text="${usuario.telefono}"></span>
+                            </span>
+                            <span class="datos__correo">
+                                <strong>Correo:</strong>
+                                <span th:text="${usuario.correo}"></span>
+                            </span>
+                            <span class="datos__identificacion">
+                                <strong>Tipo identificacion:</strong>
+                                <span th:text="${usuario.tipoIdentificacion.descripcion}"></span>
+                            </span>
+                            <span class="datos__ubicacion">
+                                <strong>Identificacion:</strong>
+                                <span th:text="${usuario.numeroIdentificacion}"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -210,11 +224,11 @@
                 <h2 class="personales__titles">Datos personales</h2>
                 <p class="personales__text">Para cambiar tus datos personales, edita y guarda desde aquí</p>
 
-                <form class="personales__formulario" action="">
+                <form class="personales__formulario" th:action="@{/perfil/actualizar-usuario}" method="post">
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Nombre" id="nombre">
+                            <input type="text" autocomplete="off" placeholder="" name="nombres" id="nombre" th:value="${usuario.nombres}">
                             <label class="label" for="nombre">Nombre</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -226,7 +240,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Apellido" id="apellido">
+                            <input type="text" autocomplete="off" placeholder="" name="apellidos" id="apellido" th:value="${usuario.apellidos}">
                             <label class="label" for="apellido">Apellido</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -238,16 +252,11 @@
 
                     <div class="formulario__input">
                         <div class="custom-select-wrapper">
-                            <select class="styled-select" id="tipoIdentificacion">
+                            <select class="styled-select" name="tipoIdentificacion" id="tipoIdentificacion" required>
                                 <option disabled selected>Tipo De Identificación</option>
-                                <option value="Cedula">CC (Cédula de Ciudadanía)</option>
-                                <option value="C.Extranjeria">CE (Cédula de Extranjería)</option>
-                                <option value="D.Extranjería">DE (Documento de Extranjería)</option>
-                                <option value="NIT">NIT (Identificación Tributaria)</option>
-                                <option value="PP">PP (Pasaporte)</option>
-                                <option value="RUT">RUT (Registro Único Tributario)</option>
-                                <option value="TEC">TE (Tarjeta de Extranjería)</option>
-                                <option value="T">TI (Tarjeta de Identidad)</option>
+                                <option th:each="tipo : ${tiposIdentificacion}" th:value="${tipo.name()}"
+                                        th:text="${tipo.descripcion}"
+                                        th:selected="${tipo.name() == usuario.tipoIdentificacion.name()}"></option>
                             </select>
                             <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon1"></i>
                         </div>
@@ -258,8 +267,8 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Identificacion"
-                                   id="identificacion">
+                            <input type="text" autocomplete="off" placeholder="" name="numeroIdentificacion"
+                                   id="identificacion" th:value="${usuario.numeroIdentificacion}">
                             <label for="identificacion">Identificacion</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -271,7 +280,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="email" autocomplete="off" placeholder="" name="Email" id="email1">
+                            <input type="email" autocomplete="off" placeholder="" name="correo" id="email1" th:value="${usuario.correo}">
                             <label for="email">Email</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -283,7 +292,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
+                            <input type="text" autocomplete="off" placeholder="" name="telefono" id="telefono" th:value="${usuario.telefono}">
                             <label for="telefono">Telefono</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -308,17 +317,20 @@
                     <h2 class="card__title title--empresa">Cambiar Empresa</h2>
                     <p class="card__text">Cambia la foto de perfil de la empresa</p>
 
-                    <form id="formFotoEmpresa" action="" method="post"
-                          enctype="">
+                    <form id="formFotoEmpresa" th:action="@{/perfil/colocar-imagen-empresa}" method="post"
+                          enctype="multipart/form-data">
                         <div class="card__img">
                             <figure class="img__user user--empresar">
-                                <img id="previewEmpresa" th:src="@{/Assets/Img/ExperenciaUsuarios/logo__hotel2.png}"
-                                     alt="logo hotel 2">
+                                <img id="previewEmpresa" th:src="@{'/perfil-empresa/' + ${usuario.empresa.imagen}}"
+                                     th:alt="${usuario.empresa.imagen}">
                             </figure>
+
                             <div class="img__btn">
                                 <div class="btn__item">
-                                    <input type="file" id="fileInputEmpresa" name="fotoEmpresa" accept="image/*"
+                                    <input type="file" id="fileInputEmpresa" name="imagenEmpresaNueva" accept="image/*"
                                            hidden>
+                                    <!-- Input oculto con el nombre de la imagen original -->
+                                    <input type="hidden" id="imagenEmpresa" name="imagenEmpresaOriginal" th:value="${usuario.empresa.imagen}">
                                     <!-- Botón dinámico -->
                                     <button type="button" class="item__button button--subir"
                                             id="btnSubirEmpresa">Subir

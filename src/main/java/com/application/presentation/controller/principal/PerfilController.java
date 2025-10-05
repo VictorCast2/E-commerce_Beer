@@ -4,6 +4,7 @@ import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.empresa.enums.ESector;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
+import com.application.presentation.dto.empresa.request.SetEmpresaPhotoRequest;
 import com.application.presentation.dto.empresa.request.UpdateEmpresaRequest;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.usuario.request.SetUsuarioPhotoRequest;
@@ -42,7 +43,7 @@ public class PerfilController {
         return "Perfil";
     }
 
-    @PostMapping("/actualizar-datos")
+    @PostMapping("/actualizar-usuario")
     public String updateUsuario(@AuthenticationPrincipal CustomUserPrincipal principal,
                                 @ModelAttribute @Valid UpdateUsuarioRequest usuarioRequest) {
         GeneralResponse response = usuarioService.updateUser(principal, usuarioRequest);
@@ -62,6 +63,14 @@ public class PerfilController {
     public String setUsuarioPhoto(@AuthenticationPrincipal CustomUserPrincipal principal,
                                   @ModelAttribute @Valid SetUsuarioPhotoRequest usuarioPhotoRequest) {
         GeneralResponse response = usuarioService.setUserPhoto(principal, usuarioPhotoRequest);
+        String mensaje = response.mensaje();
+        return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
+    }
+
+    @PostMapping("/colocar-imagen-empresa")
+    public String setEmpresaPhoto(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                  @ModelAttribute @Valid SetEmpresaPhotoRequest empresaPhotoRequest) {
+        GeneralResponse response = empresaService.setEmpresaPhoto(principal, empresaPhotoRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }

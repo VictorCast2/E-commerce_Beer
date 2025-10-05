@@ -9,6 +9,7 @@ import com.application.persistence.repository.EmpresaRepository;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
+import com.application.presentation.dto.empresa.request.SetEmpresaPhotoRequest;
 import com.application.presentation.dto.empresa.request.UpdateEmpresaRequest;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.ImagenServiceImpl;
@@ -84,16 +85,36 @@ public class EmpresaServiceImpl implements EmpresaService {
         empresaActualizada.setCorreo(empresaRequest.correo());
         empresaActualizada.setESector(empresaRequest.sector());
 
-        String imagen = imagenService.asignarImagen(empresaRequest.imagen(), "perfil-empresa");
-        if (imagen != null) {
-            empresaActualizada.setImagen(imagen);
-        } else {
-            empresaActualizada.setImagen(empresaRequest.imagenOriginal());
-        }
-
         usuario.setEmpresa(empresaActualizada);
         usuarioRepository.save(usuario);
 
         return new GeneralResponse("Empresa actualizada exitosamente");
     }
+
+    @Override
+    public GeneralResponse setEmpresaPhoto(CustomUserPrincipal principal, SetEmpresaPhotoRequest empresaPhotoRequest) {
+
+        String correo = principal.getCorreo();
+        Usuario usuario = usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new EntityNotFoundException("El usuario autenticado con correo '" + correo + "' no existe."));
+
+        Empresa empresaPhoto = usuario.getEmpresa();
+        if (empresaPhoto == null) {
+            throw new EntityNotFoundException("El usuario no tiene una empresa asociada.");
+        }
+
+        String imagen = imagenService.asignarImagen(empresaPhotoRequest.imagenEmpresaNueva(), "perfil-empresa");
+        if (imagen != null) {
+            empresaPhoto.setImagen(imagen);
+        } else {
+            empresaPhoto.setImagen(empresaPhotoRequest.imagenEmpresaOriginal());
+        }
+
+        usuario.setEmpresa(empresaPhoto);
+        usuarioRepository.save(usuario);
+
+        return new GeneralResponse("Imagen asignada exitosamente");
+    }
+
+
 }
