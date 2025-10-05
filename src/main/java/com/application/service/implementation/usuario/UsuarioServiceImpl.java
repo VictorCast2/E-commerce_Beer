@@ -8,22 +8,17 @@ import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.general.response.RegisterResponse;
-import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
-import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
-import com.application.presentation.dto.usuario.request.SetUsuarioPhotoRequest;
-import com.application.presentation.dto.usuario.request.UpdateUsuarioRequest;
+import com.application.presentation.dto.general.response.BaseResponse;
+import com.application.presentation.dto.usuario.request.*;
 import com.application.service.implementation.ImagenServiceImpl;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -80,11 +75,11 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    public RegisterResponse createUser(@Valid CreateUsuarioRequest usuarioRequest) {
+    public BaseResponse createUser(@Valid CreateUsuarioRequest usuarioRequest) {
 
         String correo = usuarioRequest.correo();
         if (usuarioRepository.existsByCorreo(correo)) {
-            return new RegisterResponse("El correo " + correo + " ya está registrado", false);
+            return new BaseResponse("El correo " + correo + " ya está registrado", false);
         }
 
         Usuario usuario = Usuario.builder()
@@ -110,7 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         usuarioRepository.save(usuario);
 
-        return new RegisterResponse("Usuario creado exitosamente", true);
+        return new BaseResponse("Usuario creado exitosamente", true);
     }
 
     @Override
@@ -144,6 +139,27 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuarioRepository.save(usuarioPhoto);
 
         return new GeneralResponse("Imagen asignada exitosamente");
+    }
+
+    @Override
+    public BaseResponse updatePassword(CustomUserPrincipal principal, UpdatePasswordRequest passwordRequest) {
+
+        Usuario usuario = this.getUsuarioByCorreo(principal.getCorreo());
+        String currentPassword = passwordRequest.currentPassword();
+        String newPassword = passwordRequest.newPassword();
+
+        if (!encoder.matches(currentPassword, usuario.getPassword())) {
+            return new BaseResponse("Contraseña actual incorrecta", false);
+        }
+
+        if (encoder.matches(newPassword, usuario.getPassword())) {
+            return new BaseResponse("La nueva contraseña no puede ser igual a la anterior", false);
+        }
+
+        usuario.setPassword(encoder.encode(newPassword));
+        usuarioRepository.save(usuario);
+
+        return new BaseResponse("contraseña actualizada exitosamente", true);
     }
 
 }
