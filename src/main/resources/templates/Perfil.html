@@ -152,26 +152,36 @@
 
                     <div class="perfil__user">
 
-                        <div class="perfil__card">
-                            <h2 class="card__title">Cambiar perfil</h2>
-                            <p class="card__text">Cambia tu foto de perfil desde aquí</p>
-                        
-                            <div class="card__img">
-                                <figure class="img__user">
-                                    <img id="preview" src="../static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg" alt="">
-                                </figure>
-                        
-                                <div class="img__btn">
-                                    <div class="btn__item">
+                        <div class="perfil__user">
 
-                                        <input type="file" id="fileInput" accept="image/*" hidden>
+                            <div class="perfil__card">
+                                <h2 class="card__title">Cambiar perfil</h2>
+                                <p class="card__text">Cambia tu foto de perfil desde aquí</p>
 
-                                        <button class="item__button button--subir">Subir</button>
-                                        <button class="item__button button--restablecer">Restablecer</button>
+                                <form id="formFoto" action="" method="" enctype="">
+                                    <div class="card__img">
+                                        <figure class="img__user">
+                                            <img id="preview"
+                                                src="../static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg" alt="">
+                                        </figure>
+
+                                        <div class="img__btn">
+                                            <div class="btn__item">
+                                                <!-- Input de tipo file -->
+                                                <input type="file" id="fileInput" name="fotoPerfil" accept="image/*"
+                                                    hidden>
+
+                                                <button type="button" class="item__button button--subir"
+                                                    id="btnSubir">Subir</button>
+                                                <button type="button" class="item__button button--restablecer"
+                                                    id="btnRestablecer">Restablecer</button>
+                                            </div>
+
+                                            <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
+
+                                        </div>
                                     </div>
-                        
-                                    <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
-                                </div>
+                                </form>
                             </div>
                         </div>
 
@@ -179,11 +189,14 @@
                             <h2 class="informacion__title">Información del perfil</h2>
 
                             <p class="informacion__text">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse pariatur architecto praesentium, id rem molestias similique.
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero
+                                quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse
+                                pariatur architecto praesentium, id rem molestias similique.
                             </p>
 
                             <div class="informacion__datos">
-                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes Tejedor</span>
+                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes
+                                    Tejedor</span>
                                 <span class="datos__telelfono"><strong>Telefono:</strong> (+57) 313643769</span>
                                 <span class="datos__correo"> <strong>Correo:</strong> Keiner@gmail.com</span>
                                 <span class="datos__identificacion"> <strong>Tipo identificacion:</strong> Cedula</span>
@@ -295,31 +308,40 @@
                         <div class="perfil__card">
                             <h2 class="card__title title--empresa">Cambiar Empresa</h2>
                             <p class="card__text">Cambia la foto de perfil de la empresa</p>
-                        
-                            <div class="card__img">
-                                <figure class="img__user user--empresar">
-                                    <img id="preview" src="../static/Assets/Img/logos/logo__hotel2.png" alt="">
-                                </figure>
-                        
-                                <div class="img__btn">
-                                    <div class="btn__item">
 
-                                        <input type="file" id="fileInput" accept="image/*" hidden>
+                            <form id="formFotoEmpresa" action="" method=""
+                                enctype="">
+                                <div class="card__img">
+                                    <figure class="img__user user--empresar">
+                                        <img id="previewEmpresa" src="../static/Assets/Img/logos/logo__hotel2.png"
+                                            alt="">
+                                    </figure>
 
-                                        <button class="item__button button--subir">Subir</button>
-                                        <button class="item__button button--restablecer">Restablecer</button>
+                                    <div class="img__btn">
+                                        <div class="btn__item">
+                                            <input type="file" id="fileInputEmpresa" name="fotoEmpresa" accept="image/*"
+                                                hidden>
+
+                                            <!-- Botón dinámico -->
+                                            <button type="button" class="item__button button--subir"
+                                                id="btnSubirEmpresa">Subir</button>
+                                            <button type="button" class="item__button button--restablecer"
+                                                id="btnRestablecerEmpresa">Restablecer</button>
+                                        </div>
+
+                                        <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                     </div>
-                        
-                                    <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div class="empresa__informacion">
                             <h2 class="informacion__title">Información de la empresa</h2>
 
                             <p class="informacion__text">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse pariatur architecto praesentium, id rem molestias similique.
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iure consequatur vero
+                                quidem amet, magnam exercitationem repellat blanditiis eveniet aut nulla sed esse
+                                pariatur architecto praesentium, id rem molestias similique.
                             </p>
 
                             <div class="empresas__datos">
@@ -362,7 +384,8 @@
                                     <span class="box__icon"><i class="ri-close-line"></i></span>
                                 </div>
                                 <p class="input__error">
-                                    La razón social solo puede contener letras, espacios y debe tener entre 3 y 50 caracteres.
+                                    La razón social solo puede contener letras, espacios y debe tener entre 3 y 50
+                                    caracteres.
                                 </p>
                             </div>
 

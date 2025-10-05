@@ -290,7 +290,7 @@ export function desplegablePerfil() {
 
     if (subMenu && profileImage) {
         profileImage.addEventListener("click", function (e) {
-            e.stopPropagation(); // 🔹 Evita que el click cierre el menú inmediatamente
+            e.stopPropagation(); // Evita que el click cierre el menú inmediatamente
             subMenu.classList.toggle("open__menu");
         });
 

@@ -14,6 +14,50 @@ document.addEventListener('DOMContentLoaded', () => {
     verProductos();
 
     //cambiar foto de perfil 
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const btnSubir = document.getElementById('btnSubir');
+    const btnRestablecer = document.getElementById('btnRestablecer');
+    const form = document.getElementById('formFoto');
+    const imagenOriginal = preview.src;
+
+    // Cuando haces clic en "Subir"
+    btnSubir.addEventListener('click', () => {
+        // Si el botón está en modo guardar, envía el formulario
+        if (btnSubir.classList.contains('button--guardar')) {
+            form.submit();
+        } else {
+            fileInput.click();
+        }
+    });
+
+    // Mostrar vista previa y cambiar botón a "Guardar"
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                preview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+
+            // Cambiar botón de "Subir" → "Guardar"
+            btnSubir.textContent = "Guardar";
+            btnSubir.classList.remove("button--subir");
+            btnSubir.classList.add("button--guardar");
+        }
+    });
+
+    // Restablecer imagen y volver a estado original
+    btnRestablecer.addEventListener('click', () => {
+        preview.src = imagenOriginal;
+        fileInput.value = "";
+
+        // Volver el botón a su estado original
+        btnSubir.textContent = "Subir";
+        btnSubir.classList.remove("button--guardar");
+        btnSubir.classList.add("button--subir");
+    });
 
     //validaciones datos del usuario
     const fields = {
@@ -160,6 +204,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //cambiar foto de empresa 
+    const fileInputEmpresa = document.getElementById('fileInputEmpresa');
+    const previewEmpresa = document.getElementById('previewEmpresa');
+    const btnSubirEmpresa = document.getElementById('btnSubirEmpresa');
+    const btnRestablecerEmpresa = document.getElementById('btnRestablecerEmpresa');
+    const formFotoEmpresa = document.getElementById('formFotoEmpresa');
+    const imagenOriginalEmpresa = previewEmpresa.src;
+
+    // Al hacer clic en "Subir" o "Guardar"
+    btnSubirEmpresa.addEventListener('click', () => {
+        if (btnSubirEmpresa.classList.contains('button--guardar')) {
+            formFotoEmpresa.submit();
+        } else {
+            fileInputEmpresa.click();
+        }
+    });
+
+    // Vista previa y cambio de botón a "Guardar"
+    fileInputEmpresa.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                previewEmpresa.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+
+            btnSubirEmpresa.textContent = "Guardar";
+            btnSubirEmpresa.classList.remove("button--subir");
+            btnSubirEmpresa.classList.add("button--guardar");
+        }
+    });
+
+    // Restablecer imagen original
+    btnRestablecerEmpresa.addEventListener('click', () => {
+        previewEmpresa.src = imagenOriginalEmpresa;
+        fileInputEmpresa.value = "";
+
+        btnSubirEmpresa.textContent = "Subir";
+        btnSubirEmpresa.classList.remove("button--guardar");
+        btnSubirEmpresa.classList.add("button--subir");
+    });
 
     //validaciones de datos de la empresa
     const fieldsEmpresa = {

@@ -88,7 +88,7 @@
     left: 27%;
     border: 0;
     border-left: 1px solid #ccc;
-    height:94%;
+    height: 94%;
 }
 
 .container__main {
@@ -99,7 +99,7 @@
     margin-right: 3rem;
 }
 
-.perfil__user{
+.perfil__user {
     display: flex;
     justify-content: space-between;
 
@@ -116,7 +116,7 @@
     margin-bottom: 0.2rem;
 }
 
-.perfil__card .title--empresa{
+.perfil__card .title--empresa {
     width: 980px;
     border-top: 1px solid #ccc;
     padding-top: 50px;
@@ -138,20 +138,25 @@
 }
 
 .img__user img {
-    max-width: 100%;
-    cursor: pointer;
-    width: 120px;
-    border-radius: 50%;
-}
-
-
-.user--empresar img {
-    background-color: #f0f3f2;
-    max-width: 100%;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
+    display: block;
+    cursor: pointer;
+    background-color: #f0f3f2;
+}
+
+.user--empresar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    cursor: pointer;
+    background-color: #f0f3f2;
 }
 
 .img__btn {
@@ -197,23 +202,40 @@
     background-color: #e6ccb2;
 }
 
+.button--guardar {
+    background-color: var(--colorCafe);
+    color: var(--colorCafe);
+    border-radius: 30px;
+    border: none;
+    width: 80px;
+    height: 45px;
+    font: 500 1.2rem var(--typografiaUrbanist);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button--guardar:hover {
+    background-color: #a47c48;
+    color: var(--colorWhite);
+}
+
 .img__btn .btn__text {
     font: 500 1rem var(--typografiaUrbanist);
 }
 
-.user__informacion{
+.user__informacion {
     background-color: var(--colorWhite);
     width: 100%;
     max-width: 450px;
     position: relative;
 }
 
-.user__informacion .informacion__title{
+.user__informacion .informacion__title {
     font: 600 1.5rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
 }
 
-.user__informacion .informacion__text{
+.user__informacion .informacion__text {
     width: 500px;
     font: 400 0.9rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
@@ -223,7 +245,7 @@
     padding-bottom: 0.9rem;
 }
 
-.user__informacion .informacion__text::after{
+.user__informacion .informacion__text::after {
     content: "";
     position: absolute;
     left: 0;
@@ -233,7 +255,7 @@
     background: linear-gradient(to right, transparent, var(--colorDark), transparent);
 }
 
-.informacion__datos{
+.informacion__datos {
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
@@ -241,30 +263,29 @@
 }
 
 .informacion__datos :is(.datos__nombre,
-                    .datos__telelfono,
-                    .datos__correo, 
-                    .datos__identificacion,
-                    .datos__ubicacion)
-                    {
-                        font: 500 1.02rem var(--typografiaUrbanist);
+    .datos__telelfono,
+    .datos__correo,
+    .datos__identificacion,
+    .datos__ubicacion) {
+    font: 500 1.02rem var(--typografiaUrbanist);
 
 }
 
 
 
-.empresa__informacion{
+.empresa__informacion {
     width: 100%;
     max-width: 450px;
     position: relative;
     margin-top: 3rem;
 }
 
-.empresa__informacion .informacion__title{
+.empresa__informacion .informacion__title {
     font: 600 1.5rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
 }
 
-.empresa__informacion .informacion__text{
+.empresa__informacion .informacion__text {
     width: 500px;
     font: 400 0.9rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
@@ -274,7 +295,7 @@
     padding-bottom: 0.9rem;
 }
 
-.empresa__informacion .informacion__text::after{
+.empresa__informacion .informacion__text::after {
     content: "";
     position: absolute;
     left: 0;
@@ -284,7 +305,7 @@
     background: linear-gradient(to right, transparent, var(--colorDark), transparent);
 }
 
-.empresas__datos{
+.empresas__datos {
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
@@ -292,14 +313,13 @@
 }
 
 .empresas__datos :is(.datos__nit,
-                    .datos__social,
-                    .datos__ciudad, 
-                    .datos__direccion,
-                    .datos__correo,
-                    .datos__telefono,
-                    .datos__sector)
-                    {
-                        font: 500 1.02rem var(--typografiaUrbanist);
+    .datos__social,
+    .datos__ciudad,
+    .datos__direccion,
+    .datos__correo,
+    .datos__telefono,
+    .datos__sector) {
+    font: 500 1.02rem var(--typografiaUrbanist);
 
 }
 
@@ -430,7 +450,7 @@
     pointer-events: none;
 }
 
-.custom-sector{
+.custom-sector {
     position: absolute;
     top: 50%;
     left: 195%;
@@ -481,7 +501,7 @@
 }
 
 .swal-popup {
-    font:var(--typografiaUrbanist) ;
+    font: var(--typografiaUrbanist);
 }
 
 
