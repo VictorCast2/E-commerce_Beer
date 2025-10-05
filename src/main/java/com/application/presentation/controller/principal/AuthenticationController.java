@@ -6,7 +6,7 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.general.response.RegisterResponse;
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
 import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
 import com.application.service.interfaces.empresa.EmpresaService;
@@ -95,7 +95,7 @@ public class AuthenticationController {
                            Model model) {
         model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         model.addAttribute("mensaje", mensaje); // mensaje a mostrar
-        model.addAttribute("success", success); // boolean que determina si se obtuvo un mensaje de exito o error
+        model.addAttribute("success", success); // boolean que determina si se obtuvo un mensaje de éxito o error
         return "Registro";
     }
 
@@ -106,7 +106,7 @@ public class AuthenticationController {
             String mensaje = UriUtils.encode("Error en los datos del formulario", StandardCharsets.UTF_8);
             return "redirect:/auth/registro?mensaje=" + mensaje + "&success=false";
         }
-        RegisterResponse response = usuarioService.createUser(usuarioRequest);
+        BaseResponse response = usuarioService.createUser(usuarioRequest);
         String mensaje = UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
         return "redirect:/auth/registro?mensaje=" + mensaje + "&success=" + response.success();
     }

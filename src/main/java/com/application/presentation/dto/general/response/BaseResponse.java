@@ -1,6 +1,6 @@
 package com.application.presentation.dto.general.response;
 
-public record RegisterResponse(
+public record BaseResponse(
         String mensaje,
         boolean success
 ) {

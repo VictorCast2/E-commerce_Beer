@@ -48,7 +48,7 @@ public class ImagenServiceImpl implements ImagenService {
                 String nombreFoto = System.currentTimeMillis() + extension;
 
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(baseDir + nombreFoto);
+                Path rutaCompleta = Paths.get(directorio + nombreFoto);
                 Files.write(rutaCompleta, bytesImagen);
 
                 return nombreFoto;
