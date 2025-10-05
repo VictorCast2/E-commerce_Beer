@@ -191,19 +191,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Al cargar la página, revisamos si hay bandera de login
     window.addEventListener("DOMContentLoaded", () => {
-        if (sessionStorage.getItem("loginSuccess") === "true") {
+
+        const body = document.body;
+        const mensaje = body.dataset.mensaje;
+
+        if (mensaje) {
             Swal.fire({
-                title: "Registro exitoso",
+                title: "Proceso exitoso",
+                text: mensaje,
                 icon: "success",
                 timer: 3000,
-                draggable: true,
+                showConfirmButton: false,
                 timerProgressBar: true,
                 customClass: {
                     title: 'swal-title',
                     popup: 'swal-popup'
                 }
-            });
-            sessionStorage.removeItem("loginSuccess");
+            })
         }
     });
 
