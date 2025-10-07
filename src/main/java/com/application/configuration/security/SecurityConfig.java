@@ -1,8 +1,8 @@
 package com.application.configuration.security;
 
-import com.application.configuration.Custom.CustomAuthFailureHandler;
-import com.application.configuration.Custom.CustomAuthSuccessHandler;
-import com.application.configuration.Custom.CustomOauth2UserService;
+import com.application.configuration.custom.CustomAuthFailureHandler;
+import com.application.configuration.custom.CustomAuthSuccessHandler;
+import com.application.configuration.custom.CustomOauth2UserService;
 import com.application.configuration.filter.RecaptchaFilter;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -49,7 +49,16 @@ public class SecurityConfig {
 
                         // Configurar endpoints públicos (sin autenticación)
                         // Principal Controller
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers(
+                                "/**", // Todas las rutas
+                                "/error/**", // Rutas de error
+                                // Rutas de Swagger
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                // Rutas de Webjars para Swagger
+                                "/webjars/**"
+                        ).permitAll()
 
                         // Autenticación Controller
                         .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()

@@ -1,4 +1,4 @@
-package com.application.configuration.Custom;
+package com.application.configuration.custom;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;

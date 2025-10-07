@@ -1,4 +1,4 @@
-package com.application.configuration.Custom;
+package com.application.configuration.custom;
 
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
@@ -48,6 +48,3 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
         return new CustomUserPrincipal(usuario, oAuth2User.getAttributes());
     }
 }
-
-
-

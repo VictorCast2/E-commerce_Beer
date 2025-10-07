@@ -24,11 +24,6 @@
 .gitignore
 
 # ---------------------------
-# Archivos de log
-# ---------------------------
-*.log
-
-# ---------------------------
 # Archivos de entorno y secretos
 # ---------------------------
 .env
@@ -51,10 +46,3 @@ vendor/
 charts/
 *.dbmdl
 *.jfm
-
-# ---------------------------
-# Archivos de documentación
-# ---------------------------
-*.md
-**.md
-LICENSE
