@@ -1,14 +1,14 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
-import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.general.response.RegisterResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
 import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
 import com.application.service.interfaces.empresa.EmpresaService;
 import com.application.service.interfaces.usuario.UsuarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequestMapping("/auth")
+@Tag(name = "Authentication", description = "Controller for Authentication")
 public class AuthenticationController {
 
     @Autowired
