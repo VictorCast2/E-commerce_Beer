@@ -1,6 +1,6 @@
 package com.application.persistence.entity.categoria;
 
-import com.application.persistence.entity.pack.Pack;
+import com.application.persistence.entity.producto.Producto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,8 +32,8 @@ public class Categoria {
     @Column(nullable = false)
     private boolean activo;
 
-    // Cardinalidad con la tabla packs
+    // Cardinalidad con la tabla producto
     @Builder.Default
     @ManyToMany(mappedBy = "categorias")
-    private Set<Pack> packs = new HashSet<>();
+    private Set<Producto> productos = new HashSet<>();
 }

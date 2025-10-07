@@ -27,9 +27,9 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body>
+<body th:data-mensaje="${mensaje}" th:data-success="${success}">
     <header class="header">
-        <h1 class="header__logo">HoreecarBeer</h2>
+        <h1 class="header__logo">HoreecarBeer</h1>
 
             <nav class="header__navbar">
                 <ul class="navbar__list">
@@ -231,11 +231,11 @@
                 <div class="formulario__pass">
                     <h2 class="pass__title">Cambiar Contraseña</h2>
 
-                    <form class="formulario__contra" action="">
+                    <form class="formulario__contra" th:action="@{/perfil/actualizar-contraseña}" method="post">
 
                         <div class="formulario__input">
                             <div class="input-box box--contra">
-                                <input type="password" autocomplete="off" placeholder="" name="ContraseñaAntigua"
+                                <input type="password" autocomplete="off" placeholder="" name="currentPassword"
                                     id="contraseñaAntigua">
                                 <label class="label" for="contraseñaAntigua">Contraseña Antigua</label>
                                 <span class="box__icon icon--changed"><i class="ri-check-line"></i></span>
@@ -248,7 +248,7 @@
 
                         <div class="formulario__input">
                             <div class="input-box box--contra">
-                                <input type="password" autocomplete="off" placeholder="" name="NuevaContraseña"
+                                <input type="password" autocomplete="off" placeholder="" name="newPassword"
                                     id="nuevaContraseña">
                                 <label class="label" for="nuevaContraseña">Nueva Contraseña</label>
                                 <span class="box__icon icon--changed"><i class="ri-check-line"></i></span>

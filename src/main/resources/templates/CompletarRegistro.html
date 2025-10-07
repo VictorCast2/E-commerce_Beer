@@ -27,7 +27,7 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body>
+<body th:data-mensaje="${mensaje}" th:data-redirect="${redirectTo}">
     <div class="contenido__form">
 
         <figure class="form__imagen">
@@ -35,7 +35,7 @@
         </figure>
 
         <div class="form__registro">
-            <form class="form">
+            <form class="form" th:action="@{/auth/completar-registro}" method="post">
                 <h1 class="formulario__title">Completa tu registro</h1>
 
                 <span class="formulario__title2">Para continuar necesitamos algunos datos adicionales</span>
@@ -44,7 +44,7 @@
                 <div class="formulario">
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Nombre" id="nombre">
+                            <input type="text" autocomplete="off" th:value="${usuario.nombres}" placeholder="" name="nombres" id="nombre">
                             <label for="nombre">Nombre</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -56,7 +56,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Apellido" id="apellido">
+                            <input type="text" autocomplete="off" th:value="${usuario.apellidos}" placeholder="" name="apellidos" id="apellido">
                             <label for="apellido">Apellido</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -68,16 +68,10 @@
 
                     <div class="formulario__input">
                         <div class="custom-select-wrapper">
-                            <select class="styled-select" id="tipoIdentificacion">
+                            <select class="styled-select" name="tipoIdentificacion" id="tipoIdentificacion" required>
                                 <option disabled selected>Tipo De Identificación</option>
-                                <option value="Cedula">CC (Cédula de Ciudadanía)</option>
-                                <option value="C.Extranjeria">CE (Cédula de Extranjería)</option>
-                                <option value="D.Extranjería">DE (Documento de Extranjería)</option>
-                                <option value="NIT">NIT (Identificación Tributaria)</option>
-                                <option value="PP">PP (Pasaporte)</option>
-                                <option value="RUT">RUT (Registro Único Tributario)</option>
-                                <option value="TEC">TE (Tarjeta de Extranjería)</option>
-                                <option value="T">TI (Tarjeta de Identidad)</option>
+                                <option th:each="tipo : ${tiposIdentificacion}" th:value="${tipo.name()}"
+                                        th:text="${tipo.descripcion}"></option>
                             </select>
                             <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
                         </div>
@@ -88,7 +82,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Identificacion"
+                            <input type="text" autocomplete="off" placeholder="" name="numeroIdentificacion"
                                 id="identificacion">
                             <label for="identificacion">Identificacion</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
@@ -101,7 +95,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="email" autocomplete="off" placeholder="" name="Email" id="email">
+                            <input type="email" autocomplete="off" th:value="${usuario.correo}" placeholder="" name="correo" id="email" readonly>
                             <label for="email">Email</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -113,7 +107,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
+                            <input type="text" autocomplete="off" placeholder="" name="telefono" id="telefono">
                             <label for="telefono">Telefono</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -125,7 +119,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="password" autocomplete="off" placeholder="" name="Password" id="password">
+                            <input type="password" autocomplete="off" placeholder="" name="password" id="password">
                             <label for="password">Password</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -157,8 +151,10 @@
 
                     <div class="formulario__input">
                         <div class="remember-forgot">
-                            <label class="forgot__label"><input type="checkbox" name="terminos">Pertenece a alguna
-                                empresa?</label>
+                            <label class="forgot__label">
+                                <input type="checkbox" name="registrarEmpresa" value="true">Pertenece a alguna
+                                empresa?
+                            </label>
                         </div>
                     </div>
 
@@ -172,6 +168,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/Js/CompleterRegistro.js}"></script>
 </body>
 

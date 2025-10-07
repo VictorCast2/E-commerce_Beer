@@ -27,7 +27,7 @@ class CategoriaRepositoryTest {
 
         // Persistir todos los packs de todas las categorías
         categorias.stream()
-                        .flatMap(categoria -> categoria.getPacks().stream())
+                        .flatMap(categoria -> categoria.getProductos().stream())
                                 .forEach(entityManager::persist);
 
         // Persistir categorías sueltas (las que no vinieron por cascada)
@@ -53,7 +53,7 @@ class CategoriaRepositoryTest {
         long categoriaId = 1L;
 
         // When
-        long resultado = categoriaRepository.countPacksByCategoriaId(categoriaId);
+        long resultado = categoriaRepository.countProductosByCategoriaId(categoriaId);
 
         // Then
         assertEquals(2L, resultado);

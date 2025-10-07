@@ -8,14 +8,12 @@ import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.persistence.repository.RolRepository;
 import com.application.persistence.repository.UsuarioRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
-import com.application.presentation.dto.general.response.RegisterResponse;
-import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
-import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
-import com.application.presentation.dto.usuario.request.UpdateUsuarioRequest;
+import com.application.presentation.dto.general.response.BaseResponse;
+import com.application.presentation.dto.usuario.request.*;
 import com.application.service.implementation.ImagenServiceImpl;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,19 +23,14 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final RolRepository rolRepository;
 
-    @Autowired
-    private RolRepository rolRepository;
-
-    @Autowired
-    private ImagenServiceImpl imagenService;
-
-    @Autowired
-    private PasswordEncoder encoder;
+    private final ImagenServiceImpl imagenService;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
@@ -82,11 +75,11 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    public RegisterResponse createUser(@Valid CreateUsuarioRequest usuarioRequest) {
+    public BaseResponse createUser(@Valid CreateUsuarioRequest usuarioRequest) {
 
         String correo = usuarioRequest.correo();
         if (usuarioRepository.existsByCorreo(correo)) {
-            return new RegisterResponse("El correo " + correo + " ya está registrado", false);
+            return new BaseResponse("El correo " + correo + " ya está registrado", false);
         }
 
         Usuario usuario = Usuario.builder()
@@ -112,7 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         usuarioRepository.save(usuario);
 
-        return new RegisterResponse("Usuario creado exitosamente", true);
+        return new BaseResponse("Usuario creado exitosamente", true);
     }
 
     @Override
@@ -127,15 +120,46 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         usuarioActualizado.setTelefono(usuarioRequest.telefono());
         usuarioActualizado.setCorreo(usuarioRequest.correo());
 
-        String imagen = imagenService.asignarImagen(usuarioRequest.imagen(), "perfil-usuario");
-        if (imagen != null) {
-            usuarioActualizado.setImagen(imagen);
-        } else {
-            usuarioActualizado.setImagen(usuarioRequest.imagenOriginal());
-        }
-
         usuarioRepository.save(usuarioActualizado);
         return new GeneralResponse("Sus datos se han actualizado exitosamente");
+    }
+
+    @Override
+    public GeneralResponse setUserPhoto(CustomUserPrincipal principal, SetUsuarioPhotoRequest usuarioPhotoRequest) {
+
+        Usuario usuarioPhoto = this.getUsuarioByCorreo(principal.getCorreo());
+
+        String imagen = imagenService.asignarImagen(usuarioPhotoRequest.imagenUsuarioNueva(), "perfil-usuario");
+        if (imagen != null) {
+            usuarioPhoto.setImagen(imagen);
+        } else {
+            usuarioPhoto.setImagen(usuarioPhotoRequest.imagenUsuarioOriginal());
+        }
+
+        usuarioRepository.save(usuarioPhoto);
+
+        return new GeneralResponse("Imagen asignada exitosamente");
+    }
+
+    @Override
+    public BaseResponse updatePassword(CustomUserPrincipal principal, UpdatePasswordRequest passwordRequest) {
+
+        Usuario usuario = this.getUsuarioByCorreo(principal.getCorreo());
+        String currentPassword = passwordRequest.currentPassword();
+        String newPassword = passwordRequest.newPassword();
+
+        if (!encoder.matches(currentPassword, usuario.getPassword())) {
+            return new BaseResponse("Contraseña actual incorrecta", false);
+        }
+
+        if (encoder.matches(newPassword, usuario.getPassword())) {
+            return new BaseResponse("La nueva contraseña no puede ser igual a la anterior", false);
+        }
+
+        usuario.setPassword(encoder.encode(newPassword));
+        usuarioRepository.save(usuario);
+
+        return new BaseResponse("contraseña actualizada exitosamente", true);
     }
 
 }

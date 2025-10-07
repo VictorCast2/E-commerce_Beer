@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -27,7 +26,7 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body>
+<body th:data-mensaje="${mensaje}">
     <div class="contenido__form">
 
         <figure class="form__imagen">
@@ -35,7 +34,7 @@
         </figure>
 
         <div class="form__registro">
-            <form class="form">
+            <form class="form" th:action="@{/auth/registrar-empresa}" method="post">
                 <h1 class="formulario__title">Registrar Empresa</h1>
 
                 <span class="formulario__title2">Para continuar necesitamos algunos datos adicionales</span>
@@ -44,8 +43,8 @@
                 <div class="formulario">
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Nit" id="nit">
-                            <label class="label" for="contraseñaAntigua">Nit</label>
+                            <input type="text" autocomplete="off" placeholder="" name="nit" id="nit">
+                            <label class="label" for="nit">Nit</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
                         </div>
@@ -56,8 +55,8 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="RazonSocial" id="razonSocial">
-                            <label class="label" for="razonSocial">Razon Social</label>
+                            <input type="text" autocomplete="off" placeholder="" name="razonSocial" id="razonSocial">
+                            <label for="razonSocial">Razon Social</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
                         </div>
@@ -68,7 +67,7 @@
 
                     <div class="formulario__input">
                         <div class="custom-select-wrapper wrapper--top">
-                            <select class="styled-select" id="Ciudad">
+                            <select class="styled-select" name="ciudad" id="Ciudad">
                                 <option disabled selected>Ciudad</option>
                             </select>
                             <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
@@ -80,7 +79,7 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Direccion" id="direccion">
+                            <input type="text" autocomplete="off" placeholder="" name="direccion" id="direccion">
                             <label for="direccion">Direccion</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -94,19 +93,19 @@
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="email" autocomplete="off" placeholder="" name="Email" id="email">
+                            <input type="email" autocomplete="off" placeholder="" name="correo" id="email">
                             <label for="email">Email</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
                         </div>
-                        <p class="input__error error--changed2">
+                        <p class="input__error">
                             El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
                         </p>
                     </div>
 
                     <div class="formulario__input">
                         <div class="input-box">
-                            <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
+                            <input type="text" autocomplete="off" placeholder="" name="telefono" id="telefono">
                             <label for="telefono">Telefono</label>
                             <span class="box__icon"><i class="ri-check-line"></i></span>
                             <span class="box__icon"><i class="ri-close-line"></i></span>
@@ -118,14 +117,10 @@
 
                     <div class="formulario__input" id="sector-input">
                         <div class="custom-select-wrapper">
-                            <select class="styled-select" id="tipoSector">
+                            <select class="styled-select" name="sector" id="tipoSector">
                                 <option disabled selected>Tipo de sector</option>
-                                <option value="Hotel">Hotel</option>
-                                <option value="Restaurante">Restaurante</option>
-                                <option value="Cafe">Cafe</option>
-                                <option value="Bar">Bar</option>
-                                <option value="NightClub">NightClub</option>
-                                <option value="Catering">Catering</option>
+                                <option th:each="sector : ${sectores}" th:value="${sector}"
+                                    th:text="${sector}"></option>
                             </select>
                             <i class="fa-solid fa-chevron-down custom-sector" id="arrowIcon1"></i>
                         </div>
@@ -145,6 +140,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/Js/RegistrarEmpresa.js}"></script>
 </body>
 

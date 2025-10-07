@@ -4,6 +4,13 @@ import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
 import com.application.presentation.dto.general.response.RegisterResponse;
+import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.persistence.entity.empresa.enums.ESector;
+import com.application.persistence.entity.usuario.Usuario;
+import com.application.persistence.entity.usuario.enums.EIdentificacion;
+import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
+import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.usuario.request.CompleteUsuarioProfileRequest;
 import com.application.presentation.dto.usuario.request.CreateUsuarioRequest;
 import com.application.service.interfaces.empresa.EmpresaService;
@@ -49,24 +56,34 @@ public class AuthenticationController {
     }
 
     @GetMapping("/completar-registro")
-    public String CompletarRegistro(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
+    public String CompletarRegistro(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                    @RequestParam(value = "mensaje", required = false) String mensaje,
+                                    @RequestParam(value = "redirectTo", required = false) String redirectTo,
+                                    Model model) {
+        Usuario usuario = this.usuarioService.getUsuarioByCorreo(principal.getCorreo());
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
+        model.addAttribute("redirectTo", redirectTo); // redireccionados desde el JS mediante Swal
         return "CompletarRegistro";
     }
 
     @PostMapping("/completar-registro")
     public String postCompletarPerfil(@AuthenticationPrincipal CustomUserPrincipal principal,
             @ModelAttribute @Valid CompleteUsuarioProfileRequest completeProfileRequest,
-            boolean registrarEmpresa) {
-        usuarioService.completeUserProfile(principal, completeProfileRequest);
-        if (registrarEmpresa) {
-            return "redirect:/auth/registrar-empresa";
-        }
-        return "redirect:/";
+            @RequestParam(name = "registrarEmpresa", defaultValue = "false") boolean registrarEmpresa) {
+        GeneralResponse response = usuarioService.completeUserProfile(principal, completeProfileRequest);
+
+        String destino = registrarEmpresa ? "registrarEmpresa" : "index";
+        return "redirect:/auth/completar-registro?mensaje="
+                + UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8)
+                + "&redirectTo=" + destino;
     }
 
     @GetMapping("/registrar-empresa")
-    public String RegistrarEmpresa(Model model, @RequestParam(value = "mensaje", required = false) String mensaje) {
+    public String RegistrarEmpresa(@RequestParam(value = "mensaje", required = false) String mensaje,
+                                   Model model) {
+        model.addAttribute("sectores", ESector.values());
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
         return "RegistrarEmpresa";
     }
@@ -74,8 +91,8 @@ public class AuthenticationController {
     @PostMapping("/registrar-empresa")
     public String postCreateEmpresa(@AuthenticationPrincipal CustomUserPrincipal principal,
             @ModelAttribute @Valid CreateEmpresaRequest createEmpresaRequest) {
-        empresaService.createEmpresa(principal, createEmpresaRequest);
-        return "redirect:/";
+        GeneralResponse response = empresaService.createEmpresa(principal, createEmpresaRequest);
+        return "redirect:/auth/registrar-empresa?mensaje=" + UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
     }
 
     @GetMapping("/registro")
@@ -84,7 +101,7 @@ public class AuthenticationController {
                            Model model) {
         model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         model.addAttribute("mensaje", mensaje); // mensaje a mostrar
-        model.addAttribute("success", success); // boolean que determina si se obtuvo un mensaje de exito o error
+        model.addAttribute("success", success); // boolean que determina si se obtuvo un mensaje de éxito o error
         return "Registro";
     }
 
@@ -95,7 +112,7 @@ public class AuthenticationController {
             String mensaje = UriUtils.encode("Error en los datos del formulario", StandardCharsets.UTF_8);
             return "redirect:/auth/registro?mensaje=" + mensaje + "&success=false";
         }
-        RegisterResponse response = usuarioService.createUser(usuarioRequest);
+        BaseResponse response = usuarioService.createUser(usuarioRequest);
         String mensaje = UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
         return "redirect:/auth/registro?mensaje=" + mensaje + "&success=" + response.success();
     }

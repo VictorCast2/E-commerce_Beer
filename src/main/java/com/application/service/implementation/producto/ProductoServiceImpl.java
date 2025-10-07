@@ -1,23 +1,30 @@
 package com.application.service.implementation.producto;
 
+import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.entity.producto.Producto;
+import com.application.persistence.entity.producto.enums.ETipo;
+import com.application.persistence.repository.CategoriaRepository;
 import com.application.persistence.repository.ProductoRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
+import com.application.presentation.dto.producto.response.ProductoCategoriaResponse;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.interfaces.producto.ProductoService;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class ProductoServiceImpl implements ProductoService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
+    private final CategoriaRepository categoriaRepository;
 
     /**
      * Obtiene un producto por su ID.
@@ -25,12 +32,25 @@ public class ProductoServiceImpl implements ProductoService {
      *
      * @param id ID del producto a buscar
      * @return La entidad producto encontrada
-     * @throws NoSuchElementException si la producto no existe
+     * @throws EntityNotFoundException si la producto no existe
      */
     @Override
     public Producto getProductoById(Long id) {
         return productoRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Error: El producto con id: " + id + " no existe"));
+                .orElseThrow(() -> new EntityNotFoundException("Error: El producto con id: " + id + " no existe"));
+    }
+
+    /**
+     * Obtiene un producto como DTO de respuesta por su ID.
+     * Este método es para la presentación del producto en la pagina de Producto-Descripción
+     *
+     * @param id ID del producto a buscar
+     * @return DTO con la información del producto, incluyendo categorías.
+     */
+    @Override
+    public ProductoResponse getProductoResponseById(Long id) {
+        Producto producto = this.getProductoById(id);
+        return this.toResponse(producto);
     }
 
     /**
@@ -43,36 +63,51 @@ public class ProductoServiceImpl implements ProductoService {
     public List<ProductoResponse> getProductos() {
         List<Producto> productos = productoRepository.findAll();
         return productos.stream()
-                .map(producto -> new ProductoResponse(
-                        producto.getImagen(),
-                        producto.getNombre(),
-                        producto.getPrecio(),
-                        producto.getStock(),
-                        producto.getDescripcion(),
-                        producto.getMarca(),
-                        producto.getPresentacion()
-                ))
+                .map(this::toResponse)
                 .toList();
     }
 
     /**
      * Obtiene todos los productos que están activos (disponibles para la venta).
+     * Este método es para la vista del E-commerce
      *
-     * @return Lista de DTOs con datos básicos de productos activos
+     * @return Lista de DTOs con productos activos
      */
     @Override
     public List<ProductoResponse> getProductosActivos() {
         List<Producto> productos = productoRepository.findByActivoTrue();
         return productos.stream()
-                .map(producto -> new ProductoResponse(
-                        producto.getImagen(),
-                        producto.getNombre(),
-                        producto.getPrecio(),
-                        producto.getStock(),
-                        producto.getDescripcion(),
-                        producto.getMarca(),
-                        producto.getPresentacion()
-                ))
+                .map(this::toResponse)
+                .toList();
+    }
+
+    /**
+     * Obtiene todos los productos que están activos y sean distiontos de Etipo.UNIDAD,
+     * Este método es para la vista de Pack para listar cajas, pack y combos
+     * que estén disponibles para la venta
+     *
+     * @return Lista de DTOs con productos activos que no sean individuales
+     */
+    @Override
+    public List<ProductoResponse> getPacksActivos() {
+        List<Producto> productoList = productoRepository.findByeTipoNotAndActivoTrue(ETipo.UNIDAD);
+        return productoList.stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    /**
+     * Obtiene los productos que pertenecen a una categoría específica.
+     * Este método sera de uso común para la pagina de Productos, en el filtro
+     *
+     * @param id ID de la categoría
+     * @return Lista de DTOs con productos que pertenecen a la categoría indicada
+     */
+    @Override
+    public List<ProductoResponse> getProductoByCategoriaId(Long id) {
+        List<Producto> productos = productoRepository.findByCategorias_CategoriaId(id);
+        return productos.stream()
+                .map(this::toResponse)
                 .toList();
     }
 
@@ -83,18 +118,24 @@ public class ProductoServiceImpl implements ProductoService {
      * @return Respuesta con mensaje de confirmación
      */
     @Override
+    @Transactional
     public GeneralResponse createProducto(@NotNull ProductoCreateRequest productoRequest) {
 
         Producto producto = Producto.builder()
+                .codigoProducto(productoRequest.codigoProducto())
                 .imagen(productoRequest.imagen())
                 .nombre(productoRequest.nombre())
+                .marca(productoRequest.marca())
+                .pais(productoRequest.pais())
+                .eTipo(productoRequest.tipo())
                 .precio(productoRequest.precio())
                 .stock(productoRequest.stock())
                 .descripcion(productoRequest.descripcion())
-                .marca(productoRequest.marca())
-                .presentacion(productoRequest.presentacion())
                 .activo(true)
                 .build();
+
+        List<Categoria> categoriaList = categoriaRepository.findAllById(productoRequest.categoriaIds());
+        categoriaList.forEach(producto::addCategoria);
 
         productoRepository.save(producto);
 
@@ -107,20 +148,29 @@ public class ProductoServiceImpl implements ProductoService {
      * @param productoRequest DTO con los datos actualizados
      * @param id ID del producto a actualizar
      * @return Respuesta con mensaje de confirmación
-     * @throws NoSuchElementException si el producto no existe
+     * @throws EntityNotFoundException si el producto no existe
      */
     @Override
+    @Transactional
     public GeneralResponse updateProducto(@NotNull ProductoCreateRequest productoRequest, Long id) {
 
         Producto productoActualizado = this.getProductoById(id);
 
+        productoActualizado.setCodigoProducto(productoActualizado.getCodigoProducto());
         productoActualizado.setImagen(productoRequest.imagen());
         productoActualizado.setNombre(productoRequest.nombre());
+        productoActualizado.setMarca(productoRequest.marca());
+        productoActualizado.setPais(productoRequest.pais());
+        productoActualizado.setETipo(productoRequest.tipo());
         productoActualizado.setPrecio(productoRequest.precio());
         productoActualizado.setStock(productoRequest.stock());
         productoActualizado.setDescripcion(productoRequest.descripcion());
-        productoActualizado.setMarca(productoRequest.marca());
-        productoActualizado.setPresentacion(productoRequest.presentacion());
+
+        for (Categoria categoria : new HashSet<>(productoActualizado.getCategorias())) {
+            productoActualizado.deleteCategoria(categoria);
+        }
+        List<Categoria> categoriaList = categoriaRepository.findAllById(productoRequest.categoriaIds());
+        categoriaList.forEach(productoActualizado::addCategoria);
 
         productoRepository.save(productoActualizado);
 
@@ -133,7 +183,7 @@ public class ProductoServiceImpl implements ProductoService {
      *
      * @param id ID del producto a deshabilitar
      * @return Respuesta con mensaje de confirmación
-     * @throws NoSuchElementException si el producto no existe
+     * @throws EntityNotFoundException si el producto no existe
      */
     @Override
     public GeneralResponse disableProducto(Long id) {
@@ -145,12 +195,12 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Elimina un producto y rompe sus relaciones con packs para evitar
+     * Elimina un producto y rompe sus relaciones con categorías para evitar
      * errores de integridad referencial en la base de datos.
      *
      * @param id ID del producto a eliminar
      * @return Respuesta con mensaje de confirmación
-     * @throws NoSuchElementException si el producto no existe
+     * @throws EntityNotFoundException si el producto no existe
      */
     @Override
     @Transactional
@@ -158,13 +208,38 @@ public class ProductoServiceImpl implements ProductoService {
 
         Producto producto = this.getProductoById(id);
 
-        if (!producto.getPackProductos().isEmpty()) {
-
-            producto.getPackProductos().forEach(pp -> pp.getPack().deleteProducto(producto));
-
+        for (Categoria categoria : new HashSet<>(producto.getCategorias())) {
+            producto.deleteCategoria(categoria);
         }
 
         productoRepository.delete(producto);
         return new GeneralResponse("Producto eliminado exitosamente");
+    }
+
+    /**
+     * Convierte una entidad Producto a su DTO de respuesta, incluyendo
+     * categorías.
+     * Para uso interno del servicio en los método de búsqueda
+     *
+     * @param producto Entidad producto a convertir
+     * @return DTO con la información completa del producto
+     */
+    @Override
+    public ProductoResponse toResponse(Producto producto) {
+        return new ProductoResponse(
+                producto.getProductoId(),
+                producto.getImagen(),
+                producto.getNombre(),
+                producto.getMarca(),
+                producto.getPais(),
+                producto.getETipo(),
+                producto.getPrecio(),
+                producto.getStock(),
+                producto.getDescripcion(),
+                producto.getCategorias().stream()
+                        .map(categoria -> new ProductoCategoriaResponse(
+                                categoria.getCategoriaId(), categoria.getNombre()
+                        )).toList()
+        );
     }
 }

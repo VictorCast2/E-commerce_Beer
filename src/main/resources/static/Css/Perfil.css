@@ -88,7 +88,7 @@
     left: 27%;
     border: 0;
     border-left: 1px solid #ccc;
-    height:94%;
+    height: 94%;
 }
 
 .container__main {
@@ -99,7 +99,7 @@
     margin-right: 3rem;
 }
 
-.perfil__user{
+.perfil__user {
     display: flex;
     justify-content: space-between;
 
@@ -116,7 +116,7 @@
     margin-bottom: 0.2rem;
 }
 
-.perfil__card .title--empresa{
+.perfil__card .title--empresa {
     width: 980px;
     border-top: 1px solid #ccc;
     padding-top: 50px;
@@ -138,20 +138,26 @@
 }
 
 .img__user img {
-    max-width: 100%;
-    cursor: pointer;
-    width: 120px;
-    border-radius: 50%;
-}
-
-
-.user--empresar img {
-    background-color: #f0f3f2;
-    max-width: 100%;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
+    display: block;
+    cursor: pointer;
+    background-color: #f0f3f2;
+}
+
+
+.user--empresar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    cursor: pointer;
+    background-color: #f0f3f2;
 }
 
 .img__btn {
@@ -197,23 +203,40 @@
     background-color: #e6ccb2;
 }
 
+.button--guardar {
+    background-color: var(--colorCafe);
+    color: var(--colorCafe);
+    border-radius: 30px;
+    border: none;
+    width: 80px;
+    height: 45px;
+    font: 500 1.2rem var(--typografiaUrbanist);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button--guardar:hover {
+    background-color: #a47c48;
+    color: var(--colorWhite);
+}
+
 .img__btn .btn__text {
     font: 500 1rem var(--typografiaUrbanist);
 }
 
-.user__informacion{
+.user__informacion {
     background-color: var(--colorWhite);
     width: 100%;
     max-width: 450px;
     position: relative;
 }
 
-.user__informacion .informacion__title{
+.user__informacion .informacion__title {
     font: 600 1.5rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
 }
 
-.user__informacion .informacion__text{
+.user__informacion .informacion__text {
     width: 500px;
     font: 400 0.9rem var(--typografiaGeist);
     margin-bottom: 0.7rem;
@@ -223,7 +246,7 @@
     padding-bottom: 0.9rem;
 }
 
-.user__informacion .informacion__text::after{
+.user__informacion .informacion__text::after {
     content: "";
     position: absolute;
     left: 0;

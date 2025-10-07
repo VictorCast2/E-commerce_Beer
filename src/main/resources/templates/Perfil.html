@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -12,15 +12,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
-        integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title> Perfil || E-ecommer Beer</title>
     <meta name="description" content="">
     <meta name="autor" content="">
@@ -28,7 +28,7 @@
     <meta name="robots" content="index,follow">
 </head>
 
-<body>
+<body th:data-mensaje="${mensaje}">
     <header class="header">
         <h1 class="header__logo">HoreecarBeer</h1>
 
@@ -44,81 +44,81 @@
 
         <div class="list__icon">
 
-            <span class="icon__item language-selector">
-                <div class="language-dropdown">
-                    <button class="dropdown-toggle">
-                        <i class="ri-translate-2"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>Español</li>
-                        <li>English</li>
-                        <li>France</li>
-                        <li>Portugues</li>
-                    </ul>
-                </div>
-            </span>
+                <span class="icon__item language-selector">
+                    <div class="language-dropdown">
+                        <button class="dropdown-toggle">
+                            <i class="ri-translate-2"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>Español</li>
+                            <li>English</li>
+                            <li>France</li>
+                            <li>Portugues</li>
+                        </ul>
+                    </div>
+                </span>
 
             <!-- Buscar -->
             <span class="icon__item">
-                <i class="ri-search-line"></i>
-            </span>
+                    <i class="ri-search-line"></i>
+                </span>
 
             <!-- Usuario -->
             <span class="icon__item">
-                <i class="ri-user-line"></i>
+                    <i class="ri-user-line"></i>
                 <!-- Cuando el usuario NO está autenticado -->
-                <div class="nav__menu" id="SubMenu1" sec:authorize="isAnonymous()">
-                    <div class="menu__sub">
-                        <a th:href="@{/auth/login}" class="sub__link">
-                            <p class="link__text">Iniciar Sesión</p>
-                        </a>
-                        <a th:href="@{/auth/registro}" class="sub__link">
-                            <p class="link__text">Registro</p>
-                        </a>
-                        <a th:href="@{/auth/recordar-contrasenna}" class="sub__link">
-                            <p class="link__text">Recordar Contraseña</p>
-                        </a>
-                    </div>
-                </div>
-                <!-- Cuando el usuario SÍ está autenticado -->
-                <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
-                    <div class="menu__sub">
-                        <div class="sub__info">
-                            <i class="ri-user-line"></i>
-                            <h2 class="info__title" th:text="${#authentication.principal?.nombres}">Nombre Usuario
-                            </h2>
+                    <div class="nav__menu" id="SubMenu1" sec:authorize="isAnonymous()">
+                        <div class="menu__sub">
+                            <a th:href="@{/auth/login}" class="sub__link">
+                                <p class="link__text">Iniciar Sesión</p>
+                            </a>
+                            <a th:href="@{/auth/registro}" class="sub__link">
+                                <p class="link__text">Registro</p>
+                            </a>
+                            <a th:href="@{/auth/recordar-contrasenna}" class="sub__link">
+                                <p class="link__text">Recordar Contraseña</p>
+                            </a>
                         </div>
-                        <hr>
-                        <a th:href="@{/perfil/}" class="sub__link">
-                            <p class="link__text">Perfil</p>
-                        </a>
-                        <a th:href="@{/perfil/configuration}" class="sub__link">
-                            <p class="link__text">Configuracion</p>
-                        </a>
-                        <a th:href="@{/perfil/notificaciones}" class="sub__link">
-                            <p class="link__text">Notificaciones</p>
-                        </a>
-                        <a th:href="@{/perfil/pedidos}" class="sub__link">
-                            <p class="link__text">Sus Pedidos</p>
-                        </a>
-                        <a th:href="@{/auth/logout}" class="sub__link">
-                            <p class="link__text">Cerrar Seccion</p>
-                        </a>
                     </div>
-                </div>
-            </span>
+                <!-- Cuando el usuario SÍ está autenticado -->
+                    <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
+                        <div class="menu__sub">
+                            <div class="sub__info">
+                                <i class="ri-user-line"></i>
+                                <h2 class="info__title" th:text="${#authentication.principal?.nombres}">Nombre Usuario
+                                </h2>
+                            </div>
+                            <hr>
+                            <a th:href="@{/perfil/}" class="sub__link">
+                                <p class="link__text">Perfil</p>
+                            </a>
+                            <a th:href="@{/perfil/configuration}" class="sub__link">
+                                <p class="link__text">Configuracion</p>
+                            </a>
+                            <a th:href="@{/perfil/notificaciones}" class="sub__link">
+                                <p class="link__text">Notificaciones</p>
+                            </a>
+                            <a th:href="@{/perfil/pedidos}" class="sub__link">
+                                <p class="link__text">Sus Pedidos</p>
+                            </a>
+                            <a th:href="@{/auth/logout}" class="sub__link">
+                                <p class="link__text">Cerrar Seccion</p>
+                            </a>
+                        </div>
+                    </div>
+                </span>
 
             <!-- Favorito -->
             <span class="icon__item" id="go-fav">
-                <i class="ri-heart-3-line"></i>
-                <span class="icon__badge" id="fav-count"></span>
-            </span>
+                    <i class="ri-heart-3-line"></i>
+                    <span class="icon__badge" id="fav-count"></span>
+                </span>
 
             <!-- Carrito -->
             <span class="icon__item" id="cart-icon">
-                <i class="ri-shopping-cart-2-line"></i>
-                <span class="icon__badge" id="cart-count"></span>
-            </span>
+                    <i class="ri-shopping-cart-2-line"></i>
+                    <span class="icon__badge" id="cart-count"></span>
+                </span>
         </div>
     </header>
 
@@ -155,25 +155,35 @@
                             <h2 class="card__title">Cambiar perfil</h2>
                             <p class="card__text">Cambia tu foto de perfil desde aquí</p>
 
-                            <div class="card__img">
-                                <figure class="img__user">
-                                    <img id="preview" th:src="@{/Assets/Img/ExperenciaUsuarios/imagen__user.jpg}"
-                                        alt="">
-                                </figure>
+                            <form id="formFoto" th:action="@{/perfil/colocar-imagen-usuario}" method="post" enctype="multipart/form-data">
+                                <div class="card__img">
+                                    <figure class="img__user">
+                                        <img id="preview" th:src="@{'/perfil-usuario/' + ${usuario.imagen}}"
+                                             th:alt="${usuario.imagen}">
+                                    </figure>
 
-                                <div class="img__btn">
-                                    <div class="btn__item">
+                                    <div class="img__btn">
+                                        <div class="btn__item">
+                                            <!-- Input de tipo file -->
+                                            <input type="file" id="fileInput" name="imagenUsuarioNueva" accept="image/*"
+                                                   hidden>
 
-                                        <input type="file" id="fileInput" accept="image/*" hidden>
+                                            <!-- Input oculto con el nombre de la imagen original -->
+                                            <input type="hidden" id="imagenUsuario" name="imagenUsuarioOriginal" th:value="${usuario.imagen}">
 
-                                        <button class="item__button button--subir">Subir</button>
-                                        <button class="item__button button--restablecer">Restablecer</button>
+                                            <button type="button" class="item__button button--subir"
+                                                    id="btnSubir">Subir
+                                            </button>
+                                            <button type="button" class="item__button button--restablecer"
+                                                    id="btnRestablecer">Restablecer
+                                            </button>
+                                        </div>
+                                        <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                     </div>
-
-                                    <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                 </div>
-                            </div>
+                            </form>
                         </div>
+
 
                         <div class="user__informacion">
                             <h2 class="informacion__title">Información del perfil</h2>
@@ -185,137 +195,156 @@
                             </p>
 
                             <div class="informacion__datos">
-                                <span class="datos__nombre"><strong>Nombre completo:</strong> Keyner Alfonso Reyes
-                                    Tejedor</span>
-                                <span class="datos__telelfono"><strong>Telefono:</strong> (+57) 313643769</span>
-                                <span class="datos__correo"> <strong>Correo:</strong> Keiner@gmail.com</span>
-                                <span class="datos__identificacion"> <strong>Tipo identificacion:</strong> Cedula</span>
-                                <span class="datos__ubicacion"><strong>Identificacion:</strong> 1043658213</span>
+                                <span class="datos__nombre">
+                                    <strong>Nombre completo:</strong>
+                                    <span th:text="${usuario.nombres} + ' ' + ${usuario.apellidos}"></span>
+                                </span>
+                                <span class="datos__telelfono">
+                                    <strong>Telefono:</strong>
+                                    <span th:text="${usuario.telefono}"></span>
+                                </span>
+                                <span class="datos__correo">
+                                    <strong>Correo:</strong>
+                                    <span th:text="${usuario.correo}"></span>
+                                </span>
+                                <span class="datos__identificacion">
+                                    <strong>Tipo identificacion:</strong>
+                                    <span th:text="${usuario.tipoIdentificacion.descripcion}"></span>
+                                </span>
+                                <span class="datos__ubicacion">
+                                    <strong>Identificacion:</strong>
+                                    <span th:text="${usuario.numeroIdentificacion}"></span>
+                                </span>
                             </div>
                         </div>
-
                     </div>
+                </div>
 
-                    <div class="perfil__personales">
+                <div class="perfil__personales">
 
-                        <h2 class="personales__titles">Datos personales</h2>
-                        <p class="personales__text">Para cambiar tus datos personales, edita y guarda desde aquí</p>
+                    <h2 class="personales__titles">Datos personales</h2>
+                    <p class="personales__text">Para cambiar tus datos personales, edita y guarda desde aquí</p>
 
-                        <form class="personales__formulario" action="">
+                    <form class="personales__formulario" th:action="@{/perfil/actualizar-usuario}" method="post">
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Nombre" id="nombre">
-                                    <label class="label" for="nombre">Nombre</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    El nombre debe tener al menos 3 letras y no contener números.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="nombres" id="nombre" th:value="${usuario.nombres}">
+                                <label class="label" for="nombre">Nombre</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                El nombre debe tener al menos 3 letras y no contener números.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Apellido" id="apellido">
-                                    <label class="label" for="apellido">Apellido</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    El nombre debe tener al menos 3 letras y no contener números.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="apellidos" id="apellido" th:value="${usuario.apellidos}">
+                                <label class="label" for="apellido">Apellido</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                El nombre debe tener al menos 3 letras y no contener números.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="custom-select-wrapper">
-                                    <select class="styled-select" id="tipoIdentificacion">
-                                        <option disabled selected>Tipo De Identificación</option>
-                                        <option value="Cedula">CC (Cédula de Ciudadanía)</option>
-                                        <option value="C.Extranjeria">CE (Cédula de Extranjería)</option>
-                                        <option value="D.Extranjería">DE (Documento de Extranjería)</option>
-                                        <option value="NIT">NIT (Identificación Tributaria)</option>
-                                        <option value="PP">PP (Pasaporte)</option>
-                                        <option value="RUT">RUT (Registro Único Tributario)</option>
-                                        <option value="TEC">TE (Tarjeta de Extranjería)</option>
-                                        <option value="T">TI (Tarjeta de Identidad)</option>
-                                    </select>
-                                    <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon1"></i>
-                                </div>
-                                <p class="input__error error--tipoIdentificacion">
-                                    Por favor, seleccione un tipo de identificación.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="custom-select-wrapper">
+                                <select class="styled-select" name="tipoIdentificacion" id="tipoIdentificacion" required>
+                                    <option disabled selected>Tipo De Identificación</option>
+                                    <option th:each="tipo : ${tiposIdentificacion}" th:value="${tipo.name()}"
+                                            th:text="${tipo.descripcion}"
+                                            th:selected="${tipo.name() == usuario.tipoIdentificacion.name()}"></option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon1"></i>
                             </div>
+                            <p class="input__error error--tipoIdentificacion">
+                                Por favor, seleccione un tipo de identificación.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Identificacion"
-                                        id="identificacion">
-                                    <label for="identificacion">Identificacion</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    La cédula debe contener entre 6 y 10 dígitos numéricos.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="numeroIdentificacion"
+                                       id="identificacion" th:value="${usuario.numeroIdentificacion}">
+                                <label for="identificacion">Identificacion</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                La cédula debe contener entre 6 y 10 dígitos numéricos.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="email" autocomplete="off" placeholder="" name="Email" id="email1">
-                                    <label for="email">Email</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error error--changed2">
-                                    El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="email" autocomplete="off" placeholder="" name="correo" id="email1" th:value="${usuario.correo}">
+                                <label for="email">Email</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error error--changed2">
+                                El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Telefono" id="telefono">
-                                    <label for="telefono">Telefono</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    El teléfono solo puede contener numeros y el maximo son 10 digitos.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="telefono" id="telefono" th:value="${usuario.telefono}">
+                                <label for="telefono">Telefono</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                El teléfono solo puede contener numeros y el maximo son 10 digitos.
+                            </p>
+                        </div>
 
 
-                            <div class="formulario__input formulario__btn-container">
-                                <button class="formulario__btn" type="submit">Guardar</button>
-                                <button class="formulario__btn btn--cancelar" type="submit">Cancelar</button>
-                            </div>
+                        <div class="formulario__input formulario__btn-container">
+                            <button class="formulario__btn" type="submit">Guardar</button>
+                            <button class="formulario__btn btn--cancelar" type="submit">Cancelar</button>
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
+                </div>
 
+                <div th:if="${usuario.empresa != null}">
                     <div class="perfil__user user--empresa">
 
                         <div class="perfil__card">
                             <h2 class="card__title title--empresa">Cambiar Empresa</h2>
                             <p class="card__text">Cambia la foto de perfil de la empresa</p>
 
-                            <div class="card__img">
-                                <figure class="img__user user--empresar">
-                                    <img id="preview1" th:src="@{/Assets/Img/ExperenciaUsuarios/logo__hotel2.png}" alt="logo hotel 2">
-                                </figure>
+                            <form id="formFotoEmpresa" th:action="@{/perfil/colocar-imagen-empresa}" method="post"
+                                  enctype="multipart/form-data">
+                                <div class="card__img">
+                                    <figure class="img__user user--empresar">
+                                        <img id="previewEmpresa" th:src="@{'/perfil-empresa/' + ${usuario.empresa.imagen}}"
+                                             th:alt="${usuario.empresa.imagen}">
+                                    </figure>
 
-                                <div class="img__btn">
-                                    <div class="btn__item">
-
-                                        <input type="file" id="fileInput1" accept="image/*" hidden>
-
-                                        <button class="item__button button--subir">Subir</button>
-                                        <button class="item__button button--restablecer">Restablecer</button>
+                                    <div class="img__btn">
+                                        <div class="btn__item">
+                                            <input type="file" id="fileInputEmpresa" name="imagenEmpresaNueva" accept="image/*"
+                                                   hidden>
+                                            <!-- Input oculto con el nombre de la imagen original -->
+                                            <input type="hidden" id="imagenEmpresa" name="imagenEmpresaOriginal" th:value="${usuario.empresa.imagen}">
+                                            <!-- Botón dinámico -->
+                                            <button type="button" class="item__button button--subir"
+                                                    id="btnSubirEmpresa">Subir
+                                            </button>
+                                            <button type="button" class="item__button button--restablecer"
+                                                    id="btnRestablecerEmpresa">Restablecer
+                                            </button>
+                                        </div>
+                                        <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                     </div>
-
-                                    <p class="btn__text">JPG, GIF o PNG permitidos. Tamaño máximo de 800K</p>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div class="empresa__informacion">
@@ -328,127 +357,138 @@
                             </p>
 
                             <div class="empresas__datos">
-                                <span class="datos__nit"><strong>Nit:</strong> 00055478554</span>
-                                <span class="datos__social"><strong>Razon Social:</strong> </span>
-                                <span class="datos__ciudad"><strong>Ciudad:</strong> Cartagena</span>
-                                <span class="datos__direccion"><strong>Direccion:</strong> San Fernando Calle 45</span>
-                                <span class="datos__correo"> <strong>Correo:</strong> beer@gmail.com</span>
-                                <span class="datos__telefono"><strong>Telefono:</strong> 3004289582</span>
-                                <span class="datos__sector"><strong>Sector:</strong> Hotel</span>
+                                <span class="datos__nit">
+                                    <strong>Nit:</strong> <span th:text="${usuario.empresa.nit}"></span>
+                                </span>
+                                <span class="datos__social">
+                                    <strong>Razon Social:</strong> <span th:text="${usuario.empresa.razonSocial}"></span>
+                                </span>
+                                <span class="datos__ciudad">
+                                    <strong>Ciudad:</strong> <span th:text="${usuario.empresa.ciudad}"></span>
+                                </span>
+                                <span class="datos__direccion">
+                                    <strong>Direccion:</strong> <span th:text="${usuario.empresa.direccion}"></span>
+                                </span>
+                                <span class="datos__correo">
+                                    <strong>Correo:</strong> <span th:text="${usuario.empresa.correo}"></span>
+                                </span>
+                                <span class="datos__telefono">
+                                    <strong>Telefono:</strong> <span th:text="${usuario.empresa.telefono}"></span>
+                                </span>
+                                <span class="datos__sector">
+                                    <strong>Sector:</strong>
+                                    <span th:text="${usuario.empresa.eSector.name()}"></span>
+                                </span>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="perfil__empresa">
-                        <h2 class="empresa__titles">Datos empresa</h2>
-                        <p class="empresa__text">Si pertenece alguna empresa rellene el siguiente formulario</p>
+                    <h2 class="empresa__titles">Datos empresa</h2>
+                    <p class="empresa__text">Si pertenece alguna empresa rellene el siguiente formulario</p>
 
-                        <form class="empresa__formulario" action="">
+                    <form class="empresa__formulario" th:action="@{/perfil/actualizar-empresa}" method="post">
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Nit" id="nit">
-                                    <label class="label" for="nit">Nit</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    El NIT no puede estar vacío y debe contener solo números.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="Nit" id="nit" th:value="${usuario.empresa.nit}" disabled>
+                                <label class="label" for="nit">Nit</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                El NIT no puede estar vacío y debe contener solo números.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="RazonSocial"
-                                        id="razonSocial">
-                                    <label class="label" for="razonSocial">Razon Social</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    La razón social solo puede contener letras, espacios y debe tener entre 3 y 50
-                                    caracteres.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="RazonSocial"
+                                       id="razonSocial" th:value="${usuario.empresa.razonSocial}" disabled>
+                                <label class="label" for="razonSocial">Razon Social</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                La razón social solo puede contener letras, espacios y debe tener entre 3 y 50
+                                caracteres.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="custom-select-wrapper wrapper--top">
-                                    <select class="styled-select" id="Ciudad">
-                                        <option disabled selected>Ciudad</option>
-                                    </select>
-                                    <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon2"></i>
-                                </div>
-                                <p class="input__error error--ciudad">
-                                    Por favor, seleccione una ciudad.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="custom-select-wrapper wrapper--top">
+                                <select class="styled-select" name="ciudad" id="Ciudad">
+                                    <option disabled selected>Ciudad</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon2"></i>
                             </div>
+                            <p class="input__error error--ciudad">
+                                Por favor, seleccione una ciudad.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Direccion"
-                                        id="direccion">
-                                    <label for="direccion">Direccion</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error error--direccion">
-                                    Ingresa una dirección válida (ej. Calle 45 #10-23, 130002 o San Fernando, Calle 45
-                                    #10-23,
-                                    130002).
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="direccion"
+                                       id="direccion" th:value="${usuario.empresa.direccion}">
+                                <label for="direccion">Direccion</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error error--direccion">
+                                Ingresa una dirección válida (ej. Calle 45 #10-23, 130002 o San Fernando, Calle 45
+                                #10-23,
+                                130002).
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="email" autocomplete="off" placeholder="" name="Email" id="correo">
-                                    <label for="correo">Email</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error error--changed2">
-                                    El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="email" autocomplete="off" placeholder="" name="correo" id="correo" th:value="${usuario.empresa.correo}">
+                                <label for="correo">Email</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error error--changed2">
+                                El correo solo puede contener letras,numeros,puntos,guiones y guion bajo.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input">
-                                <div class="input-box">
-                                    <input type="text" autocomplete="off" placeholder="" name="Telefono" id="phone">
-                                    <label for="phone">Telefono</label>
-                                    <span class="box__icon"><i class="ri-check-line"></i></span>
-                                    <span class="box__icon"><i class="ri-close-line"></i></span>
-                                </div>
-                                <p class="input__error">
-                                    El teléfono solo puede contener numeros y el maximo son 10 digitos.
-                                </p>
+                        <div class="formulario__input">
+                            <div class="input-box">
+                                <input type="text" autocomplete="off" placeholder="" name="telefono" id="phone" th:value="${usuario.empresa.telefono}">
+                                <label for="phone">Telefono</label>
+                                <span class="box__icon"><i class="ri-check-line"></i></span>
+                                <span class="box__icon"><i class="ri-close-line"></i></span>
                             </div>
+                            <p class="input__error">
+                                El teléfono solo puede contener numeros y el maximo son 10 digitos.
+                            </p>
+                        </div>
 
-                            <div class="formulario__input" id="sector-input">
-                                <div class="custom-select-wrapper">
-                                    <select class="styled-select" id="tipoSector">
-                                        <option disabled selected>Tipo de sector</option>
-                                        <option value="Hotel">Hotel</option>
-                                        <option value="Restaurante">Restaurante</option>
-                                        <option value="Cafe">Cafe</option>
-                                        <option value="Bar">Bar</option>
-                                        <option value="NightClub">NightClub</option>
-                                        <option value="Catering">Catering</option>
-                                    </select>
-                                    <i class="fa-solid fa-chevron-down custom-sector" id="arrowIcon"></i>
-                                </div>
-                                <p class="input__error error--Tiposector">
-                                    Por favor, un tipo de sector
-                                </p>
+                        <div class="formulario__input" id="sector-input">
+                            <div class="custom-select-wrapper">
+                                <select class="styled-select" name="sector" id="tipoSector">
+                                    <option disabled selected>Tipo de sector</option>
+                                    <option th:each="sector : ${sectoresEmpresa}" th:value="${sector.name()}"
+                                            th:text="${sector.name()}"
+                                            th:selected="${sector.name() == usuario.empresa.eSector.name()}"></option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down custom-sector" id="arrowIcon"></i>
                             </div>
+                            <p class="input__error error--Tiposector">
+                                Por favor, un tipo de sector
+                            </p>
+                        </div>
 
-                            <div class="formulario__input formulario__container">
-                                <button class="formulario__btn" type="submit">Guardar</button>
-                            </div>
-                    </div>
-
+                        <div class="formulario__input formulario__container">
+                            <button class="formulario__btn" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </div>
                 </div>
             </main>
-
         </div>
     </section>
 
@@ -489,7 +529,7 @@
                         <div class="subcripcion__formulario">
                             <div class="formulario__input">
                                 <input type="email" autocomplete="off" placeholder="Ingresa tu email" name="Email"
-                                    id="email">
+                                       id="email">
                                 <button type="submit">Subcribete</button>
                             </div>
                         </div>
