@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
-
     @Override
     public void onAuthenticationFailure(
             HttpServletRequest request,

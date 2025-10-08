@@ -12,7 +12,6 @@ import java.util.*;
 
 @Getter
 public class CustomUserPrincipal implements UserDetails, OAuth2User {
-
     // Atributos para la autenticación y autorización del usuario mediante UserDetails
     private final String correo;
     private final String password;

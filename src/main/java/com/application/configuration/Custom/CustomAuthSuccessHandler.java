@@ -17,7 +17,6 @@ import java.util.Collection;
 @Component
 @RequiredArgsConstructor
 public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-
     private final UsuarioRepository usuarioRepository;
 
     @Override
