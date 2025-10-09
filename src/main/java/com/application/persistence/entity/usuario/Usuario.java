@@ -45,6 +45,8 @@ public class Usuario {
     private String correo;
     @Column(length = 100)
     private String password;
+    @Column(length = 100)
+    private String direccion;
 
     @Column(name = "is_enabled")
     @Builder.Default
