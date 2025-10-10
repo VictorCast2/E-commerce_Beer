@@ -1,17 +1,12 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
-import com.application.persistence.entity.producto.Producto;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
-import com.application.presentation.dto.pack.response.PackResponse;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
-import com.application.service.interfaces.usuario.UsuarioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

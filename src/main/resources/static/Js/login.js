@@ -20,8 +20,8 @@ const fields = {
 Object.keys(fields).forEach(fieldId => {
     const input = document.getElementById(fieldId);
     const inputBox = input.closest(".input-box");
-    const validIcon = inputBox.querySelector(".valid-icon");
-    const invalidIcon = inputBox.querySelector(".invalid-icon");
+    const validIcon = inputBox.querySelector(".ri-check-line");
+    const invalidIcon = inputBox.querySelector(".ri-close-line");
     const errorMessage = inputBox.nextElementSibling;
 
     input.addEventListener("input", () => {
