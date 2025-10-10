@@ -18,7 +18,6 @@ import java.util.*;
 @Table(
         name = "usuario",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "numeroIdentificacion", name = "uk_usuario_numero_identificacion"),
                 @UniqueConstraint(columnNames = "telefono", name = "uk_usuario_telefono"),
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
