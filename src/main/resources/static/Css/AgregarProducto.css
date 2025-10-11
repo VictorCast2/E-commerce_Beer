@@ -1,0 +1,31 @@
+@import url("./DashboardProducto.css");
+
+
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+    --colorCafe: #8e705c;
+    --colorWhite: #ffffff;
+}
+
+.titleheader__btn a {
+    text-decoration: none;
+    position: relative;
+    left: 1.2rem;
+    cursor: pointer;
+    background-color:#eeee;
+    color: var(--colorDark);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #eee;
+    font: 600 1rem var(--typografiaGeist);
+    transition: background-color .5s ease,border .5s ease;
+}
+
+.titleheader__btn a:hover {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+}

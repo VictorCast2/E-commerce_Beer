@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Efecto glassmorphism solo al hacer scroll
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
 
-            // 🔹 Asegurar que siempre es un entero creciente
+            // Asegurar que siempre es un entero creciente
             const value = Math.floor(progress * (end - start) + start);
 
             element.textContent = formatNumberCustom(value, hasDollar) + suffix;
