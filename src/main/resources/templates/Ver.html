@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" th:href="@{/Css/Ver.css}">
-    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/Logo.png}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/LogoBeer.png}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,6 +79,7 @@
                         </a>
                     </div>
                 </div>
+
                 <!-- Cuando el usuario SÍ está autenticado -->
                 <div class="nav__menu" id="SubMenu" sec:authorize="isAuthenticated()">
                     <div class="menu__sub">
@@ -131,32 +132,32 @@
                 <a href="" class="breadcrumb-category"></a>
                 <a href="" class="breadcrumb-name"></a>
             </div>
-
             <div class="container__flex">
 
+                <!-- Imagen principal del producto -->
                 <figure class="flex__img">
-                    <img th:src="" alt="producto seleccionado">
+                    <img src="" alt="producto seleccionado">
                 </figure>
 
+                <!-- Detalles del producto -->
                 <div class="flex__details">
-
+                    <!-- Categoría -->
                     <span class="details__category"></span>
-
+                    <!-- Nombre -->
                     <span class="details__name"></span>
-
+                    <!-- Precio -->
                     <div class="details__precie">
                         <span class="precie__total"></span>
                         <span class="precie__total total--desct"></span>
                     </div>
 
+                    <!-- Controles de cantidad + botón agregar -->
                     <div class="details__plus">
-
-                        <div class="plus__control" data-index="${index}">
+                        <div class="plus__control">
                             <button class="control__minus">−</button>
                             <span class="control__qty">0</span>
                             <button class="control__plus">+</button>
                         </div>
-
                         <button class="details__addCard">Agregar Al Carrito</button>
                     </div>
 
@@ -331,8 +332,6 @@
                     <img th:src="@{/Assets/Img/footer/pay.png}" alt="">
                 </figure>
             </div>
-
-
         </div>
 
         <div class="instalar__copyright">

@@ -154,7 +154,7 @@ export function initCart() {
                             <span class="qty">${item.qty}</span>
                             <button class="plus">+</button>
                         </div>
-                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <span class="price">$${parseFloat(item.price || 0).toFixed(2)}</span>
                     </div>
                     <button class="remove" data-index="${index}">
                         <i class="ri-delete-bin-6-line"></i>
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Swal.fire({
             html: `
         <div class="contenedor-imagen-modal">
-            <img th:src="@{/Assets/Img/Logos/costaoroimport.png}"
+            <img src="/Assets/Img/Logos/costaoroimport.png"
             alt="Mayor de edad"
             class="mi-imagen-modal">
         </div>
