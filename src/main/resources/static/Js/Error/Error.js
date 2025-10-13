@@ -116,3 +116,179 @@ document.addEventListener('DOMContentLoaded', function() {
     syncFoamWithLiquid();
     console.log('Página 404 cargada con jarra de cerveza interactiva.');
 });
+// Configuración global para SweetAlert2
+const swalConfig = {
+    confirmButtonColor: '#13294B',
+    cancelButtonColor: '#6c757d',
+    focusConfirm: false,
+    customClass: {
+        popup: 'custom-swal',
+        confirmButton: 'swal-confirm-btn'
+    }
+};
+
+// Crear burbujas dinámicamente - versión optimizada
+function createBubbles() {
+    const bubblesContainers = document.querySelectorAll('.bubbles');
+    
+    bubblesContainers.forEach(container => {
+        const bubbleCount = Math.floor(Math.random() * 10) + 20; // 20-30 burbujas
+        
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            
+            // Determinar tamaño
+            const isLarge = Math.random() > 0.7;
+            if (isLarge) bubble.classList.add('large');
+            else bubble.classList.add('small');
+            
+            // Configuración de la burbuja
+            const left = Math.random() * 85 + 5;
+            const delay = Math.random() * 4;
+            const duration = Math.random() * 3 + 2;
+            const initialBottom = Math.random() * 30;
+            const sway = (Math.random() - 0.5) * 20;
+            
+            Object.assign(bubble.style, {
+                left: `${left}%`,
+                bottom: `${initialBottom}%`,
+                animationDelay: `${delay}s`,
+                animationDuration: `${duration}s`
+            });
+            
+            bubble.style.setProperty('--sway', `${sway}px`);
+            container.appendChild(bubble);
+        }
+    });
+}
+
+// Animación interactiva de la jarra de cerveza
+function setupPitcherInteractions() {
+    const beerPitchers = document.querySelectorAll('.beer-pitcher');
+    
+    beerPitchers.forEach(pitcher => {
+        const beerLiquid = pitcher.querySelector('.beer-liquid');
+        const bubbles = pitcher.querySelectorAll('.bubble');
+        const foamLayers = pitcher.querySelectorAll('.foam-layer');
+        
+        pitcher.addEventListener('mouseenter', () => {
+            // Pausar todas las animaciones
+            [beerLiquid, ...bubbles, ...foamLayers].forEach(element => {
+                if (element) element.style.animationPlayState = 'paused';
+            });
+            
+            // Efecto visual al hacer hover
+            pitcher.style.transform = 'scale(1.05)';
+        });
+        
+        pitcher.addEventListener('mouseleave', () => {
+            // Reanudar todas las animaciones
+            [beerLiquid, ...bubbles, ...foamLayers].forEach(element => {
+                if (element) element.style.animationPlayState = 'running';
+            });
+            
+            // Restaurar transformación
+            pitcher.style.transform = 'scale(1)';
+        });
+        
+        // Click para mostrar información adicional con SweetAlert2
+        pitcher.addEventListener('click', () => {
+            const errorType = document.querySelector('title').textContent;
+            showBeerInfo(errorType);
+        });
+    });
+}
+
+// Mostrar información con SweetAlert2
+function showBeerInfo(errorType) {
+    const messages = {
+        'Error 404 - Página no encontrada': {
+            title: '¡Página no encontrada!',
+            text: 'Esta página se ha evaporado como la espuma de una buena cerveza...',
+            icon: 'error'
+        },
+        'Error 401 - No autorizado': {
+            title: 'Acceso no autorizado',
+            text: 'Parece que esta jarra está cerrada con candado. ¿Tienes la llave?',
+            icon: 'warning'
+        },
+        'Error 400 - Solicitud incorrecta': {
+            title: 'Problema de comunicación',
+            text: 'Tal vez se nos derramó un poco la cerveza. Vuelve a intentarlo.',
+            icon: 'info'
+        },
+        'Error': {
+            title: 'En mantenimiento',
+            text: 'Estamos trabajando para mejorar tu experiencia. Vuelve pronto.',
+            icon: 'info'
+        }
+    };
+    
+    const config = messages[errorType] || messages['Error'];
+    
+    Swal.fire({
+        ...config,
+        ...swalConfig,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    });
+}
+
+// Función para mostrar confirmación al intentar volver
+function setupBackButton() {
+    const backButton = document.querySelector('.button');
+    
+    if (backButton) {
+        backButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            Swal.fire({
+                title: '¿Volver atrás?',
+                text: 'Estás a punto de regresar a la página anterior',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, volver',
+                cancelButtonText: 'Cancelar',
+                ...swalConfig
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.history.back();
+                }
+            });
+        });
+    }
+}
+
+// Inicialización mejorada
+document.addEventListener('DOMContentLoaded', function() {
+    createBubbles();
+    setupPitcherInteractions();
+    setupBackButton();
+    
+    // Mostrar alerta de bienvenida si es la primera visita
+    if (!sessionStorage.getItem('errorPageVisited')) {
+        setTimeout(() => {
+            Swal.fire({
+                title: '¡Salud! 🍻',
+                text: 'Has llegado a una página de error con estilo cervecero',
+                icon: 'info',
+                timer: 3000,
+                showConfirmButton: false,
+                ...swalConfig
+            });
+            sessionStorage.setItem('errorPageVisited', 'true');
+        }, 1000);
+    }
+    
+    console.log('Página de error cargada con mejoras interactivas');
+});
+
+// Manejo de errores global
+window.addEventListener('error', (e) => {
+    console.error('Error capturado:', e.error);
+});

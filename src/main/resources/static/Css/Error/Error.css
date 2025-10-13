@@ -36,10 +36,10 @@ body {
 .container {
     text-align: center;
     background: var(--color-terciario);
-    padding: 40px 30px;
+    padding: clamp(30px, 5vw, 50px) clamp(20px, 4vw, 40px);
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: min(90vw, 600px);
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -70,17 +70,20 @@ p {
     line-height: 1.5;
 }
 
-/* ======== Diseño del 404 con jarra de cerveza realista ======== */
-.error-404 {
+/* ======== Diseño unificado para todos los errores ======== */
+.error-404,
+.error-401,
+.error-400 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 120px;
+    font-size: clamp(80px, 15vw, 150px);
     font-weight: bold;
     color: var(--color-primario);
     margin-bottom: 30px;
-    gap: 15px;
+    gap: clamp(10px, 2vw, 20px);
     position: relative;
+    flex-wrap: wrap;
 }
 
 .error-num {
@@ -94,11 +97,11 @@ p {
     transform: translateY(-5px) rotate(5deg);
 }
 
-/* Contenedor de la jarra de cerveza - más grande y prominente */
+/* Contenedor de la jarra de cerveza - responsive */
 .beer-container {
     position: relative;
-    width: 140px;
-    height: 220px;
+    width: clamp(80px, 20vw, 140px);
+    height: clamp(120px, 30vw, 220px);
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -108,25 +111,23 @@ p {
 /* Jarra de cerveza realista */
 .beer-pitcher {
     position: relative;
-    width: 110px;
-    height: 200px;
+    width: 80%;
+    height: 90%;
     z-index: 2;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-/* Asa de la jarra (handle) - curva realista */
+/* Asa de la jarra (handle) */
 .pitcher-handle {
     position: absolute;
-    right: -15px;
+    right: -12%;
     top: 40%;
-    width: 25px;
-    height: 60px;
+    width: 20%;
+    height: 27%;
     background: linear-gradient(to bottom, #e0e0e0, #c0c0c0, #a0a0a0);
     border-radius: 50px 10px 50px 10px;
-    box-shadow:
-            inset -5px 0 10px rgba(255, 255, 255, 0.3),
-            2px 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: inset -5px 0 10px rgba(255, 255, 255, 0.3), 2px 2px 5px rgba(0, 0, 0, 0.2);
     transform: rotate(20deg);
     z-index: 1;
 }
@@ -134,19 +135,19 @@ p {
 .pitcher-handle::before {
     content: '';
     position: absolute;
-    left: -5px;
-    top: 10px;
-    width: 10px;
-    height: 40px;
+    left: -25%;
+    top: 17%;
+    width: 40%;
+    height: 67%;
     background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
     border-radius: 50%;
 }
 
-/* Cuerpo principal de la jarra - forma trapezoidal para realismo */
+/* Cuerpo principal de la jarra */
 .pitcher-body {
     position: relative;
     width: 100%;
-    height: 160px;
+    height: 73%;
     background: linear-gradient(to bottom,
     rgba(255, 255, 255, 0.3) 0%,
     rgba(240, 240, 240, 0.5) 50%,
@@ -155,41 +156,37 @@ p {
     border-bottom: 5px solid #b0b0b0;
     border-radius: 20px 20px 50px 50px;
     overflow: hidden;
-    box-shadow:
-            inset 0 0 20px rgba(0, 0, 0, 0.1),
-            0 8px 20px rgba(0, 0, 0, 0.15),
-            inset -10px 0 20px rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.15), inset -10px 0 20px rgba(255, 255, 255, 0.2);
     z-index: 3;
 }
 
-/* Bordes superiores más anchos para forma de jarra */
 .pitcher-body::before {
     content: '';
     position: absolute;
     top: -3px;
-    left: 10px;
-    right: 10px;
+    left: 9%;
+    right: 9%;
     height: 6px;
     background: linear-gradient(to right, #f0f0f0, #ffffff, #f0f0f0);
     border-radius: 10px;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Base de la jarra - estable y realista */
+/* Base de la jarra */
 .pitcher-base {
     position: absolute;
-    bottom: -10px;
+    bottom: -5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 15px;
+    width: 57%;
+    height: 7%;
     background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
     border-radius: 50% 50% 10px 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-/* Efectos de vidrio: reflejos y condensación para realismo */
+/* Efectos de vidrio */
 .glass-effects {
     position: absolute;
     top: 0;
@@ -205,8 +202,8 @@ p {
     position: absolute;
     top: 10%;
     right: 10%;
-    width: 20px;
-    height: 60px;
+    width: 18%;
+    height: 27%;
     background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
     border-radius: 10px;
     filter: blur(1px);
@@ -230,13 +227,13 @@ p {
     50% { opacity: 0.8; transform: translateX(5px); }
 }
 
-/* Espuma realista con múltiples capas y animación orgánica */
+/* Espuma realista */
 .beer-foam {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 15%;
     z-index: 5;
     overflow: hidden;
     transition: height 0.5s ease-in-out;
@@ -283,7 +280,7 @@ p {
     50% { transform: translateY(-4px) scale(1.1); opacity: 1; }
 }
 
-/* Líquido de cerveza con gradiente realista y burbujeo */
+/* Líquido de cerveza */
 .beer-liquid {
     position: absolute;
     bottom: 0;
@@ -313,7 +310,7 @@ p {
     }
 }
 
-/* Burbujas mejoradas - más variadas y realistas */
+/* Burbujas mejoradas */
 .bubbles {
     position: absolute;
     bottom: 0;
@@ -370,67 +367,31 @@ p {
     }
 }
 
-/* Burbujas más grandes que se mueven más lento */
 .bubble.large {
     width: 12px !important;
     height: 12px !important;
     animation-duration: 5s !important;
 }
 
-/* Burbujas pequeñas que se mueven más rápido */
 .bubble.small {
     width: 4px !important;
     height: 4px !important;
     animation-duration: 2s !important;
 }
 
-/* Loader mejorado con tema cervecero */
-.loader-container {
-    margin: 25px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.loader {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(245, 158, 11, 0.2);
-    border-radius: 50%;
-    border-top-color: var(--color-principal);
-    animation: spin 1s ease-in-out infinite;
-}
-
-.loader-text {
-    color: var(--color-principal);
-    font-weight: 500;
-    animation: pulse 2s infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-/* Botón mejorado con más interactividad */
+/* Botón mejorado */
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 12px 30px;
+    padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 30px);
     color: var(--color-primario);
     background: linear-gradient(135deg, var(--color-secundario), #ffed4a);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: clamp(14px, 1.5vw, 16px);
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 213, 0, 0.3);
     border: 2px solid transparent;
@@ -463,7 +424,7 @@ p {
 /* Mensaje adicional */
 .additional-info {
     margin-top: 25px;
-    font-size: 14px;
+    font-size: clamp(12px, 1.5vw, 14px);
     color: var(--color-light);
     animation: fadeIn 1s ease-in-out 0.5s both;
 }
@@ -473,131 +434,44 @@ p {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-    .error-404 {
-        font-size: 90px;
-        gap: 10px;
-    }
-
-    .beer-container {
-        width: 110px;
-        height: 180px;
-    }
-
-    .beer-pitcher {
-        width: 90px;
-        height: 170px;
-    }
-
-    .pitcher-body {
-        height: 130px;
-    }
-
-    .pitcher-handle {
-        width: 20px;
-        height: 50px;
-        right: -12px;
-    }
-
-    .pitcher-base {
-        width: 65px;
-        height: 12px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 15px;
-    }
-
-    .button {
-        padding: 10px 25px;
-        font-size: 15px;
-    }
-
-    .loader {
-        width: 40px;
-        height: 40px;
-        border-width: 4px;
-    }
+/* Variantes para diferentes errores */
+.beer-pitcher.locked .pitcher-body::after {
+    content: '🔒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(20px, 4vw, 30px);
+    z-index: 10;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
 }
 
-/* Responsive */
-/* Tablets (481px a 768px) */
+.beer-pitcher.half-empty .beer-liquid {
+    height: 40%;
+    animation: none;
+}
+
+/* Responsive simplificado */
 @media (max-width: 768px) {
-    .container {
-        padding: 30px 20px;
-        max-width: 90%;
+    .error-404,
+    .error-401,
+    .error-400 {
+        gap: 8px;
     }
-
-    .error-404 {
-        font-size: 100px;
-        gap: 12px;
-    }
-
+    
     .beer-container {
-        width: 120px;
-        height: 190px;
-    }
-
-    .beer-pitcher {
-        width: 95px;
-        height: 180px;
-    }
-
-    h1 {
-        font-size: 26px;
-    }
-
-    p {
-        font-size: 15px;
-    }
-
-    .button {
-        padding: 10px 28px;
-        font-size: 15px;
+        margin: 0 5px;
     }
 }
 
-/* Laptops y pantallas medianas (769px a 1200px) */
-@media (max-width: 1200px) {
+@media (max-width: 480px) {
+    .error-404,
+    .error-401,
+    .error-400 {
+        font-size: clamp(60px, 20vw, 80px);
+    }
+    
     .container {
-        max-width: 600px;
-        padding: 40px 25px;
-    }
-
-    h1 {
-        font-size: clamp(24px, 2vw, 30px);
-    }
-
-    p {
-        font-size: clamp(14px, 1.5vw, 16px);
-    }
-
-    .button {
-        font-size: clamp(14px, 1.2vw, 16px);
-        padding: 12px 28px;
-    }
-}
-
-/* Pantallas grandes (más de 1200px) */
-@media (min-width: 1201px) {
-    .container {
-        max-width: 800px;
-    }
-
-    .error-404 {
-        font-size: 150px;
-    }
-
-    h1 {
-        font-size: 32px;
-    }
-
-    p {
-        font-size: 18px;
+        padding: 25px 15px;
     }
 }
