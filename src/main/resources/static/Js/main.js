@@ -373,21 +373,26 @@ export function carruselProductos() {
 
         const paso = visibles * (cardWidth + gap); // mueve 4 productos
 
-        nextBtn.addEventListener("click", () => {
-            if (posicion < maxPosicion) {
-                posicion += paso;
-                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                if (posicion < maxPosicion) {
+                    posicion += paso;
+                    if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                    track.style.transform = `translateX(-${posicion}px)`;
+                }
+            });
+        }
 
-        prevBtn.addEventListener("click", () => {
-            if (posicion > 0) {
-                posicion -= paso;
-                if (posicion < 0) posicion = 0; // no pasar inicio
-                track.style.transform = `translateX(-${posicion}px)`;
-            }
-        });
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                if (posicion > 0) {
+                    posicion -= paso;
+                    if (posicion < 0) posicion = 0; // no pasar inicio
+                    track.style.transform = `translateX(-${posicion}px)`;
+                }
+            });
+        }
+
     });
 }
 
