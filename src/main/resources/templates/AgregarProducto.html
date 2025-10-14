@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,15 @@
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <title>Dashboard Agregar Producto || E-ecommer Beer</title>
     <meta name="description" content="">
     <meta name="autor" content="">
     <meta name="keywords" content="">
     <meta name="robots" content="index,follow">
 </head>
+
 <body>
     <div class="container__dashboard">
 
@@ -192,7 +196,212 @@
                     </div>
                 </div>
 
-                
+                <div class="body__registrarproducto">
+                    <div class="registrarproducto__productoinformacion">
+
+                        <div class="productoinformacion__formulario">
+
+                            <form class="formulario__producto" action="">
+                                <h2 class="producto__title">Información del producto
+                                </h2>
+
+                                <div class="producto__input">
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__box">
+                                            <input type="text" autocomplete="off" placeholder="" name="Nombre"
+                                                id="nombre">
+                                            <label class="box__label" for="nombre">Nombre del producto</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                                        </div>
+                                        <p class="formulario__error">
+                                            El nombre debe tener al menos 3 letras y no contener números.
+                                        </p>
+                                    </div>
+
+                                    <!-- CATEGORÍA PRINCIPAL -->
+                                    <div class="input__formulario">
+                                        <div class="formulario__customselect">
+                                            <select class="customselect__styled" id="categoriaPrincipal">
+                                                <option disabled selected>Categoria principal</option>
+                                                <option value="Vino">Vino</option>
+                                                <option value="Cerveza">Cerveza</option>
+                                                <option value="Whisky">Whisky</option>
+                                                <option value="Tequila">Tequila</option>
+                                                <option value="Vodka">Vodka</option>
+                                                <option value="Ginebra">Ginebra</option>
+                                                <option value="Aguardiente">Aguardiente</option>
+                                                <option value="Ron">Ron</option>
+                                                <option value="Mezcal">Mezcal</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                        </div>
+                                        <p class="formulario__error">
+                                            
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__customselect">
+                                            <select class="customselect__styled" id="páises">
+                                                <option disabled selected>Pais</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <!-- CATEGORÍA SECUNDARIA -->
+                                    <div class="input__formulario">
+                                        <div class="formulario__customselect">
+                                            <select class="customselect__styled" id="categoriaSecundaria" required>
+                                                <option disabled selected>Categoría secundaria</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down custom-arrow"></i>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__customselect">
+                                            <select class="customselect__styled" id="marca">
+                                                <option disabled selected>Marca</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__customselect">
+                                            <select class="customselect__styled" id="tipo">
+                                                <option disabled selected>Tipo</option>
+                                                <option value="Unidad">Unidad</option>
+                                                <option value="Caja">Caja</option>
+                                                <option value="Pack">Pack</option>
+                                                <option value="Combo">Combo</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <h2 class="input__inventario">Datos de inventario</h2>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__box">
+                                            <input type="text" autocomplete="off" placeholder="" name="CodigoProducto"
+                                                id="codigoProducto">
+                                            <label class="box__label" for="codigoProducto">Codigo del producto</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__box">
+                                            <input type="number" autocomplete="off" placeholder="" name="Stock"
+                                                id="stock">
+                                            <label class="box__label" for="stock">Stock</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <h2 class="input__estados">Estados del producto</h2>
+
+                                    <div class="estados__container">
+
+                                        <label class="radio__option activo">
+                                            <input type="radio" name="estado" value="activo">
+                                            <span class="radio__custom"></span>
+                                            Activo
+                                        </label>
+
+                                        <label class="radio__option inactivo">
+                                            <input type="radio" name="estado" value="inactivo">
+                                            <span class="radio__custom"></span>
+                                            Inactivo
+                                        </label>
+
+                                        <label class="radio__option borrador">
+                                            <input type="radio" name="estado" value="borrador">
+                                            <span class="radio__custom"></span>
+                                            Borrador
+                                        </label>
+                                    </div>
+
+                                    <h2 class="input__precio">Precio del producto</h2>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__box">
+                                            <input type="text" autocomplete="off" placeholder="" name="PrecioRegular"
+                                                id="precioRegular">
+                                            <label class="box__label" for="precioRegular">Precio regular</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario">
+                                        <div class="formulario__box">
+                                            <input type="text" autocomplete="off" placeholder="" name="PrecioVenta"
+                                                id="precioVenta">
+                                            <label class="box__label" for="precioVenta">Precio de venta</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+                                        </div>
+                                        <p class="formulario__error">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="input__formulario" id="formulario__imagen">
+                                        <h2 class="formulario__title">Imágenes del producto</h2>
+                                        <div class="formulario__boximagen">
+                                            <p class="boximagen__texto">Suelte los archivos aqui para cargarlos</p>
+                                            <input type="file" id="fileInput" accept="image/*" hidden>
+                                            <div class="preview-container" id="previewContainer"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input__formulario" id="formulario__descripcion">
+                                        <h2 class="formulario__title">Descripción del producto</h2>
+                                        <div class="formulario__boxdescripcion">
+                                            <div id="editor-container"></div>
+                                        </div>
+                                    </div>
+
+                                    <button class="input__btn">Crear Producto</button>
+
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </section>
         </main>
@@ -200,6 +409,9 @@
     </div>
 
 
-    <script type="module" src="../static/Js/AgregarProducto.js"></script>
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="../static/Js/AgregarProducto.js"></script>
 </body>
+
 </html>

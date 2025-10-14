@@ -187,12 +187,11 @@
                 <div class="body__titleheader">
                     <div class="titleheader__producto">
                         <h2 class="producto__titulo">Productos</h2>
-                        <p class="producto__texto">Hay 0 productos en el carrito.</p>
+                        <p class="producto__texto">Hay 12 productos registrados</p>
                     </div>
 
                     <div class="titleheader__btn">
                         <a href="AgregarProducto.html">Agregar Producto</a>
-                        <a href="AgregarPack.html">Agregar Pack</a>
                     </div>
                 </div>
 
@@ -205,10 +204,9 @@
                             <div class="custom__select">
                                 <select id="filtro-estado">
                                     <option value="todos">Estado</option>
-                                    <option value="Procesado">Procesado</option>
-                                    <option value="Cancelar">Cancelado</option>
-                                    <option value="Pendiente">Pendiente</option>
-                                    <option value="Completado">Completado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                    <option value="Borrador">Borrador</option>
                                 </select>
                                 <i class="ri-arrow-down-s-line"></i>
                             </div>
@@ -242,7 +240,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados procesado">Procesado</button>
+                                            <button class="td__estados Activo">Activo</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -280,7 +278,7 @@
                                         <td>$24,00</td>
                                         <td>50</td>
                                         <td>
-                                            <button class="td__estados pendiente">Pendiente</button>
+                                            <button class="td__estados Inactivo">Inactivo</button>
                                         </td>
                                         <td class="menu__actions">
                                             <div class="dropdown">
@@ -315,7 +313,7 @@
                                         <td>$349.900</td>
                                         <td>200</td>
                                         <td>
-                                            <button class="td__estados cancelado">Cancelar</button>
+                                            <button class="td__estados Inactivo">Inactivo</button>
                                         </td>
                                         <td class="menu__actions">
                                             <div class="dropdown">
@@ -351,7 +349,7 @@
                                         <td>$39.000</td>
                                         <td>45</td>
                                         <td>
-                                            <button class="td__estados completado">Completado</button>
+                                            <button class="td__estados Activo">Activo</button>
                                         </td>
                                         <td class="menu__actions">
                                             <div class="dropdown">
@@ -386,44 +384,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados procesado">Procesado</button>
-                                        </td>
-
-                                        <td class="menu__actions">
-                                            <div class="dropdown">
-                                                <button class="dropdown__toggle">
-                                                    <i class="ri-more-2-fill"></i>
-                                                </button>
-
-                                                <div class="dropdown__menu">
-                                                    <button class="dropdown__item editar">
-                                                        <i class="ri-edit-box-line"></i> Editar
-                                                    </button>
-                                                    <button class="dropdown__item eliminar">
-                                                        <i class="ri-delete-bin-5-line"></i> Eliminar
-                                                    </button>
-                                                    <button class="dropdown__item ocultar">
-                                                        <i class="ri-eye-line"></i> Ocultar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <figure class="img__container">
-                                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino2.webp"
-                                                    alt="">
-                                            </figure>
-                                        </td>
-                                        <td class="td__product">Vino Lambrusco Botticello Bianco Dolce 750 ml</td>
-                                        <td>Vino Blanco</td>
-                                        <td>$39.000</td>
-                                        <td>120</td>
-                                        <td>
-                                            <button class="td__estados procesado">Procesado</button>
+                                            <button class="td__estados Activo">Activo</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -460,7 +421,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados procesado">Procesado</button>
+                                            <button class="td__estados Activo">Activo</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -497,7 +458,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados procesado">Procesado</button>
+                                            <button class="td__estados Borrador">Borrador</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -534,7 +495,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados procesado">Procesado</button>
+                                            <button class="td__estados Borrador">Borrador</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -571,7 +532,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados cancelado">Cancelar</button>
+                                            <button class="td__estados Borrador">Borrador</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -608,7 +569,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados completado">Completado</button>
+                                            <button class="td__estados Inactivo">Inactivo</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -645,7 +606,7 @@
                                         <td>$39.000</td>
                                         <td>120</td>
                                         <td>
-                                            <button class="td__estados pendiente">Pendiente</button>
+                                            <button class="td__estados Inactivo">Inactivo</button>
                                         </td>
 
                                         <td class="menu__actions">
@@ -669,6 +630,44 @@
                                         </td>
 
                                     </tr>
+
+                                    <tr>
+                                        <td>
+                                            <figure class="img__container">
+                                                <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino2.webp"
+                                                    alt="">
+                                            </figure>
+                                        </td>
+                                        <td class="td__product">Vino Lambrusco Botticello Bianco Dolce 750 ml</td>
+                                        <td>Vino Blanco</td>
+                                        <td>$39.000</td>
+                                        <td>120</td>
+                                        <td>
+                                            <button class="td__estados Borrador">Borrador</button>
+                                        </td>
+
+                                        <td class="menu__actions">
+                                            <div class="dropdown">
+                                                <button class="dropdown__toggle">
+                                                    <i class="ri-more-2-fill"></i>
+                                                </button>
+
+                                                <div class="dropdown__menu">
+                                                    <button class="dropdown__item editar">
+                                                        <i class="ri-edit-box-line"></i> Editar
+                                                    </button>
+                                                    <button class="dropdown__item eliminar">
+                                                        <i class="ri-delete-bin-5-line"></i> Eliminar
+                                                    </button>
+                                                    <button class="dropdown__item ocultar">
+                                                        <i class="ri-eye-line"></i> Ocultar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
 
@@ -696,8 +695,8 @@
     </div>
 
 
-
-    <script type="module" src="../static/Js/DashboardProducto.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../static/Js/DashboardProducto.js"></script>
 </body>
 
 </html>
