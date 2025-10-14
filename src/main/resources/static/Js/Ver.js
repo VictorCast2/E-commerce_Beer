@@ -1,13 +1,6 @@
-import {
-    activarGlassmorphism,
-    inicialHeart,
-    initCart,
-    rederigirFav,
-    finalizarCompra,
-    addProductToCart,
-} from "./main.js";
+import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra, addProductToCart } from "./main.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     activarGlassmorphism();
 
     inicialHeart();
@@ -22,26 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const product = JSON.parse(localStorage.getItem("selectedProduct"));
 
     if (product) {
-        const img = document.querySelector(".flex__img img");
-        let imagePath = product.image;
-
-        // --- Normaliza la ruta de imagen para que funcione en /ver.html y carrito
-        // Corrige errores de nombres y rutas relativas
-        imagePath = imagePath
-            .replace("..", "")
-            .replace("./", "")
-            .replace("/static", "")
-            .replace("Productos__Destacados", "Productos_Destacados")
-            .replace("Produscto", "Producto"); // corrige el typo “Produscto”
-
-        // Si la ruta no tiene prefijo, agrégalo
-        if (!imagePath.startsWith("/Assets/")) {
-            imagePath =
-                "/Assets" + (imagePath.startsWith("/") ? imagePath : "/" + imagePath);
-        }
-
-        img.src = imagePath;
-
+        document.querySelector(".flex__img img").src = product.image;
         document.querySelector(".details__category").textContent = product.category;
         document.querySelector(".details__name").textContent = product.name;
 
@@ -51,10 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (product.oldPrice) prices[1].textContent = "$" + product.oldPrice;
         }
 
-        document.querySelector(".breadcrumb-subcategory").textContent =
-            product.subcategory + " /";
-        document.querySelector(".breadcrumb-category").textContent =
-            product.category + " /";
+        document.querySelector(".breadcrumb-subcategory").textContent = product.subcategory + " /";
+        document.querySelector(".breadcrumb-category").textContent = product.category + " /";
         document.querySelector(".breadcrumb-name").textContent = product.name;
     }
 
@@ -84,29 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
     addBtn.addEventListener("click", () => {
         if (!product || qty <= 0) return;
 
-        const numericPrice =
-            typeof product.price === "string"
-                ? parseFloat(product.price.replace(/[^0-9.]/g, ""))
-                : product.price;
-
-        // Normalizamos la ruta antes de enviar al carrito
-        let imgPath = product.image
-            .replace("..", "")
-            .replace("./", "")
-            .replace("/static", "")
-            .replace("Productos__Destacados", "Productos_Destacados")
-            .replace("Produscto", "Producto");
-
-        if (!imgPath.startsWith("/Assets/")) {
-            imgPath = "/Assets" + (imgPath.startsWith("/") ? imgPath : "/" + imgPath);
-        }
+        const numericPrice = typeof product.price === "string"
+            ? parseFloat(product.price.replace(/[^0-9.]/g, ""))
+            : product.price;
 
         addProductToCart({
             name: product.name,
             price: numericPrice,
-            img: imgPath,
-            qty: qty, // cantidad del contador
-            openDrawer: true, // abrir drawer
+            img: product.image,
+            qty: qty,          // cantidad del contador
+            openDrawer: true   // abrir drawer
         });
 
         // Reiniciamos el contador
@@ -121,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     titles.forEach((title, index) => {
         title.addEventListener("click", () => {
-            titles.forEach((t) => t.classList.remove("active"));
-            texts.forEach((t) => t.classList.remove("active"));
+            titles.forEach(t => t.classList.remove("active"));
+            texts.forEach(t => t.classList.remove("active"));
             title.classList.add("active");
             texts[index].classList.add("active");
         });
@@ -133,27 +92,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("modalnewadd");
     const closeModalBtn = document.querySelector(".modal__close");
 
-    abirmodal.addEventListener("click", () =>
-        modal.classList.remove("newadd--hidden")
-    );
-    closeModalBtn.addEventListener("click", () =>
-        modal.classList.add("newadd--hidden")
-    );
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.add("newadd--hidden");
-    });
+    abirmodal.addEventListener("click", () => modal.classList.remove("newadd--hidden"));
+    closeModalBtn.addEventListener("click", () => modal.classList.add("newadd--hidden"));
+    window.addEventListener("click", e => { if (e.target === modal) modal.classList.add("newadd--hidden"); });
 
     // --- Calificación estrellas
     const stars = document.querySelectorAll(".stars i");
     const ratingInput = document.getElementById("rating");
 
-    stars.forEach((star) => {
+    stars.forEach(star => {
         star.addEventListener("click", () => {
             const value = star.getAttribute("data-value");
             ratingInput.value = value;
 
-            stars.forEach((s) => s.classList.remove("ri-star-fill"));
-            stars.forEach((s) => s.classList.add("ri-star-line"));
+            stars.forEach(s => s.classList.remove("ri-star-fill"));
+            stars.forEach(s => s.classList.add("ri-star-line"));
 
             for (let i = 0; i < value; i++) {
                 stars[i].classList.remove("ri-star-line");
@@ -161,4 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+
 });
