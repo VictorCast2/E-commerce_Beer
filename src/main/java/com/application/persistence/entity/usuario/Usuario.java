@@ -18,7 +18,6 @@ import java.util.*;
 @Table(
         name = "usuario",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "numeroIdentificacion", name = "uk_usuario_numero_identificacion"),
                 @UniqueConstraint(columnNames = "telefono", name = "uk_usuario_telefono"),
                 @UniqueConstraint(columnNames = "correo", name = "uk_usuario_correo")
         }
@@ -45,6 +44,8 @@ public class Usuario {
     private String correo;
     @Column(length = 100)
     private String password;
+    @Column(length = 100)
+    private String direccion;
 
     @Column(name = "is_enabled")
     @Builder.Default

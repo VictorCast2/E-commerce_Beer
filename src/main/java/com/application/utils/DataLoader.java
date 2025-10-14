@@ -55,11 +55,11 @@ public class DataLoader {
             // Persona de Contacto con Empresa
             Empresa empresaTheresa = Empresa.builder()
                     .imagen("perfil-empresa.png")
-                    .nit("987654321-0")
+                    .nit("9876543210")
                     .razonSocial("Aurum Tech")
                     .ciudad("Cartagena")
                     .direccion("Barrio Mz## Lt## Et#")
-                    .telefono("320 4569875")
+                    .telefono("3204569875")
                     .correo("aurum@tech.com")
                     .eSector(ESector.BAR)
                     .activo(true)

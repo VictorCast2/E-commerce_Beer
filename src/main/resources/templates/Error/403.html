@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,49 +9,47 @@
     <link rel="stylesheet" th:href="@{/Css/Error/Error.css}">
     <link rel="icon" type="image/png" th:href="@{/Assets/Img/Error/Error.png}">
 </head>
+
 <body>
 <div class="container">
-    <!-- Representación visual del 403 -->
+    <!-- 403 con jarra de cerveza mejorada y realista -->
     <div class="error-403">
         <span class="error-num">4</span>
-
-        <div class="beer-container" aria-hidden="true">
-            <div class="beer-pitcher forbidden" role="img" aria-label="Jarra prohibida">
+        <div class="beer-container">
+            <div class="beer-pitcher">
+                <!-- Cuerpo principal de la jarra -->
                 <div class="pitcher-body">
-                    <div class="bubbles"></div>
-                    <div class="beer-liquid blocked" id="beer-liquid"></div>
+                    <!-- Burbujas en el interior -->
+                    <div class="bubbles" id="bubbles"></div>
+                    <!-- Líquido de cerveza con gradiente realista -->
+                    <div class="beer-liquid" id="beer-liquid"></div>
                 </div>
+                <!-- Base de la jarra -->
                 <div class="pitcher-base"></div>
+                <!-- Efectos de vidrio: reflejos y condensación -->
                 <div class="glass-effects"></div>
-                <div class="forbidden-icon" aria-hidden="true">🚫</div>
             </div>
         </div>
-
-        <span class="error-num">0</span>
         <span class="error-num">3</span>
     </div>
 
-    <h1>Acceso prohibido</h1>
-    <p>No tienes autorización para acceder a este recurso. Si crees que esto es un error, contacta con el administrador del sitio.</p>
+        <h1>Acceso prohibido</h1>
+        <p>No tienes autorización para acceder a este recurso. Si crees que esto es un error, contacta con el
+            administrador del sitio.</p>
 
-    <!-- Loader temático -->
-    <div class="loader-container">
-        <div class="loader" aria-hidden="true"></div>
-        <span class="loader-text">Revisando restricciones...</span>
+        <!-- Botones -->
+        <div class="buttons">
+            <a href="javascript:history.back()" class="button">Volver</a>
+            <a th:href="@{/auth/login}" class="button secondary">Iniciar sesión</a>
+        </div>
+
+        <!-- Mensaje adicional -->
+        <div class="additional-info">
+            <p>¡Ups! Esta cerveza está fuera de tu alcance. Solicita permisos si corresponde.</p>
+        </div>
     </div>
 
-    <!-- Botones -->
-    <div class="buttons">
-        <a href="javascript:history.back()" class="button">Volver</a>
-        <a th:href="@{/auth/login}" class="button secondary">Iniciar sesión</a>
-    </div>
-
-    <!-- Mensaje adicional -->
-    <div class="additional-info">
-        <p>¡Ups! Esta cerveza está fuera de tu alcance. Solicita permisos si corresponde.</p>
-    </div>
-</div>
-
-<script th:src="@{/Js/Error/Error.js}"></script>
+    <script th:src="@{/Js/Error/Error.js}"></script>
 </body>
+
 </html>

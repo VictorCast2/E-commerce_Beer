@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,61 +11,57 @@
 </head>
 
 <body>
-<div class="container">
-    <!-- 300 con varias jarras para elegir -->
-    <div class="error-300">
-        <span class="error-num">3</span>
-        <div class="beer-options">
-            <!-- Opción 1 -->
-            <div class="beer-pitcher option">
-                <div class="pitcher-body">
-                    <div class="beer-liquid" id="beer-liquid-1"></div>
+    <div class="container">
+        <!-- 300 con varias jarras para elegir -->
+        <div class="error-300">
+            <span class="error-num">3</span>
+            <div class="beer-container">
+                <div class="beer-pitcher">
+                    <!-- Cuerpo principal de la jarra -->
+                    <div class="pitcher-body">
+                        <!-- Burbujas en el interior -->
+                        <div class="bubbles" id="bubbles"></div>
+                        <!-- Líquido de cerveza con gradiente realista -->
+                        <div class="beer-liquid" id="beer-liquid"></div>
+                    </div>
+                    <!-- Base de la jarra -->
+                    <div class="pitcher-base"></div>
+                    <!-- Efectos de vidrio: reflejos y condensación -->
+                    <div class="glass-effects"></div>
                 </div>
-                <div class="pitcher-base"></div>
-                <div class="glass-effects"></div>
             </div>
-            <!-- Opción 2 -->
-            <div class="beer-pitcher option">
-                <div class="pitcher-body">
-                    <div class="beer-liquid half" id="beer-liquid-2"></div>
+            <div class="beer-container">
+                <div class="beer-pitcher">
+                    <!-- Cuerpo principal de la jarra -->
+                    <div class="pitcher-body">
+                        <!-- Burbujas en el interior -->
+                        <div class="bubbles" id="bubbles"></div>
+                        <!-- Líquido de cerveza con gradiente realista -->
+                        <div class="beer-liquid" id="beer-liquid"></div>
+                    </div>
+                    <!-- Base de la jarra -->
+                    <div class="pitcher-base"></div>
+                    <!-- Efectos de vidrio: reflejos y condensación -->
+                    <div class="glass-effects"></div>
                 </div>
-                <div class="pitcher-base"></div>
-                <div class="glass-effects"></div>
-            </div>
-            <!-- Opción 3 -->
-            <div class="beer-pitcher option">
-                <div class="pitcher-body">
-                    <div class="beer-liquid light" id="beer-liquid-3"></div>
-                </div>
-                <div class="pitcher-base"></div>
-                <div class="glass-effects"></div>
             </div>
         </div>
-        <span class="error-num">0</span>
-        <span class="error-num">0</span>
+
+        <h1>Múltiples opciones disponibles</h1>
+        <p>Tu solicitud tiene varios caminos posibles...
+            ¡Elige tu cerveza favorita antes de continuar!</p>
+
+        <!-- Botón de volver -->
+        <a href="javascript:history.back()" class="button">
+            Volver a la página anterior
+        </a>
+
+        <!-- Mensaje divertido -->
+        <div class="additional-info">
+            <p>Cuando hay varias cervezas, ¡la decisión nunca es fácil!</p>
+        </div>
     </div>
-
-    <h1>Múltiples opciones disponibles</h1>
-    <p>Tu solicitud tiene varios caminos posibles...
-        ¡Elige tu cerveza favorita antes de continuar!</p>
-
-    <!-- Loader temático -->
-    <div class="loader-container">
-        <div class="loader"></div>
-        <span class="loader-text">Preparando opciones...</span>
-    </div>
-
-    <!-- Botón de volver -->
-    <a href="javascript:history.back()" class="button">
-        Volver a la página anterior
-    </a>
-
-    <!-- Mensaje divertido -->
-    <div class="additional-info">
-        <p>Cuando hay varias cervezas, ¡la decisión nunca es fácil!</p>
-    </div>
-</div>
-
-<script th:src="@{/Js/Error/Error.js}"></script>
+    <script th:src="@{/Js/Error/Error.js}"></script>
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 package com.application.presentation.controller.principal;
 
 import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -62,7 +62,21 @@ public class PrincipalController {
     }
 
     @GetMapping("/ver")
-    public String Ver() {
+    public String Ver(Model model) {
+        // Simulación de datos (en producción vendrán de la base de datos)
+        model.addAttribute("subcategory", "Licores");
+        model.addAttribute("category", "Whisky");
+        model.addAttribute("productName", "Jack Daniel’s Old No. 7");
+
+        return "Ver";
+    }
+
+    @GetMapping("/ver/{id}")
+    public String Ver(@PathVariable Long id, Model model) {
+        Producto producto = productoService.getProductoById(id);
+        model.addAttribute("subcategory", producto.getDescripcion());
+        model.addAttribute("category", producto.getCategorias());
+        model.addAttribute("productName", producto.getNombre());
         return "Ver";
     }
 
