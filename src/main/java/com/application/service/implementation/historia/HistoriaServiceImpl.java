@@ -2,6 +2,7 @@ package com.application.service.implementation.historia;
 
 import com.application.persistence.entity.historia.Historia;
 import com.application.persistence.repository.HistoriaRepository;
+import com.application.presentation.dto.historia.response.HistoriaResponse;
 import com.application.service.interfaces.historia.HistoriaService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,25 @@ public class HistoriaServiceImpl implements HistoriaService {
     public Historia getHistoriaById(Long id) {
         return historiaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Error: La hsitoria con id: " + id + " no existe."));
+    }
+
+    /**
+     * Convierte una entidad Historia a su DTO de respuesta,
+     * no incluye la lista de comentarios
+     * Para uso interno del Servicio en los métodos de búsqueda
+     *
+     * @param historia Entidad Historia a convertir
+     * @return DTO con la información de la Historia
+     */
+    @Override
+    public HistoriaResponse toResponse(Historia historia) {
+        return new HistoriaResponse(
+                historia.getHistoriaId(),
+                historia.getImagen(),
+                historia.getTitulo(),
+                historia.getDescripcion(),
+                historia.getHistoriaCompleta(),
+                historia.getFecha()
+        );
     }
 }
