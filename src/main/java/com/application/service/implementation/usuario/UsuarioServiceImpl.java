@@ -1,6 +1,6 @@
 package com.application.service.implementation.usuario;
 
-import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
