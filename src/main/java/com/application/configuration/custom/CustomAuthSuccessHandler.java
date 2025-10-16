@@ -42,7 +42,7 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
             String rol = authority.getAuthority();
 
             if (rol.equals("ROLE_ADMIN")) {
-                this.getRedirectStrategy().sendRedirect(request, response, "/admin/principal");
+                this.getRedirectStrategy().sendRedirect(request, response, "/admin/principal/");
                 return;
             }
         }
