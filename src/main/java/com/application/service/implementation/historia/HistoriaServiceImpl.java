@@ -59,6 +59,21 @@ public class HistoriaServiceImpl implements HistoriaService {
     }
 
     /**
+     * Obtiene todas las historias registradas con estado activo
+     * Uso común para el ecommerce en la sección de blog
+     *
+     * @return Lista de DTO con historias activas
+     * @apiNote Solo se mostrarán los atributos imagen, título, descripción y fecha
+     */
+    @Override
+    public List<HistoriaResponse> getHistoriasActivas() {
+        List<Historia> historias = historiaRepository.findByActivoTrue();
+        return historias.stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    /**
      * Convierte una entidad Historia a su DTO de respuesta,
      * no incluye la lista de comentarios
      * Para uso interno del Servicio en los métodos de búsqueda

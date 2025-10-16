@@ -10,6 +10,7 @@ public interface HistoriaService {
     Historia getHistoriaById(Long id);
     HistoriaResponse getHistoriaResponseById(Long id);
     List<HistoriaResponse> getHistorias();
+    List<HistoriaResponse> getHistoriasActivas();
 
     // Utils
     HistoriaResponse toResponse(Historia historia);
