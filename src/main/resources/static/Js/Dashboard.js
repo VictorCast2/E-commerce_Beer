@@ -515,18 +515,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 Object.entries(detalle).forEach(([licor, cantidad]) => {
                     detalleHTML += `
                     <div style="
-                        display: flex; 
-                        justify-content: space-between; 
-                        align-items: center; 
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
                         padding: 2px 0;
                         border-bottom: 1px solid #eee;
                     ">
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <span style="
-                                display: inline-block; 
-                                width: 10px; 
-                                height: 10px; 
-                                border-radius: 50%; 
+                                display: inline-block;
+                                width: 10px;
+                                height: 10px;
+                                border-radius: 50%;
                                 background-color: ${colorLicores[licor]};
                             "></span>
                             <span style="font-weight: 500;">${licor}</span>
@@ -667,5 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var chartProye = new ApexCharts(document.querySelector("#chartVentas"), optionsProye);
     chartProye.render();
 
-    //Predecir compras futuras
+    //Predecir compras
+
+
 });
