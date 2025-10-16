@@ -1,4 +1,4 @@
-package com.application.configuration.custom;
+package com.application.configuration.Custom;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

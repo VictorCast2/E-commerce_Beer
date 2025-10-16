@@ -1,6 +1,6 @@
 package com.application.service.interfaces.usuario;
 
-import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.general.response.BaseResponse;

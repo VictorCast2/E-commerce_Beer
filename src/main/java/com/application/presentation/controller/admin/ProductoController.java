@@ -1,6 +1,6 @@
 package com.application.presentation.controller.admin;
 
-import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
@@ -39,7 +39,7 @@ public class ProductoController {
         model.addAttribute("productoList", productoList);
         model.addAttribute("mensaje", mensaje);
 
-        return "Producto";
+        return "DashboardProducto";
     }
 
     @PostMapping("/add-producto")

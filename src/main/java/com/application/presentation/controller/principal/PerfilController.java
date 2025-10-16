@@ -1,6 +1,6 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.empresa.enums.ESector;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
