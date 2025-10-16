@@ -6,6 +6,7 @@ import com.application.presentation.dto.historia.response.HistoriaResponse;
 public interface HistoriaService {
     // Consulta
     Historia getHistoriaById(Long id);
+    HistoriaResponse getHistoriaResponseById(Long id);
 
     // Utils
     HistoriaResponse toResponse(Historia historia);

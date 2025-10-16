@@ -29,6 +29,19 @@ public class HistoriaServiceImpl implements HistoriaService {
     }
 
     /**
+     * Obtiene una historia como DTO de respuesta por su ID
+     * Este método es para la presentación de la historia en la pagina de Historia-Descripción
+     *
+     * @param id ID de la historia a buscar
+     * @return DTO con la información de la historia, no incluye sus comentarios.
+     */
+    @Override
+    public HistoriaResponse getHistoriaResponseById(Long id) {
+        Historia historia = this.getHistoriaById(id);
+        return this.toResponse(historia);
+    }
+
+    /**
      * Convierte una entidad Historia a su DTO de respuesta,
      * no incluye la lista de comentarios
      * Para uso interno del Servicio en los métodos de búsqueda
