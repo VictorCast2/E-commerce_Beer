@@ -42,6 +42,16 @@ public class ProductoController {
         return "DashboardProducto";
     }
 
+    @GetMapping("/add-producto")
+    public String addProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
+                              Model model) {
+        Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
+
+        model.addAttribute("usuario", usuario);
+
+        return "AgregarProducto";
+    }
+
     @PostMapping("/add-producto")
     public String addProducto(@ModelAttribute @Valid ProductoCreateRequest productoRequest) {
         GeneralResponse response = productoService.createProducto(productoRequest);
