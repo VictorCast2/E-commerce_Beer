@@ -26,9 +26,9 @@ public class Historia {
     private String imagen;
     @Column(length = 100, nullable = false)
     private String titulo;
-    @Column(nullable = false)
+    @Column(length = 1000, nullable = false)
     private String descripcion;
-    @Column(name = "historia_completa", nullable = false)
+    @Column(name = "historia_completa", length = 10000, nullable = false)
     private String historiaCompleta;
     @Column(nullable = false)
     private LocalDate fecha;

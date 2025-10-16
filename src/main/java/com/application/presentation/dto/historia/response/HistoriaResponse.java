@@ -8,6 +8,7 @@ public record HistoriaResponse(
         String titulo,
         String descripcion,
         String historiaCompleta,
-        LocalDate fecha
+        LocalDate fecha,
+        boolean activo
 ) {
 }
