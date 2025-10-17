@@ -128,6 +128,27 @@ public class HistoriaServiceImpl implements HistoriaService {
     }
 
     /**
+     * Cambia el estado de la historia.
+     *
+     * @param id ID de la historia a cambiar su estado
+     * @return Respuesta con mensaje de confirmación según el estado de la historia
+     */
+    @Override
+    public GeneralResponse changeEstadoHistoria(Long id) {
+        Historia historia = this.getHistoriaById(id);
+
+        boolean nuevoEstado = !historia.isActivo();
+        historia.setActivo(nuevoEstado);
+        historiaRepository.save(historia);
+
+        String mensaje = nuevoEstado
+                ? "Historia habilitada exitosamente"
+                : "Historia deshabilitada exitosamente";
+
+        return new GeneralResponse(mensaje);
+    }
+
+    /**
      * Convierte una entidad Historia a su DTO de respuesta,
      * no incluye la lista de comentarios
      * Para uso interno del Servicio en los métodos de búsqueda
