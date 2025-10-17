@@ -10,7 +10,6 @@ import com.application.service.interfaces.historia.HistoriaService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +32,7 @@ public class HistoriaServiceImpl implements HistoriaService {
     @Override
     public Historia getHistoriaById(Long id) {
         return historiaRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Error: La hsitoria con id: " + id + " no existe."));
+                .orElseThrow(() -> new EntityNotFoundException("Error: La historia con id: " + id + " no existe."));
     }
 
     /**
@@ -100,6 +99,32 @@ public class HistoriaServiceImpl implements HistoriaService {
 
         historiaRepository.save(historia);
         return new GeneralResponse("Historia creada exitosamente");
+    }
+
+    /**
+     * Actualiza los datos de una historia existente.
+     *
+     * @param historiaRequest DTO con los datos para actualizar la historia
+     * @param id ID de la historia a actualizar
+     * @return Respuesta con mensaje de confirmación
+     * @throws EntityNotFoundException si la historia no existe
+     */
+    @Override
+    public GeneralResponse updateHistoria(HistoriaCreateRequest historiaRequest, Long id) {
+
+        Historia historiaActualizada = this.getHistoriaById(id);
+
+        String imagen = imagenService.asignarImagen(historiaRequest.imagen(), "imagen-blog");
+
+        historiaActualizada.setTitulo(historiaRequest.titulo());
+        historiaActualizada.setImagen(imagen);
+        historiaActualizada.setDescripcion(historiaRequest.descripcion());
+        historiaActualizada.setHistoriaCompleta(historiaRequest.historiaCompleta());
+        historiaActualizada.setFecha(LocalDate.now());
+
+        historiaRepository.save(historiaActualizada);
+
+        return new GeneralResponse("Historia actualizada exitosamente");
     }
 
     /**
