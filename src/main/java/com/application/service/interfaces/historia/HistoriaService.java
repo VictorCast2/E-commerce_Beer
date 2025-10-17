@@ -18,6 +18,7 @@ public interface HistoriaService {
     GeneralResponse createHistoria(HistoriaCreateRequest historiaRequest);
     GeneralResponse updateHistoria(HistoriaCreateRequest historiaRequest, Long id);
     GeneralResponse changeEstadoHistoria(Long id);
+    GeneralResponse deleteHistoria(Long id);
 
     // Utils
     HistoriaResponse toResponse(Historia historia);

@@ -10,6 +10,7 @@ import com.application.service.interfaces.historia.HistoriaService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -131,7 +132,8 @@ public class HistoriaServiceImpl implements HistoriaService {
      * Cambia el estado de la historia.
      *
      * @param id ID de la historia a cambiar su estado
-     * @return Respuesta con mensaje de confirmación según el estado de la historia
+     * @return DTO con mensaje de confirmación según el estado de la historia
+     * @throws EntityNotFoundException si la historia no existe
      */
     @Override
     public GeneralResponse changeEstadoHistoria(Long id) {
@@ -146,6 +148,21 @@ public class HistoriaServiceImpl implements HistoriaService {
                 : "Historia deshabilitada exitosamente";
 
         return new GeneralResponse(mensaje);
+    }
+
+    /**
+     * Elimina una historia y sus comentarios asociados
+     *
+     * @param id ID de la historia a eliminar
+     * @return DTO con mensaje de confirmación
+     * @throws EntityNotFoundException si la historia no existe
+     */
+    @Override
+    @Transactional
+    public GeneralResponse deleteHistoria(Long id) {
+        Historia historia = this.getHistoriaById(id);
+        historiaRepository.delete(historia);
+        return new GeneralResponse("Historia eliminada exitosamente");
     }
 
     /**
