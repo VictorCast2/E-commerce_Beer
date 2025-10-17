@@ -2,12 +2,17 @@ package com.application.service.implementation.historia;
 
 import com.application.persistence.entity.historia.Historia;
 import com.application.persistence.repository.HistoriaRepository;
+import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.presentation.dto.historia.request.HistoriaCreateRequest;
 import com.application.presentation.dto.historia.response.HistoriaResponse;
+import com.application.service.implementation.ImagenServiceImpl;
 import com.application.service.interfaces.historia.HistoriaService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -15,6 +20,7 @@ import java.util.List;
 public class HistoriaServiceImpl implements HistoriaService {
 
     private final HistoriaRepository historiaRepository;
+    private final ImagenServiceImpl imagenService;
 
     /**
      * Obtener una Historia por Id
@@ -71,6 +77,29 @@ public class HistoriaServiceImpl implements HistoriaService {
         return historias.stream()
                 .map(this::toResponse)
                 .toList();
+    }
+
+    /**
+     * Método para crear una historia a partir de un DTO de creación
+     *
+     * @param historiaRequest DTO con los datos de la nueva historia
+     * @return Respuesta con mensaje de confirmación
+     */
+    @Override
+    public GeneralResponse createHistoria(HistoriaCreateRequest historiaRequest) {
+        String imagen = imagenService.asignarImagen(historiaRequest.imagen(), "imagen-blog");
+
+        Historia historia = Historia.builder()
+                .imagen(imagen)
+                .titulo(historiaRequest.titulo())
+                .descripcion(historiaRequest.descripcion())
+                .historiaCompleta(historiaRequest.historiaCompleta())
+                .fecha(LocalDate.now())
+                .activo(true)
+                .build();
+
+        historiaRepository.save(historia);
+        return new GeneralResponse("Historia creada exitosamente");
     }
 
     /**

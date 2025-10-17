@@ -31,7 +31,7 @@ public class Historia {
     @Column(name = "historia_completa", length = 10000, nullable = false)
     private String historiaCompleta;
     @Column(nullable = false)
-    private LocalDate fecha;
+    private LocalDate fecha = LocalDate.now();
     @Column(name = "is_enabled")
     private boolean activo;
 
