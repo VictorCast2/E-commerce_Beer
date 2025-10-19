@@ -1,4 +1,4 @@
-package com.application.configuration.custom;
+package com.application.configuration.Custom;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;
@@ -42,7 +42,7 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
             String rol = authority.getAuthority();
 
             if (rol.equals("ROLE_ADMIN")) {
-                this.getRedirectStrategy().sendRedirect(request, response, "/admin/principal");
+                this.getRedirectStrategy().sendRedirect(request, response, "/admin/principal/");
                 return;
             }
         }

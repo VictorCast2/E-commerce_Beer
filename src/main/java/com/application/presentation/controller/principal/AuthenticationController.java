@@ -1,6 +1,6 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.configuration.Custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
 import com.application.presentation.dto.general.response.BaseResponse;
