@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.HashSet;
 import java.util.List;
 
@@ -42,7 +41,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     /**
      * Obtiene un producto como DTO de respuesta por su ID.
-     * Este método es para la presentación del producto en la pagina de Producto-Descripción
+     * Este método es para la presentación del producto en la pagina de
+     * Producto-Descripción
      *
      * @param id ID del producto a buscar
      * @return DTO con la información del producto, incluyendo categorías.
@@ -82,7 +82,8 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Obtiene todos los productos que están activos y sean distiontos de Etipo.UNIDAD,
+     * Obtiene todos los productos que están activos y sean distiontos de
+     * Etipo.UNIDAD,
      * Este método es para la vista de Pack para listar cajas, pack y combos
      * que estén disponibles para la venta
      *
@@ -146,7 +147,7 @@ public class ProductoServiceImpl implements ProductoService {
      * Actualiza los datos de un producto existente.
      *
      * @param productoRequest DTO con los datos actualizados
-     * @param id ID del producto a actualizar
+     * @param id              ID del producto a actualizar
      * @return Respuesta con mensaje de confirmación
      * @throws EntityNotFoundException si el producto no existe
      */
@@ -179,7 +180,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     /**
      * Deshabilita un producto.
-     * El producto seguirá existiendo en la base de datos, pero no se mostrará en la vista de Productos.
+     * El producto seguirá existiendo en la base de datos, pero no se mostrará en la
+     * vista de Productos.
      *
      * @param id ID del producto a deshabilitar
      * @return Respuesta con mensaje de confirmación
@@ -238,8 +240,7 @@ public class ProductoServiceImpl implements ProductoService {
                 producto.getDescripcion(),
                 producto.getCategorias().stream()
                         .map(categoria -> new ProductoCategoriaResponse(
-                                categoria.getCategoriaId(), categoria.getNombre()
-                        )).toList()
-        );
+                                categoria.getCategoriaId(), categoria.getNombre()))
+                        .toList());
     }
 }

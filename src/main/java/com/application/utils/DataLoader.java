@@ -19,7 +19,8 @@ public class DataLoader {
 
     @Bean
     @Profile("dev")
-    public CommandLineRunner init(UsuarioRepository usuarioRepository, RolRepository rolRepository, EmpresaRepository empresaRepository) {
+    public CommandLineRunner init(UsuarioRepository usuarioRepository, RolRepository rolRepository,
+            EmpresaRepository empresaRepository) {
         return args -> {
 
             /* Cargar roles a la base de datos a partir del ERol */

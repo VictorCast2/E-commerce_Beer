@@ -1,6 +1,6 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.empresa.enums.ESector;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
-
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 
@@ -35,8 +34,8 @@ public class PerfilController {
 
     @GetMapping("/")
     public String perfil(@AuthenticationPrincipal CustomUserPrincipal principal,
-                         @RequestParam(value = "mensaje", required = false) String mensaje,
-                         Model model) {
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
         model.addAttribute("usuario", usuario); // datos del usuario
         model.addAttribute("mensaje", mensaje); // mensaje de los distintos formularios
@@ -47,7 +46,7 @@ public class PerfilController {
 
     @PostMapping("/actualizar-usuario")
     public String updateUsuario(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                @ModelAttribute @Valid UpdateUsuarioRequest usuarioRequest) {
+            @ModelAttribute @Valid UpdateUsuarioRequest usuarioRequest) {
         GeneralResponse response = usuarioService.updateUser(principal, usuarioRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -55,7 +54,7 @@ public class PerfilController {
 
     @PostMapping("/actualizar-empresa")
     public String updateEmpresa(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                @ModelAttribute @Valid UpdateEmpresaRequest empresaRequest) {
+            @ModelAttribute @Valid UpdateEmpresaRequest empresaRequest) {
         GeneralResponse response = empresaService.updateEmpresa(principal, empresaRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -63,7 +62,7 @@ public class PerfilController {
 
     @PostMapping("/colocar-imagen-usuario")
     public String setUsuarioPhoto(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                  @ModelAttribute @Valid SetUsuarioPhotoRequest usuarioPhotoRequest) {
+            @ModelAttribute @Valid SetUsuarioPhotoRequest usuarioPhotoRequest) {
         GeneralResponse response = usuarioService.setUserPhoto(principal, usuarioPhotoRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -71,7 +70,7 @@ public class PerfilController {
 
     @PostMapping("/colocar-imagen-empresa")
     public String setEmpresaPhoto(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                  @ModelAttribute @Valid SetEmpresaPhotoRequest empresaPhotoRequest) {
+            @ModelAttribute @Valid SetEmpresaPhotoRequest empresaPhotoRequest) {
         GeneralResponse response = empresaService.setEmpresaPhoto(principal, empresaPhotoRequest);
         String mensaje = response.mensaje();
         return "redirect:/perfil/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -84,9 +83,9 @@ public class PerfilController {
 
     @GetMapping("/configuration")
     public String configuracion(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                @RequestParam(value = "mensaje", required = false) String mensaje,
-                                @RequestParam(value = "success", required = false) Boolean success,
-                                Model model) {
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            @RequestParam(value = "success", required = false) Boolean success,
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
         model.addAttribute("usuario", usuario); // datos del usuario
         model.addAttribute("mensaje", mensaje); // mensaje de los distintos formularios
@@ -96,7 +95,7 @@ public class PerfilController {
 
     @PostMapping("/actualizar-contraseña")
     public String updatePassword(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                 @ModelAttribute @Valid UpdatePasswordRequest passwordRequest) {
+            @ModelAttribute @Valid UpdatePasswordRequest passwordRequest) {
         BaseResponse response = usuarioService.updatePassword(principal, passwordRequest);
         String mensajeEncode = UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
         return "redirect:/perfil/configuration?mensaje=" + mensajeEncode + "&success=" + response.success();

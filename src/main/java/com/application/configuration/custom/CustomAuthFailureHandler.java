@@ -1,4 +1,4 @@
-package com.application.configuration.Custom;
+package com.application.configuration.custom;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriUtils;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -24,14 +23,15 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
 
         String mensajeError = "Credenciales Invalidas";
 
-        //  Manejo de errores provenientes del .formLogin()
+        // Manejo de errores provenientes del .formLogin()
         switch (exception) {
             case LockedException e -> mensajeError = "Tu cuenta está bloqueada.";
             case DisabledException e -> mensajeError = "Tu cuenta está deshabilitada.";
             case AccountExpiredException e -> mensajeError = "Tu sesión ha expirado";
             case CredentialsExpiredException e -> mensajeError = "Tu contraseña ha expirado";
             case BadCredentialsException e -> mensajeError = "Usuario o contraseña incorrectos";
-            case AuthenticationServiceException e -> mensajeError = e.getMessage(); // Mensaje en caso no se valide el reCAPTCHA
+            case AuthenticationServiceException e -> mensajeError = e.getMessage(); // Mensaje en caso no se valide el
+                                                                                    // reCAPTCHA
             default -> mensajeError = "Error de Autenticación";
         }
 

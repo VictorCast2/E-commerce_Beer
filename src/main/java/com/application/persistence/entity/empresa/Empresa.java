@@ -10,15 +10,12 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(
-        name = "empresa",
-        uniqueConstraints = {
-            @UniqueConstraint(columnNames = "nit", name = "uk_empresa_nit"),
-            @UniqueConstraint(columnNames = "razon_social", name = "uk_empresa_razon_social"),
-            @UniqueConstraint(columnNames = "telefono", name = "uk_empresa_telefono"),
-            @UniqueConstraint(columnNames = "correo", name = "uk_empresa_correo")
-        }
-)
+@Table(name = "empresa", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "nit", name = "uk_empresa_nit"),
+        @UniqueConstraint(columnNames = "razon_social", name = "uk_empresa_razon_social"),
+        @UniqueConstraint(columnNames = "telefono", name = "uk_empresa_telefono"),
+        @UniqueConstraint(columnNames = "correo", name = "uk_empresa_correo")
+})
 public class Empresa {
 
     @Id

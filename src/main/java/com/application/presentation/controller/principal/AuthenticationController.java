@@ -1,6 +1,6 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.enums.EIdentificacion;
 import com.application.presentation.dto.empresa.request.CreateEmpresaRequest;
 import com.application.presentation.dto.general.response.BaseResponse;
@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
-
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 
@@ -36,9 +35,9 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String login(Model model,
-                        @RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "logout", required = false) String logout,
-                        @RequestParam(value = "success", required = false) String success) {
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "success", required = false) String success) {
         if (error != null) {
             model.addAttribute("mensajeError", error);
         }
@@ -53,9 +52,9 @@ public class AuthenticationController {
 
     @GetMapping("/completar-registro")
     public String CompletarRegistro(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                    @RequestParam(value = "mensaje", required = false) String mensaje,
-                                    @RequestParam(value = "redirectTo", required = false) String redirectTo,
-                                    Model model) {
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            @RequestParam(value = "redirectTo", required = false) String redirectTo,
+            Model model) {
         Usuario usuario = this.usuarioService.getUsuarioByCorreo(principal.getCorreo());
         model.addAttribute("usuario", usuario);
         model.addAttribute("tiposIdentificacion", EIdentificacion.values());
@@ -78,7 +77,7 @@ public class AuthenticationController {
 
     @GetMapping("/registrar-empresa")
     public String RegistrarEmpresa(@RequestParam(value = "mensaje", required = false) String mensaje,
-                                   Model model) {
+            Model model) {
         model.addAttribute("sectores", ESector.values());
         model.addAttribute("mensaje", mensaje); // mensaje para el alert
         return "RegistrarEmpresa";
@@ -88,13 +87,14 @@ public class AuthenticationController {
     public String postCreateEmpresa(@AuthenticationPrincipal CustomUserPrincipal principal,
             @ModelAttribute @Valid CreateEmpresaRequest createEmpresaRequest) {
         GeneralResponse response = empresaService.createEmpresa(principal, createEmpresaRequest);
-        return "redirect:/auth/registrar-empresa?mensaje=" + UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
+        return "redirect:/auth/registrar-empresa?mensaje="
+                + UriUtils.encode(response.mensaje(), StandardCharsets.UTF_8);
     }
 
     @GetMapping("/registro")
     public String Registro(@RequestParam(value = "mensaje", required = false) String mensaje,
-                           @RequestParam(value = "success", required = false) Boolean success,
-                           Model model) {
+            @RequestParam(value = "success", required = false) Boolean success,
+            Model model) {
         model.addAttribute("tiposIdentificacion", EIdentificacion.values());
         model.addAttribute("mensaje", mensaje); // mensaje a mostrar
         model.addAttribute("success", success); // boolean que determina si se obtuvo un mensaje de éxito o error

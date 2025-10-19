@@ -3,7 +3,6 @@ package com.application.persistence.entity.historia;
 import com.application.persistence.entity.comentario.Comentario;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;

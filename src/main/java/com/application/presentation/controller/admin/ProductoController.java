@@ -1,6 +1,6 @@
 package com.application.presentation.controller.admin;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
@@ -44,7 +44,7 @@ public class ProductoController {
 
     @GetMapping("/add-producto")
     public String addProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
-                              Model model) {
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
 
         model.addAttribute("usuario", usuario);

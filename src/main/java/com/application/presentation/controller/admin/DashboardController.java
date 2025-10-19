@@ -1,6 +1,6 @@
 package com.application.presentation.controller.admin;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ public class DashboardController {
 
     @GetMapping("/")
     public String Dashboard(@AuthenticationPrincipal CustomUserPrincipal principal,
-                           @RequestParam(value = "mensaje", required = false) String mensaje,
-                           Model model) {
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            Model model) {
 
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
 

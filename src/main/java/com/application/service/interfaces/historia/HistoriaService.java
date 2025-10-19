@@ -10,14 +10,20 @@ import java.util.List;
 public interface HistoriaService {
     // Consulta
     Historia getHistoriaById(Long id);
+
     HistoriaResponse getHistoriaResponseById(Long id);
+
     List<HistoriaResponse> getHistorias();
+
     List<HistoriaResponse> getHistoriasActivas();
 
     // CRUD
     GeneralResponse createHistoria(HistoriaCreateRequest historiaRequest);
+
     GeneralResponse updateHistoria(HistoriaCreateRequest historiaRequest, Long id);
+
     GeneralResponse changeEstadoHistoria(Long id);
+
     GeneralResponse deleteHistoria(Long id);
 
     // Utils

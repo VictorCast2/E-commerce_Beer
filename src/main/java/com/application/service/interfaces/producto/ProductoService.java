@@ -9,16 +9,24 @@ import java.util.List;
 public interface ProductoService {
     // Consulta
     Producto getProductoById(Long id);
+
     ProductoResponse getProductoResponseById(Long id);
+
     List<ProductoResponse> getProductos();
+
     List<ProductoResponse> getProductosActivos();
+
     List<ProductoResponse> getPacksActivos();
+
     List<ProductoResponse> getProductoByCategoriaId(Long id);
 
     // CRUD
     GeneralResponse createProducto(ProductoCreateRequest productoRequest);
+
     GeneralResponse updateProducto(ProductoCreateRequest productoRequest, Long id);
+
     GeneralResponse disableProducto(Long id);
+
     GeneralResponse deleteProducto(Long id);
 
     // Utils

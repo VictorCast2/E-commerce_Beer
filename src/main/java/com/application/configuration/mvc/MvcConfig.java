@@ -32,8 +32,7 @@ public class MvcConfig implements WebMvcConfigurer {
             "perfil-usuario", baseDir + "perfil-usuario/",
             "perfil-empresa", baseDir + "perfil-empresa/",
             "imagen-producto", baseDir + "imagen-producto/",
-            "imagen-blog", baseDir + "imagen-blog/"
-    );
+            "imagen-blog", baseDir + "imagen-blog/");
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -41,21 +40,23 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
-        // recorremos los directorios y le enseñamos la ruta y ubicación a spring para que sepa donde buscar
-        directorios.forEach( (tipo, ruta) -> {
+        // recorremos los directorios y le enseñamos la ruta y ubicación a spring para
+        // que sepa donde buscar
+        directorios.forEach((tipo, ruta) -> {
             registry.addResourceHandler(tipo + "/**")
                     .addResourceLocations("file:/" + ruta);
-        } );
+        });
     }
 
     /**
-     * Método para crear los directorios y cargar las imágenes en las rutas especificadas
+     * Método para crear los directorios y cargar las imágenes en las rutas
+     * especificadas
      *
-     *  Este método se inicializa automáticamente
+     * Este método se inicializa automáticamente
      */
     @PostConstruct
     public void init() {
-        directorios.forEach( (tipo, ruta) -> {
+        directorios.forEach((tipo, ruta) -> {
             try {
                 // Si el directorio físico no existe, lo creamos automáticamente
                 Path path = Paths.get(ruta);
@@ -63,11 +64,13 @@ public class MvcConfig implements WebMvcConfigurer {
                     Files.createDirectories(path);
                 }
             } catch (IOException e) {
-                throw new RuntimeException( "Error: no se ha podido crear el directorios de imágenes " + ruta + " " +  e.getMessage() + e);
+                throw new RuntimeException(
+                        "Error: no se ha podido crear el directorios de imágenes " + ruta + " " + e.getMessage() + e);
             }
         });
 
-        // Creamos laa imágenes por defecto dentro de del directorio 'C:/gestion-ventas/**'
+        // Creamos laa imágenes por defecto dentro de del directorio
+        // 'C:/gestion-ventas/**'
         // imagen de usuario
         copiarImagen("static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg", "perfil-user.jpg", "perfil-usuario");
         // imagen de empresa
@@ -78,9 +81,12 @@ public class MvcConfig implements WebMvcConfigurer {
      * Método para copiar una imagen desde dentro del proyecto (carpeta resources)
      * hacia uno de los directorios externos ubicados den "C:/gestion-ventas/**".
      *
-     * @param rutaOrigen aquí indicamos la ruta dentro de resources (ejemplo: static/img/default.png)
+     * @param rutaOrigen   aquí indicamos la ruta dentro de resources (ejemplo:
+     *                     static/img/default.png)
      * @param nombreImagen nombre que tendrá la imagen en el directorio externo
-     * @param tipo tipo de directorio donde queremos guardar la imagen (perfil-usuario, perfil-empresa, imagen-producto, imagen-blog)
+     * @param tipo         tipo de directorio donde queremos guardar la imagen
+     *                     (perfil-usuario, perfil-empresa, imagen-producto,
+     *                     imagen-blog)
      */
     public void copiarImagen(String rutaOrigen, String nombreImagen, String tipo) {
 
@@ -91,7 +97,8 @@ public class MvcConfig implements WebMvcConfigurer {
         }
 
         try {
-            // usamos el prefijo 'classpath:' porque estamos buscando dentro del proyecto, específicamente en 'resources/*+'
+            // usamos el prefijo 'classpath:' porque estamos buscando dentro del proyecto,
+            // específicamente en 'resources/*+'
             Resource resource = resourceLoader.getResource("classpath:" + rutaOrigen);
 
             if (!resource.exists()) {
@@ -102,13 +109,15 @@ public class MvcConfig implements WebMvcConfigurer {
 
             if (!Files.exists(rutaDestino)) {
                 try (InputStream inputStream = resource.getInputStream(); // InputStream: Se encarga de leer datos
-                     OutputStream outputStream = Files.newOutputStream(rutaDestino); // OutputStream: Se encarga de escribir datos (en bytes)
+                        OutputStream outputStream = Files.newOutputStream(rutaDestino); // OutputStream: Se encarga de
+                                                                                        // escribir datos (en bytes)
                 ) {
                     FileCopyUtils.copy(inputStream, outputStream);
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error: ha ocurrido un error al copiar la imagen: " + nombreImagen + " " +  e.getMessage(), e);
+            throw new RuntimeException(
+                    "Error: ha ocurrido un error al copiar la imagen: " + nombreImagen + " " + e.getMessage(), e);
         }
 
     }

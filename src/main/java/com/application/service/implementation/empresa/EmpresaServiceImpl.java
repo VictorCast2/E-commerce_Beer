@@ -1,6 +1,6 @@
 package com.application.service.implementation.empresa;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
@@ -34,7 +34,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 
         String correo = principal.getCorreo();
         Usuario usuario = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new EntityNotFoundException("El usuario autenticado con correo '" + correo + "' no existe."));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "El usuario autenticado con correo '" + correo + "' no existe."));
 
         Rol rolPersonaContacto = rolRepository.findByName(ERol.PERSONA_CONTACTO)
                 .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_CONTACTO no existe"));
@@ -72,7 +73,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 
         String correo = principal.getCorreo();
         Usuario usuario = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new EntityNotFoundException("El usuario autenticado con correo '" + correo + "' no existe."));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "El usuario autenticado con correo '" + correo + "' no existe."));
 
         Empresa empresaActualizada = usuario.getEmpresa();
         if (empresaActualizada == null) {
@@ -96,7 +98,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 
         String correo = principal.getCorreo();
         Usuario usuario = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new EntityNotFoundException("El usuario autenticado con correo '" + correo + "' no existe."));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "El usuario autenticado con correo '" + correo + "' no existe."));
 
         Empresa empresaPhoto = usuario.getEmpresa();
         if (empresaPhoto == null) {
@@ -115,6 +118,5 @@ public class EmpresaServiceImpl implements EmpresaService {
 
         return new GeneralResponse("Imagen asignada exitosamente");
     }
-
 
 }
