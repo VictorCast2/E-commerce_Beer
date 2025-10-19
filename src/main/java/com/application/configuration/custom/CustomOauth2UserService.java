@@ -1,4 +1,4 @@
-package com.application.configuration.custom;
+package com.application.configuration.Custom;
 
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;

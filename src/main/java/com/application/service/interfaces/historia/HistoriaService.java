@@ -1,13 +1,25 @@
 package com.application.service.interfaces.historia;
 
-import com.application.presentation.dto.historia.request.HistoriaRequest;
+import com.application.persistence.entity.historia.Historia;
+import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.presentation.dto.historia.request.HistoriaCreateRequest;
 import com.application.presentation.dto.historia.response.HistoriaResponse;
 
-import javax.validation.Valid;
+import java.util.List;
 
 public interface HistoriaService {
-    HistoriaResponse crearHistoria(@Valid HistoriaRequest historiaRequest);
-    HistoriaResponse actualizarHistoria(@Valid HistoriaRequest historiaRequest);
-    HistoriaResponse eliminarHistoria(@Valid HistoriaRequest historiaRequest);
-    HistoriaResponse encontrarHistoria(@Valid HistoriaRequest historiaRequest);
+    // Consulta
+    Historia getHistoriaById(Long id);
+    HistoriaResponse getHistoriaResponseById(Long id);
+    List<HistoriaResponse> getHistorias();
+    List<HistoriaResponse> getHistoriasActivas();
+
+    // CRUD
+    GeneralResponse createHistoria(HistoriaCreateRequest historiaRequest);
+    GeneralResponse updateHistoria(HistoriaCreateRequest historiaRequest, Long id);
+    GeneralResponse changeEstadoHistoria(Long id);
+    GeneralResponse deleteHistoria(Long id);
+
+    // Utils
+    HistoriaResponse toResponse(Historia historia);
 }

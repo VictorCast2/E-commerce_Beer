@@ -29,7 +29,7 @@ public class ImagenServiceImpl implements ImagenService {
      * @param tipo tipo de directorio donde se guardara la imagen
      * @return el nombre de la foto con un formato en milisegundos más su extensión (.jpg, .png, étc)
      * o un null si el usuario no cuenta con una foto de perfil
-     * @nota: La interfaz MultipartFile, es usada para representa un archivo
+     * @apiNote: La interfaz MultipartFile, es usada para representar un archivo
      * cargado mediante un formulario multipart/form-data,
      * (típico en formularios HTML con <input type="file">).
      */

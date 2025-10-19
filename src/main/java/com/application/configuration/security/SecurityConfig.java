@@ -1,8 +1,8 @@
 package com.application.configuration.security;
 
-import com.application.configuration.custom.CustomAuthFailureHandler;
-import com.application.configuration.custom.CustomAuthSuccessHandler;
-import com.application.configuration.custom.CustomOauth2UserService;
+import com.application.configuration.Custom.CustomAuthFailureHandler;
+import com.application.configuration.Custom.CustomAuthSuccessHandler;
+import com.application.configuration.Custom.CustomOauth2UserService;
 import com.application.configuration.filter.RecaptchaFilter;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +49,14 @@ public class SecurityConfig {
 
                         // Configurar endpoints públicos (sin autenticación)
                         // Principal Controller
+                        // Autenticación Controller
+                        .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                        // Configurar endpoints públicos estáticos (sin autenticación)
+                        .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
+
+
+                        // Vainas de VICTOR (NO VUELVAS A TOCAR NADA)
                         .requestMatchers(
                                 "/**", // Todas las rutas
                                 "/error/**", // Rutas de error
@@ -59,12 +67,6 @@ public class SecurityConfig {
                                 // Rutas de Webjars para Swagger
                                 "/webjars/**"
                         ).permitAll()
-
-                        // Autenticación Controller
-                        .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                                                // Configurar endpoints públicos estáticos (sin autenticación)
-                                                .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
                         // Configurar endpoints NO ESPECIFICADOS
                         .anyRequest().authenticated()
                 )

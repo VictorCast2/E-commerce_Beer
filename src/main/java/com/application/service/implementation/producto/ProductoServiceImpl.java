@@ -219,7 +219,7 @@ public class ProductoServiceImpl implements ProductoService {
     /**
      * Convierte una entidad Producto a su DTO de respuesta, incluyendo
      * categorías.
-     * Para uso interno del servicio en los método de búsqueda
+     * Para uso interno del servicio en los métodos de búsqueda
      *
      * @param producto Entidad producto a convertir
      * @return DTO con la información completa del producto
