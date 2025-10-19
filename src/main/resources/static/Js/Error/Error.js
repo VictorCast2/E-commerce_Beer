@@ -41,6 +41,9 @@ function syncFoamWithLiquid() {
     const beerLiquid = document.getElementById('beer-liquid');
     const beerFoam = document.getElementById('beer-foam');
 
+    // Verificar que los elementos existan
+    if (!beerLiquid || !beerFoam) return;
+
     // Observar cambios en la altura del líquido
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
@@ -72,63 +75,51 @@ function syncFoamWithLiquid() {
 }
 
 // Animación interactiva de la jarra de cerveza
-const beerPitcher = document.querySelector('.beer-pitcher');
-const beerLiquid = document.getElementById('beer-liquid');
-const foamLayers = document.querySelectorAll('.foam-layer'); // Pausar también la espuma para consistencia
+function setupBeerPitcherInteractions() {
+    const beerPitcher = document.querySelector('.beer-pitcher');
+    const beerLiquid = document.getElementById('beer-liquid');
+    const foamLayers = document.querySelectorAll('.foam-layer'); // Pausar también la espuma para consistencia
 
-beerPitcher.addEventListener('mouseenter', function() {
-    // Pausar animación del líquido
-    if (beerLiquid) {
-        beerLiquid.style.animationPlayState = 'paused';
-    }
-    // Pausar todas las burbujas
-    document.querySelectorAll('.bubble').forEach(bubble => {
-        bubble.style.animationPlayState = 'paused';
-    });
-    // Pausar capas de espuma para efecto congelado
-    foamLayers.forEach(layer => {
-        layer.style.animationPlayState = 'paused';
-    });
-    // Efecto adicional: escala ligera para "agitar" al hover
-    beerPitcher.style.transform = 'scale(1.05)';
-});
+    // Verificar que los elementos existan antes de agregar event listeners
+    if (!beerPitcher) return;
 
-beerPitcher.addEventListener('mouseleave', function() {
-    // Reanudar animación del líquido
-    if (beerLiquid) {
-        beerLiquid.style.animationPlayState = 'running';
-    }
-    // Reanudar todas las burbujas
-    document.querySelectorAll('.bubble').forEach(bubble => {
-        bubble.style.animationPlayState = 'running';
+    beerPitcher.addEventListener('mouseenter', function() {
+        // Pausar animación del líquido
+        if (beerLiquid) {
+            beerLiquid.style.animationPlayState = 'paused';
+        }
+        // Pausar todas las burbujas
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.style.animationPlayState = 'paused';
+        });
+        // Pausar capas de espuma para efecto congelado
+        foamLayers.forEach(layer => {
+            layer.style.animationPlayState = 'paused';
+        });
+        // Efecto adicional: escala ligera para "agitar" al hover
+        beerPitcher.style.transform = 'scale(1.05)';
     });
-    // Reanudar capas de espuma
-    foamLayers.forEach(layer => {
-        layer.style.animationPlayState = 'running';
-    });
-    // Restaurar escala
-    beerPitcher.style.transform = 'scale(1)';
-});
 
-// Inicializar cuando la página cargue
-document.addEventListener('DOMContentLoaded', function() {
-    createBubbles();
-    syncFoamWithLiquid();
-    console.log('Página 404 cargada con jarra de cerveza interactiva.');
-});
-// Configuración global para SweetAlert2
-const swalConfig = {
-    confirmButtonColor: '#13294B',
-    cancelButtonColor: '#6c757d',
-    focusConfirm: false,
-    customClass: {
-        popup: 'custom-swal',
-        confirmButton: 'swal-confirm-btn'
-    }
-};
+    beerPitcher.addEventListener('mouseleave', function() {
+        // Reanudar animación del líquido
+        if (beerLiquid) {
+            beerLiquid.style.animationPlayState = 'running';
+        }
+        // Reanudar todas las burbujas
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.style.animationPlayState = 'running';
+        });
+        // Reanudar capas de espuma
+        foamLayers.forEach(layer => {
+            layer.style.animationPlayState = 'running';
+        });
+        // Restaurar escala
+        beerPitcher.style.transform = 'scale(1)';
+    });
+}
 
 // Crear burbujas dinámicamente - versión optimizada
-function createBubbles() {
+function createBubblesOptimized() {
     const bubblesContainers = document.querySelectorAll('.bubbles');
     
     bubblesContainers.forEach(container => {
@@ -192,7 +183,7 @@ function setupPitcherInteractions() {
             pitcher.style.transform = 'scale(1)';
         });
         
-        // Click para mostrar información adicional con SweetAlert2
+        // Click para mostrar información adicional
         pitcher.addEventListener('click', () => {
             const errorType = document.querySelector('title').textContent;
             showBeerInfo(errorType);
@@ -200,43 +191,29 @@ function setupPitcherInteractions() {
     });
 }
 
-// Mostrar información con SweetAlert2
+// Mostrar información con alertas nativas
 function showBeerInfo(errorType) {
     const messages = {
         'Error 404 - Página no encontrada': {
             title: '¡Página no encontrada!',
-            text: 'Esta página se ha evaporado como la espuma de una buena cerveza...',
-            icon: 'error'
+            text: 'Esta página se ha evaporado como la espuma de una buena cerveza...'
         },
         'Error 401 - No autorizado': {
             title: 'Acceso no autorizado',
-            text: 'Parece que esta jarra está cerrada con candado. ¿Tienes la llave?',
-            icon: 'warning'
+            text: 'Parece que esta jarra está cerrada con candado. ¿Tienes la llave?'
         },
         'Error 400 - Solicitud incorrecta': {
             title: 'Problema de comunicación',
-            text: 'Tal vez se nos derramó un poco la cerveza. Vuelve a intentarlo.',
-            icon: 'info'
+            text: 'Tal vez se nos derramó un poco la cerveza. Vuelve a intentarlo.'
         },
         'Error': {
             title: 'En mantenimiento',
-            text: 'Estamos trabajando para mejorar tu experiencia. Vuelve pronto.',
-            icon: 'info'
+            text: 'Estamos trabajando para mejorar tu experiencia. Vuelve pronto.'
         }
     };
     
     const config = messages[errorType] || messages['Error'];
-    
-    Swal.fire({
-        ...config,
-        ...swalConfig,
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-        }
-    });
+    alert(`${config.title}\n\n${config.text}`);
 }
 
 // Función para mostrar confirmación al intentar volver
@@ -247,45 +224,33 @@ function setupBackButton() {
         backButton.addEventListener('click', (e) => {
             e.preventDefault();
             
-            Swal.fire({
-                title: '¿Volver atrás?',
-                text: 'Estás a punto de regresar a la página anterior',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, volver',
-                cancelButtonText: 'Cancelar',
-                ...swalConfig
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.history.back();
-                }
-            });
+            if (confirm('¿Volver atrás?\n\nEstás a punto de regresar a la página anterior')) {
+                window.history.back();
+            }
         });
     }
 }
 
 // Inicialización mejorada
 document.addEventListener('DOMContentLoaded', function() {
-    createBubbles();
+    // Verificar que los elementos existan antes de inicializar
+    const bubblesContainer = document.getElementById('bubbles');
+    if (bubblesContainer) {
+        createBubbles();
+    }
+    
+    createBubblesOptimized();
+    setupBeerPitcherInteractions();
     setupPitcherInteractions();
     setupBackButton();
     
-    // Mostrar alerta de bienvenida si es la primera visita
-    if (!sessionStorage.getItem('errorPageVisited')) {
-        setTimeout(() => {
-            Swal.fire({
-                title: '¡Salud! 🍻',
-                text: 'Has llegado a una página de error con estilo cervecero',
-                icon: 'info',
-                timer: 3000,
-                showConfirmButton: false,
-                ...swalConfig
-            });
-            sessionStorage.setItem('errorPageVisited', 'true');
-        }, 1000);
+    // Sincronizar espuma con líquido si los elementos existen
+    const beerLiquid = document.getElementById('beer-liquid');
+    const beerFoam = document.getElementById('beer-foam');
+    if (beerLiquid && beerFoam) {
+        syncFoamWithLiquid();
     }
     
-    console.log('Página de error cargada con mejoras interactivas');
 });
 
 // Manejo de errores global
