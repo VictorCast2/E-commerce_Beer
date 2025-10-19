@@ -1,6 +1,6 @@
 package com.application.presentation.controller.principal;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.producto.response.ProductoResponse;
@@ -82,8 +82,8 @@ public class PrincipalController {
 
     @GetMapping("/descripcion-producto/{productoId}")
     public String getDescripcionProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
-                                         @PathVariable Long productoId,
-                                         Model model) {
+            @PathVariable Long productoId,
+            Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
         ProductoResponse productoResponse = productoService.getProductoResponseById(productoId);
 

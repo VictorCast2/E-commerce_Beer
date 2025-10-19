@@ -5,7 +5,6 @@ import com.application.persistence.entity.compra.enums.EMetodoPago;
 import com.application.persistence.entity.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -35,10 +34,6 @@ public class Compra {
 
     // Cardinalidad con la tabla usuario
     @ManyToOne
-    @JoinColumn(
-            name = "usuario_id",
-            referencedColumnName = "usuario_id",
-            foreignKey = @ForeignKey(name = "fk_compra_usuario")
-    )
+    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id", foreignKey = @ForeignKey(name = "fk_compra_usuario"))
     private Usuario usuario;
 }

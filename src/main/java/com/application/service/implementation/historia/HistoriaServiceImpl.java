@@ -11,7 +11,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,7 +37,8 @@ public class HistoriaServiceImpl implements HistoriaService {
 
     /**
      * Obtiene una historia como DTO de respuesta por su ID
-     * Este método es para la presentación de la historia en la pagina de Historia-Descripción
+     * Este método es para la presentación de la historia en la pagina de
+     * Historia-Descripción
      *
      * @param id ID de la historia a buscar
      * @return DTO con la información de la historia, no incluye sus comentarios.
@@ -106,7 +106,7 @@ public class HistoriaServiceImpl implements HistoriaService {
      * Actualiza los datos de una historia existente.
      *
      * @param historiaRequest DTO con los datos para actualizar la historia
-     * @param id ID de la historia a actualizar
+     * @param id              ID de la historia a actualizar
      * @return Respuesta con mensaje de confirmación
      * @throws EntityNotFoundException si la historia no existe
      */
@@ -182,7 +182,6 @@ public class HistoriaServiceImpl implements HistoriaService {
                 historia.getDescripcion(),
                 historia.getHistoriaCompleta(),
                 historia.getFecha(),
-                historia.isActivo()
-        );
+                historia.isActivo());
     }
 }

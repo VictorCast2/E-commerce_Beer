@@ -1,6 +1,6 @@
 package com.application.service.implementation.usuario;
 
-import com.application.configuration.Custom.CustomUserPrincipal;
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
 import com.application.persistence.entity.usuario.Usuario;
@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.validation.Valid;
 
 @Service
@@ -48,7 +47,8 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    public GeneralResponse completeUserProfile(CustomUserPrincipal principal, CompleteUsuarioProfileRequest completeProfileRequest) {
+    public GeneralResponse completeUserProfile(CustomUserPrincipal principal,
+            CompleteUsuarioProfileRequest completeProfileRequest) {
         Usuario usuario = this.getUsuarioByCorreo(principal.getCorreo());
         String encryptedPassword = encoder.encode(completeProfileRequest.password());
 
@@ -62,11 +62,12 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         if (completeProfileRequest.tipoIdentificacion().equals(EIdentificacion.NIT)) {
             Rol rolPersonaJuridica = rolRepository.findByName(ERol.PERSONA_JURIDICA)
-                            .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_JURIDICA no existe en la BD"));
+                    .orElseThrow(
+                            () -> new EntityNotFoundException("Error: el rol PERSONA_JURIDICA no existe en la BD"));
             usuario.setRol(rolPersonaJuridica);
         } else {
             Rol rolPersonaNatural = rolRepository.findByName(ERol.PERSONA_NATURAL)
-                            .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_NATURAL no exite en la BD"));
+                    .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_NATURAL no exite en la BD"));
             usuario.setRol(rolPersonaNatural);
         }
 
@@ -95,7 +96,8 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         if (usuarioRequest.tipoIdentificacion().equals(EIdentificacion.NIT)) {
             Rol rolPersonaJuridica = rolRepository.findByName(ERol.PERSONA_JURIDICA)
-                    .orElseThrow(() -> new EntityNotFoundException("Error: el rol PERSONA_JURIDICA no existe en la BD"));
+                    .orElseThrow(
+                            () -> new EntityNotFoundException("Error: el rol PERSONA_JURIDICA no existe en la BD"));
             usuario.setRol(rolPersonaJuridica);
         } else {
             Rol rolPersonaNatural = rolRepository.findByName(ERol.PERSONA_NATURAL)

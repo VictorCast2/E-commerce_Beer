@@ -1,4 +1,4 @@
-package com.application.configuration.Custom;
+package com.application.configuration.custom;
 
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.usuario.Usuario;
@@ -7,13 +7,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.util.*;
 
 @Getter
 public class CustomUserPrincipal implements UserDetails, OAuth2User {
 
-    // Atributos para la autenticación y autorización del usuario mediante UserDetails
+    // Atributos para la autenticación y autorización del usuario mediante
+    // UserDetails
     private final String correo;
     private final String password;
     private final List<GrantedAuthority> authorities = new ArrayList<>();

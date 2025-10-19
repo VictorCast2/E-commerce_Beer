@@ -30,14 +30,16 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Categoria getCategoriaById(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("La categoria con id: " + id + " no existe o ha sido eliminada"));
+                .orElseThrow(() -> new NoSuchElementException(
+                        "La categoria con id: " + id + " no existe o ha sido eliminada"));
     }
 
     /**
      * Obtiene todas las categorías registradas (activas e inactivas).
      * Uso común para el panel administrativo.
      *
-     * @return Lista de DTOs con nombre, descripción y cantidad de packs de las categorías
+     * @return Lista de DTOs con nombre, descripción y cantidad de packs de las
+     *         categorías
      */
     @Override
     public List<CategoriaResponse> getCategorias() {
@@ -49,8 +51,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                     return new CategoriaResponse(
                             categoria.getNombre(),
                             categoria.getDescripcion(),
-                            cantidadPacks
-                    );
+                            cantidadPacks);
                 })
                 .collect(Collectors.toList());
     }
@@ -71,8 +72,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                     return new CategoriaResponse(
                             categoria.getNombre(),
                             categoria.getDescripcion(),
-                            cantidadPacks
-                    );
+                            cantidadPacks);
                 })
                 .collect(Collectors.toList());
     }
@@ -101,7 +101,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * Actualiza una categoría existente.
      *
      * @param categoriaRequest DTO con los nuevos datos
-     * @param id ID de la categoría a actualizar
+     * @param id               ID de la categoría a actualizar
      * @return DTO con mensaje de éxito
      * @throws NoSuchElementException si la categoría no existe
      */
@@ -119,7 +119,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     /**
      * Deshabilita una categoría.
-     * La categoría seguirá existiendo en la base de datos, pero no se mostrará en la vista de Productos.
+     * La categoría seguirá existiendo en la base de datos, pero no se mostrará en
+     * la vista de Productos.
      *
      * @param id ID de la categoría a deshabilitar
      * @return DTO con mensaje de éxito

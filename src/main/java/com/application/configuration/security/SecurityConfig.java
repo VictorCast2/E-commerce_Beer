@@ -1,8 +1,6 @@
 package com.application.configuration.security;
 
-import com.application.configuration.Custom.CustomAuthFailureHandler;
-import com.application.configuration.Custom.CustomAuthSuccessHandler;
-import com.application.configuration.Custom.CustomOauth2UserService;
+import com.application.configuration.custom.*;
 import com.application.configuration.filter.RecaptchaFilter;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -24,99 +22,90 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http,
-            CustomAuthSuccessHandler customAuthSuccessHandler,
-            CustomAuthFailureHandler customAuthFailureHandler,
-            CustomOauth2UserService customOauth2UserService,
-            RecaptchaFilter recaptchaFilter
-    ) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .invalidSessionUrl("/auth/login")
-                        .maximumSessions(2)
-                        .expiredUrl("/auth/login?expired")
-                        .sessionRegistry(sessionRegistry())
-                )
-                .authorizeHttpRequests(auth -> auth
-                        // Configurar endpoints privados
-                        /* ----- Admin ----- */
-                        .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
-                        .requestMatchers("/admin/producto/**").hasRole("ADMIN")
+        @Bean
+        public SecurityFilterChain securityFilterChain(
+                        HttpSecurity http,
+                        CustomAuthSuccessHandler customAuthSuccessHandler,
+                        CustomAuthFailureHandler customAuthFailureHandler,
+                        CustomOauth2UserService customOauth2UserService,
+                        RecaptchaFilter recaptchaFilter) throws Exception {
+                return http
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                                .invalidSessionUrl("/auth/login")
+                                                .maximumSessions(2)
+                                                .expiredUrl("/auth/login?expired")
+                                                .sessionRegistry(sessionRegistry()))
+                                .authorizeHttpRequests(auth -> auth
+                                                // Configurar endpoints privados
+                                                /* ----- Admin ----- */
+                                                .requestMatchers("/admin/categoria/**").hasRole("ADMIN")
+                                                .requestMatchers("/admin/producto/**").hasRole("ADMIN")
 
-                        // Configurar endpoints públicos (sin autenticación)
-                        // Principal Controller
-                        // Autenticación Controller
-                        .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                        // Configurar endpoints públicos estáticos (sin autenticación)
-                        .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
+                                                // Configurar endpoints públicos (sin autenticación)
+                                                // Principal Controller
+                                                // Autenticación Controller
+                                                .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
+                                                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                                                // Configurar endpoints públicos estáticos (sin autenticación)
+                                                .requestMatchers("/", "/Assets/**", "/Js/**", "/Css/**").permitAll()
 
+                                                // Vainas de VICTOR (NO VUELVAS A TOCAR NADA)
+                                                .requestMatchers(
+                                                                "/**", // Todas las rutas
+                                                                "/error/**", // Rutas de error
+                                                                // Rutas de Swagger
+                                                                "/swagger-ui.html",
+                                                                "/swagger-ui/**",
+                                                                "/v3/api-docs/**",
+                                                                // Rutas de Webjars para Swagger
+                                                                "/webjars/**")
+                                                .permitAll()
+                                                // Configurar endpoints NO ESPECIFICADOS
+                                                .anyRequest().authenticated())
+                                .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class)
+                                .formLogin(form -> form
+                                                .loginPage("/auth/login")
+                                                .loginProcessingUrl("/auth/login")
+                                                .successHandler(customAuthSuccessHandler)
+                                                .failureHandler(customAuthFailureHandler))
+                                .oauth2Login(oauth2 -> oauth2
+                                                .loginPage("/auth/login")
+                                                .successHandler(customAuthSuccessHandler)
+                                                .failureHandler(customAuthFailureHandler)
+                                                .userInfoEndpoint(userInfo -> userInfo
+                                                                .userService(customOauth2UserService)))
+                                .logout(logout -> logout
+                                                .logoutUrl("/auth/logout")
+                                                .logoutSuccessUrl("/auth/login?logout")
+                                                .deleteCookies("JSESSIONID", "access_token"))
+                                .exceptionHandling(ex -> ex
+                                                .accessDeniedPage("/error/403"))
+                                .build();
+        }
 
-                        // Vainas de VICTOR (NO VUELVAS A TOCAR NADA)
-                        .requestMatchers(
-                                "/**", // Todas las rutas
-                                "/error/**", // Rutas de error
-                                // Rutas de Swagger
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**",
-                                // Rutas de Webjars para Swagger
-                                "/webjars/**"
-                        ).permitAll()
-                        // Configurar endpoints NO ESPECIFICADOS
-                        .anyRequest().authenticated()
-                )
-                .addFilterBefore(recaptchaFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin(form -> form
-                        .loginPage("/auth/login")
-                        .loginProcessingUrl("/auth/login")
-                        .successHandler(customAuthSuccessHandler)
-                        .failureHandler(customAuthFailureHandler)
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/auth/login")
-                        .successHandler(customAuthSuccessHandler)
-                        .failureHandler(customAuthFailureHandler)
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOauth2UserService)
-                        )
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/auth/logout")
-                        .logoutSuccessUrl("/auth/login?logout")
-                        .deleteCookies("JSESSIONID", "access_token")
-                )
-                .exceptionHandling(ex -> ex
-                        .accessDeniedPage("/error/403")
-                )
-                .build();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+                        throws Exception {
+                return authenticationConfiguration.getAuthenticationManager();
+        }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+        @Bean
+        public DaoAuthenticationProvider authenticationProvider(UsuarioServiceImpl usuario) {
+                DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(usuario);
+                authenticationProvider.setPasswordEncoder(this.passwordEncoder());
+                return authenticationProvider;
+        }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(UsuarioServiceImpl usuario) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(usuario);
-        authenticationProvider.setPasswordEncoder(this.passwordEncoder());
-        return authenticationProvider;
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
+        @Bean
+        public SessionRegistry sessionRegistry() {
+                return new SessionRegistryImpl();
+        }
 
 }
