@@ -39,4 +39,28 @@ public class Comentario {
         @JoinColumn(name = "historia_id", referencedColumnName = "historia_id", foreignKey = @ForeignKey(name = "fk_comentario_historia"))
         private Historia historia;
 
+        // Agregar usuario a comentario y viceversa (bidirectional)
+        public void addUsuario(Usuario usuario) {
+                this.setUsuario(usuario);
+                usuario.getComentarios().add(this);
+        }
+
+        // Eliminar usuario de comentario y viceversa (bidirectional)
+        public void deleteUsuario(Usuario usuario) {
+                this.setUsuario(null);
+                usuario.getComentarios().remove(this);
+        }
+
+        // Agregar historia a comentario y viceversa (bidirectional)
+        public void addHistoria(Historia historia) {
+                this.setHistoria(historia);
+                historia.getComentarios().add(this);
+        }
+
+        // Eliminar historia de comentario y viceversa (bidirectional)
+        public void deleteHistoria(Historia historia) {
+                this.setHistoria(null);
+                historia.getComentarios().remove(this);
+        }
+
 }

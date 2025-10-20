@@ -1,5 +1,6 @@
 package com.application.persistence.entity.usuario;
 
+import com.application.persistence.entity.comentario.Comentario;
 import com.application.persistence.entity.compra.Compra;
 import com.application.persistence.entity.empresa.Empresa;
 import com.application.persistence.entity.rol.Rol;
@@ -71,6 +72,10 @@ public class Usuario {
 
         // Cardinalidad con la tabla compra (relación bidireccional)
         @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-        private Set<Compra> compras = new HashSet<>();
+        private Set<Compra> compras;
+
+        // Cardinalidad con la tabla comentarios (relación bidireccional)
+        @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+        private Set<Comentario> comentarios;
 
 }
