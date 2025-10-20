@@ -21,7 +21,7 @@ public class Comentario {
         private Long comentarioId;
         @Column(length = 100, nullable = false)
         private String titulo;
-        @Column(nullable = false)
+        @Column(length = 1000, nullable = false)
         private String mensaje;
         @Column(nullable = false)
         private int calificacion;
