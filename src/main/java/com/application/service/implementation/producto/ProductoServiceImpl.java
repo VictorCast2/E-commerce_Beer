@@ -82,7 +82,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Obtiene todos los productos que están activos y sean distiontos de
+     * Obtiene todos los productos que están activos y sean distintos de
      * Etipo.UNIDAD,
      * Este método es para la vista de Pack para listar cajas, pack y combos
      * que estén disponibles para la venta

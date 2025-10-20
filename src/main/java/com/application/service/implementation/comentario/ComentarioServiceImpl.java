@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ComentarioServiceImpl implements ComentarioService {
@@ -28,6 +30,21 @@ public class ComentarioServiceImpl implements ComentarioService {
     public Comentario getComentarioById(Long id) {
         return comentarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("El comentario con id " + id + " no existe"));
+    }
+
+    /**
+     * Obtiene todos los comentarios registrados (activos e inactivos).
+     * Uso común para el panel administrativo, vista de reseñas.
+     * Los datos a incluir son -> tituloBlog, nombreUsuario, mensaje, calificación y fecha
+     *
+     * @return Lista de DTOs con datos de cada comentario
+     */
+    @Override
+    public List<ComentarioResponse> getComentarios() {
+        List<Comentario> comentarios = comentarioRepository.findAll();
+        return comentarios.stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     /**
