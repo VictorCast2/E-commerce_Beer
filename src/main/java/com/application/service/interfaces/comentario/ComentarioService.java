@@ -12,6 +12,7 @@ public interface ComentarioService {
 
     // Consulta
     List<ComentarioResponse> getComentarios();
+    List<ComentarioResponse> getComentariosActivosByHistoriaId(Long historiaId);
 
     // Util
     ComentarioResponse toResponse(Comentario comentario);

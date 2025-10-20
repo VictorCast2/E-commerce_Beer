@@ -48,6 +48,23 @@ public class ComentarioServiceImpl implements ComentarioService {
     }
 
     /**
+     * Obtiene todos los comentarios activos pertenecientes a una historia por si id.
+     * Uso común para la vista de descripción-historia.
+     * Los datos a incluir son -> imagen (hay que agregarlo al response), nombresUsuario, correo,
+     * título, mensaje, calificación
+     *
+     * @param historiaId ID de la historia a buscar
+     * @return Lista de DTOs con los datos del comentario
+     */
+    @Override
+    public List<ComentarioResponse> getComentariosActivosByHistoriaId(Long historiaId) {
+        List<Comentario> comentarios = comentarioRepository.findByHistoria_HistoriaIdAndActivoTrue(historiaId);
+        return comentarios.stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    /**
      * Convierte una entidad Comentario a su DTO de respuesta, incluyendo
      * algunos datos del Usuario y el título de la Historio.
      * Para uso interno del servicio en los métodos de búsqueda
