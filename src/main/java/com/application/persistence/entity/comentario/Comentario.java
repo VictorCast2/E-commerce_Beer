@@ -27,6 +27,7 @@ public class Comentario {
         private int calificacion;
         @Column(nullable = false)
         private LocalDate fecha;
+        private boolean activo;
 
         // Cardinalidad con la tabla usuario (relación unidireccional)
         @ManyToOne

@@ -2,6 +2,9 @@ package com.application.service.implementation.comentario;
 
 import com.application.persistence.entity.comentario.Comentario;
 import com.application.persistence.repository.ComentarioRepository;
+import com.application.presentation.dto.comentario.response.ComentarioBlogResponse;
+import com.application.presentation.dto.comentario.response.ComentarioResponse;
+import com.application.presentation.dto.comentario.response.ComentarioUsuarioResponse;
 import com.application.service.interfaces.comentario.ComentarioService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +20,6 @@ public class ComentarioServiceImpl implements ComentarioService {
      * Obtener un comentario por id.
      * Este método es de uso interno para otros métodos del servicio
      *
-     *
      * @param id ID del comentario a buscar
      * @return la entidad comentario encontrada
      * @throws EntityNotFoundException si el comentario no exite
@@ -26,5 +28,33 @@ public class ComentarioServiceImpl implements ComentarioService {
     public Comentario getComentarioById(Long id) {
         return comentarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("El comentario con id " + id + " no existe"));
+    }
+
+    /**
+     * Convierte una entidad Comentario a su DTO de respuesta, incluyendo
+     * algunos datos del Usuario y el título de la Historio.
+     * Para uso interno del servicio en los métodos de búsqueda
+     *
+     * @param comentario Entidad comentario a convertir
+     * @return DTO con la información completa del comentario
+     */
+    @Override
+    public ComentarioResponse toResponse(Comentario comentario) {
+        return new ComentarioResponse(
+                comentario.getComentarioId(),
+                comentario.getTitulo(),
+                comentario.getMensaje(),
+                comentario.getCalificacion(),
+                comentario.getFecha(),
+                comentario.isActivo(),
+                new ComentarioUsuarioResponse(
+                        comentario.getUsuario().getNombres(),
+                        comentario.getUsuario().getApellidos(),
+                        comentario.getUsuario().getCorreo()
+                ),
+                new ComentarioBlogResponse(
+                        comentario.getHistoria().getTitulo()
+                )
+        );
     }
 }
