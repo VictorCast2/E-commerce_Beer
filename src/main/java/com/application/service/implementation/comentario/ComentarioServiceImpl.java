@@ -113,15 +113,25 @@ public class ComentarioServiceImpl implements ComentarioService {
     /**
      * Actualiza los datos de un comentario existente
      *
+     * @param historiaId ID de la historia a validar si existe
      * @param comentarioId ID del comentario a actualizar
+     * @param principal Usuario en sesión
      * @param comentarioRequest DTO con los datos del comentario actualizado
      * @return Respuesta con mensaje de confirmación y estado del proceso (success)
      * @throws EntityNotFoundException si la historia, comentario o el usuario no existen
      */
     @Override
-    public BaseResponse updateComentario(ComentarioCreateRequest comentarioRequest, Long comentarioId) {
+    public BaseResponse updateComentario(Long historiaId, Long comentarioId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest) {
 
         Comentario comentario = this.getComentarioById(comentarioId);
+
+        if (!comentario.getHistoria().getHistoriaId().equals(historiaId)) {
+            throw new IllegalArgumentException("El comentario no pertenece a la historia indicada");
+        }
+
+        if (!comentario.getUsuario().getCorreo().equals(principal.getCorreo())) {
+            throw new SecurityException("No puedes actualizar el comentario de otro usuario");
+        }
 
         comentario.setTitulo(comentarioRequest.titulo());
         comentario.setMensaje(comentarioRequest.mensaje());

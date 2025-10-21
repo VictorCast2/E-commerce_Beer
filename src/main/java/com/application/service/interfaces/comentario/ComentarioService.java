@@ -19,7 +19,7 @@ public interface ComentarioService {
 
     // CRUD
     BaseResponse createComentario(Long historiaId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
-    BaseResponse updateComentario(ComentarioCreateRequest comentarioRequest, Long comentarioId);
+    BaseResponse updateComentario(Long historiaId, Long comentarioId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
     BaseResponse changeEstadoComentario(Long id);
     BaseResponse deleteComentario(Long comentarioId, CustomUserPrincipal principal);
 
