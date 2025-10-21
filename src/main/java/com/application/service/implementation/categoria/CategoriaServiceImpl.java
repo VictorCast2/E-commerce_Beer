@@ -1,25 +1,31 @@
 package com.application.service.implementation.categoria;
 
 import com.application.persistence.entity.categoria.Categoria;
+import com.application.persistence.entity.categoria.SubCategoria;
 import com.application.persistence.repository.CategoriaRepository;
+import com.application.persistence.repository.SubCategoriaRepository;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.categoria.response.SubCategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.service.interfaces.ImagenService;
 import com.application.service.interfaces.categoria.CategoriaService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.NoSuchElementException;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CategoriaServiceImpl implements CategoriaService {
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    private final CategoriaRepository categoriaRepository;
+    private final ImagenService imagenService;
 
     /**
      * Obtiene una categoría por su ID.
@@ -65,23 +71,33 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     /**
-     * Crea una nueva categoría.
+     * Método para crear una categoria y subcategorias a partir de un DTO de creación.
      *
-     * @param categoriaRequest DTO con los datos necesarios para crear la categoría
-     * @return DTO con mensaje de éxito
+     * @param categoriaRequest DTO con los datos de la categoría y las subcategorias
+     * @return Respuesta con mensaje de confirmación
      */
     @Override
+    @Transactional
     public GeneralResponse createCategoria(@NotNull CategoriaCreateRequest categoriaRequest) {
 
+        String imagen = this.imagenService.asignarImagen(categoriaRequest.imagen(), "imagen-categoria");
         Categoria categoria = Categoria.builder()
+                .imagen(imagen)
                 .nombre(categoriaRequest.nombre())
                 .descripcion(categoriaRequest.descripcion())
-                .activo(true)
+                .activo(categoriaRequest.activo())
                 .build();
+
+        for (String nombreSubCategoria : categoriaRequest.subcategorias()) {
+            SubCategoria subCategoria = SubCategoria.builder()
+                    .nombre(nombreSubCategoria)
+                    .build();
+            categoria.addSubCategoria(subCategoria);
+        }
 
         categoriaRepository.save(categoria);
 
-        return new GeneralResponse("categoria creada exitosamente");
+        return new GeneralResponse("Categoria creada exitosamente");
     }
 
     /**
