@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/AgregarPack.css">
+    <link rel="stylesheet" href="../static/Css/AgregarCategoria.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,9 @@
         integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <title>Dashboard Agregar Pack || E-ecommer Beer</title>
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <title>Dashboard Agregar Categoria || E-ecommer Beer</title>
     <meta name="description" content="">
     <meta name="autor" content="">
     <meta name="keywords" content="">
@@ -45,14 +47,14 @@
 
                 <p class="menu__title">Administracion De Tiendas</p>
 
-                <li class="sidebar__item active">
+                <li class="sidebar__item">
                     <i class="ri-shopping-cart-2-line"></i>
                     <a href="DashboardProducto.html" class="sidebar__text">Productos</a>
                 </li>
 
-                <li class="sidebar__item">
+                <li class="sidebar__item active">
                     <i class="ri-list-unordered"></i>
-                    <a href="" class="sidebar__text">Categorias</a>
+                    <a href="DashboardCategoria.html" class="sidebar__text">Categorias</a>
                 </li>
 
                 <li class="sidebar__item">
@@ -186,11 +188,11 @@
 
                 <div class="body__titleheader">
                     <div class="titleheader__producto">
-                        <h2 class="producto__titulo">Agregar nuevo pack</h2>
+                        <h2 class="producto__titulo">Agregar nueva categoria</h2>
                     </div>
 
                     <div class="titleheader__btn">
-                        <a href="DashboardProducto.html">Volver al producto</a>
+                        <a href="DashboardCategoria.html">Volver a categorias</a>
                     </div>
                 </div>
 
@@ -199,8 +201,8 @@
 
                         <div class="productoinformacion__formulario">
 
-                            <form class="formulario__producto" action="">
-                                <h2 class="producto__title">Información del pack
+                            <form class="formulario__producto" id="formularioProducto" action="">
+                                <h2 class="producto__title">Información de la categoria
                                 </h2>
 
                                 <div class="producto__input">
@@ -209,7 +211,7 @@
                                         <div class="formulario__box">
                                             <input type="text" autocomplete="off" placeholder="" name="Nombre"
                                                 id="nombre">
-                                            <label class="box__label" for="nombre">Nombre del producto</label>
+                                            <label class="box__label" for="nombre">Nombre de la categoria</label>
                                             <span class="box__icon"><i class="ri-check-line"></i></span>
                                             <span class="box__icon"><i class="ri-close-line"></i></span>
                                         </div>
@@ -235,160 +237,64 @@
                                             </select>
                                             <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
                                         </div>
-                                        <p class="formulario__error">
-
+                                        <p class="formulario__error error--CategoriaPrincipal">
+                                            Selecciona una categoria principal para la categoria.
                                         </p>
                                     </div>
 
-                                    <div class="input__formulario">
-                                        <div class="formulario__customselect">
-                                            <select class="customselect__styled" id="páises">
-                                                <option disabled selected>Pais</option>
-                                            </select>
-                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
+                                    <h2 class="input__estados">Estados de la categoria</h2>
+
+                                    <div class="input__formulario estados__container">
+
+                                        <div class="container__radio">
+                                            <label class="radio__option activo">
+                                                <input type="radio" name="estado" value="activo">
+                                                <span class="radio__custom"></span>
+                                                Activo
+                                            </label>
+
+                                            <label class="radio__option inactivo">
+                                                <input type="radio" name="estado" value="inactivo">
+                                                <span class="radio__custom"></span>
+                                                Inactivo
+                                            </label>
                                         </div>
-                                        <p class="formulario__error">
 
+                                        <p class="formulario__error error--estado">
+                                            Por favor, debes seleccionar un estado de la categoria
                                         </p>
-                                    </div>
 
-                                    <!-- CATEGORÍA SECUNDARIA -->
-                                    <div class="input__formulario">
-                                        <div class="formulario__customselect">
-                                            <select class="customselect__styled" id="categoriaSecundaria" required>
-                                                <option disabled selected>Categoría secundaria</option>
-                                            </select>
-                                            <i class="fa-solid fa-chevron-down custom-arrow"></i>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__customselect">
-                                            <select class="customselect__styled" id="marca">
-                                                <option disabled selected>Marca</option>
-                                            </select>
-                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__customselect">
-                                            <select class="customselect__styled" id="tipo">
-                                                <option disabled selected>Tipo</option>
-                                                <option value="Unidad">Unidad</option>
-                                                <option value="Caja">Caja</option>
-                                                <option value="Pack">Pack</option>
-                                                <option value="Combo">Combo</option>
-                                            </select>
-                                            <i class="fa-solid fa-chevron-down custom-arrow" id="arrowIcon"></i>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <h2 class="input__inventario">Datos de inventario</h2>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="CodigoProducto"
-                                                id="codigoProducto">
-                                            <label class="box__label" for="codigoProducto">Codigo del producto</label>
-                                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__box">
-                                            <input type="number" autocomplete="off" placeholder="" name="Stock"
-                                                id="stock">
-                                            <label class="box__label" for="stock">Stock</label>
-                                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <h2 class="input__estados">Estados del pack</h2>
-
-                                    <div class="estados__container">
-
-                                        <label class="radio__option activo">
-                                            <input type="radio" name="estado" value="activo">
-                                            <span class="radio__custom"></span>
-                                            Activo
-                                        </label>
-
-                                        <label class="radio__option inactivo">
-                                            <input type="radio" name="estado" value="inactivo">
-                                            <span class="radio__custom"></span>
-                                            Inactivo
-                                        </label>
-
-                                        <label class="radio__option borrador">
-                                            <input type="radio" name="estado" value="borrador">
-                                            <span class="radio__custom"></span>
-                                            Borrador
-                                        </label>
-                                    </div>
-
-                                    <h2 class="input__precio">Precio del pack</h2>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="PrecioRegular"
-                                                id="precioRegular">
-                                            <label class="box__label" for="precioRegular">Precio regular</label>
-                                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
-                                    </div>
-
-                                    <div class="input__formulario">
-                                        <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="PrecioVenta"
-                                                id="precioVenta">
-                                            <label class="box__label" for="precioVenta">Precio de venta</label>
-                                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                                        </div>
-                                        <p class="formulario__error">
-
-                                        </p>
                                     </div>
 
                                     <div class="input__formulario" id="formulario__imagen">
-                                        <h2 class="formulario__title">Imágenes del pack</h2>
+                                        <h2 class="formulario__title">Imágen de la categoria</h2>
                                         <div class="formulario__boximagen">
                                             <p class="boximagen__texto">Suelte los archivos aqui para cargarlos</p>
                                             <input type="file" id="fileInput" accept="image/*" hidden>
                                             <div class="preview-container" id="previewContainer"></div>
                                         </div>
+
+                                        <p class="formulario__error error--formato">
+                                            Solo se permiten archivos con formato JPG, PNG o WEBP..
+                                        </p>
+
+                                        <p class="formulario__error error--vacio">
+                                            Debes subir al menos una imagen de la categoria.
+                                        </p>
                                     </div>
 
                                     <div class="input__formulario" id="formulario__descripcion">
-                                        <h2 class="formulario__title">Descripción del pack</h2>
+                                        <h2 class="formulario__title">Descripción de la categoria</h2>
                                         <div class="formulario__boxdescripcion">
                                             <div id="editor-container"></div>
                                         </div>
+
+                                        <p class="formulario__error error--descripcion">
+                                            Por favor, agrega una descripción de la categoria antes de continuar.
+                                        </p>
                                     </div>
 
-                                    <button class="input__btn">Crear Pack</button>
+                                    <button class="input__btn">Crear Categoria</button>
 
 
                                 </div>
@@ -407,7 +313,10 @@
     </div>
 
 
-    <script type="module" src="../static/Js/AgregarPack.js"></script>
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../static/Js/AgregarCategoria.js"></script>
 </body>
 
 </html>

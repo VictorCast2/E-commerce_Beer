@@ -462,7 +462,7 @@
 
 .input__formulario .formulario__error {
     font: 600 1rem var(--typografiaUrbanist);
-    width: 480px;
+    width: 500px;
     margin: 10px 0 10px 20px;
     display: none;
 }
