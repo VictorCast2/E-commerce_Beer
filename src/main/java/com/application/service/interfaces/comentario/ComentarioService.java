@@ -19,6 +19,7 @@ public interface ComentarioService {
 
     // CRUD
     BaseResponse createComentario(Long historiaId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
+    BaseResponse updateComentario(ComentarioCreateRequest comentarioRequest, Long comentarioId);
 
     // Util
     ComentarioResponse toResponse(Comentario comentario);

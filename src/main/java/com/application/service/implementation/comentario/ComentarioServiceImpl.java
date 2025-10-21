@@ -78,7 +78,7 @@ public class ComentarioServiceImpl implements ComentarioService {
     /**
      * Crea un nuevo comentario a partir de un DTO de creación.
      *
-     * @param historiaId ID de la historia a buscar
+     * @param historiaId ID de la historia a comentar
      * @param principal Usuario en sesión
      * @param comentarioRequest DTO con los datos del nuevo comentario
      * @return Respuesta con mensaje de confirmación y estado del proceso (success)
@@ -107,6 +107,28 @@ public class ComentarioServiceImpl implements ComentarioService {
 
         comentarioRepository.save(comentario);
         return new BaseResponse("Comentario creado exitosamente", true);
+    }
+
+    /**
+     * Actualiza los datos de un comentario existente
+     *
+     * @param comentarioId ID del comentario a actualizar
+     * @param comentarioRequest DTO con los datos del comentario actualizado
+     * @return Respuesta con mensaje de confirmación y estado del proceso (success)
+     * @throws EntityNotFoundException si la historia, comentario o el usuario no existen
+     */
+    @Override
+    public BaseResponse updateComentario(ComentarioCreateRequest comentarioRequest, Long comentarioId) {
+
+        Comentario comentario = this.getComentarioById(comentarioId);
+
+        comentario.setTitulo(comentarioRequest.titulo());
+        comentario.setMensaje(comentarioRequest.mensaje());
+        comentario.setCalificacion(comentarioRequest.calificacion());
+
+        comentarioRepository.save(comentario);
+
+        return new BaseResponse("Comentario actualizado exitosamente", true);
     }
 
     /**
