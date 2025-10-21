@@ -21,12 +21,13 @@ public class Comentario {
         private Long comentarioId;
         @Column(length = 100, nullable = false)
         private String titulo;
-        @Column(nullable = false)
+        @Column(length = 1000, nullable = false)
         private String mensaje;
         @Column(nullable = false)
         private int calificacion;
         @Column(nullable = false)
         private LocalDate fecha;
+        private boolean activo;
 
         // Cardinalidad con la tabla usuario (relación unidireccional)
         @ManyToOne
@@ -37,5 +38,29 @@ public class Comentario {
         @ManyToOne
         @JoinColumn(name = "historia_id", referencedColumnName = "historia_id", foreignKey = @ForeignKey(name = "fk_comentario_historia"))
         private Historia historia;
+
+        // Agregar usuario a comentario y viceversa (bidirectional)
+        public void addUsuario(Usuario usuario) {
+                this.setUsuario(usuario);
+                usuario.getComentarios().add(this);
+        }
+
+        // Eliminar usuario de comentario y viceversa (bidirectional)
+        public void deleteUsuario(Usuario usuario) {
+                this.setUsuario(null);
+                usuario.getComentarios().remove(this);
+        }
+
+        // Agregar historia a comentario y viceversa (bidirectional)
+        public void addHistoria(Historia historia) {
+                this.setHistoria(historia);
+                historia.getComentarios().add(this);
+        }
+
+        // Eliminar historia de comentario y viceversa (bidirectional)
+        public void deleteHistoria(Historia historia) {
+                this.setHistoria(null);
+                historia.getComentarios().remove(this);
+        }
 
 }
