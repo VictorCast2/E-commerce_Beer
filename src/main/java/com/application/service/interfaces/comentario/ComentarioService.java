@@ -21,6 +21,7 @@ public interface ComentarioService {
     BaseResponse createComentario(Long historiaId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
     BaseResponse updateComentario(ComentarioCreateRequest comentarioRequest, Long comentarioId);
     BaseResponse changeEstadoComentario(Long id);
+    BaseResponse deleteComentario(Long comentarioId, CustomUserPrincipal principal);
 
     // Util
     ComentarioResponse toResponse(Comentario comentario);

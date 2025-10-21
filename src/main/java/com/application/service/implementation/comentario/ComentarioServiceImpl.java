@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -151,6 +152,31 @@ public class ComentarioServiceImpl implements ComentarioService {
                 : "Comentario deshabilitado exitosamente";
 
         return new BaseResponse(mensaje, true);
+    }
+
+    /**
+     * Elimina un comentario y rompe su relación con historia y usuario para evitar
+     * errores de integridad referencial en la base de datos.
+     *
+     * @param comentarioId ID del comentario a eliminar
+     * @param principal Usuario en sesión
+     * @return Respuesta con mensaje de confirmación y estado del proceso (success)
+     * @throws EntityNotFoundException si el comentario no existe
+     */
+    @Override
+    @Transactional
+    public BaseResponse deleteComentario(Long comentarioId, CustomUserPrincipal principal) {
+        Comentario comentario = this.getComentarioById(comentarioId);
+
+        if (!comentario.getUsuario().getCorreo().equals(principal.getCorreo())) {
+            throw new SecurityException("No puedes modificar un comentario que no es tuyo");
+        }
+
+        comentario.deleteHistoria(comentario.getHistoria());
+        comentario.deleteUsuario(comentario.getUsuario());
+
+        comentarioRepository.delete(comentario);
+        return new BaseResponse("Comentario eliminado exitosamente", true);
     }
 
     /**
