@@ -4,8 +4,10 @@ import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.repository.CategoriaRepository;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
+import com.application.presentation.dto.categoria.response.SubCategoriaResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.interfaces.categoria.CategoriaService;
+import jakarta.persistence.EntityNotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +27,12 @@ public class CategoriaServiceImpl implements CategoriaService {
      *
      * @param id ID de la categoría a buscar
      * @return La entidad categoria encontrada
-     * @throws NoSuchElementException si la categoría no existe
+     * @throws EntityNotFoundException si la categoría no existe
      */
     @Override
     public Categoria getCategoriaById(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException(
-                        "La categoria con id: " + id + " no existe o ha sido eliminada"));
+                .orElseThrow(() -> new EntityNotFoundException("La categoria con id: " + id + " no existe o ha sido eliminada"));
     }
 
     /**
@@ -44,16 +45,9 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public List<CategoriaResponse> getCategorias() {
         List<Categoria> categorias = categoriaRepository.findAll();
-        return categorias
-                .stream()
-                .map(categoria -> {
-                    long cantidadPacks = categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId());
-                    return new CategoriaResponse(
-                            categoria.getNombre(),
-                            categoria.getDescripcion(),
-                            cantidadPacks);
-                })
-                .collect(Collectors.toList());
+        return categorias.stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     /**
@@ -65,16 +59,9 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public List<CategoriaResponse> getCategoriasActivas() {
         List<Categoria> categoriasActivas = categoriaRepository.findByActivoTrue();
-        return categoriasActivas
-                .stream()
-                .map(categoria -> {
-                    long cantidadPacks = categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId());
-                    return new CategoriaResponse(
-                            categoria.getNombre(),
-                            categoria.getDescripcion(),
-                            cantidadPacks);
-                })
-                .collect(Collectors.toList());
+        return categoriasActivas.stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     /**
@@ -152,5 +139,30 @@ public class CategoriaServiceImpl implements CategoriaService {
         categoriaRepository.delete(categoria);
 
         return new GeneralResponse("categoria eliminada exitosamente");
+    }
+
+    /**
+     * Convierte una entidad Categoria a su DTO de respuesta,
+     * no incluye la cantidad de productos que tiene
+     * Para uso interno del Servicio en los métodos de búsqueda
+     *
+     * @param categoria Entidad categoria a convertir
+     * @return DTO con la información de la categoria
+     */
+    @Override
+    public CategoriaResponse toResponse(Categoria categoria) {
+        return new CategoriaResponse(
+                categoria.getCategoriaId(),
+                categoria.getImagen(),
+                categoria.getNombre(),
+                categoria.getDescripcion(),
+                categoria.isActivo(),
+                categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId()),
+                categoria.getSubCategorias().stream()
+                        .map(subCategoria -> new SubCategoriaResponse(
+                                subCategoria.getId(), subCategoria.getNombre()
+                        ))
+                        .toList()
+        );
     }
 }
