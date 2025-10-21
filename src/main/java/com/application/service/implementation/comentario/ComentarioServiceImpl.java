@@ -132,6 +132,28 @@ public class ComentarioServiceImpl implements ComentarioService {
     }
 
     /**
+     * Cambia el estado del comentario.
+     *
+     * @param id ID del comentario a cambiar su estado
+     * @return Respuesta con mensaje de confirmación y estado del proceso (success)
+     * @throws EntityNotFoundException si el comentario no existe
+     */
+    @Override
+    public BaseResponse changeEstadoComentario(Long id) {
+        Comentario comentario = this.getComentarioById(id);
+
+        boolean nuevoEstado = !comentario.isActivo();
+        comentario.setActivo(nuevoEstado);
+        comentarioRepository.save(comentario);
+
+        String mensaje = nuevoEstado
+                ? "Comentario habilitado exitosamente"
+                : "Comentario deshabilitado exitosamente";
+
+        return new BaseResponse(mensaje, true);
+    }
+
+    /**
      * Convierte una entidad Comentario a su DTO de respuesta, incluyendo
      * algunos datos del Usuario y el título de la Historio.
      * Para uso interno del servicio en los métodos de búsqueda
