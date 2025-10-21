@@ -40,10 +40,12 @@ public class Producto {
         private boolean activo;
 
         // Cardinalidad con la tabla categoria
-        @Builder.Default
-        @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-        @JoinTable(name = "producto_categoria", joinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "producto_id", foreignKey = @ForeignKey(name = "fk_producto_categoria")), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "categoria_id", foreignKey = @ForeignKey(name = "fk_categoria_producto")))
-        private Set<Categoria> categorias = new HashSet<>();
+        @ManyToOne
+        @JoinColumn(name = "categoria_id",
+                referencedColumnName = "categoria_id",
+                foreignKey = @ForeignKey(name = "fk_producto_categoria")
+        )
+        private Categoria categoria;
 
         // Cardinalidad con la tabla detálle ventas
         @Builder.Default
@@ -52,13 +54,13 @@ public class Producto {
 
         // Agregar categoria a producto y viceversa (bidirectional)
         public void addCategoria(Categoria categoria) {
-                categorias.add(categoria);
+                this.setCategoria(categoria);
                 categoria.getProductos().add(this);
         }
 
         // Eliminar categoria de producto y viceversa (bidirectional)
         public void deleteCategoria(Categoria categoria) {
-                categorias.remove(categoria);
+                this.setCategoria(null);
                 categoria.getProductos().remove(this);
         }
 
