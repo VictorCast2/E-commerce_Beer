@@ -1,15 +1,24 @@
 package com.application.service.implementation.comentario;
 
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.comentario.Comentario;
+import com.application.persistence.entity.historia.Historia;
+import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.ComentarioRepository;
+import com.application.persistence.repository.HistoriaRepository;
+import com.application.persistence.repository.UsuarioRepository;
+import com.application.presentation.dto.comentario.request.ComentarioCreateRequest;
 import com.application.presentation.dto.comentario.response.ComentarioBlogResponse;
 import com.application.presentation.dto.comentario.response.ComentarioResponse;
 import com.application.presentation.dto.comentario.response.ComentarioUsuarioResponse;
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.service.interfaces.comentario.ComentarioService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,6 +26,8 @@ import java.util.List;
 public class ComentarioServiceImpl implements ComentarioService {
 
     private final ComentarioRepository comentarioRepository;
+    private final HistoriaRepository historiaRepository;
+    private final UsuarioRepository usuarioRepository;
 
     /**
      * Obtener un comentario por id.
@@ -62,6 +73,40 @@ public class ComentarioServiceImpl implements ComentarioService {
         return comentarios.stream()
                 .map(this::toResponse)
                 .toList();
+    }
+
+    /**
+     * Crea un nuevo comentario a partir de un DTO de creación.
+     *
+     * @param historiaId ID de la historia a buscar
+     * @param principal Usuario en sesión
+     * @param comentarioRequest DTO con los datos del nuevo comentario
+     * @return Respuesta con mensaje de confirmación y estado del proceso (success)
+     * @throws EntityNotFoundException si la historia o el usuario no existen
+     */
+    @Override
+    @Transactional
+    public BaseResponse createComentario(Long historiaId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest) {
+
+        Historia historia = historiaRepository.findById(historiaId)
+                .orElseThrow(() -> new EntityNotFoundException("La historia con id: " + historiaId + " no existe."));
+
+        Usuario usuario = usuarioRepository.findByCorreo(principal.getCorreo())
+                .orElseThrow(() -> new EntityNotFoundException("El usuario autenticado con correo '" + principal.getCorreo() + "' no existe."));
+
+        Comentario comentario = Comentario.builder()
+                .titulo(comentarioRequest.titulo())
+                .mensaje(comentarioRequest.mensaje())
+                .calificacion(comentarioRequest.calificacion())
+                .fecha(LocalDate.now())
+                .activo(true)
+                .build();
+
+        comentario.addHistoria(historia);
+        comentario.addUsuario(usuario);
+
+        comentarioRepository.save(comentario);
+        return new BaseResponse("Comentario creado exitosamente", true);
     }
 
     /**

@@ -75,7 +75,8 @@ public class Usuario {
         private Set<Compra> compras;
 
         // Cardinalidad con la tabla comentarios (relación bidireccional)
+        @Builder.Default
         @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-        private Set<Comentario> comentarios;
+        private Set<Comentario> comentarios = new HashSet<>();
 
 }
