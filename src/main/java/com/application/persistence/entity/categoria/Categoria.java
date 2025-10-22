@@ -45,7 +45,7 @@ public class Categoria {
                 this.productos.add(producto);
         }
 
-        // Agregar categoria a producto y viceversa (bidireccional)
+        // Eliminar categoria a producto y viceversa (bidireccional)
         public void deleteProducto(Producto producto) {
                 producto.setCategoria(null);
                 this.productos.remove(producto);

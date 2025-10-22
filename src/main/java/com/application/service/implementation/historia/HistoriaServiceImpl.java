@@ -5,7 +5,7 @@ import com.application.persistence.repository.HistoriaRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.historia.request.HistoriaCreateRequest;
 import com.application.presentation.dto.historia.response.HistoriaResponse;
-import com.application.service.implementation.ImagenServiceImpl;
+import com.application.service.interfaces.ImagenService;
 import com.application.service.interfaces.historia.HistoriaService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.List;
 public class HistoriaServiceImpl implements HistoriaService {
 
     private final HistoriaRepository historiaRepository;
-    private final ImagenServiceImpl imagenService;
+    private final ImagenService imagenService;
 
     /**
      * Obtener una Historia por Id

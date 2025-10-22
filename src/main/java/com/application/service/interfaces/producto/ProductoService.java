@@ -18,7 +18,7 @@ public interface ProductoService {
     // CRUD
     GeneralResponse createProducto(ProductoCreateRequest productoRequest);
     GeneralResponse updateProducto(ProductoCreateRequest productoRequest, Long id);
-    GeneralResponse disableProducto(Long id);
+    GeneralResponse changeEstadoProducto(Long id);
     GeneralResponse deleteProducto(Long id);
 
     // Utils

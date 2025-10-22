@@ -75,7 +75,7 @@ public class PrincipalController {
     public String Ver(@PathVariable Long id, Model model) {
         Producto producto = productoService.getProductoById(id);
         model.addAttribute("subcategory", producto.getDescripcion());
-        model.addAttribute("category", producto.getCategorias());
+        model.addAttribute("category", producto.getCategoria());
         model.addAttribute("productName", producto.getNombre());
         return "Ver";
     }

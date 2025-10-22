@@ -110,7 +110,7 @@ public class ProductoServiceImpl implements ProductoService {
      */
     @Override
     public List<ProductoResponse> getProductoByCategoriaId(Long id) {
-        List<Producto> productos = productoRepository.findByCategorias_CategoriaId(id);
+        List<Producto> productos = productoRepository.findByCategoria_CategoriaId(id);
         return productos.stream()
                 .map(this::toResponse)
                 .toList();
@@ -212,25 +212,29 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Deshabilita un producto.
-     * El producto seguirá existiendo en la base de datos, pero no se mostrará en la
-     * vista de Productos.
+     * Cambia el estado del producto.
      *
-     * @param id ID del producto a deshabilitar
-     * @return Respuesta con mensaje de confirmación
+     * @param id ID del producto a cambiar su estado
+     * @return DTO con mensaje de confirmación según el estado del producto
      * @throws EntityNotFoundException si el producto no existe
      */
     @Override
-    public GeneralResponse disableProducto(Long id) {
+    public GeneralResponse changeEstadoProducto(Long id) {
         Producto producto = this.getProductoById(id);
-        producto.setActivo(false);
+
+        boolean nuevoEstado = !producto.isActivo();
+        producto.setActivo(nuevoEstado);
         productoRepository.save(producto);
 
-        return new GeneralResponse("Producto deshabilitado exitosamente");
+        String mensaje = nuevoEstado
+                ? "Producto Habilitado exitosamente"
+                : "Producto deshabilitado exitosamente";
+
+        return new GeneralResponse(mensaje);
     }
 
     /**
-     * Elimina un producto y rompe sus relaciones con categorías para evitar
+     * Elimina un producto y rompe sus relaciones con categoría y subcategoria para evitar
      * errores de integridad referencial en la base de datos.
      *
      * @param id ID del producto a eliminar
@@ -243,9 +247,8 @@ public class ProductoServiceImpl implements ProductoService {
 
         Producto producto = this.getProductoById(id);
 
-        for (Categoria categoria : new HashSet<>(producto.getCategorias())) {
-            producto.deleteCategoria(categoria);
-        }
+        producto.getCategoria().deleteProducto(producto);
+        producto.getSubCategoria().deleteProducto(producto);
 
         productoRepository.delete(producto);
         return new GeneralResponse("Producto eliminado exitosamente");
