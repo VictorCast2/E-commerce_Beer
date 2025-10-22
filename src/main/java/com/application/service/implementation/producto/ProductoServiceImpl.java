@@ -7,7 +7,6 @@ import com.application.persistence.repository.CategoriaRepository;
 import com.application.persistence.repository.ProductoRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
-import com.application.presentation.dto.producto.response.ProductoCategoriaResponse;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.interfaces.producto.ProductoService;
 import jakarta.persistence.EntityNotFoundException;
@@ -220,7 +219,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     /**
      * Convierte una entidad Producto a su DTO de respuesta, incluyendo
-     * categorías.
+     * categoria y subcategoria.
      * Para uso interno del servicio en los métodos de búsqueda
      *
      * @param producto Entidad producto a convertir
@@ -230,6 +229,7 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoResponse toResponse(Producto producto) {
         return new ProductoResponse(
                 producto.getProductoId(),
+                producto.getCodigoProducto(),
                 producto.getImagen(),
                 producto.getNombre(),
                 producto.getMarca(),
@@ -238,9 +238,9 @@ public class ProductoServiceImpl implements ProductoService {
                 producto.getPrecio(),
                 producto.getStock(),
                 producto.getDescripcion(),
-                producto.getCategorias().stream()
-                        .map(categoria -> new ProductoCategoriaResponse(
-                                categoria.getCategoriaId(), categoria.getNombre()))
-                        .toList());
+                producto.isActivo(),
+                producto.getCategoria().getNombre(),
+                producto.getSubCategoria().getNombre()
+        );
     }
 }
