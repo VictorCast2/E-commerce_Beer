@@ -32,6 +32,7 @@ public class MvcConfig implements WebMvcConfigurer {
             "perfil-usuario", baseDir + "perfil-usuario/",
             "perfil-empresa", baseDir + "perfil-empresa/",
             "imagen-producto", baseDir + "imagen-producto/",
+            "imagen-categoria", baseDir + "imagen-categoria/",
             "imagen-blog", baseDir + "imagen-blog/");
 
     @Autowired
@@ -65,11 +66,11 @@ public class MvcConfig implements WebMvcConfigurer {
                 }
             } catch (IOException e) {
                 throw new RuntimeException(
-                        "Error: no se ha podido crear el directorios de imágenes " + ruta + " " + e.getMessage() + e);
+                        "Error: no se ha podido crear el directorio de imágenes " + ruta + " " + e.getMessage() + e);
             }
         });
 
-        // Creamos laa imágenes por defecto dentro de del directorio
+        // Creamos las imágenes por defecto dentro de del directorio
         // 'C:/gestion-ventas/**'
         // imagen de usuario
         copiarImagen("static/Assets/Img/ExperenciaUsuarios/imagen__user.jpg", "perfil-user.jpg", "perfil-usuario");

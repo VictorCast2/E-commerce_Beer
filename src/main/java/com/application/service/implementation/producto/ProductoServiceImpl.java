@@ -1,14 +1,16 @@
 package com.application.service.implementation.producto;
 
 import com.application.persistence.entity.categoria.Categoria;
+import com.application.persistence.entity.categoria.SubCategoria;
 import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.entity.producto.enums.ETipo;
 import com.application.persistence.repository.CategoriaRepository;
 import com.application.persistence.repository.ProductoRepository;
+import com.application.persistence.repository.SubCategoriaRepository;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.producto.request.ProductoCreateRequest;
-import com.application.presentation.dto.producto.response.ProductoCategoriaResponse;
 import com.application.presentation.dto.producto.response.ProductoResponse;
+import com.application.service.interfaces.ImagenService;
 import com.application.service.interfaces.producto.ProductoService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
+    private final SubCategoriaRepository subCategoriaRepository;
+    private final ImagenService imagenService;
 
     /**
      * Obtiene un producto por su ID.
@@ -106,7 +110,7 @@ public class ProductoServiceImpl implements ProductoService {
      */
     @Override
     public List<ProductoResponse> getProductoByCategoriaId(Long id) {
-        List<Producto> productos = productoRepository.findByCategorias_CategoriaId(id);
+        List<Producto> productos = productoRepository.findByCategoria_CategoriaId(id);
         return productos.stream()
                 .map(this::toResponse)
                 .toList();
@@ -122,9 +126,11 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public GeneralResponse createProducto(@NotNull ProductoCreateRequest productoRequest) {
 
+        String imagen = this.imagenService.asignarImagen(productoRequest.imagen(), "imagen-producto");
+
         Producto producto = Producto.builder()
                 .codigoProducto(productoRequest.codigoProducto())
-                .imagen(productoRequest.imagen())
+                .imagen(imagen)
                 .nombre(productoRequest.nombre())
                 .marca(productoRequest.marca())
                 .pais(productoRequest.pais())
@@ -132,11 +138,23 @@ public class ProductoServiceImpl implements ProductoService {
                 .precio(productoRequest.precio())
                 .stock(productoRequest.stock())
                 .descripcion(productoRequest.descripcion())
-                .activo(true)
+                .activo(productoRequest.activo())
                 .build();
 
-        List<Categoria> categoriaList = categoriaRepository.findAllById(productoRequest.categoriaIds());
-        categoriaList.forEach(producto::addCategoria);
+        Long categoriaId = productoRequest.categoriaId();
+        Categoria categoria = categoriaRepository.findById(categoriaId)
+                .orElseThrow(() -> new EntityNotFoundException("La categoria con id: " + categoriaId + " no exite"));
+        categoria.addProducto(producto);
+
+        Long subCategoriaId = productoRequest.subCategoriaId();
+        SubCategoria subCategoria = subCategoriaRepository.findById(subCategoriaId)
+                        .orElseThrow(() -> new EntityNotFoundException("La subcategoria con id: " + subCategoriaId + " no existe"));
+
+        if (!subCategoria.getCategoria().getCategoriaId().equals(categoriaId)) {
+            throw new IllegalArgumentException("La subcategoria seleccionada no pertenece a la categoría " + categoria.getNombre());
+        }
+
+        subCategoria.addProducto(producto);
 
         productoRepository.save(producto);
 
@@ -155,49 +173,68 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public GeneralResponse updateProducto(@NotNull ProductoCreateRequest productoRequest, Long id) {
 
-        Producto productoActualizado = this.getProductoById(id);
+        Producto producto = this.getProductoById(id);
 
-        productoActualizado.setCodigoProducto(productoActualizado.getCodigoProducto());
-        productoActualizado.setImagen(productoRequest.imagen());
-        productoActualizado.setNombre(productoRequest.nombre());
-        productoActualizado.setMarca(productoRequest.marca());
-        productoActualizado.setPais(productoRequest.pais());
-        productoActualizado.setETipo(productoRequest.tipo());
-        productoActualizado.setPrecio(productoRequest.precio());
-        productoActualizado.setStock(productoRequest.stock());
-        productoActualizado.setDescripcion(productoRequest.descripcion());
+        String imagen = this.imagenService.asignarImagen(productoRequest.imagen(), "imagen-producto");
 
-        for (Categoria categoria : new HashSet<>(productoActualizado.getCategorias())) {
-            productoActualizado.deleteCategoria(categoria);
+        producto.setCodigoProducto(productoRequest.codigoProducto());
+        producto.setImagen(imagen);
+        producto.setNombre(productoRequest.nombre());
+        producto.setMarca(productoRequest.marca());
+        producto.setPais(productoRequest.pais());
+        producto.setETipo(productoRequest.tipo());
+        producto.setPrecio(productoRequest.precio());
+        producto.setStock(productoRequest.stock());
+        producto.setDescripcion(productoRequest.descripcion());
+        producto.setActivo(productoRequest.activo());
+
+        producto.getCategoria().deleteProducto(producto);
+        producto.getSubCategoria().deleteProducto(producto);
+
+        Long categoriaId = productoRequest.categoriaId();
+        Categoria categoria = categoriaRepository.findById(categoriaId)
+                .orElseThrow(() -> new EntityNotFoundException("La categoria con id: " + categoriaId + " no exite"));
+        categoria.addProducto(producto);
+
+        Long subCategoriaId = productoRequest.subCategoriaId();
+        SubCategoria subCategoria = subCategoriaRepository.findById(subCategoriaId)
+                .orElseThrow(() -> new EntityNotFoundException("La subcategoria con id: " + subCategoriaId + " no existe"));
+
+        if (!subCategoria.getCategoria().getCategoriaId().equals(categoriaId)) {
+            throw new IllegalArgumentException("La subcategoria seleccionada no pertenece a la categoría " + categoria.getNombre());
         }
-        List<Categoria> categoriaList = categoriaRepository.findAllById(productoRequest.categoriaIds());
-        categoriaList.forEach(productoActualizado::addCategoria);
 
-        productoRepository.save(productoActualizado);
+        subCategoria.addProducto(producto);
+
+        productoRepository.save(producto);
 
         return new GeneralResponse("Producto actualizado exitosamente");
     }
 
     /**
-     * Deshabilita un producto.
-     * El producto seguirá existiendo en la base de datos, pero no se mostrará en la
-     * vista de Productos.
+     * Cambia el estado del producto.
      *
-     * @param id ID del producto a deshabilitar
-     * @return Respuesta con mensaje de confirmación
+     * @param id ID del producto a cambiar su estado
+     * @return DTO con mensaje de confirmación según el estado del producto
      * @throws EntityNotFoundException si el producto no existe
      */
     @Override
-    public GeneralResponse disableProducto(Long id) {
+    public GeneralResponse changeEstadoProducto(Long id) {
         Producto producto = this.getProductoById(id);
-        producto.setActivo(false);
+
+        boolean nuevoEstado = !producto.isActivo();
+        producto.setActivo(nuevoEstado);
         productoRepository.save(producto);
 
-        return new GeneralResponse("Producto deshabilitado exitosamente");
+        String mensaje = nuevoEstado
+                ? "Producto Habilitado exitosamente"
+                : "Producto deshabilitado exitosamente";
+
+        return new GeneralResponse(mensaje);
     }
 
     /**
-     * Elimina un producto y rompe sus relaciones con categorías para evitar
+     * Elimina un producto y rompe sus relaciones con categoría y subcategoria para evitar
      * errores de integridad referencial en la base de datos.
      *
      * @param id ID del producto a eliminar
@@ -210,9 +247,8 @@ public class ProductoServiceImpl implements ProductoService {
 
         Producto producto = this.getProductoById(id);
 
-        for (Categoria categoria : new HashSet<>(producto.getCategorias())) {
-            producto.deleteCategoria(categoria);
-        }
+        producto.getCategoria().deleteProducto(producto);
+        producto.getSubCategoria().deleteProducto(producto);
 
         productoRepository.delete(producto);
         return new GeneralResponse("Producto eliminado exitosamente");
@@ -220,7 +256,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     /**
      * Convierte una entidad Producto a su DTO de respuesta, incluyendo
-     * categorías.
+     * categoria y subcategoria.
      * Para uso interno del servicio en los métodos de búsqueda
      *
      * @param producto Entidad producto a convertir
@@ -230,6 +266,7 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoResponse toResponse(Producto producto) {
         return new ProductoResponse(
                 producto.getProductoId(),
+                producto.getCodigoProducto(),
                 producto.getImagen(),
                 producto.getNombre(),
                 producto.getMarca(),
@@ -238,9 +275,9 @@ public class ProductoServiceImpl implements ProductoService {
                 producto.getPrecio(),
                 producto.getStock(),
                 producto.getDescripcion(),
-                producto.getCategorias().stream()
-                        .map(categoria -> new ProductoCategoriaResponse(
-                                categoria.getCategoriaId(), categoria.getNombre()))
-                        .toList());
+                producto.isActivo(),
+                producto.getCategoria().getNombre(),
+                producto.getSubCategoria().getNombre()
+        );
     }
 }

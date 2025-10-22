@@ -3,6 +3,7 @@ package com.application.presentation.controller.admin;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
@@ -63,7 +64,7 @@ public class CategoriaController {
 
     @PostMapping("disable-categoria/{id}")
     public String disableCategoria(@PathVariable Long id) {
-        GeneralResponse response = categoriaService.disableCategoria(id);
+        BaseResponse response = categoriaService.changeEstadoCategoria(id);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
@@ -71,7 +72,7 @@ public class CategoriaController {
 
     @PostMapping("delete-categoria/{id}")
     public String deleteCategoria(@PathVariable Long id) {
-        GeneralResponse response = categoriaService.deleteCategoria(id);
+        BaseResponse response = categoriaService.deleteCategoria(id);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
