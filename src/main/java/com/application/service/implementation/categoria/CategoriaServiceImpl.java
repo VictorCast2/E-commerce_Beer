@@ -7,6 +7,7 @@ import com.application.persistence.repository.SubCategoriaRepository;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.categoria.response.SubCategoriaResponse;
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.service.interfaces.ImagenService;
 import com.application.service.interfaces.categoria.CategoriaService;
@@ -137,19 +138,30 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     /**
-     * Deshabilita una categoría.
-     * La categoría seguirá existiendo en la base de datos, pero no se mostrará en
-     * la vista de Productos.
+     * Cambia el estado de la Categoria.
      *
-     * @param id ID de la categoría a deshabilitar
-     * @return DTO con mensaje de éxito
+     * @param id ID de la categoria a cambiar su estado
+     * @return DTO con mensaje de confirmación según el estado de la categoria
+     * @throws EntityNotFoundException si la categoria no existe
+     * @apiNote Si la categoria tiene productos asociados, entonces no se podrá deshabilitar
      */
     @Override
-    public GeneralResponse disableCategoria(Long id) {
+    public BaseResponse changeEstadoCategoria(Long id) {
         Categoria categoria = this.getCategoriaById(id);
-        categoria.setActivo(false);
+
+        if (!categoria.getProductos().isEmpty()) {
+            return new BaseResponse("No es posible deshabilitar una categoria con producto asociados", false);
+        }
+
+        boolean nuevoEstado = !categoria.isActivo();
+        categoria.setActivo(nuevoEstado);
         categoriaRepository.save(categoria);
-        return new GeneralResponse("categoría deshabilitada exitosamente");
+
+        String mensaje = nuevoEstado
+                ? "Categoría habilitada exitosamente"
+                : "Categoría deshabilitada exitosamente";
+
+        return new BaseResponse(mensaje, true);
     }
 
     /**
