@@ -1,6 +1,7 @@
 package com.application.persistence.entity.producto;
 
 import com.application.persistence.entity.categoria.Categoria;
+import com.application.persistence.entity.categoria.SubCategoria;
 import com.application.persistence.entity.compra.DetalleVenta;
 import com.application.persistence.entity.producto.enums.ETipo;
 import jakarta.persistence.*;
@@ -46,6 +47,14 @@ public class Producto {
                 foreignKey = @ForeignKey(name = "fk_producto_categoria")
         )
         private Categoria categoria;
+
+        // Cardinalidad con la tabla sub-categoria
+        @ManyToOne
+        @JoinColumn(name = "subcategoria_id",
+                referencedColumnName = "subcategoria_id",
+                foreignKey = @ForeignKey(name = "fk_producto_subcategoria")
+        )
+        private SubCategoria subCategoria;
 
         // Cardinalidad con la tabla detálle ventas
         @Builder.Default

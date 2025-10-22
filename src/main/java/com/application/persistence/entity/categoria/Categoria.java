@@ -36,7 +36,7 @@ public class Categoria {
 
         // Cardinalidad con la tabla categorías
         @Builder.Default
-        @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
         private Set<SubCategoria> subCategorias = new HashSet<>();
 
         // Agregar categoria a sub-categoria y viceversa (bidirectional)

@@ -1,7 +1,11 @@
 package com.application.persistence.entity.categoria;
 
+import com.application.persistence.entity.producto.Producto;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,7 +18,8 @@ public class SubCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "subcategoria_id")
+    private Long subCategoriaId;
     private String nombre;
 
     @ManyToOne
@@ -23,4 +28,8 @@ public class SubCategoria {
             foreignKey = @ForeignKey(name = "fk_sub-Categoria_categoria")
     )
     private Categoria categoria;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "subCategoria", fetch = FetchType.LAZY)
+    private Set<Producto> productos = new HashSet<>();
 }

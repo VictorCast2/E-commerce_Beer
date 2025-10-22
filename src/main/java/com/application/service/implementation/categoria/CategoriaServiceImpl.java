@@ -101,23 +101,39 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     /**
-     * Actualiza una categoría existente.
+     * Método para actualizar una categoría y subcategorias a partir de un DTO de creación.
      *
-     * @param categoriaRequest DTO con los nuevos datos
-     * @param id               ID de la categoría a actualizar
+     * @param categoriaRequest DTO con los nuevos datos de la categoría y las subcategorias
+     * @param id ID de la categoría a actualizar
      * @return DTO con mensaje de éxito
-     * @throws NoSuchElementException si la categoría no existe
+     * @throws EntityNotFoundException si la categoría no existe
      */
     @Override
     public GeneralResponse updateCategoria(@NotNull CategoriaCreateRequest categoriaRequest, Long id) {
 
         Categoria categoria = this.getCategoriaById(id);
 
+        String imagen = this.imagenService.asignarImagen(categoriaRequest.imagen(), "imagen-categoria");
+
+        categoria.setImagen(imagen);
         categoria.setNombre(categoriaRequest.nombre());
         categoria.setDescripcion(categoriaRequest.descripcion());
+        categoria.setActivo(categoriaRequest.activo());
+
+        for (SubCategoria subCategoria : new HashSet<>(categoria.getSubCategorias())) {
+            categoria.deleteSubCategoria(subCategoria);
+        }
+
+        for (String nombreSubCategoria : categoriaRequest.subcategorias()) {
+            SubCategoria subCategoria = SubCategoria.builder()
+                    .nombre(nombreSubCategoria)
+                    .build();
+            categoria.addSubCategoria(subCategoria);
+        }
+
         categoriaRepository.save(categoria);
 
-        return new GeneralResponse("categoria actualizada exitosamente");
+        return new GeneralResponse("Categoria actualizada exitosamente");
     }
 
     /**
@@ -176,7 +192,7 @@ public class CategoriaServiceImpl implements CategoriaService {
                 categoriaRepository.countProductosByCategoriaId(categoria.getCategoriaId()),
                 categoria.getSubCategorias().stream()
                         .map(subCategoria -> new SubCategoriaResponse(
-                                subCategoria.getId(), subCategoria.getNombre()
+                                subCategoria.getSubCategoriaId(), subCategoria.getNombre()
                         ))
                         .toList()
         );
