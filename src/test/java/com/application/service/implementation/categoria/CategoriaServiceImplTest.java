@@ -1,5 +1,6 @@
 package com.application.service.implementation.categoria;
 
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.categoria.Categoria;
 import com.application.persistence.repository.CategoriaRepository;
@@ -73,7 +74,7 @@ class CategoriaServiceImplTest {
         assertEquals(5, resultado.size());
         assertEquals("Categoria 1", resultado.getFirst().nombre());
         assertEquals("Primera categoria de prueba", resultado.getFirst().descripcion());
-        assertEquals(2, resultado.getFirst().totalPacks());
+        assertEquals(2, resultado.getFirst().totalProductos());
 
         verify(categoriaRepository).findAll();
         verify(categoriaRepository, times(5)).countProductosByCategoriaId( anyLong() );
@@ -92,7 +93,7 @@ class CategoriaServiceImplTest {
         assertEquals(3, resultado.size());
         assertEquals("Categoria 1", resultado.getFirst().nombre());
         assertEquals("Primera categoria de prueba", resultado.getFirst().descripcion());
-        assertEquals(2, resultado.getFirst().totalPacks());
+        assertEquals(2, resultado.getFirst().totalProductos());
 
         verify(categoriaRepository).findByActivoTrue();
         verify(categoriaRepository, times(3)).countProductosByCategoriaId( anyLong() );
@@ -117,7 +118,7 @@ class CategoriaServiceImplTest {
     @Test
     void updateCategoria() {
         // Given
-        CategoriaCreateRequest categoriaRequest = new CategoriaCreateRequest("categoria actualizada",  "categoria de pruebas");
+        CategoriaCreateRequest categoriaRequest = new CategoriaCreateRequest(null,"categoria actualizada",  "categoria de pruebas",true, null);
         Long id = 1L;
 
         // When
@@ -142,7 +143,7 @@ class CategoriaServiceImplTest {
 
         // When
         when(categoriaRepository.findById( anyLong() )).thenReturn(CategoriaDataProvider.categoriaMock());
-        GeneralResponse resultado = categoriaService.disableCategoria(id);
+        BaseResponse resultado = categoriaService.changeEstadoCategoria(id);
 
         // Then
         ArgumentCaptor<Categoria> argumentCaptor = ArgumentCaptor.forClass(Categoria.class);
@@ -160,7 +161,7 @@ class CategoriaServiceImplTest {
 
         // When
         when(categoriaRepository.findById( anyLong() )).thenReturn(CategoriaDataProvider.categoriaMock());
-        GeneralResponse resultado = categoriaService.deleteCategoria(id);
+        BaseResponse resultado = categoriaService.deleteCategoria(id);
 
         // Then
         ArgumentCaptor<Categoria> argumentCaptor = ArgumentCaptor.forClass(Categoria.class);

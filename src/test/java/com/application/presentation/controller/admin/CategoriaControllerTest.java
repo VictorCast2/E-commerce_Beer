@@ -1,5 +1,6 @@
 package com.application.presentation.controller.admin;
 
+import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.provider.CategoriaDataProvider;
 import com.application.persistence.entity.rol.Rol;
 import com.application.persistence.entity.rol.enums.ERol;
@@ -116,12 +117,12 @@ class CategoriaControllerTest {
     @WithMockUser(roles = "ADMIN")
     void disableCategoria() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Categoria Deshabilitada");
+        BaseResponse responseMock = new BaseResponse("Categoria Deshabilitada", true);
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 
         // When
-        when(categoriaService.disableCategoria( anyLong() )).thenReturn(responseMock);
+        when(categoriaService.changeEstadoCategoria( anyLong() )).thenReturn(responseMock);
 
         // Then
         mockMvc.perform(post("/admin/categoria/disable-categoria/{id}", id)
@@ -129,14 +130,14 @@ class CategoriaControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/categoria/?mensaje=" + mensajeEncode));
 
-        verify(categoriaService).disableCategoria( anyLong() );
+        verify(categoriaService).changeEstadoCategoria( anyLong() );
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void deleteCategoria() throws Exception {
         // Given
-        GeneralResponse responseMock = new GeneralResponse("Categoria Eliminada");
+        BaseResponse responseMock = new BaseResponse("Categoria Eliminada", true);
         String mensajeEncode = UriUtils.encode(responseMock.mensaje(), StandardCharsets.UTF_8);
         Long id = 1L;
 

@@ -110,6 +110,7 @@ public class CategoriaServiceImpl implements CategoriaService {
      * @throws EntityNotFoundException si la categoría no existe
      */
     @Override
+    @Transactional
     public GeneralResponse updateCategoria(@NotNull CategoriaCreateRequest categoriaRequest, Long id) {
 
         Categoria categoria = this.getCategoriaById(id);
@@ -165,24 +166,24 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     /**
-     * Elimina una categoría de la base de datos.
+     * Elimina una categoría y sus subcategorias de la base de datos.
      * Solo es posible si no tiene productos asociados.
      *
      * @param id ID de la categoría a eliminar
-     * @return DTO con mensaje de éxito o error
-     * @throws IllegalArgumentException si la categoría tiene productos asociados
+     * @return DTO con mensaje de éxito o error según el estado del success
      */
     @Override
-    public GeneralResponse deleteCategoria(Long id) {
+    @Transactional
+    public BaseResponse deleteCategoria(Long id) {
         Categoria categoria = this.getCategoriaById(id);
 
         if (!categoria.getProductos().isEmpty()) {
-            throw new IllegalArgumentException("No es posible eliminar una categoria con productos");
+            return new BaseResponse("No es posible eliminar una categoria con productos", false);
         }
 
         categoriaRepository.delete(categoria);
 
-        return new GeneralResponse("categoria eliminada exitosamente");
+        return new BaseResponse("categoria eliminada exitosamente", true);
     }
 
     /**

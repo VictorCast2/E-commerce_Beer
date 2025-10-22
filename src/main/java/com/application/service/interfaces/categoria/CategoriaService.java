@@ -18,7 +18,7 @@ public interface CategoriaService {
     GeneralResponse createCategoria(CategoriaCreateRequest categoriaRequest);
     GeneralResponse updateCategoria(CategoriaCreateRequest categoriaRequest, Long id);
     BaseResponse changeEstadoCategoria(Long id);
-    GeneralResponse deleteCategoria(Long id);
+    BaseResponse deleteCategoria(Long id);
 
     // Utils
     CategoriaResponse toResponse(Categoria categoria);
