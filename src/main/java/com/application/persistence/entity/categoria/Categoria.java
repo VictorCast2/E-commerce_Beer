@@ -39,13 +39,25 @@ public class Categoria {
         @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
         private Set<SubCategoria> subCategorias = new HashSet<>();
 
-        // Agregar categoria a sub-categoria y viceversa (bidirectional)
+        // Agregar categoria a producto y viceversa (bidireccional)
+        public void addProducto(Producto producto) {
+                producto.setCategoria(this);
+                this.productos.add(producto);
+        }
+
+        // Agregar categoria a producto y viceversa (bidireccional)
+        public void deleteProducto(Producto producto) {
+                producto.setCategoria(null);
+                this.productos.remove(producto);
+        }
+
+        // Agregar categoria a sub-categoria y viceversa (bidireccional)
         public void addSubCategoria(SubCategoria subCategoria) {
                 subCategoria.setCategoria(this);
                 this.subCategorias.add(subCategoria);
         }
 
-        // Eliminar categoria de sub-categoria y viceversa (bidirectional)
+        // Eliminar categoria de sub-categoria y viceversa (bidireccional)
         public void deleteSubCategoria(SubCategoria subCategoria) {
                 subCategoria.setCategoria(null);
                 this.subCategorias.remove(subCategoria);
