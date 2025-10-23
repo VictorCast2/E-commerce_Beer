@@ -6,6 +6,7 @@ import java.util.List;
 
 public record ProductoResponse(
         Long id,
+        String codigoProducto,
         String imagen,
         String nombre,
         String marca,
@@ -14,6 +15,8 @@ public record ProductoResponse(
         double precio,
         int stock,
         String descripcion,
-        List<ProductoCategoriaResponse> categorias
+        boolean activo,
+        String nombreCategoria,
+        String nombreSubCategoria
 ) {
 }

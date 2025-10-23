@@ -21,15 +21,45 @@ public class Categoria {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "categoria_id", nullable = false)
         private Long categoriaId;
-        @Column(length = 75, nullable = false)
+        private String imagen;
+        @Column(length = 175, nullable = false)
         private String nombre;
-        @Column(length = 300, nullable = false)
+        @Column(length = 500, nullable = false)
         private String descripcion;
         @Column(nullable = false)
         private boolean activo;
 
         // Cardinalidad con la tabla producto
         @Builder.Default
-        @ManyToMany(mappedBy = "categorias")
+        @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
         private Set<Producto> productos = new HashSet<>();
+
+        // Cardinalidad con la tabla categorías
+        @Builder.Default
+        @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+        private Set<SubCategoria> subCategorias = new HashSet<>();
+
+        // Agregar categoria a producto y viceversa (bidireccional)
+        public void addProducto(Producto producto) {
+                producto.setCategoria(this);
+                this.productos.add(producto);
+        }
+
+        // Eliminar categoria a producto y viceversa (bidireccional)
+        public void deleteProducto(Producto producto) {
+                producto.setCategoria(null);
+                this.productos.remove(producto);
+        }
+
+        // Agregar categoria a sub-categoria y viceversa (bidireccional)
+        public void addSubCategoria(SubCategoria subCategoria) {
+                subCategoria.setCategoria(this);
+                this.subCategorias.add(subCategoria);
+        }
+
+        // Eliminar categoria de sub-categoria y viceversa (bidireccional)
+        public void deleteSubCategoria(SubCategoria subCategoria) {
+                subCategoria.setCategoria(null);
+                this.subCategorias.remove(subCategoria);
+        }
 }

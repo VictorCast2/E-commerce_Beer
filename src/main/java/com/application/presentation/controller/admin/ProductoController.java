@@ -68,9 +68,9 @@ public class ProductoController {
         return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("disable-producto/{id}")
-    public String disableProducto(@PathVariable Long id) {
-        GeneralResponse response = productoService.disableProducto(id);
+    @PostMapping("cambiar-estado-producto/{id}")
+    public String changeEstadoProducto(@PathVariable Long id) {
+        GeneralResponse response = productoService.changeEstadoProducto(id);
         String mensaje = response.mensaje();
 
         return "redirect:/admin/producto/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);

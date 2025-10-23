@@ -19,6 +19,7 @@ public class ImagenServiceImpl implements ImagenService {
             "perfil-usuario", baseDir + "perfil-usuario//",
             "perfil-empresa", baseDir + "perfil-empresa//",
             "imagen-producto", baseDir + "imagen-producto//",
+            "imagen-categoria", baseDir + "imagen-categoria//",
             "imagen-blog", baseDir + "imagen-blog//"
     );
 

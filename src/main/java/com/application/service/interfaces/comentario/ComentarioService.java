@@ -1,15 +1,28 @@
 package com.application.service.interfaces.comentario;
 
-import com.application.presentation.dto.comentario.request.ComentarioRequest;
+import com.application.configuration.custom.CustomUserPrincipal;
+import com.application.persistence.entity.comentario.Comentario;
+import com.application.presentation.dto.comentario.request.ComentarioCreateRequest;
 import com.application.presentation.dto.comentario.response.ComentarioResponse;
-import javax.validation.Valid;
+import com.application.presentation.dto.general.response.BaseResponse;
+
+import java.util.List;
 
 public interface ComentarioService {
-    ComentarioResponse crearHistoria(@Valid ComentarioRequest comentarioRequest);
 
-    ComentarioResponse actualizarHistoria(@Valid ComentarioRequest comentarioRequest);
+    // Util
+    Comentario getComentarioById(Long id);
 
-    ComentarioResponse eliminarHistoria(@Valid ComentarioRequest comentarioRequest);
+    // Consulta
+    List<ComentarioResponse> getComentarios();
+    List<ComentarioResponse> getComentariosActivosByHistoriaId(Long historiaId);
 
-    ComentarioResponse encontrarHistoria(@Valid ComentarioRequest comentarioRequest);
+    // CRUD
+    BaseResponse createComentario(Long historiaId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
+    BaseResponse updateComentario(Long historiaId, Long comentarioId, CustomUserPrincipal principal, ComentarioCreateRequest comentarioRequest);
+    BaseResponse changeEstadoComentario(Long id);
+    BaseResponse deleteComentario(Long comentarioId, CustomUserPrincipal principal);
+
+    // Util
+    ComentarioResponse toResponse(Comentario comentario);
 }
