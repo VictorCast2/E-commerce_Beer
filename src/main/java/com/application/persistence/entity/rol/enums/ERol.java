@@ -1,9 +1,16 @@
 package com.application.persistence.entity.rol.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum ERol {
-    ADMIN, // Administrador de la Aplicacion
-    INVITADO, // Usuario no logueado
-    PERSONA_CONTACTO, // Usuario afiliado a una empresa
-    PERSONA_JURIDICA, // Usuario que cuanta con un NIT
-    PERSONA_NATURAL // Usuario registrado con un tipo de identificación diferente a NIT
+    ADMIN("Admin"), // Administrador de la Aplicacion
+    INVITADO("Invitado"), // Usuario no logueado
+    PERSONA_CONTACTO("Persona Contacto"), // Usuario afiliado a una empresa
+    PERSONA_JURIDICA("Persona Jurídica"), // Usuario que cuanta con un NIT
+    PERSONA_NATURAL("Persona Natural"); // Usuario registrado con un tipo de identificación diferente a NIT
+
+    private final String descripcion;
 }
