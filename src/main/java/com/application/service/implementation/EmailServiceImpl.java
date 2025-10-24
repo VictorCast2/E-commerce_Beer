@@ -4,6 +4,7 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.service.interfaces.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,5 +70,44 @@ public class EmailServiceImpl implements EmailService {
         } catch (Exception e) {
             throw new RuntimeException("Error al enviar el email de bienvenida" + e.getMessage(), e);
         }
+    }
+
+    /**
+     * @param usuario
+     * @param request
+     */
+    @Override
+    public void sendEmailLoginSuccessful(Usuario usuario, HttpServletRequest request) {
+        try {
+            Map<String, Object> variables = new HashMap<>();
+            variables.put("nombre", usuario.getNombres() + " " + usuario.getApellidos());
+            variables.put("fechaLogin", LocalDateTime.now());
+            variables.put("dispositivo", this.getDeviceInfo(request));
+
+            this.sendEmail(usuario.getCorreo(), "Inicio de Sesión Exitoso - Seguridad", "email-login-exitoso", variables);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al enviar el email de inicio de sesión exitoso" + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * @param request
+     * @return
+     */
+    @Override
+    public String getDeviceInfo(HttpServletRequest request) {
+        String userAgent = request.getHeader("User-Agent");
+        if (userAgent != null) {
+            if (userAgent.contains("Mobile")) {
+                return "Dispositivo Móvil";
+            } else if (userAgent.contains("Windows")) {
+                return "Computadora Windows";
+            } else if (userAgent.contains("Mac")) {
+                return "Computadora Mac";
+            } else if (userAgent.contains("Linux")) {
+                return "Computadora Linux";
+            }
+        }
+        return "Dispositivo Desconocido";
     }
 }

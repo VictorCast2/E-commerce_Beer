@@ -2,6 +2,7 @@ package com.application.configuration.custom;
 
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.persistence.repository.UsuarioRepository;
+import com.application.service.interfaces.EmailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.util.Collection;
 public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     private final UsuarioRepository usuarioRepository;
+    private final EmailService emailService;
 
     @Override
     public void onAuthenticationSuccess(
@@ -34,6 +36,10 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
         if (usuario != null && (usuario.getPassword() == null)) {
             this.getRedirectStrategy().sendRedirect(request, response, "/auth/completar-registro");
             return;
+        }
+
+        if (usuario != null) {
+            this.emailService.sendEmailLoginSuccessful(usuario, request);
         }
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
