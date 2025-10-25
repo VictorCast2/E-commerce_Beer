@@ -11,6 +11,8 @@ import com.application.presentation.dto.general.response.GeneralResponse;
 import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.usuario.request.*;
 import com.application.service.implementation.ImagenServiceImpl;
+import com.application.service.interfaces.EmailService;
+import com.application.service.interfaces.ImagenService;
 import com.application.service.interfaces.usuario.UsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
 
-    private final ImagenServiceImpl imagenService;
+    private final ImagenService imagenService;
+    private final EmailService emailService;
     private final PasswordEncoder encoder;
 
     @Override
@@ -72,6 +75,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         }
 
         usuarioRepository.save(usuario);
+        this.emailService.sendWelcomeEmail(usuario);
         return new GeneralResponse("Registro completado exitosamente.");
     }
 
