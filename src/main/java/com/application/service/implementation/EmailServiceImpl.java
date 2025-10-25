@@ -24,11 +24,12 @@ public class EmailServiceImpl implements EmailService {
     private final TemplateEngine templateEngine;
 
     /**
+     * Envía un correo electrónico con contenido HTML generado desde una plantilla Thymeleaf.
      *
-     * @param to
-     * @param subject
-     * @param plantilla
-     * @param variables
+     * @param to correo del destinatario principal
+     * @param subject Asusto del correo
+     * @param plantilla Nombre del archivo HTML (sin extensión) dentro de la carpeta "email/"
+     * @param variables Variables dinámicas que se inyectan en la plantilla Thymeleaf
      */
     @Override
     public void sendEmail(String to, String subject, String plantilla, Map<String, Object> variables) {
@@ -51,7 +52,10 @@ public class EmailServiceImpl implements EmailService {
     }
 
     /**
-     * @param usuario
+     * Método para enviarle un correo al usuario cuando se registre en el sistema.
+     * Se prepara el contexto con información personal y la URL de inicio de sesión.
+     *
+     * @param usuario Usuario al que se le enviara el correo
      */
     @Override
     public void sendWelcomeEmail(Usuario usuario) {
@@ -73,8 +77,10 @@ public class EmailServiceImpl implements EmailService {
     }
 
     /**
-     * @param usuario
-     * @param request
+     * Método para enviarle un email al usuario cunado inicie sesión
+     *
+     * @param usuario Usuario que inicio sesión
+     * @param request Petición HTTP para obtener información del dispositivo desde el User-Agent
      */
     @Override
     public void sendEmailLoginSuccessful(Usuario usuario, HttpServletRequest request) {
@@ -91,8 +97,11 @@ public class EmailServiceImpl implements EmailService {
     }
 
     /**
-     * @param request
-     * @return
+     * Extrae información básica del dispositivo desde los headers HTTP
+     * usando el User-Agent para ofrecer contexto en las notificaciones de seguridad.
+     *
+     * @param request Petición actual que contiene el User-Agent
+     * @return Texto descriptivo del dispositivo detectado
      */
     @Override
     public String getDeviceInfo(HttpServletRequest request) {

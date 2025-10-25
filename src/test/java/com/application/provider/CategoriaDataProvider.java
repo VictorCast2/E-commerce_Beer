@@ -131,7 +131,7 @@ public class CategoriaDataProvider {
     }
 
     public static CategoriaCreateRequest newCategoriaMock() {
-        return new CategoriaCreateRequest("Categoria 1", "Primera  categoria de prueba");
+        return new CategoriaCreateRequest(null, "Categoria 1", "Primera  categoria de prueba", true, null);
     }
 
     public static long cantidadPackPorCategoria() {
@@ -141,8 +141,8 @@ public class CategoriaDataProvider {
     // Controller
     public static List<CategoriaResponse> categoriaResponseListMock() {
         return List.of(
-                new CategoriaResponse("Categoria 1", "Primera Categoria de Pruebas", 5),
-                new CategoriaResponse("Categoria 2", "Segunda Categoria de Pruebas", 3)
+                new CategoriaResponse(1L,"categoria.jpg","Categoria 1", "Primera Categoria de Pruebas", true, 5, null),
+                new CategoriaResponse(2L, "categoria.jpg","Categoria 2", "Segunda Categoria de Pruebas", true, 3, null)
         );
     }
 }
