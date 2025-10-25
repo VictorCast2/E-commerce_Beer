@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
