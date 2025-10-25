@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="notif__item unread">
-                                <img src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg" alt="User">
+                                <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}" alt="User">
                                 <div class="notif__text">
                                     <p><strong>Su pedido ha sido realizado</strong> <br><span>esperando el envío</span>
                                     </p>
@@ -124,7 +124,7 @@
                             </div>
 
                             <div class="notif__item">
-                                <img src="../static/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg" alt="User">
+                                <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg}" alt="User">
                                 <div class="notif__text">
                                     <p><strong>Jitu Chauhan</strong> <span>respondió a tu lista de pedidos pendientes
                                             con
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="notif__item">
-                                <img src="../static/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg" alt="User">
+                                <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg}" alt="User">
                                 <div class="notif__text">
                                     <p><strong>Tienes mensajes nuevos</strong> <span>2 mensajes no leídos</span></p>
                                     <small> <i class="ri-time-line"></i> Hace 2 días</small>
@@ -151,7 +151,7 @@
 
                     <!-- Foto de usuario -->
                     <div class="header__user">
-                        <img id="user__admin" src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg"
+                        <img id="user__admin" th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}"
                             alt="Usuario">
 
                         <div class="nav__menu" id="SubMenu">
@@ -302,30 +302,20 @@
                                             Por favor, agrega una descripción de la categoria antes de continuar.
                                         </p>
                                     </div>
-
                                     <button class="input__btn">Crear Categoria</button>
-
-
                                 </div>
-
                             </form>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </section>
         </main>
-
     </div>
-
 
     <!-- Quill JS -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../static/Js/EditarCategoria.js"></script>
+    <script th:src="@{/Js/EditarCategoria.js}"></script>
 </body>
 
 </html>
