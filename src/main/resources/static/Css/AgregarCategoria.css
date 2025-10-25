@@ -87,7 +87,7 @@
     padding: 10px 15px;
     border-radius: 8px;
     width: 520px;
-    height: 25px;
+    height: 26px;
     letter-spacing: 1px;
     outline: none;
     transition: border-color .1s ease, outline .1s ease;
@@ -111,17 +111,99 @@
     border-radius: 100px;
 }
 
-.input__precio {
-    font: 600 1.3rem var(--typografiaGeist);
-    grid-column: 1 / -1;
-    margin: 1.2rem 0 1rem 1.5rem;
+.formulario__box input.has-value ~ label {
+    background-color: #fff;
+    transform: translateY(-80%) translateX(-10px) scale(0.9);
+    padding: 0 5px;
+    color: #8e6b43;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 100px;
 }
 
-.input__inventario {
-    font: 600 1.3rem var(--typografiaGeist);
-    grid-column: 1 / -1;
-    margin: 1.2rem 0 1rem 1.5rem;
+/* lista desplegable */
+.lista-subcategorias {
+    position: absolute;
+    top: 65px;
+    left: 20px;
+    width: 550px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 10;
+    padding: 8px 0;
 }
+
+.lista-subcategorias p {
+    margin: 0;
+    padding: 8px 15px;
+    font: 600 0.95rem var(--typografiaUrbanist);
+    color: #8e6b43;
+    cursor: default;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lista-subcategorias p:hover {
+    background-color: #f7efe7;
+}
+
+.lista-subcategorias p i {
+    cursor: pointer;
+    font-size: 1rem;
+    color: #c0392b;
+    transition: color 0.2s ease;
+}
+
+.lista-subcategorias p i:hover {
+    color: #e74c3c;
+}
+
+/* oculta o muestra la lista */
+.oculto {
+    display: none;
+}
+.visible {
+    display: block;
+}
+
+#subcategoriaTags {
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 480px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.sub-tag {
+    background-color: #f7efe7;
+    color: #8e6b43;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font: 600 0.9rem var(--typografiaGeist);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    pointer-events: auto;
+}
+
+.sub-tag i {
+    cursor: pointer;
+    color: #c0392b;
+    font-size: 0.9rem;
+    pointer-events: auto
+}
+
+
+
 
 .input__estados {
     font: 600 1.3rem var(--typografiaGeist);
@@ -435,6 +517,8 @@
 .custom-arrow.rotate {
     transform: translateY(-50%) rotate(180deg);
 }
+
+
 
 
 .box__icon i {

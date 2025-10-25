@@ -207,19 +207,6 @@
 
                                 <div class="producto__input">
 
-                                    <div class="input__formulario">
-                                        <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="Nombre"
-                                                id="nombre">
-                                            <label class="box__label" for="nombre">Nombre de la categoria</label>
-                                            <span class="box__icon"><i class="ri-check-line"></i></span>
-                                            <span class="box__icon"><i class="ri-close-line"></i></span>
-                                        </div>
-                                        <p class="formulario__error">
-                                            El nombre debe tener al menos 3 letras y no contener números.
-                                        </p>
-                                    </div>
-
                                     <!-- CATEGORÍA PRINCIPAL -->
                                     <div class="input__formulario">
                                         <div class="formulario__customselect">
@@ -239,6 +226,27 @@
                                         </div>
                                         <p class="formulario__error error--CategoriaPrincipal">
                                             Selecciona una categoria principal para la categoria.
+                                        </p>
+                                    </div>
+
+                                    <!-- CATEGORÍA Secundaria -->
+                                    <div class="input__formulario">
+                                        <div class="formulario__box" id="subcategoriaBox">
+                                            <input type="text" autocomplete="off" placeholder="" name="SubCategoria"
+                                                id="Subcategoria">
+                                            <label class="box__label" for="Subcategoria">Sub-Categoría</label>
+                                            <span class="box__icon"><i class="ri-check-line"></i></span>
+                                            <span class="box__icon"><i class="ri-close-line"></i></span>
+
+                                            <!-- Lista de subcategorías agregadas -->
+                                            <div id="subcategoriaLista" class="lista-subcategorias oculto"></div>
+                                        </div>
+
+                                        <!-- Campo oculto para enviar las subcategorías -->
+                                        <input type="hidden" name="subcategoriasHidden" id="subcategoriasHidden">
+
+                                        <p class="formulario__error">
+                                            Debes agregar al menos una subcategoría antes de continuar
                                         </p>
                                     </div>
 
