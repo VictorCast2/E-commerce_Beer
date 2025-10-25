@@ -189,6 +189,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Weka -->
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.8.6</version>
+        </dependency>
+
     </dependencies>
 
 	<build>
