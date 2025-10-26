@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //FILTRO DE PRODUCTOS (por texto y estado)
+    //FILTRO DE PRODUCTOS (por texto y estado)
     (() => {
         const searchInput = document.getElementById("inputSearch");
         const stateSelect = document.getElementById("filtro-estado");
@@ -151,17 +152,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    /* Nota: Debe de enviarte a la pagina de EditarProducto.html con 
+                    /* Nota: Debe de enviarte a la pagina de EditarCategoria.html con 
                     spring boot easy no? con un get en el controlldor easy no?
                     una vez lo hagas borrar este comentario por favor*/
-                    window.location.href = "/EditarProducto.html";
+                    window.location.href = "/EditarCategoria.html";
 
                 }
             });
         }
 
         // === OCULTAR ===
-        /* A esta modal se le tiene que pasar algo del controllador para que oculte el producto en el index
+        /* A esta modal se le tiene que pasar algo del controllador para que oculte el la categoria en el index
         o algo asi xd no se de spring boot problema tuyo jose */
         else if (e.target.closest(".ocultar")) {
             Swal.fire({
