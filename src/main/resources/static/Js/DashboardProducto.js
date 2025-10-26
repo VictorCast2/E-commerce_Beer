@@ -50,26 +50,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const stateSelect = document.getElementById("filtro-estado");
         const tableBody = document.getElementById("favoritos-body");
 
-        if (!searchInput || !stateSelect || !tableBody) return; // Evita errores si falta algo
+        if (!searchInput || !stateSelect || !tableBody) return;
 
-        const tableRows = Array.from(tableBody.rows); // Más rápido que querySelectorAll('tr')
+        const tableRows = Array.from(tableBody.rows);
 
         const filtrarTabla = () => {
             const texto = searchInput.value.trim().toLowerCase();
             const estadoSeleccionado = stateSelect.value.trim().toLowerCase();
+            const palabras = texto.split(/\s+/).filter(Boolean); // separa las palabras
 
             tableRows.forEach(row => {
-                const nombre = row.querySelector('.td__product')?.textContent.toLowerCase() || '';
+                // Tomamos todo el texto de las celdas (sin los botones del menú)
+                const celdas = Array.from(row.querySelectorAll("td"))
+                    .filter(td => !td.classList.contains("menu__actions")) // evita el menú
+                    .map(td => td.textContent.toLowerCase())
+                    .join(" "); // une todo en un solo string
+
                 const estado = row.querySelector('.td__estados')?.textContent.toLowerCase() || '';
 
-                const coincideTexto = !texto || nombre.includes(texto);
+                // Coincide si alguna palabra está presente en cualquier parte del texto del tr
+                const coincideTexto = palabras.length === 0 || palabras.some(palabra => celdas.includes(palabra));
                 const coincideEstado = estadoSeleccionado === "todos" || estado === estadoSeleccionado;
 
+                // Mostrar u ocultar según los filtros
                 row.hidden = !(coincideTexto && coincideEstado);
             });
         };
 
-        // Mejor rendimiento con "input" y "change"
         searchInput.addEventListener('input', filtrarTabla);
         stateSelect.addEventListener('change', filtrarTabla);
     })();
@@ -243,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".pasar--anterior").disabled = pagina === 1;
         document.querySelector(".pasar--siguiente").disabled = pagina === totalPaginas;
 
-        // 👉 Después de actualizar las filas, marcamos los últimos dos menús visibles
+        // Después de actualizar las filas, marcamos los últimos dos menús visibles
         marcarUltimosDosMenus();
     }
 
