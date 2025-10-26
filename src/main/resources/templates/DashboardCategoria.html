@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="../static/Css/DashboardCategoria.css">
+    <link rel="stylesheet" th:href="@{/Css/DashboardCategoria.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/LogoBeer.png}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
           integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,7 +34,7 @@
     <aside class="dashboard__sidebar">
 
         <figure class="sidebar__logo">
-            <img src="../static/Assets/Img/logos/LogoBeer.png" alt="Logo dashboard">
+            <img th:src="@{/Assets/Img/logos/LogoBeer.png}" alt="Logo dashboard">
             <figcaption class="logo__acronimo">OroImport</figcaption>
         </figure>
 
@@ -112,7 +113,7 @@
                         </div>
 
                         <div class="notif__item unread">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Su pedido ha sido realizado</strong> <br><span>esperando el envío</span>
                                 </p>
@@ -121,7 +122,7 @@
                         </div>
 
                         <div class="notif__item">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Jitu Chauhan</strong> <span>respondió a tu lista de pedidos pendientes
                                             con
@@ -131,7 +132,7 @@
                         </div>
 
                         <div class="notif__item">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Tienes mensajes nuevos</strong> <span>2 mensajes no leídos</span></p>
                                 <small> <i class="ri-time-line"></i> Hace 2 días</small>
@@ -148,7 +149,7 @@
 
                 <!-- Foto de usuario -->
                 <div class="header__user">
-                    <img id="user__admin" src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg"
+                    <img id="user__admin" th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}"
                          alt="Usuario">
 
                     <div class="nav__menu" id="SubMenu">
@@ -228,7 +229,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/vinoCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/vinoCategoria.png}"
                                              alt="categoria de la bebida vino">
                                     </figure>
                                 </td>
@@ -263,7 +264,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/whiskyCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/whiskyCategoria.png}"
                                              alt="categoria de la bebida whisky">
                                     </figure>
                                 </td>
@@ -298,7 +299,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/cervezaCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/cervezaCategoria.png}"
                                              alt="categoria de la bebida cerveza">
                                     </figure>
                                 </td>
@@ -333,7 +334,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/tequilaCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/tequilaCategoria.png}"
                                              alt="categoria de la bebida tequila">
                                     </figure>
                                 </td>
@@ -368,7 +369,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/mezcalCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/mezcalCategoria.png}"
                                              alt="categoria de la bebida mezcal">
                                     </figure>
                                 </td>
@@ -403,7 +404,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/ronCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/ronCategoria.png}"
                                              alt="categoria de la bebida ron">
                                     </figure>
                                 </td>
@@ -438,7 +439,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/aguardienteCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/aguardienteCategoria.png}"
                                              alt="categoria de la bebida aguardiente">
                                     </figure>
                                 </td>
@@ -473,7 +474,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/vodkaCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/vodkaCategoria.png}"
                                              alt="categoria de la bebida vodkas">
                                     </figure>
                                 </td>
@@ -508,7 +509,7 @@
                             <tr>
                                 <td>
                                     <figure class="img__container">
-                                        <img src="../static/Assets/Img/iconoCategoria/ginebraCategoria.png"
+                                        <img th:src="@{/Assets/Img/iconoCategoria/ginebraCategoria.png}"
                                              alt="categoria de la bebida ginebra">
                                     </figure>
                                 </td>
@@ -564,7 +565,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../static/Js/DashboardCategoria.js"></script>
+<script th:src="@{/Js/DashboardCategoria.js}"></script>
 </body>
 
 </html>
