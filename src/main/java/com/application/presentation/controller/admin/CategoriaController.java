@@ -28,20 +28,30 @@ public class CategoriaController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
-    @GetMapping("/")
-    public String Categoria(
+    @GetMapping("/agregar")
+    public String AgregarCategoria(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam(value = "mensaje", required = false) String mensaje,
             Model model) {
-
         Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
         List<CategoriaResponse> categoriaResponses = categoriaService.getCategorias();
-
         model.addAttribute("usuario", usuario);
         model.addAttribute("categoriaList", categoriaResponses);
         model.addAttribute("mensaje", mensaje);
+        return "AgregarCategoria";
+    }
 
-        return "Categoria";
+    @GetMapping("/editar")
+    public String EditarCategoria(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam(value = "mensaje", required = false) String mensaje,
+            Model model) {
+        Usuario usuario = usuarioService.getUsuarioByCorreo(userDetails.getUsername());
+        List<CategoriaResponse> categoriaResponses = categoriaService.getCategorias();
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("categoriaList", categoriaResponses);
+        model.addAttribute("mensaje", mensaje);
+        return "EditarCategoria";
     }
 
     @PostMapping("/add-categoria")
