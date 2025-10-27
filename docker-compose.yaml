@@ -29,7 +29,7 @@ services:
     image: "mysql:latest"
     container_name: DB-Costa-De-Oro-Imports-MySQL
     environment:
-      - MYSQL_DATABASE=DB-Costa-De-Oro-Imports-MySQL
+      - MYSQL_DATABASE=db_beer
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
