@@ -1,38 +1,27 @@
-# ============================
-# Etapa 1: Construcción
-# ============================
-FROM eclipse-temurin:21-jdk-jammy AS builder
+# Etapa 1: Compilar la app con Maven
+FROM eclipse-temurin:21.0.3_9-jdk AS builder
 
 WORKDIR /app
 
-# Copiar Maven Wrapper y configuración
-COPY mvnw mvnw.cmd pom.xml ./
-COPY .mvn/ .mvn/
+# Copiamos los archivos necesarios para descargar dependencias
+COPY ./pom.xml .
+COPY ./.mvn .mvn
+COPY ./mvnw .
 
-# Dar permisos al wrapper
-RUN chmod +x mvnw
+# Descargar dependencias sin compilar
+RUN ./mvnw dependency:go-offline
 
-# 🔍 Verificar que los archivos del wrapper se copiaron correctamente
-RUN ls -R .mvn && cat .mvn/wrapper/maven-wrapper.properties
+# Copiar código fuente y compilar
+COPY ./src ./src
+RUN ./mvnw clean install -DskipTests
 
-# Descargar dependencias sin compilar (modo offline)
-RUN ./mvnw dependency:go-offline --batch-mode
-
-# Copiar código fuente
-COPY src src
-
-# Construir el JAR (sin ejecutar tests)
-RUN ./mvnw clean package -DskipTests --batch-mode
-
-# ============================
-# Etapa 2: Producción
-# ============================
-FROM eclipse-temurin:21-jre-jammy
+# Etapa 2: Imagen final con solo el .jar
+FROM eclipse-temurin:21.0.3_9-jre
 
 WORKDIR /app
 
-# Copiar el JAR generado desde la etapa anterior
 COPY --from=builder /app/target/*.jar app.jar
+
 
 # Puerto por defecto de Spring Boot
 EXPOSE 8080
