@@ -20,6 +20,8 @@ public class DetalleVenta {
         @Column(name = "detalle_venta_id")
         private Long detalleVentaId;
 
+        @Column(name = "precio_unitario")
+        private int precioUnitario;
         private int cantidad;
         private int subtotal;
 
