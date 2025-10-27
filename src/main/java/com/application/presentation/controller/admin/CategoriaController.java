@@ -43,7 +43,7 @@ public class CategoriaController {
         return "DashboardCategoria";
     }
 
-    @GetMapping("/agregar")
+    @GetMapping("/add")
     public String AgregarCategoria(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam(value = "mensaje", required = false) String mensaje,
@@ -56,7 +56,7 @@ public class CategoriaController {
         return "AgregarCategoria";
     }
 
-    @GetMapping("/editar")
+    @GetMapping("/update")
     public String EditarCategoria(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam(value = "mensaje", required = false) String mensaje,
@@ -69,7 +69,7 @@ public class CategoriaController {
         return "EditarCategoria";
     }
 
-    @PostMapping("/add-categoria")
+    @PostMapping("/add")
     public String addcategoria(@ModelAttribute @Valid CategoriaCreateRequest categoriaRequest) {
         GeneralResponse response = categoriaService.createCategoria(categoriaRequest);
         String mensaje = response.mensaje();
@@ -77,7 +77,7 @@ public class CategoriaController {
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("update-categoria/{id}")
+    @PostMapping("update/{id}")
     public String updateCategoria(
             @ModelAttribute @Valid CategoriaCreateRequest categoriaRequest,
             @PathVariable Long id) {
@@ -87,7 +87,7 @@ public class CategoriaController {
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("disable-categoria/{id}")
+    @PostMapping("disable/{id}")
     public String disableCategoria(@PathVariable Long id) {
         BaseResponse response = categoriaService.changeEstadoCategoria(id);
         String mensaje = response.mensaje();
@@ -95,7 +95,7 @@ public class CategoriaController {
         return "redirect:/admin/categoria/?mensaje=" + UriUtils.encode(mensaje, StandardCharsets.UTF_8);
     }
 
-    @PostMapping("delete-categoria/{id}")
+    @PostMapping("delete/{id}")
     public String deleteCategoria(@PathVariable Long id) {
         BaseResponse response = categoriaService.deleteCategoria(id);
         String mensaje = response.mensaje();

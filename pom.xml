@@ -189,7 +189,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Weka -->
+        <!-- weka -->
         <dependency>
             <groupId>nz.ac.waikato.cms.weka</groupId>
             <artifactId>weka-stable</artifactId>

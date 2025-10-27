@@ -31,7 +31,7 @@ public class CompraController {
         return "DashboardCompra";
     }
 
-    @GetMapping("/detalle_compra/")
+    @GetMapping("/detalle-compra/")
     public String DetalleCompra(@AuthenticationPrincipal CustomUserPrincipal principal,
                                   @RequestParam(value = "mensaje", required = false) String mensaje,
                                   Model model) {
