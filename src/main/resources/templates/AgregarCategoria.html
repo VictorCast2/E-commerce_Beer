@@ -55,7 +55,7 @@
 
             <li class="sidebar__item">
                 <i class="ri-list-unordered"></i>
-                <a th:href="@{/admin/categoria/agregar}" class="sidebar__text">Categorias</a>
+                <a th:href="@{/admin/categoria/}" class="sidebar__text">Categorias</a>
             </li>
 
             <li class="sidebar__item">
@@ -177,6 +177,7 @@
                             <a th:href="@{/auth/logout}" class="sub__link">
                                 <p class="link__text">Cerrar Seccion</p>
                             </a>
+
                         </div>
                     </div>
 
@@ -193,7 +194,7 @@
                 </div>
 
                 <div class="titleheader__btn">
-                    <a href="DashboardCategoria.html">Volver a categorias</a>
+                    <a th:href="@{/admin/categoria/}">Volver a categorias</a>
                 </div>
             </div>
 
@@ -304,18 +305,11 @@
                                 </div>
 
                                 <button class="input__btn">Crear Categoria</button>
-
-
                             </div>
-
                         </form>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
     </main>
 </div>
