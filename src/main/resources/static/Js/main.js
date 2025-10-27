@@ -1,3 +1,4 @@
+
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -10,6 +11,7 @@ export function activarGlassmorphism() {
         }
     });
 }
+
 
 export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -39,6 +41,7 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     // Disparamos evento para que initCart refresque la UI
     document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
 }
+
 // Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
 export function initCart() {
     const drawer = document.getElementById("cart-drawer");
@@ -328,33 +331,6 @@ export function desplegablePerfil() {
     }
 }
 
-export function desplegableBusqueda() {
-    /* Menú desplegable de búsqueda (lupa) */
-
-    const searchToggle = document.getElementById("searchToggle");
-    const searchBox = document.getElementById("searchBox");
-
-    if (searchToggle && searchBox) {
-        searchToggle.addEventListener("click", function (e) {
-            e.stopPropagation();
-
-            // Alternar visibilidad del buscador
-            searchBox.classList.toggle("active");
-        });
-
-        // Cerrar la caja de búsqueda si se hace clic fuera
-        document.addEventListener("click", function (e) {
-            const isClickInside =
-                searchBox.contains(e.target) ||
-                searchToggle.contains(e.target);
-
-            if (!isClickInside) {
-                searchBox.classList.remove("active");
-            }
-        });
-    }
-}
-
 export function carruselProductos() {
     // mostrar los productos con carrusel
     document.querySelectorAll(".flex").forEach(carrusel => {
@@ -372,26 +348,21 @@ export function carruselProductos() {
 
         const paso = visibles * (cardWidth + gap); // mueve 4 productos
 
-        if (nextBtn) {
-            nextBtn.addEventListener("click", () => {
-                if (posicion < maxPosicion) {
-                    posicion += paso;
-                    if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
-                    track.style.transform = `translateX(-${posicion}px)`;
-                }
-            });
-        }
+        nextBtn.addEventListener("click", () => {
+            if (posicion < maxPosicion) {
+                posicion += paso;
+                if (posicion > maxPosicion) posicion = maxPosicion; // no pasar límite
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
 
-        if (prevBtn) {
-            prevBtn.addEventListener("click", () => {
-                if (posicion > 0) {
-                    posicion -= paso;
-                    if (posicion < 0) posicion = 0; // no pasar inicio
-                    track.style.transform = `translateX(-${posicion}px)`;
-                }
-            });
-        }
-
+        prevBtn.addEventListener("click", () => {
+            if (posicion > 0) {
+                posicion -= paso;
+                if (posicion < 0) posicion = 0; // no pasar inicio
+                track.style.transform = `translateX(-${posicion}px)`;
+            }
+        });
     });
 }
 
@@ -430,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
             html: `
         <div class="contenedor-imagen-modal">
             <img src="/Assets/Img/Logos/costaoroimport.png"
-            alt="Mayor de edad"
+            alt="Mayor de edad" 
             class="mi-imagen-modal">
         </div>
         <h2 class="swal2-title">¿ Eres Mayor De Edad ?</h2>
@@ -464,9 +435,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //desplegar menu del usuario
     desplegablePerfil();
 
-    //desplegar menu de busqueda
-    desplegableBusqueda();
-
     //rederigir a Favorito
     rederigirFav();
 
@@ -484,23 +452,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mostrar slide por índice
     function showSlide(index) {
-        if (slides.length === 0) return; // 🚨 prevenir error si no hay slides
-
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             dots[i]?.classList.toggle('active', i === index);
         });
 
         const activeSlide = slides[index];
-        if (!activeSlide) return; // otra protección extra
-
-        const theme = activeSlide.getAttribute('data-theme') || "default";
+        const theme = activeSlide.getAttribute('data-theme');
 
         hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
         hero.classList.add(`hero--${theme}`);
 
         currentSlide = index;
     }
+
 
     // Siguiente slide
     function nextSlide() {
@@ -553,13 +518,8 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
 
     //duplicacion de los logos
-    const slider = document.getElementById("slider");
-    const logos = document.getElementById("logos");
-
-    if (slider && logos) {
-        const clone = slider.cloneNode(true);
-        logos.appendChild(clone);
-    }
+    const logos = document.getElementById("slider").cloneNode(true);
+    document.getElementById("logos").appendChild(logos);
 
     //invocar el iniciar carrito y corazon
     inicialHeart();
@@ -577,4 +537,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //cambiar anio del footer automaticamente
     document.getElementById("anio__pagina").textContent = new Date().getFullYear();
+
 });
