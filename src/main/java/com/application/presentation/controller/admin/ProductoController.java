@@ -28,7 +28,7 @@ public class ProductoController {
     private UsuarioServiceImpl usuarioService;
 
     @GetMapping("/")
-    public String Producto(@AuthenticationPrincipal CustomUserPrincipal principal,
+    public String DashboardProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
             @RequestParam(value = "mensaje", required = false) String mensaje,
             Model model) {
 

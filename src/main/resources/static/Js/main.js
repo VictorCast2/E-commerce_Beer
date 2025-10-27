@@ -39,7 +39,6 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     // Disparamos evento para que initCart refresque la UI
     document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
 }
-
 // Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
 export function initCart() {
     const drawer = document.getElementById("cart-drawer");
@@ -154,7 +153,7 @@ export function initCart() {
                             <span class="qty">${item.qty}</span>
                             <button class="plus">+</button>
                         </div>
-                        <span class="price">$${parseFloat(item.price || 0).toFixed(2)}</span>
+                        <span class="price">$${item.price.toFixed(2)}</span>
                     </div>
                     <button class="remove" data-index="${index}">
                         <i class="ri-delete-bin-6-line"></i>

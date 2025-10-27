@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="notif__item unread">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Su pedido ha sido realizado</strong> <br><span>esperando el envío</span>
                                 </p>
@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="notif__item">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroSeis.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Jitu Chauhan</strong> <span>respondió a tu lista de pedidos pendientes
                                             con
@@ -132,7 +132,7 @@
                         </div>
 
                         <div class="notif__item">
-                            <img src="../static/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg" alt="User">
+                            <img th:src="@{/Assets/Img/ExperenciaUsuarios/rostroUno.jpeg}" alt="User">
                             <div class="notif__text">
                                 <p><strong>Tienes mensajes nuevos</strong> <span>2 mensajes no leídos</span></p>
                                 <small> <i class="ri-time-line"></i> Hace 2 días</small>
@@ -149,7 +149,7 @@
 
                 <!-- Foto de usuario -->
                 <div class="header__user">
-                    <img id="user__admin" src="../static/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg"
+                    <img id="user__admin" th:src="@{/Assets/Img/ExperenciaUsuarios/rostroCuatro.jpeg}"
                          alt="Usuario">
 
                     <div class="nav__menu" id="SubMenu">
@@ -276,7 +276,7 @@
                                 <td class="td__producto">
                                     <div class="producto__info">
                                         <figure class="img__container">
-                                            <img src="../static/Assets/Img/Productos/Productos__Destacados/ProdusctoDestacado__vino2.webp"
+                                            <img th:src="@{/Assets/Img/Productos/Productos_Destacados/ProdusctoDestacado__vino2.webp}"
                                                  alt="">
                                         </figure>
                                         <span class="producto__nombre">Vino Lambrusco Botticello Bianco Dolce
@@ -292,7 +292,7 @@
                                 <td class="td__producto">
                                     <div class="producto__info">
                                         <figure class="img__container">
-                                            <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado59.png"
+                                            <img th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado59.png}"
                                                  alt="">
                                         </figure>
                                         <span class="producto__nombre">Ginebra Premium Hendrick's Importada Escocesa 750 ml</span>
@@ -307,7 +307,7 @@
                                 <td class="td__producto">
                                     <div class="producto__info">
                                         <figure class="img__container">
-                                            <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado67.png"
+                                            <img th:src="@{/Assets/Img/Productos/Productos_Destacados/ProductoDestacado67.png}"
                                                  alt="">
                                         </figure>
                                         <span class="producto__nombre">Vino Tinto Terra Vega Merlot 750 ml</span>
@@ -322,7 +322,7 @@
                                 <td class="td__producto">
                                     <div class="producto__info">
                                         <figure class="img__container">
-                                            <img src="../static/Assets/Img/Productos/Productos__Destacados/ProductoDestacado63.png"
+                                            <img th:src="@{/Assets/Img/Productos/Productos__Destacados/ProductoDestacado63.png}"
                                                  alt="">
                                         </figure>
                                         <span class="producto__nombre">Vodka Smirnoff Sabor Lulo Premium 750 ml</span>
@@ -348,14 +348,13 @@
                     </div>
                 </div>
             </div>
-
         </section>
     </main>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../static/Js/DetalleCompra.js"></script>
+<script th:src="@{/Js/DetalleCompra.js}"></script>
 </body>
 
 </html>
