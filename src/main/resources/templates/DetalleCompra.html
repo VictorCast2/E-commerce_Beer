@@ -155,8 +155,10 @@
                     <div class="nav__menu" id="SubMenu">
                         <div class="menu__sub">
                             <div class="sub__info">
-                                <span class="info__admin">Administrador de OroImport</span>
-                                <span class="info__title">joseandres@gmail.com</span>
+                                    <span class="info__admin">Administrador
+                                        <span th:text="${#authentication.principal.nombres}"> Nombre y Apellido</span>
+                                    </span>
+                                <span class="info__title" th:text="${#authentication.principal?.correo}">mail@mail.com</span>
                             </div>
                             <hr>
 
