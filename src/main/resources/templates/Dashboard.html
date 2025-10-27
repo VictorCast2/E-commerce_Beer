@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" th:href="@{/Css/Dashboard.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/Assets/Img/Logos/LogoBeer.png}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
         integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -55,12 +55,12 @@
 
                 <li class="sidebar__item">
                     <i class="ri-list-unordered"></i>
-                    <a th:href="@{/admin/categoria/agregar}" class="sidebar__text">Categorias</a>
+                    <a th:href="@{/admin/categoria/}" class="sidebar__text">Categorias</a>
                 </li>
 
                 <li class="sidebar__item">
                     <i class="ri-shopping-bag-4-line"></i>
-                    <a href="" class="sidebar__text">Compras</a>
+                    <a th:href="@{/admin/compra/}" class="sidebar__text">Compras</a>
                 </li>
 
                 <li class="sidebar__item">
@@ -162,21 +162,22 @@
                                 </div>
                                 <hr>
 
-                                <a th:href="@{/Perfil.html}" class="sub__link">
+                                <a th:href="@{/perfil/}" class="sub__link">
                                     <p class="link__text">Perfil</p>
                                 </a>
 
-                                <a th:href="@{/Configuraciones.html}" class="sub__link">
+                                <a th:href="@{/perfil/configuration}" class="sub__link">
                                     <p class="link__text">Configuracion</p>
                                 </a>
 
-                                <a th:href="@{/Notificaciones.html}" class="sub__link">
+                                <a th:href="@{/perfil/notificaciones}" class="sub__link">
                                     <p class="link__text">Notificaciones</p>
                                 </a>
 
-                                <a th:href="@{/Index.html}" class="sub__link">
+                                <a th:href="@{/auth/logout}" class="sub__link">
                                     <p class="link__text">Cerrar Seccion</p>
                                 </a>
+
                             </div>
                         </div>
 

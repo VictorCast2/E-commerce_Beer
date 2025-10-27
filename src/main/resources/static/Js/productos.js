@@ -201,5 +201,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //filtrar los productos
-
 });

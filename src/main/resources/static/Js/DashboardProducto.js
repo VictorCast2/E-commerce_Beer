@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    //Menú desplegable del perfil
+    //Menú desplegable del perfil 
     const subMenu = document.getElementById("SubMenu");
     const profileImage = document.getElementById("user__admin");
 
@@ -50,66 +50,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const stateSelect = document.getElementById("filtro-estado");
         const tableBody = document.getElementById("favoritos-body");
 
-        if (!searchInput || !stateSelect || !tableBody) return; // Evita errores si falta algo
+        if (!searchInput || !stateSelect || !tableBody) return;
 
-        const tableRows = Array.from(tableBody.rows); // Más rápido que querySelectorAll('tr')
+        const tableRows = Array.from(tableBody.rows);
 
         const filtrarTabla = () => {
             const texto = searchInput.value.trim().toLowerCase();
             const estadoSeleccionado = stateSelect.value.trim().toLowerCase();
+            const palabras = texto.split(/\s+/).filter(Boolean); // separa las palabras
 
             tableRows.forEach(row => {
-                const nombre = row.querySelector('.td__product')?.textContent.toLowerCase() || '';
+                // Tomamos todo el texto de las celdas (sin los botones del menú)
+                const celdas = Array.from(row.querySelectorAll("td"))
+                    .filter(td => !td.classList.contains("menu__actions")) // evita el menú
+                    .map(td => td.textContent.toLowerCase())
+                    .join(" "); // une todo en un solo string
+
                 const estado = row.querySelector('.td__estados')?.textContent.toLowerCase() || '';
 
-                const coincideTexto = !texto || nombre.includes(texto);
+                // Coincide si alguna palabra está presente en cualquier parte del texto del tr
+                const coincideTexto = palabras.length === 0 || palabras.some(palabra => celdas.includes(palabra));
                 const coincideEstado = estadoSeleccionado === "todos" || estado === estadoSeleccionado;
 
+                // Mostrar u ocultar según los filtros
                 row.hidden = !(coincideTexto && coincideEstado);
             });
         };
 
-        // Mejor rendimiento con "input" y "change"
         searchInput.addEventListener('input', filtrarTabla);
         stateSelect.addEventListener('change', filtrarTabla);
     })();
 
-    //abrir para mostrar editar,eliminar y ocultar
-    function marcarUltimosDosMenus() {
-        // Seleccionamos el tbody de la tabla (por su id)
-        const tbody = document.querySelector("#favoritos-body");
-        if (!tbody) return;
-
-        // Seleccionamos todos los td con la clase menu__actions dentro del tbody
-        const celdasMenu = tbody.querySelectorAll("td.menu__actions");
-
-        // Primero, limpiamos cualquier clase 'up' previa
-        celdasMenu.forEach(td => {
-            const menu = td.querySelector(".dropdown__menu");
-            if (menu) menu.classList.remove("up");
-        });
-
-        // Tomamos los últimos 2 <td>
-        const ultimosDos = Array.from(celdasMenu).slice(-2);
-
-        // Les aplicamos la clase 'up' a sus menús
-        ultimosDos.forEach(td => {
-            const menu = td.querySelector(".dropdown__menu");
-            if (menu) menu.classList.add("up");
-        });
-    }
-
-    // Llamamos la función cuando carga la página
-    marcarUltimosDosMenus();
-
-    // Observamos cambios en el tbody (por si se actualiza dinámicamente)
-    const tbody = document.querySelector("#favoritos-body");
-    if (tbody) {
-        const observer = new MutationObserver(() => {
-            marcarUltimosDosMenus();
-        });
-        observer.observe(tbody, { childList: true, subtree: true });
-    }
 
     // Manejar abrir/cerrar los menús
     document.addEventListener("click", function (e) {
@@ -129,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---- Modales con SweetAlert2 ----
     document.addEventListener("click", (e) => {
         // === ELIMINAR ===
+        /* A esta modal se le tiene que pasar detele del controllador o algo asi xd no se de spring boot
+        problema tuyo jose */
         if (e.target.closest(".eliminar")) {
             Swal.fire({
                 title: "¿Estás seguro?",
@@ -178,23 +151,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Editado",
-                        text: "El registro está listo para ser editado.",
-                        icon: "success",
-                        timer: 1500,
-                        showConfirmButton: false,
-                        customClass: {
-                            title: 'swal-title',
-                            popup: 'swal-popup'
-                        }
-                    });
+                    /* Nota: Debe de enviarte a la pagina de EditarProducto.html con 
+                    spring boot easy no? con un get en el controlldor easy no?
+                    una vez lo hagas borrar este comentario por favor*/
+                    window.location.href = "/EditarProducto.html";
 
                 }
             });
         }
 
         // === OCULTAR ===
+        /* A esta modal se le tiene que pasar algo del controllador para que oculte el producto en el index
+        o algo asi xd no se de spring boot problema tuyo jose */
         else if (e.target.closest(".ocultar")) {
             Swal.fire({
                 title: "¿Deseas ocultar este registro?",
@@ -228,8 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    //pagination de la tabla
-    /* const filasPorPagina = 12; // Máximo de registros por página
+    //pagination de la tabla 
+    const filasPorPagina = 12;
     const tablaBody = document.getElementById("favoritos-body");
     const filas = tablaBody.querySelectorAll("tr");
     const totalFilas = filas.length;
@@ -240,7 +208,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let paginaActual = 1;
 
-    // === Función para mostrar las filas según la página seleccionada ===
+    // === Función para marcar los últimos dos menús visibles ===
+    function marcarUltimosDosMenus() {
+        // Seleccionar filas visibles
+        const filasVisibles = Array.from(tablaBody.querySelectorAll("tr"))
+            .filter(tr => tr.style.display !== "none");
+
+        // Limpiar clases previas
+        const todosMenus = tablaBody.querySelectorAll("td.menu__actions .dropdown__menu");
+        todosMenus.forEach(menu => menu.classList.remove("up"));
+
+        // Tomar las últimas dos filas visibles
+        const ultimosDos = filasVisibles.slice(-2);
+        ultimosDos.forEach(tr => {
+            const menu = tr.querySelector("td.menu__actions .dropdown__menu");
+            if (menu) menu.classList.add("up");
+        });
+    }
+
+    // === Mostrar filas según página seleccionada ===
     function mostrarPagina(pagina) {
         const inicio = (pagina - 1) * filasPorPagina;
         const fin = inicio + filasPorPagina;
@@ -249,31 +235,32 @@ document.addEventListener("DOMContentLoaded", () => {
             fila.style.display = (index >= inicio && index < fin) ? "" : "none";
         });
 
-        // Actualiza el texto "Mostrando del X al Y de Z entradas"
+        // Actualizar texto de paginación
         const inicioTexto = inicio + 1;
         const finTexto = Math.min(fin, totalFilas);
         textoPaginacion.textContent = `Mostrando del ${inicioTexto} al ${finTexto} de ${totalFilas} entradas`;
 
-        // Actualiza botones activos
+        // Actualizar botones activos
         const botonesPagina = contenedorBotones.querySelectorAll(".button__item");
         botonesPagina.forEach((btn, i) => {
             btn.classList.toggle("active", i + 1 === pagina);
         });
 
-        // Control de botones "Anterior" y "Siguiente"
+        // Control botones anterior / siguiente
         document.querySelector(".pasar--anterior").disabled = pagina === 1;
         document.querySelector(".pasar--siguiente").disabled = pagina === totalPaginas;
+
+        // Después de actualizar las filas, marcamos los últimos dos menús visibles
+        marcarUltimosDosMenus();
     }
 
-    // === Crear botones de número de página dinámicamente ===
+    // === Crear botones dinámicamente ===
     function crearBotones() {
         const anterior = contenedorBotones.querySelector(".pasar--anterior");
         const siguiente = contenedorBotones.querySelector(".pasar--siguiente");
 
-        // Elimina los botones numéricos existentes
         contenedorBotones.querySelectorAll(".button__item").forEach(btn => btn.remove());
 
-        // Agrega nuevos según el total de páginas
         for (let i = 1; i <= totalPaginas; i++) {
             const btn = document.createElement("button");
             btn.classList.add("button__item");
@@ -288,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // === Eventos de navegación Anterior / Siguiente ===
+    // === Eventos de navegación ===
     document.querySelector(".pasar--anterior").addEventListener("click", () => {
         if (paginaActual > 1) {
             paginaActual--;
@@ -303,9 +290,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Inicializa la paginación
+    // === Inicializar paginación ===
     crearBotones();
-    mostrarPagina(paginaActual); */
+    mostrarPagina(paginaActual);
+
+    // verificar de forma dinamica cuantos registros hay en la tabla de productos
+    const tablaBodyTotal = document.getElementById("favoritos-body");
+    const textoProductos = document.querySelector(".producto__texto");
+
+    if (tablaBodyTotal && textoProductos) {
+        const totalFilas = tablaBodyTotal.querySelectorAll("tr").length;
+        textoProductos.textContent = `Hay ${totalFilas} producto${totalFilas !== 1 ? 's' : ''} registrado${totalFilas !== 1 ? 's' : ''}`;
+    }
 
 });
 

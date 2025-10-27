@@ -1,10 +1,12 @@
 package com.application.presentation.controller.admin;
 
+import com.application.configuration.custom.CustomUserPrincipal;
 import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.categoria.request.CategoriaCreateRequest;
 import com.application.presentation.dto.categoria.response.CategoriaResponse;
 import com.application.presentation.dto.general.response.BaseResponse;
 import com.application.presentation.dto.general.response.GeneralResponse;
+import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.categoria.CategoriaServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,19 @@ public class CategoriaController {
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
+
+    @GetMapping("/")
+    public String DashboardCategoria(@AuthenticationPrincipal CustomUserPrincipal principal,
+                                    @RequestParam(value = "mensaje", required = false) String mensaje,
+                                    Model model) {
+
+        Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("mensaje", mensaje);
+
+        return "DashboardCategoria";
+    }
 
     @GetMapping("/agregar")
     public String AgregarCategoria(
