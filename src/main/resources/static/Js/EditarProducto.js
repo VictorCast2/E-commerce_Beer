@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    //Menú desplegable del perfil 
+    //Menú desplegable del perfil
     const subMenu = document.getElementById("SubMenu");
     const profileImage = document.getElementById("user__admin");
 

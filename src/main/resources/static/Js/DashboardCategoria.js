@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // === OCULTAR ===
+            // === OCULTAR ===
         /* A esta modal se le tiene que pasar algo del controllador para que oculte el la categoria en el index
         o algo asi xd no se de spring boot problema tuyo jose */
         else if (e.target.closest(".ocultar")) {
@@ -305,6 +305,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-
-
-

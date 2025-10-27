@@ -34,31 +34,31 @@
     <aside class="dashboard__sidebar">
 
         <figure class="sidebar__logo">
-            <img th:src="@{/Assets/Img/logos/LogoBeer.png}" alt="Logo dashboard">
+            <img th:src="@{/Assets/Img/logos/Isotipo.png}" alt="Logo dashboard">
             <figcaption class="logo__acronimo">OroImport</figcaption>
         </figure>
 
         <ul class="sidebar__menu">
             <li class="sidebar__item">
                 <i class="ri-home-4-line"></i>
-                <a href="Dashboard.html" class="sidebar__text">Panel De Control</a>
+                <a href="" class="sidebar__text">Panel De Control</a>
             </li>
 
             <p class="menu__title">Administracion De Tiendas</p>
 
             <li class="sidebar__item">
                 <i class="ri-shopping-cart-2-line"></i>
-                <a href="DashboardProducto.html" class="sidebar__text">Productos</a>
+                <a th:href="@{/admin/producto/}" class="sidebar__text">Productos</a>
             </li>
 
             <li class="sidebar__item active">
                 <i class="ri-list-unordered"></i>
-                <a href="" class="sidebar__text">Categorias</a>
+                <a th:href="@{/admin/categoria/}" class="sidebar__text">Categorias</a>
             </li>
 
             <li class="sidebar__item">
                 <i class="ri-shopping-bag-4-line"></i>
-                <a href="DashboardCompra.html" class="sidebar__text">Compras</a>
+                <a th:href="@{/admin/compra/}" class="sidebar__text">Compras</a>
             </li>
 
             <li class="sidebar__item">
@@ -160,21 +160,22 @@
                             </div>
                             <hr>
 
-                            <a href="Perfil.html" class="sub__link">
+                            <a th:href="@{/perfil/}" class="sub__link">
                                 <p class="link__text">Perfil</p>
                             </a>
 
-                            <a href="Configuraciones.html" class="sub__link">
+                            <a th:href="@{/perfil/configuration}" class="sub__link">
                                 <p class="link__text">Configuracion</p>
                             </a>
 
-                            <a href="Notificaciones.html" class="sub__link">
+                            <a th:href="@{/perfil/notificaciones}" class="sub__link">
                                 <p class="link__text">Notificaciones</p>
                             </a>
 
-                            <a href="Index.html" class="sub__link">
+                            <a th:href="@{/auth/logout}" class="sub__link">
                                 <p class="link__text">Cerrar Seccion</p>
                             </a>
+
                         </div>
                     </div>
 

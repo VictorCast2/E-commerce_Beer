@@ -55,12 +55,12 @@
 
                 <li class="sidebar__item">
                     <i class="ri-list-unordered"></i>
-                    <a th:href="@{/admin/categoria/agregar}" class="sidebar__text">Categorias</a>
+                    <a th:href="@{/admin/categoria/}" class="sidebar__text">Categorias</a>
                 </li>
 
                 <li class="sidebar__item">
                     <i class="ri-shopping-bag-4-line"></i>
-                    <a href="" class="sidebar__text">Compras</a>
+                    <a th:href="@{/admin/compra/}" class="sidebar__text">Compras</a>
                 </li>
 
                 <li class="sidebar__item">
@@ -162,21 +162,22 @@
                                 </div>
                                 <hr>
 
-                                <a th:href="@{/Perfil.html}" class="sub__link">
+                                <a th:href="@{/perfil/}" class="sub__link">
                                     <p class="link__text">Perfil</p>
                                 </a>
 
-                                <a th:href="@{/Configuraciones.html}" class="sub__link">
+                                <a th:href="@{/perfil/configuration}" class="sub__link">
                                     <p class="link__text">Configuracion</p>
                                 </a>
 
-                                <a th:href="@{/Notificaciones.html}" class="sub__link">
+                                <a th:href="@{/perfil/notificaciones}" class="sub__link">
                                     <p class="link__text">Notificaciones</p>
                                 </a>
 
-                                <a th:href="@{/Index.html}" class="sub__link">
+                                <a th:href="@{/auth/logout}" class="sub__link">
                                     <p class="link__text">Cerrar Seccion</p>
                                 </a>
+
                             </div>
                         </div>
 
