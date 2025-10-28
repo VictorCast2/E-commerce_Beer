@@ -62,7 +62,7 @@ public class EmailServiceImpl implements EmailService {
             Map<String, Object> variables = new HashMap<>();
             variables.put("nombre", usuario.getNombres() + " " + usuario.getApellidos());
             variables.put("tipoUsuario", usuario.getRol().getName().getDescripcion());
-            variables.put("urlLogin", "http://localhost:8080/auth/login");
+            variables.put("urlLogin", "http://localhost:8080/");
 
             if (usuario.getEmpresa() != null) {
                 variables.put("empresa", usuario.getEmpresa().getRazonSocial());
