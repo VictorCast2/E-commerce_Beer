@@ -3,6 +3,8 @@ const body = document.body;
 const mensajeError   = body.dataset.mensajeError || null;
 const mensajeExitoso = body.dataset.mensajeExitoso || null;
 const loginSuccess   = body.dataset.loginSuccess === "true";
+const rol = body.dataset.rol;
+const next = body.dataset.next;
 const termsLabel = document.getElementById("terms-label");
 
 const fields = {
@@ -114,8 +116,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 popup: 'swal-popup'
             }
         }).then(() => {
-            // después de la alerta, redirige al protegido
-            window.location.href = "/";
+            if (rol == "ROLE_ADMIN") {
+                window.location.href = "/admin/principal/";
+            } else {
+                // ir a la última página solicitada antes del login
+                window.location.href = "/";
+            }
         });
     }
 });

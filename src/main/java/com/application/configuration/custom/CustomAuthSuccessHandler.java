@@ -10,8 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Collection;
 
 @Component
@@ -42,15 +48,23 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
             this.emailService.sendEmailLoginSuccessful(usuario, request);
         }
 
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for (GrantedAuthority authority : authorities) {
-            String rol = authority.getAuthority();
+        SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
 
-            if (rol.equals("ROLE_ADMIN")) {
-                this.getRedirectStrategy().sendRedirect(request, response, "/admin/principal/");
-                return;
-            }
-        }
+        String redirectAfter = (savedRequest != null)
+                ? savedRequest.getRedirectUrl()
+                : "/";
+
+        String rol = authentication.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("PERSONA_NATURAL");
+
+        String nextEncoded = Base64.getUrlEncoder().encodeToString(redirectAfter.getBytes(StandardCharsets.UTF_8));
+        String rolEncoded = Base64.getEncoder().encodeToString(rol.getBytes(StandardCharsets.UTF_8));
+
+        String url = String.format("/auth/login?success=true&rol=%s&next=%s", rolEncoded, nextEncoded);
+
+        this.getRedirectStrategy().sendRedirect(request, response, url);
 
         super.onAuthenticationSuccess(request, response, authentication);
     }
