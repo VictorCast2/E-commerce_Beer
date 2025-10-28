@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "/admin/principal/";
             } else {
                 // ir a la última página solicitada antes del login
-                window.location.href = "/";
+                window.location.href = next || "/";
             }
         });
     }
