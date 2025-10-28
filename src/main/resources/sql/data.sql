@@ -10,9 +10,9 @@ INSERT INTO rol (rol_id, rol) VALUES
 
 -- Insertar empresa para Theresa
 INSERT INTO empresa (
-    activo, nit, telefono, correo, razon_social, ciudad, direccion, imagen, e_sector
+    empresa_id, activo, nit, telefono, correo, razon_social, ciudad, direccion, imagen, e_sector
 ) VALUES (
-    TRUE, '9876543210', '3204569875', 'aurum@tech.com', 'Aurum Tech',
+    1, TRUE, '9876543210', '3204569875', 'aurum@tech.com', 'Aurum Tech',
     'Cartagena', 'Barrio Mz40 Lt70 Et4', 'perfil-empresa.png', 'BAR'
 );
 
