@@ -1,4 +1,11 @@
-import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra, verProductos } from "./main.js";
+import {
+    activarGlassmorphism,
+    inicialHeart,
+    initCart,
+    rederigirFav,
+    finalizarCompra,
+    verProductos,
+} from "./main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     activarGlassmorphism();
@@ -12,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     finalizarCompra();
 
     verProductos();
-
 
     //Abrir todos los select
     document.querySelectorAll(".custom-select").forEach(selectWrapper => {

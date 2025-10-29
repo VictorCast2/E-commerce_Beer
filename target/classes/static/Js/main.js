@@ -1,4 +1,3 @@
-
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -11,7 +10,6 @@ export function activarGlassmorphism() {
         }
     });
 }
-
 
 export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -28,7 +26,7 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     // Toast de confirmación
     Toastify({
         text: `${qty} x ${name} agregado al carrito`,
-        duration: 2000,
+        duration: 2000000000000000000000000000,
         close: true,
         gravity: "top",
         position: "right",
