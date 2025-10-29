@@ -1,4 +1,3 @@
-
 export function activarGlassmorphism() {
     // Efecto glassmorphism solo al hacer scroll
     const header = document.querySelector('.header');
@@ -11,7 +10,6 @@ export function activarGlassmorphism() {
         }
     });
 }
-
 
 export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];

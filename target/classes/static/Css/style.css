@@ -1,0 +1,1610 @@
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/** Hero section */
+.swal-title {
+    font-size: 44px;
+    font-family: 'Urbanist', sans-serif !important;
+    font-weight: 600;
+}
+
+.swal-popup {
+    font-size: 20px;
+    font-family: 'Urbanist', sans-serif !important;
+}
+
+.mi-imagen-modal {
+    width: 550px;
+    height: auto;
+    display: block;
+    margin: -60px auto -90px auto;
+    padding: 0 !important;
+}
+
+.texto-advertencia {
+    margin-top: 1rem;
+}
+
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #f59e0b 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+    overflow: hidden;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    background-color: transparent;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 999;
+}
+
+.header.scrolled {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+}
+
+.header__logo {
+    font: 700 1.5rem "Geist";
+}
+
+.header__navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 850px;
+    min-width: 350px;
+    min-height: 75px;
+}
+
+.navbar__list {
+    display: flex;
+    gap: 2.4em;
+    list-style: none;
+}
+
+
+.item__link {
+    position: relative;
+    text-decoration: none;
+    color: #000000;
+    font: 700 1.2rem "Urbanist";
+    transition: color .4s ease;
+}
+
+.item__link:hover {
+    color: #A0522D;
+}
+
+.item__link.active {
+    color: #A0522D;
+}
+
+.item__link.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.3rem;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #A0522D, transparent);
+
+}
+
+
+.list__icon {
+    margin-left: 1.5rem;
+    display: flex;
+    gap: 1.3rem;
+}
+
+.icon__item {
+    position: relative;
+}
+
+.icon__item i {
+    cursor: pointer;
+    font: 500 2rem "Urbanist";
+}
+
+.icon__badge {
+    position: absolute;
+    top: -6px;
+    font: 500 0.3rem "Urbanist";
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font: 700 1.2rem "Urbanist";
+    cursor: pointer;
+}
+
+.language-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    color: inherit;
+}
+
+.dropdown-toggle i {
+    font-size: 2rem;
+}
+
+.dropdown-menu {
+    list-style: none;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 0.3rem 0;
+    display: none;
+    z-index: 100;
+    min-width: 4rem;
+}
+
+.dropdown-menu li {
+    padding: 0.4rem 1rem;
+    font: 500 0.95rem "Urbanist";
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f3f4f6;
+}
+
+.language-selector:hover .dropdown-menu {
+    display: block;
+}
+
+/* Usuario opciones */
+.nav__menu {
+    position: absolute;
+    top: 90%;
+    right: -300%;
+    width: 240px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+
+.nav__menu.open__menu {
+    max-height: 400px;
+}
+
+.menu__sub {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.menu__sub hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    margin: 15px 0 10px;
+
+}
+
+.sub__info {
+    display: flex;
+    align-items: center;        /* centra verticalmente */
+    gap: 0.8rem;                /* espacio entre icono y texto */
+    padding: 0.8rem 1.5rem;     /* un poco de aire */
+}
+
+.sub__info i {
+    font-size: 35px;            /* tamaño del icono */
+    color: #525252;
+}
+
+.sub__info .info__title {
+    font: 600 1.2rem var(--typografiaGeist);
+    color: #525252;
+    margin: 0;                  /* quita márgenes de h2 */
+}
+
+.sub__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--colorLigth);
+    margin: 1px 0;
+    transition: background-color .4s ease, color .4s ease;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+}
+
+.sub__link:hover {
+    color: #111827;
+    background-color: #f3f4f6;
+}
+
+.sub__link .link__text {
+    width: 100%;
+    font: 600 1.1rem var(--typografiaUrbanist);
+
+}
+
+
+/**Section hero__content */
+.content__information {
+    position: relative;
+    margin-left: 7rem;
+}
+
+.hero__carousel {
+    padding: 140px 0 0 0;
+}
+
+.carousel__container {
+    display: flex;
+    position: relative;
+    height: 650px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel__slide {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.carousel__slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+.carousel__arrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-200%);
+    z-index: 10;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.carousel__arrow {
+    background: #000000;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 3rem;
+    cursor: pointer;
+    pointer-events: all;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.hero--paulaner {
+    background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #f59e0b 100%);
+}
+
+.hero--heineken {
+    background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #10b981 100%);
+}
+
+.hero--budweiser {
+    background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #c8102e 100%);
+}
+
+.hero--guinness {
+    background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #000000 100%);
+}
+
+/* PAULANER - naranja */
+.hero--paulaner .carousel__dot.active,
+.hero--paulaner .carousel__arrow {
+    background-color: #f59e0b;
+
+}
+
+/* HEINEKEN - verde */
+.hero--heineken .carousel__dot.active,
+.hero--heineken .carousel__arrow {
+    background-color: #10b981;
+
+}
+
+/* BUDWEISER - rojo */
+.hero--budweiser .carousel__dot.active,
+.hero--budweiser .carousel__arrow {
+    background-color: #c8102e;
+}
+
+
+.content__information .information__title {
+    font: 700 6rem/1 "Geist";
+    width: 950px;
+    margin: 0 0 0 0.4em;
+}
+
+.content__information .information__subtitulo {
+    font: 700 9.8rem/1 "Geist";
+    width: 950px;
+    color: #000000;
+    margin: 0 0 0.1em 1em;
+}
+
+.content__information .subtitulo--changed {
+    font: 700 7.8rem/1 "Geist";
+}
+
+.content__information .information__text {
+    font: 600 1.4em/1.2 "Urbanist";
+    width: 900px;
+    color: #374151;
+    margin: 0 0 0 2em;
+
+}
+
+
+
+.content__information .information__button {
+    margin: 1em 0 1em 2.5em;
+}
+
+
+
+.information__button .button__item {
+    cursor: pointer;
+    background-color: #f59e0b;
+    color: #ffffff;
+    font: 600 1.2em "Urbanist";
+    text-decoration: none;
+    margin: 0 2rem 0 0;
+    padding: 0.9em 1em;
+}
+
+.content__information .item--colorGren {
+    background-color: #10b981;
+}
+
+.content__information .item--colorRed {
+    background-color: #c8102e;
+}
+
+.content__information .item--colorBlack {
+    background-color: #000000;
+}
+
+.button__precio {
+    margin-bottom: 2.5rem;
+}
+
+.information__button .precio__shop {
+    font: 600 1.8rem "Urbanist";
+    color: #374151;
+}
+
+.information__button .shop--descuento {
+    text-decoration: line-through;
+    color: #9CA3AF;
+}
+
+.information__button .shop--changed {
+    margin-right: 0.8rem;
+}
+
+.information__button .shop--principal {
+    margin-right: 0.8rem;
+}
+
+.information__img {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    max-width: 100%;
+    width: 100%;
+}
+
+.information__img img {
+    max-width: 400px;
+    transform: rotate(-20deg) translateY(-40rem) translateX(8rem);
+}
+
+.information__img .img--heineken {
+    transform: rotate(-20deg) translateY(-40rem) translateX(12rem);
+}
+
+.information__img .img--budweiser {
+    transform: rotate(-20deg) translateY(-40rem) translateX(12rem);
+}
+
+.experencia__clientes {
+    display: flex;
+}
+
+.information__clientes {
+    margin: 2.5rem 0 0 2rem;
+    display: flex;
+    position: relative;
+}
+
+.information__clientes img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: -15px;
+    border: 2px solid white;
+    z-index: 1;
+    transition: transform 0.2s ease, z-index 0.2s;
+}
+
+.information__clientes img:first-child {
+    margin-left: 0;
+}
+
+.cliente__satif {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    margin: 2.5rem 0 0.5em 0.7em;
+}
+
+.cliente__satif .clientes__count {
+    font: 600 1em "Geist";
+
+}
+
+.cliente__satif .clientes__satisfied {
+    font: 600 1em "Geist";
+}
+
+/** Logos Cerveza */
+.logos {
+    min-height: 10vh;
+
+}
+
+.content__logos {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin-top: calc(10vh - 10px);
+    margin: auto;
+}
+
+.logos__slide {
+    animation: 10s slide infinite linear;
+
+    img {
+        height: 75px;
+        margin: 0 50px;
+    }
+}
+
+.content__logos::before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+}
+
+.content__logos::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/** Section Innovacion */
+.innovacion {
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.innovaccion__content {
+    display: flex;
+    gap: 2rem;
+    padding: 0 130px;
+}
+
+.innovaccion__content .content__item {
+    background-color: #ffbd27;
+    width: 550px;
+    height: 650px;
+    border-radius: 30px;
+}
+
+.content__item .item__titulo {
+    font: 600 2rem var(--typografiaGeist);
+    margin: 3rem 0 1.3rem 4rem;
+}
+
+.content__item .item__texto {
+    font: 400 1rem var(--typografiaUrbanist);
+    width: 300px;
+    margin: 0 0 1.3rem 4rem;
+}
+
+.content__item .item__btnExplore {
+    border-bottom: 1px solid #000000;
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    color: #000000;
+    margin: 0 0 0 4rem;
+    font: 500 1.1rem var(--typografiaUrbanist);
+
+}
+
+.content__item .item__imgInnovadora {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+}
+
+.innovaccion__content .item--beerElegante {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.item--beerElegante .item__beerElegante {
+    background-color: #f6f6f6;
+    display: flex;
+    width: 700px;
+    height: 550px;
+    border-radius: 30px;
+}
+
+.beerElegante__descripcion .descripcion__titlte {
+    font: 600 2rem var(--typografiaGeist);
+    margin: 3rem 0 1.3rem 4rem;
+}
+
+.beerElegante__descripcion .descripcion__text {
+    font: 400 1rem var(--typografiaUrbanist);
+    width: 280px;
+    margin: 0 0 1.3rem 4rem;
+}
+
+.beerElegante__descripcion .descripcion__btn {
+    border-bottom: 1px solid #000000;
+    text-decoration: none;
+    padding-bottom: 0.5rem;
+    color: #000000;
+    margin: 0 0 0 4rem;
+    font: 500 1.1rem var(--typografiaUrbanist);
+}
+
+
+.descripcion__img img {
+    max-width: 100%;
+    width: 300px;
+}
+
+.descripcion__img .img__modern {
+    margin-left: 3rem;
+}
+
+/* Drawer Carrito */
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s;
+    z-index: 90;
+}
+
+.cart-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 400px;
+    background: #fff;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, .3);
+    transform: translateX(100%);
+    transition: .3s;
+    z-index: 90000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer.is-open {
+    transform: translateX(0)
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd
+}
+
+.cart-header .header__carrito {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin: 0 0 0 1.8rem;
+    padding: 0.8rem 0;
+}
+
+.cart-header button {
+    background: none;
+    color: #bbb;
+    border: none;
+    font-size: 28px;
+    transition: color .7s ease;
+    cursor: pointer
+}
+
+.cart-header button:hover {
+    color: #000000;
+}
+
+.cart-body {
+    flex: 1;
+    overflow: auto;
+    padding: 12px;
+}
+
+.cart-list {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 0 20px 0;
+}
+
+.cart-item img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.empty-cart {
+    margin: 0 0 0 2rem;
+    font: 600 1.2rem var(--typografiaUrbanist);
+}
+
+.cart-item .info {
+    display: flex;
+    flex-direction: column
+}
+
+.cart-item .name {
+    font: 700 1rem var(--typografiaUrbanist);
+    margin: 0 0 4px
+}
+
+.cart-item .price {
+    font: 700 1rem var(--typografiaUrbanist);
+    color: #000000;
+}
+
+/* Controles de cantidad */
+.quantity-control {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    background: transparent;
+    overflow: hidden;
+    width: 120px;
+    height: 36px;
+    margin: 10px 0;
+}
+
+.quantity-control button {
+    width: 36px;
+    height: 100%;
+    border: none;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.quantity-control span {
+    flex: 1;
+    font: 700 1.2rem var(--typografiaUrbanist);
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #f6f6f7 !important;
+    color: #505050 !important;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 12px;
+    border-top: 1px solid #ddd
+}
+
+.cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.cart-subtotal span {
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.btn-primary {
+    font: 600 1.1rem var(--typografiaUrbanist);
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    background: #7c5cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Section Producto */
+.productos {
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+
+.categorias__vertodos {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 6.2rem 2rem 6.2rem;
+}
+
+
+.categorias__vertodos .vertodos__titles {
+    font: 700 2rem "Geist";
+
+}
+
+
+.categorias__vertodos .vertodos__enlaces {
+    font: 700 1.2rem "Geist";
+    color: #e30712;
+
+}
+
+
+.header__flechas {
+    position: absolute;
+    top: 50%;
+    left: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.flechas--categorias {
+    transform: translateY(-20%);
+}
+
+.flechas__arrow {
+    background: #fff;
+    border: none;
+    font: 700 1.7rem var(--typografiaGeist);
+    cursor: pointer;
+    padding: 0.5rem 0.7rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+}
+
+.flechas__arrow:hover {
+    background: #eee;
+}
+
+/** Productos Destacados */
+.destacados__vertodos {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 6.2rem 2rem 6.2rem;
+}
+
+.destacados__vertodos .destacados__titles {
+    font: 700 2rem "Geist";
+
+}
+
+.destacados__vertodos .vertodos__enlaces {
+    font: 700 1.2rem "Geist";
+    color: #e30712;
+}
+
+.flex {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.flex__productos {
+    overflow: hidden;
+    width: calc((300px * 4) + (40px * 3));
+}
+
+.flex__productos-track {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    transition: transform 0.9s ease-in-out;
+    width: max-content;
+}
+
+
+/* Card */
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 16px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+/* .card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+ */
+
+.card-icons {
+    position: absolute;
+    top: 50%;
+    right: -60px;
+    transform: translateY(-130%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: right 0.4s ease;
+}
+
+.card-icons i {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-icons i:hover {
+    transform: scale(1.1);
+    background-color: #000000;
+    color: #ffff;
+}
+
+.card:hover .card-icons {
+    right: 10px;
+}
+
+.card img {
+    max-width: 100%;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+/* Badge */
+.badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font: 600 1.1rem "Urbanist";
+    border-radius: 0.375rem;
+    padding: 2px 10px;
+    user-select: none;
+    color: white;
+}
+
+.badge-green {
+    background-color: #34d399;
+
+}
+
+.badge-pink {
+    background-color: #f472b6;
+    width: 72px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    padding: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    transform-origin: top left;
+    transform: rotate(-45deg);
+}
+
+.card .category {
+    font: 500 1rem "Geist";
+    color: #f472b6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    margin: 0 0 0.5rem 0;
+}
+
+.description {
+    font: 400 1.1rem/1.4 "Urbanist";
+    margin: -8px 0 8px 0;
+    text-align: left;
+    color: #636465;
+    width: 100%;
+}
+
+.pais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+
+}
+
+.pais img {
+    max-width: 100%;
+    width: 30px;
+    height: auto;
+}
+
+.pais .pais--changed {
+    width: 35px;
+}
+
+.pais .pais__name {
+    margin: -15px 0 0 0;
+    font: 600 1.1rem var(--typografiaUrbanist);
+}
+
+.stars {
+    color: #f59e0b;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: left;
+}
+
+.stars i {
+    margin: -3px;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+}
+
+.price {
+    font: 900 1.2rem "Urbanist";
+    color: #111827;
+}
+
+.price-old {
+    font: 600 1.2rem "Urbanist";
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+/** Banner de descuento */
+.banner {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #F6ECDD;
+    background-image: url(../Assets/Img/baner/b6.png);
+    width: 100%;
+    min-height: 40vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.banner .banner__title {
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(47, 47, 47, 0.5);
+    font: 700 1.5rem "Geist";
+}
+
+.banner .banner__subtitulo {
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(47, 47, 47, 0.5);
+    padding: 10px 0;
+    font: 700 2.5rem "Urbanist";
+}
+
+.banner .banner__subtitulo span {
+    color: #ffbd27;
+}
+
+.banner .banner__btn {
+    width: 150px;
+    height: 50px;
+    background-color: #ffffff;
+    color: #ff7302;
+    font: 600 1rem "Urbanist";
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 0.8rem;
+}
+
+.banner .banner__btn:hover {
+    background-color: #ff7302;
+    color: #fff;
+}
+
+/* Por que deberias comprar con nosotros */
+.elegir__contenedor {
+    min-height: 100vh;
+    padding-top: 0px;
+    position: relative;
+    display: grid;
+    margin-top: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.elegir__fondo {
+    position: absolute;
+    top: 1rem;
+    left: 57%;
+    transform: translateX(-3rem);
+    max-width: 300px;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.elegir__contenido {
+    margin: -3rem 0 0 7rem;
+}
+
+.elegir__contenido .contenido__titulo {
+    font: 700 3rem "Geist";
+    margin: 0 0 1.3rem 0;
+}
+
+.elegir__contenido .contenido__subtitulo {
+    font: 400 1.3rem "Urbanist";
+    color: #71717a;
+}
+
+.elegir__rejilla {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
+}
+
+.elegir__icono {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    padding: 10px;
+    font-size: 1.25rem;
+    background-color: #cad8d8;
+    border-radius: 50%;
+}
+
+.elegir__tarjeta-titulo {
+    margin-bottom: 1rem;
+    font: 600 1rem "Geist";
+    color: #18181b;
+}
+
+.elegir__tarjeta-texto {
+    color: #71717a;
+    font: 400 1.1rem "Urbanist";
+    margin-top: -0.3rem;
+}
+
+.elegir__imagen img {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Oferta del dia */
+.ofertaDia {
+    min-height: 50vh;
+}
+
+.ofertaDia__product {
+    background-color: #f6f6f6;
+}
+
+
+.ofertaDia__product .product__flex {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 5rem;
+}
+
+.flex__img img {
+    max-width: 100%;
+}
+
+.product__flex .flex__content {
+    max-width: 600px;
+    margin-top: 50px;
+}
+
+.flex__content .content__name {
+    font: 500 1.4rem var(--typografiaGeist);
+    margin: 0 0.8rem 0 0;
+}
+
+.flex__content .content__descuento {
+    font: 600 1rem var(--typografiaUrbanist);
+    background-color: #10b981;
+    color: #ffff;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.flex__content .content__title {
+    margin: 1.2rem 0 0.6rem 0;
+    font: 600 3rem var(--typografiaGeist);
+}
+
+.flex__content .content__description {
+    font: 500 1.3rem var(--typografiaUrbanist);
+    color: var(--colorLigth);
+    margin-bottom: 1.3rem;
+}
+
+.flex__content .content__precio {
+    margin: 0 0 1rem 0;
+    display: flex;
+    gap: 0.7rem;
+}
+
+.content__precio .precio__new {
+    font: 700 1.5rem var(--typografiaUrbanist);
+    color: #c8102e;
+}
+
+.content__precio .precio__old {
+    font: 700 1.5rem var(--typografiaUrbanist);
+    color: var(--colorLigth);
+    text-decoration: line-through;
+}
+
+.flex__content .content__time span {
+    font: 500 3.3rem var(--typografiaGeist);
+    margin: 0 1rem 0 0;
+}
+
+.flex__content .content__btn {
+    margin-top: 3rem;
+}
+
+.flex__content .content__comprar {
+    background-color: var(--colorDark);
+    color: #ffff;
+    font: 500 1.3rem var(--typografiaGeist);
+    padding: 20px 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+/* Section Blog */
+.blog {
+    min-height: 50vh;
+    padding: 80px 0;
+
+}
+
+.blog__encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 5.4rem;
+}
+
+.blog__encabezado .encabezado__title {
+    font: 700 3rem var(--typografiaGeist);
+    margin: 0 0 0 5rem;
+}
+
+.blog__encabezado .encabezado__btn {
+    background-color: transparent;
+    border: 1px solid #000000;
+    padding: 0.7rem 1rem;
+    font: 600 1.3rem var(--typografiaUrbanist);
+    text-decoration: none;
+    color: #000000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.blog__flex {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.blog__card img {
+    max-width: 100%;
+    width: 430px;
+    height: 250px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog__card .card__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font: 600 1.2rem var(--typografiaGeist);
+    color: var(--colorDark);
+    margin-bottom: 0.7rem;
+}
+
+.blog__card .card__text {
+    width: 400px;
+    font: 400 1rem var(--typografiaGeist);
+    color: var(--colorLigth);
+    margin-bottom: 1.5rem;
+}
+
+.blog__card .card__tiempo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card__tiempo .tiempo__item {
+    font: 500 0.8rem var(--typografiaGeist);
+    color: var(--colorLigth);
+}
+
+.tiempo__item strong {
+    color: var(--colorDark);
+}
+
+/**Section Figuras */
+
+
+/* Footer */
+
+.footer__subscripcion {
+    background: #8e705c url(../Assets/Img/baner/b14.png) no-repeat 20% 30%;
+}
+
+.subcripcion__informativa {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    min-height: 200px;
+}
+
+.informativa__formulario {
+    padding-top: 30px;
+}
+
+.informativa__subscribir .subscribir__title {
+    font: 700 2rem "Geist";
+    margin: 0 0 1rem 0;
+    color: #fff;
+
+}
+
+.informativa__subscribir .subscribir__text {
+    font: 500 1.2rem "Urbanist";
+    color: #cdd4f8;
+
+}
+
+.informativa__subscribir .subscribir__text span {
+    color: #ffbd27;
+}
+
+/* Formulario de subcripcion */
+.formulario__input {
+    position: relative;
+}
+
+.formulario__input input {
+    margin: 10px 0 25px 30px;
+    background-color: transparent;
+    border: none;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    color: #374151;
+    border-radius: 5px;
+    width: 600px;
+    font: 500 1.1rem "Urbanist";
+    height: 65px;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.formulario__input input::placeholder {
+    color: #374151;
+}
+
+.formulario__input button {
+    position: absolute;
+    bottom: 1.85rem;
+    right: 0.4rem;
+    font: 600 1.2rem var(--typografiaGeist);
+    width: 180px;
+    height: 55px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #8e705c;
+}
+
+.footer__enlaces {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 50px;
+    min-height: 50vh;
+}
+
+/* .enlaces__categoriaNosotros .categoriaNosotros__logo{
+
+}
+ */
+
+.categoriaNosotros__list {
+    list-style-type: none;
+}
+
+.categoriaNosotros__list .list__title {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.categoriaNosotros__list .list__item {
+    font: 400 1.1rem var(--typografiaUrbanist);
+    margin-bottom: 0.4rem;
+}
+
+.categoriaNosotros__list .list__siguenos {
+    font: 600 1.3rem var(--typografiaGeist);
+    padding-top: 2rem;
+}
+
+.categoriaNosotros__list .list__icon {
+    margin: 0.5rem 0 0 -0.4rem;
+}
+
+.categoriaNosotros__list .icon__social i {
+    display: flex;
+    gap: 6rem;
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0 0;
+}
+
+/** Enlaces de categorias populares */
+.enlaces__categoriaPopulares .categoriaPopulares__title {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__categoriaPopulares .categoriasPopulares__list {
+    list-style-type: none;
+
+}
+
+.categoriasPopulares__list .list__item {
+    margin-bottom: 0.7rem;
+
+}
+
+
+.categoriasPopulares__list .list__item .item__footer {
+    text-decoration: none;
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+
+/** Enlaces de productos */
+.enlaces__categoriaProductos .categoriaProductos__title {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__categoriaProductos .categoriaProductos__list {
+    list-style: none;
+
+}
+
+.categoriaProductos__list .list__item {
+    margin-bottom: 0.7rem;
+
+}
+
+
+.categoriaProductos__list .list__item .item__footer {
+    text-decoration: none;
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+/**Instalar app mobile */
+.enlaces__instalar .instalar__title {
+    font: 600 1.3rem var(--typografiaGeist);
+    margin-bottom: 0.8rem;
+}
+
+.enlaces__instalar .instalar__list {
+    list-style-type: none;
+}
+
+.instalar__list .list__item {
+    font: 500 1rem var(--typografiaUrbanist);
+    color: #374151;
+}
+
+.enlaces__instalar .instalar__flex {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.instalar__flex figure {
+    border: 1px solid #ff7302;
+    border-radius: 5px;
+    padding: 0.1rem;
+    margin: 1rem 0;
+}
+
+.instalar__list .item--pagos {
+    margin-bottom: 1rem;
+}
+
+.footer .instalar__copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.instalar__copyright .copyright__text {
+    font: 500 1.1rem var(--typografiaUrbanist);
+}
+
+.instalar__copyright .copyright__text a {
+    text-decoration: none;
+}

@@ -1,4 +1,11 @@
-import { activarGlassmorphism, inicialHeart, initCart, rederigirFav, finalizarCompra, verProductos } from "./main.js";
+import {
+    activarGlassmorphism,
+    inicialHeart,
+    initCart,
+    rederigirFav,
+    finalizarCompra,
+    verProductos,
+} from "./main.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     activarGlassmorphism();
@@ -12,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     finalizarCompra();
 
     verProductos();
-
 
     //Abrir todos los select
     document.querySelectorAll(".custom-select").forEach(selectWrapper => {
@@ -81,9 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const chip = document.createElement("div");
         chip.classList.add("filter-chip");
         chip.setAttribute("data-chip", value);
-        chip.innerHTML = `
-    ${value} <span data-remove="${value}">✖</span>
-    `;
+        chip.innerHTML = `${value} <span data-remove="${value}">✖</span>`;
 
         // Cuando se da clic en la X
         chip.querySelector("span").addEventListener("click", () => {
