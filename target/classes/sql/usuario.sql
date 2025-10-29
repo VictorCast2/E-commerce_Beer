@@ -1,4 +1,3 @@
-
 -- Insertar usuarios con rol PERSONA_CONTACTO
 insert into usuario (account_non_expired, account_non_locked, credentials_non_expired, is_enabled, empresa_id, rol_id, numero_identificacion, telefono, direccion, password, apellidos, nombres, imagen, tipo_identificacion, correo) values (1, 1, 1, 1, 2, 3, '1012159933', '3104129301', 'Transversal 316 # 464-333', '$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq', 'Garrelts', 'Kial', 'perfil-user.jpg', 'CC', 'kialgarrelts1183@gmail.com');
 insert into usuario (account_non_expired, account_non_locked, credentials_non_expired, is_enabled, empresa_id, rol_id, numero_identificacion, telefono, direccion, password, apellidos, nombres, imagen, tipo_identificacion, correo) values (1, 1, 1, 1, 3, 3, '1016581908', '3105196436', 'Carrera 811 # 311-231', '$2a$10$rj3PmRqB76o2VrobVRdCf.s2Q4S3HDnvVHeAmi8Uxdp.GWrLoqiMq', 'Huncoot', 'Francklyn', 'perfil-user.jpg', 'CC', 'francklynhuncoot1398@gmail.com');

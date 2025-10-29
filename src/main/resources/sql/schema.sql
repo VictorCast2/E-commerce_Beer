@@ -1,4 +1,5 @@
--- DROP TABLE IF EXISTS detalle_venta, compra, usuario, producto, sub_categorias, categoria, historia, comentario, rol, empresa;
+use db_beer;
+DROP TABLE IF EXISTS detalle_venta, compra, usuario, producto, sub_categorias, categoria, historia, comentario, rol, empresa;
 
 -- TABLA CATEGORIA
 CREATE TABLE `categoria` (
