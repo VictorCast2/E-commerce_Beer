@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS detalle_venta, compra, usuario, producto, sub_categorias, categoria, historia, comentario, rol, empresa;
+-- DROP TABLE IF EXISTS detalle_venta, compra, usuario, producto, sub_categorias, categoria, historia, comentario, rol, empresa;
 
 -- TABLA CATEGORIA
 CREATE TABLE `categoria` (
@@ -25,6 +25,7 @@ CREATE TABLE `sub_categorias` (
 CREATE TABLE `producto` (
   `activo` bit(1) NOT NULL,
   `precio` double NOT NULL,
+  `precio_regular` double DEFAULT 0,
   `stock` int NOT NULL,
   `categoria_id` bigint DEFAULT NULL,
   `producto_id` bigint NOT NULL AUTO_INCREMENT,

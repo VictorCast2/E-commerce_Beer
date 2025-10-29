@@ -13,6 +13,7 @@ public record ProductoResponse(
         String pais,
         ETipo tipo,
         double precio,
+        double precioRegular,
         int stock,
         String descripcion,
         boolean activo,

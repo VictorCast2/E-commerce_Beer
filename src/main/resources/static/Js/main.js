@@ -338,6 +338,8 @@ export function carruselProductos() {
         const prevBtn = carrusel.querySelector(".arrow--left");
         const nextBtn = carrusel.querySelector(".arrow--right");
 
+        if (!track || !prevBtn || !nextBtn) return;
+
         const cardWidth = 300; // ancho de cada card
         const gap = 40;        // espacio entre cards
         const visibles = 4;    // cuántos se muestran a la vez
@@ -381,7 +383,8 @@ export function verProductos() {
                 oldPrice: card.dataset.oldprice,
                 image: card.dataset.image,
                 category: card.dataset.category,
-                subcategory: card.dataset.subcategory
+                subcategory: card.dataset.subcategory,
+                descripcion: card.dataset.descripcion
             };
 
             // Guardar en localStorage
@@ -450,76 +453,85 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSlide = 0;
     let autoPlayInterval = null;
 
-    // Mostrar slide por índice
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-            dots[i]?.classList.toggle('active', i === index);
+    // validamos que exista slides y hero antes de usar
+    if (slides.length > 0 && hero) {
+        // Mostrar slide por índice
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                dots[i]?.classList.toggle('active', i === index);
+            });
+
+            const activeSlide = slides[index];
+            const theme = activeSlide.getAttribute('data-theme');
+
+            hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
+            hero.classList.add(`hero--${theme}`);
+
+            currentSlide = index;
+        }
+
+
+        // Siguiente slide
+        function nextSlide() {
+            const nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        // Slide anterior
+        function prevSlide() {
+            const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevIndex);
+        }
+
+        // Iniciar autoplay
+        function startAutoplay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Detener autoplay temporalmente
+        function stopAutoplay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Click en dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.dataset.index);
+                showSlide(index);
+                stopAutoplay();
+                startAutoplay(); // Reiniciar autoplay al interactuar
+            });
         });
 
-        const activeSlide = slides[index];
-        const theme = activeSlide.getAttribute('data-theme');
-
-        hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
-        hero.classList.add(`hero--${theme}`);
-
-        currentSlide = index;
-    }
-
-
-    // Siguiente slide
-    function nextSlide() {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        showSlide(nextIndex);
-    }
-
-    // Slide anterior
-    function prevSlide() {
-        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prevIndex);
-    }
-
-    // Iniciar autoplay
-    function startAutoplay() {
-        autoPlayInterval = setInterval(nextSlide, 5000);
-    }
-
-    // Detener autoplay temporalmente
-    function stopAutoplay() {
-        clearInterval(autoPlayInterval);
-    }
-
-    // Click en dots
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const index = parseInt(dot.dataset.index);
-            showSlide(index);
-            stopAutoplay();
-            startAutoplay(); // Reiniciar autoplay al interactuar
+        // Click en flechas
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const direction = arrow.dataset.direction;
+                if (direction === 'next') {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                stopAutoplay();
+                startAutoplay(); // Reiniciar autoplay
+            });
         });
-    });
 
-    // Click en flechas
-    arrows.forEach(arrow => {
-        arrow.addEventListener('click', () => {
-            const direction = arrow.dataset.direction;
-            if (direction === 'next') {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-            stopAutoplay();
-            startAutoplay(); // Reiniciar autoplay
-        });
-    });
+        // Mostrar primer slide
+        showSlide(0);
+        startAutoplay();
 
-    // Mostrar primer slide
-    showSlide(0);
-    startAutoplay();
+    }
 
-    //duplicacion de los logos
-    const logos = document.getElementById("slider").cloneNode(true);
-    document.getElementById("logos").appendChild(logos);
+    // Duplicación de logos (solo si existe en la vista)
+    const slider = document.getElementById("slider");
+    const logosWrapper = document.getElementById("logos");
+
+    if (slider && logosWrapper) {
+        const logos = slider.cloneNode(true);
+        logosWrapper.appendChild(logos);
+    }
 
     //invocar el iniciar carrito y corazon
     inicialHeart();

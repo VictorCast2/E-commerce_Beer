@@ -6,6 +6,9 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
+import com.application.service.interfaces.producto.ProductoService;
+import com.application.service.interfaces.usuario.UsuarioService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,31 +16,57 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Collections;
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class PrincipalController {
 
-    @Autowired
-    private UsuarioServiceImpl usuarioService;
-
-    @Autowired
-    private ProductoServiceImpl productoService;
+    private final UsuarioService usuarioService;
+    private final ProductoService productoService;
 
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+
+        List<ProductoResponse> productosMasVendidos = productoService.getProductosMasVendidosActivos();
+
+        List<ProductoResponse> productosConCategoriaVino = productoService.getProductosMasVendidosByCategoriaIdActivos(1L);
+        List<ProductoResponse> productosConCategoriaWhisky = productoService.getProductosMasVendidosByCategoriaIdActivos(2L);
+        List<ProductoResponse> productosConCategoriaCerveza = productoService.getProductosMasVendidosByCategoriaIdActivos(8L);
+
+        List<ProductoResponse> productosConCategoriaVodkaGinebra = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(4L, 6L));
+        List<ProductoResponse> productosConCategoriaTequilaMezcal = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(5L, 7L));
+        List<ProductoResponse> productosConCategoriaRonAguardiente = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(3L, 9L));
+
+        model.addAttribute("productosMasVendidos", productosMasVendidos);
+        model.addAttribute("productosConCategoriaVino", productosConCategoriaVino);
+        model.addAttribute("productosConCategoriaWhisky", productosConCategoriaWhisky);
+        model.addAttribute("productosConCategoriaCerveza", productosConCategoriaCerveza);
+        model.addAttribute("productosConCategoriaVodkaGinebra", productosConCategoriaVodkaGinebra);
+        model.addAttribute("productosConCategoriaTequilaMezcal", productosConCategoriaTequilaMezcal);
+        model.addAttribute("productosConCategoriaRonAguardiente", productosConCategoriaRonAguardiente);
         return "Index";
     }
 
     @GetMapping("/paks")
-    public String pack() {
+    public String pack(Model model) {
+
+        List<ProductoResponse> packsActivos = productoService.getPacksActivos();
+
+        model.addAttribute("packsActivos", packsActivos);
+
         return "Pack";
     }
 
     @GetMapping("/productos")
-    public String producto() {
+    public String producto(Model model) {
+
+        List<ProductoResponse> productosActivos = productoService.getProductosActivos();
+
+        model.addAttribute("productosActivos", productosActivos);
         return "Productos";
     }
 
@@ -63,27 +92,13 @@ public class PrincipalController {
 
     @GetMapping("/ver")
     public String Ver(Model model) {
-        // Simulación de datos (en producción vendrán de la base de datos)
-        model.addAttribute("subcategory", "Licores");
-        model.addAttribute("category", "Whisky");
-        model.addAttribute("productName", "Jack Daniel’s Old No. 7");
-
-        return "Ver";
-    }
-
-    @GetMapping("/ver/{id}")
-    public String Ver(@PathVariable Long id, Model model) {
-        Producto producto = productoService.getProductoById(id);
-        model.addAttribute("subcategory", producto.getDescripcion());
-        model.addAttribute("category", producto.getCategoria());
-        model.addAttribute("productName", producto.getNombre());
         return "Ver";
     }
 
     @GetMapping("/descripcion-producto/{productoId}")
     public String getDescripcionProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
-            @PathVariable Long productoId,
-            Model model) {
+                                         @PathVariable Long productoId,
+                                         Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
         ProductoResponse productoResponse = productoService.getProductoResponseById(productoId);
 
