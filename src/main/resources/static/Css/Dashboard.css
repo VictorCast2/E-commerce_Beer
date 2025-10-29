@@ -14,17 +14,17 @@
 }
 
 .sidebar__logo {
+    height: 100px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0.1rem 0 0 0.4rem;
+    margin: 0.1rem 0 0 0.2rem;
 }
 
 
 .sidebar__logo img {
     max-width: 100%;
-    width: 100px;
-
+    width: 270px;
 }
 
 .sidebar__logo .logo__acronimo {
