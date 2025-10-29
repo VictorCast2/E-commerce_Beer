@@ -2,8 +2,6 @@
 .apt_generated
 .classpath
 .factorypath
-.project
-.settings
 .springBeans
 .sts4-cache
 
@@ -19,16 +17,6 @@
 .env
 **/*.env
 */*.env
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
