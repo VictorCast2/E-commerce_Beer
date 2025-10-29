@@ -14,8 +14,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     List<Producto> findByCategoria_CategoriaId(Long categoriaId);
 
-    List<Producto> findByeTipoNotAndActivoTrue(ETipo eTipo);
-
     @Query("""
             SELECT p
               FROM Producto p
@@ -25,6 +23,17 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
              ORDER BY COALESCE(SUM(dv.cantidad), 0) DESC
             """)
     List<Producto> findProductosActivos();
+
+    @Query("""
+            SELECT p
+              FROM Producto p
+              LEFT JOIN p.detalleVentas dv
+             WHERE p.activo = true
+               AND p.eTipo <> 'UNIDAD'
+             GROUP BY p
+             ORDER BY COALESCE(SUM(dv.cantidad),0) DESC
+            """)
+    List<Producto> findProductosActivosMasVendidosNoUnidad();
 
     @Query("""
             SELECT p

@@ -95,7 +95,7 @@ public class ProductoServiceImpl implements ProductoService {
      */
     @Override
     public List<ProductoResponse> getPacksActivos() {
-        List<Producto> productoList = productoRepository.findByeTipoNotAndActivoTrue(ETipo.UNIDAD);
+        List<Producto> productoList = productoRepository.findProductosActivosMasVendidosNoUnidad();
         return productoList.stream()
                 .map(this::toResponse)
                 .toList();

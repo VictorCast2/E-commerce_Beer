@@ -52,7 +52,12 @@ public class PrincipalController {
     }
 
     @GetMapping("/paks")
-    public String pack() {
+    public String pack(Model model) {
+
+        List<ProductoResponse> packsActivos = productoService.getPacksActivos();
+
+        model.addAttribute("packsActivos", packsActivos);
+
         return "Pack";
     }
 
