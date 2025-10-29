@@ -329,52 +329,58 @@
 
                                     <h2 class="input__estados">Estados del producto</h2>
 
-                                    <div class="estados__container">
+                                    <div class="input__formulario estados__container">
 
-                                        <label class="radio__option activo">
-                                            <input type="radio" name="estado" value="activo">
-                                            <span class="radio__custom"></span>
-                                            Activo
-                                        </label>
+                                        <div class="container__radio">
+                                            <label class="radio__option activo">
+                                                <input type="radio" name="estado" value="activo">
+                                                <span class="radio__custom"></span>
+                                                Activo
+                                            </label>
 
-                                        <label class="radio__option inactivo">
-                                            <input type="radio" name="estado" value="inactivo">
-                                            <span class="radio__custom"></span>
-                                            Inactivo
-                                        </label>
+                                            <label class="radio__option inactivo">
+                                                <input type="radio" name="estado" value="inactivo">
+                                                <span class="radio__custom"></span>
+                                                Inactivo
+                                            </label>
 
-                                        <label class="radio__option borrador">
-                                            <input type="radio" name="estado" value="borrador">
-                                            <span class="radio__custom"></span>
-                                            Borrador
-                                        </label>
+                                            <label class="radio__option borrador">
+                                                <input type="radio" name="estado" value="borrador">
+                                                <span class="radio__custom"></span>
+                                                Borrador
+                                            </label>
+                                        </div>
+
+                                        <p class="formulario__error error--estado">
+                                            Por favor, debes seleccionar un estado del producto
+                                        </p>
                                     </div>
 
                                     <h2 class="input__precio">Precio del producto</h2>
 
                                     <div class="input__formulario">
                                         <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="PrecioRegular"
-                                                id="precioRegular">
+                                            <input type="text" inputmode="numeric" autocomplete="off" placeholder=""
+                                                   name="precioRegular" id="precioRegular">
                                             <label class="box__label" for="precioRegular">Precio regular</label>
                                             <span class="box__icon"><i class="ri-check-line"></i></span>
                                             <span class="box__icon"><i class="ri-close-line"></i></span>
                                         </div>
                                         <p class="formulario__error">
-
+                                            Por favor, ingresa un precio válido mayor que cero.
                                         </p>
                                     </div>
 
                                     <div class="input__formulario">
                                         <div class="formulario__box">
-                                            <input type="text" autocomplete="off" placeholder="" name="PrecioVenta"
-                                                id="precioVenta">
+                                            <input type="text" inputmode="numeric" autocomplete="off" placeholder=""
+                                                   name="precioVenta" id="precioVenta">
                                             <label class="box__label" for="precioVenta">Precio de venta</label>
                                             <span class="box__icon"><i class="ri-check-line"></i></span>
                                             <span class="box__icon"><i class="ri-close-line"></i></span>
                                         </div>
                                         <p class="formulario__error">
-
+                                            Por favor, ingresa un precio válido mayor que cero.
                                         </p>
                                     </div>
 
@@ -385,6 +391,14 @@
                                             <input type="file" id="fileInput" accept="image/*" hidden>
                                             <div class="preview-container" id="previewContainer"></div>
                                         </div>
+
+                                        <p class="formulario__error error--formato">
+                                            Solo se permiten archivos con formato JPG, PNG o WEBP..
+                                        </p>
+
+                                        <p class="formulario__error error--vacio">
+                                            Debes subir al menos una imagen del producto.
+                                        </p>
                                     </div>
 
                                     <div class="input__formulario" id="formulario__descripcion">
@@ -392,7 +406,12 @@
                                         <div class="formulario__boxdescripcion">
                                             <div id="editor-container"></div>
                                         </div>
+
+                                        <p class="formulario__error error--descripcion">
+                                            Por favor, agrega una descripción del producto antes de continuar.
+                                        </p>
                                     </div>
+
                                     <button class="input__btn">Crear Producto</button>
                                 </div>
                             </form>
