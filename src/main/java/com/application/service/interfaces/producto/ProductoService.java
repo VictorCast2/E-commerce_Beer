@@ -13,8 +13,9 @@ public interface ProductoService {
     List<ProductoResponse> getProductos();
     List<ProductoResponse> getProductosActivos();
     List<ProductoResponse> getPacksActivos();
-    List<ProductoResponse> getProductoByCategoriaId(Long id);
+    List<ProductoResponse> getProductoByCategoriaId(Long id); // DE MOMENTO NO LE VEO USO
     List<ProductoResponse> getProductosMasVendidosActivos();
+    List<ProductoResponse> getProductosMasVendidosByCategoriaIdActivos(Long categoriaId);
 
     // CRUD
     GeneralResponse createProducto(ProductoCreateRequest productoRequest);

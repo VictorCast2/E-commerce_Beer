@@ -32,8 +32,14 @@ public class PrincipalController {
     public String index(Model model) {
 
         List<ProductoResponse> productosMasVendidos = productoService.getProductosMasVendidosActivos();
+        List<ProductoResponse> productosConCategoriaVino = productoService.getProductosMasVendidosByCategoriaIdActivos(1L);
+        List<ProductoResponse> productosConCategoriaWhisky = productoService.getProductosMasVendidosByCategoriaIdActivos(2L);
+        List<ProductoResponse> productosConCategoriaCerveza = productoService.getProductosMasVendidosByCategoriaIdActivos(8L);
 
         model.addAttribute("productosMasVendidos", productosMasVendidos);
+        model.addAttribute("productosConCategoriaVino", productosConCategoriaVino);
+        model.addAttribute("productosConCategoriaWhisky", productosConCategoriaWhisky);
+        model.addAttribute("productosConCategoriaCerveza", productosConCategoriaCerveza);
         return "Index";
     }
 

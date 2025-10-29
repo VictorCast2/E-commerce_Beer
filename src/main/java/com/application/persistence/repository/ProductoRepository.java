@@ -4,6 +4,7 @@ import com.application.persistence.entity.producto.Producto;
 import com.application.persistence.entity.producto.enums.ETipo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,15 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
              ORDER BY SUM(dv.cantidad) DESC
             """)
     List<Producto> findProductosMasVendidosActivos();
+
+    @Query("""
+                SELECT p
+                  FROM Producto p
+                  JOIN p.detalleVentas dv
+                 WHERE p.categoria.categoriaId = :categoriaId
+                   AND p.activo = true
+                 GROUP BY p
+                 ORDER BY SUM(dv.cantidad) DESC
+            """)
+    List<Producto> findProductosMasVendidosByCategoriaIdActivos(@Param("categoriaId") Long categoriaId);
 }
