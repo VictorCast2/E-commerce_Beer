@@ -11,11 +11,20 @@ import java.util.List;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
-    List<Producto> findByActivoTrue();
 
     List<Producto> findByCategoria_CategoriaId(Long categoriaId);
 
     List<Producto> findByeTipoNotAndActivoTrue(ETipo eTipo);
+
+    @Query("""
+            SELECT p
+              FROM Producto p
+              LEFT JOIN p.detalleVentas dv
+             WHERE p.activo = true
+             GROUP BY p
+             ORDER BY COALESCE(SUM(dv.cantidad), 0) DESC
+            """)
+    List<Producto> findProductosActivos();
 
     @Query("""
             SELECT p

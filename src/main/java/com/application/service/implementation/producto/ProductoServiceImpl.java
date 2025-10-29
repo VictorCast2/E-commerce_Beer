@@ -79,7 +79,7 @@ public class ProductoServiceImpl implements ProductoService {
      */
     @Override
     public List<ProductoResponse> getProductosActivos() {
-        List<Producto> productos = productoRepository.findByActivoTrue();
+        List<Producto> productos = productoRepository.findProductosActivos();
         return productos.stream()
                 .map(this::toResponse)
                 .toList();

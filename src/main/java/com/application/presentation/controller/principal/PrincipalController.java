@@ -57,7 +57,11 @@ public class PrincipalController {
     }
 
     @GetMapping("/productos")
-    public String producto() {
+    public String producto(Model model) {
+
+        List<ProductoResponse> productosActivos = productoService.getProductosActivos();
+
+        model.addAttribute("productosActivos", productosActivos);
         return "Productos";
     }
 
