@@ -26,7 +26,7 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     // Toast de confirmación
     Toastify({
         text: `${qty} x ${name} agregado al carrito`,
-        duration: 2000000000000000000000000000,
+        duration: 2000,
         close: true,
         gravity: "top",
         position: "right",
