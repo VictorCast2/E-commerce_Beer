@@ -320,6 +320,7 @@ public class ProductoServiceImpl implements ProductoService {
                 producto.getPais(),
                 producto.getETipo(),
                 producto.getPrecio(),
+                producto.getPrecioRegular(),
                 producto.getStock(),
                 producto.getDescripcion(),
                 producto.isActivo(),

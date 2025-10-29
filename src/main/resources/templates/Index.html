@@ -416,11 +416,11 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p, stat : ${productosMasVendidos}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="'Top ' + ${stat.index + 1}">Top</div>
+                                <div class="badge badge-green" th:text="'Top ' + ${stat.index + 1}"></div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -444,7 +444,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -479,11 +481,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaWhisky}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Whisky</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -507,7 +511,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -543,11 +549,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaTequilaMezcal}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Tequila & Mezcal</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -571,7 +579,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -607,11 +617,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaVino}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Vino</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -635,7 +647,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -672,11 +686,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaCerveza}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Cerveza</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -700,7 +716,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -736,11 +754,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaRonAguardiente}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Rones & Aguardientes</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -764,7 +784,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">
@@ -800,11 +822,13 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaVodkaGinebra}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=0,
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
-                                <div class="badge badge-green" th:text="${p.nombreCategoria}">Vodkas & Ginebras</div>
+                                <div class="badge badge-green"
+                                     th:text="${p.precioRegular != 0 ? '-' + T(java.lang.Math).round(((p.precioRegular - p.precio) / p.precioRegular) * 100) + '%' : p.nombreCategoria}">
+                                </div>
 
                                 <img th:src="@{'/imagen-producto/' + ${p.imagen}}"
                                      alt="" width="250" height="250"/>
@@ -828,7 +852,9 @@
 
                                 <div class="price-container">
                                     <span class="price" th:text="${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'POINT')}"></span>
-                                    <span class="price-old"></span>
+                                    <span class="price-old"
+                                          th:text="${p.precioRegular != 0 ? #numbers.formatDecimal(p.precioRegular, 0, 'POINT', 0, 'POINT') : ''}">
+                                    </span>
                                 </div>
 
                                 <div class="card-icons">

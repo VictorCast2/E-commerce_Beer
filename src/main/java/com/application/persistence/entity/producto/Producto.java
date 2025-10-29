@@ -34,6 +34,8 @@ public class Producto {
         @Enumerated(EnumType.STRING)
         private ETipo eTipo;
         private double precio;
+        @Column(name = "precio_regular")
+        private double precioRegular;
         private int stock;
         @Column(length = 700)
         private String descripcion;
