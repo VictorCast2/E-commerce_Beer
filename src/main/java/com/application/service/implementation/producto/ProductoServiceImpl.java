@@ -117,6 +117,21 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
+     * Obtiene los productos más vendidos en orden descendente (más ventas a menor ventas) y con estado activo
+     * Este método sera usado en la pagina de Index.html para mostrar los productos destacados
+     *
+     * @return Lista de DTO con los 16 productos con mayor cantidad de ventas y con estado activo
+     */
+    @Override
+    public List<ProductoResponse> getProductosMasVendidosActivos() {
+        List<Producto> productos = productoRepository.findProductosMasVendidosActivos();
+        return productos.stream()
+                .map(this::toResponse)
+                .limit(16)
+                .toList();
+    }
+
+    /**
      * Crea un nuevo producto a partir de un DTO de creación.
      *
      * @param productoRequest DTO con los datos del nuevo producto
@@ -277,7 +292,7 @@ public class ProductoServiceImpl implements ProductoService {
                 producto.getDescripcion(),
                 producto.isActivo(),
                 producto.getCategoria().getNombre(),
-                producto.getSubCategoria().getNombre()
+                producto.getSubCategoria() != null ? producto.getSubCategoria().getNombre() : "Sin subcategoría"
         );
     }
 }

@@ -6,6 +6,9 @@ import com.application.persistence.entity.usuario.Usuario;
 import com.application.presentation.dto.producto.response.ProductoResponse;
 import com.application.service.implementation.producto.ProductoServiceImpl;
 import com.application.service.implementation.usuario.UsuarioServiceImpl;
+import com.application.service.interfaces.producto.ProductoService;
+import com.application.service.interfaces.usuario.UsuarioService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,21 +16,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Collections;
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class PrincipalController {
 
-    @Autowired
-    private UsuarioServiceImpl usuarioService;
-
-    @Autowired
-    private ProductoServiceImpl productoService;
+    private final UsuarioService usuarioService;
+    private final ProductoService productoService;
 
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+
+        List<ProductoResponse> productosMasVendidos = productoService.getProductosMasVendidosActivos();
+
+        model.addAttribute("productosMasVendidos", productosMasVendidos);
         return "Index";
     }
 
@@ -63,27 +69,13 @@ public class PrincipalController {
 
     @GetMapping("/ver")
     public String Ver(Model model) {
-        // Simulación de datos (en producción vendrán de la base de datos)
-        model.addAttribute("subcategory", "Licores");
-        model.addAttribute("category", "Whisky");
-        model.addAttribute("productName", "Jack Daniel’s Old No. 7");
-
-        return "Ver";
-    }
-
-    @GetMapping("/ver/{id}")
-    public String Ver(@PathVariable Long id, Model model) {
-        Producto producto = productoService.getProductoById(id);
-        model.addAttribute("subcategory", producto.getDescripcion());
-        model.addAttribute("category", producto.getCategoria());
-        model.addAttribute("productName", producto.getNombre());
         return "Ver";
     }
 
     @GetMapping("/descripcion-producto/{productoId}")
     public String getDescripcionProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
-            @PathVariable Long productoId,
-            Model model) {
+                                         @PathVariable Long productoId,
+                                         Model model) {
         Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getCorreo());
         ProductoResponse productoResponse = productoService.getProductoResponseById(productoId);
 

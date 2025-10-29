@@ -338,6 +338,8 @@ export function carruselProductos() {
         const prevBtn = carrusel.querySelector(".arrow--left");
         const nextBtn = carrusel.querySelector(".arrow--right");
 
+        if (!track || !prevBtn || !nextBtn) return;
+
         const cardWidth = 300; // ancho de cada card
         const gap = 40;        // espacio entre cards
         const visibles = 4;    // cuántos se muestran a la vez
@@ -381,7 +383,8 @@ export function verProductos() {
                 oldPrice: card.dataset.oldprice,
                 image: card.dataset.image,
                 category: card.dataset.category,
-                subcategory: card.dataset.subcategory
+                subcategory: card.dataset.subcategory,
+                descripcion: card.dataset.descripcion
             };
 
             // Guardar en localStorage

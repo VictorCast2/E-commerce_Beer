@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(".flex__img img").src = product.image;
         document.querySelector(".details__category").textContent = product.category;
         document.querySelector(".details__name").textContent = product.name;
+        document.querySelector(".complemento__text").textContent = product.descripcion;
 
         const prices = document.querySelectorAll(".details__precie .precie__total");
         if (prices.length > 0) {
