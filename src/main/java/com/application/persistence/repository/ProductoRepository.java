@@ -37,4 +37,15 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
                  ORDER BY SUM(dv.cantidad) DESC
             """)
     List<Producto> findProductosMasVendidosByCategoriaIdActivos(@Param("categoriaId") Long categoriaId);
+
+    @Query("""
+                SELECT p
+                  FROM Producto p
+                  JOIN p.detalleVentas dv
+                 WHERE p.categoria.categoriaId IN :categoriaIds
+                   AND p.activo = true
+                 GROUP BY p
+                 ORDER BY SUM(dv.cantidad) DESC
+            """)
+    List<Producto> findProductosMasVendidosByCategoriaIdsActivos(@Param("categoriaIds") List<Long> categoriaIds);
 }

@@ -117,7 +117,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Obtiene los productos más vendidos en orden descendente (más ventas a menor ventas) y con estado activo
+     * Obtiene los productos más vendidos en orden descendente (más ventas a menor ventas) y con estado activo.
      * Este método sera usado en la pagina de Index.html para mostrar los productos destacados
      *
      * @return Lista de DTO con los 16 productos con mayor cantidad de ventas y con estado activo
@@ -132,18 +132,34 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     /**
-     * Obtiene los productos más vendidos por su categoria en orden descendente y con estado activo
+     * Obtiene los productos más vendidos por su categoria en orden descendente y con estado activo.
      * Este método sera usado en la pagina de Index.html para mostrar los productos según su categoriaId
      *
      * @param categoriaId ID de la categoria
-     * @return Lista de DTO con 16 productos pertenecientes a la categoria indicada, con mayor ventas y estado activo
+     * @return Lista de DTO con 12 productos pertenecientes a la categoria indicada, con mayor ventas y estado activo
      */
     @Override
     public List<ProductoResponse> getProductosMasVendidosByCategoriaIdActivos(Long categoriaId) {
         List<Producto> productos = productoRepository.findProductosMasVendidosByCategoriaIdActivos(categoriaId);
         return productos.stream()
                 .map(this::toResponse)
-                .limit(16)
+                .limit(12)
+                .toList();
+    }
+
+    /**
+     * Obtiene los productos más vendidos de varias categorías en orden descendente y con estado activo.
+     * Este método sera usado en la pagina de Index.html para mostrar los productos de varias categorías
+     *
+     * @param categoriaIds IDs de las categorías
+     * @return Lista de DTO con 12 productos pertenecientes a las categorías indicadas, con mayor ventas y estado activo
+     */
+    @Override
+    public List<ProductoResponse> getProductosMasVendidosByCategoriaIdsActivos(List<Long> categoriaIds) {
+        List<Producto> productos = productoRepository.findProductosMasVendidosByCategoriaIdsActivos(categoriaIds);
+        return productos.stream()
+                .map(this::toResponse)
+                .limit(12)
                 .toList();
     }
 

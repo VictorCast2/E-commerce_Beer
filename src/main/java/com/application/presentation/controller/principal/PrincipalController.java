@@ -32,14 +32,22 @@ public class PrincipalController {
     public String index(Model model) {
 
         List<ProductoResponse> productosMasVendidos = productoService.getProductosMasVendidosActivos();
+
         List<ProductoResponse> productosConCategoriaVino = productoService.getProductosMasVendidosByCategoriaIdActivos(1L);
         List<ProductoResponse> productosConCategoriaWhisky = productoService.getProductosMasVendidosByCategoriaIdActivos(2L);
         List<ProductoResponse> productosConCategoriaCerveza = productoService.getProductosMasVendidosByCategoriaIdActivos(8L);
+
+        List<ProductoResponse> productosConCategoriaVodkaGinebra = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(4L, 6L));
+        List<ProductoResponse> productosConCategoriaTequilaMezcal = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(5L, 7L));
+        List<ProductoResponse> productosConCategoriaRonAguardiente = productoService.getProductosMasVendidosByCategoriaIdsActivos(List.of(3L, 9L));
 
         model.addAttribute("productosMasVendidos", productosMasVendidos);
         model.addAttribute("productosConCategoriaVino", productosConCategoriaVino);
         model.addAttribute("productosConCategoriaWhisky", productosConCategoriaWhisky);
         model.addAttribute("productosConCategoriaCerveza", productosConCategoriaCerveza);
+        model.addAttribute("productosConCategoriaVodkaGinebra", productosConCategoriaVodkaGinebra);
+        model.addAttribute("productosConCategoriaTequilaMezcal", productosConCategoriaTequilaMezcal);
+        model.addAttribute("productosConCategoriaRonAguardiente", productosConCategoriaRonAguardiente);
         return "Index";
     }
 
