@@ -55,16 +55,16 @@ INSERT INTO usuario (
 
 -- Insertar categorías de bebidas alcohólicas
 INSERT INTO `categoria` (`activo`, `nombre`, `descripcion`, `imagen`) VALUES
-(1, 'Vino', 'Descubre la elegancia en cada copa. Nuestra selección de vinos te transporta a los mejores viñedos del mundo, con aromas y sabores que celebran los momentos especiales. Perfectos para compartir o disfrutar en una noche tranquila.', 'CP1'),
-(1, 'Whisky', 'Elixir dorado de tradición y carácter. Cada sorbo de nuestro whisky cuenta una historia de añejamiento perfecto y sabores robustos. Ideal para los paladares exigentes que buscan sofisticación y profundidad.', 'CP2'),
-(1, 'Ron', 'Dulce caribeño en estado puro. Nuestro ron captura el espíritu festivo de las islas, con notas de caña de azúcar y especias que evocan brisas tropicales. Perfecto para cocktails o disfrutar solo.', 'CP3'),
-(1, 'Vodka', 'Pureza y versatilidad en cada trago. La cristalinidad de nuestro vodka ofrece una experiencia suave y refrescente, ideal como base para cocktails creativos o para disfrutar en su forma más pura.', 'CP4'),
-(1, 'Tequila', 'El espíritu vibrante de México. Desde el corazón del agave azul, nuestro tequila ofrece notas terrosas y cítricas que despiertan los sentidos. ¡Vive la fiesta en cada sorbo!', 'CP5'),
-(1, 'Ginebra', 'Botánica y sofisticación en armonía. Nuestra ginebra combina enebro con una selección de hierbas y especias que crean un perfil complejo y aromático. La base perfecta para un gin-tonic excepcional.', 'CP6'),
-(1, 'Mezcal', 'Fuego y tradición ancestral. El humo seductor de nuestro mezcal te transporta a Oaxaca, con notas ahumadas que revelan el arte centenario de su producción. Para los aventureros del sabor.', 'CP7'),
-(1, 'Cerveza', 'La reina de las reuniones. Desde rubias refrescantes hasta artesanales intensas, nuestra selección de cervezas ofrece variedad y calidad para cada ocasión. ¡El mejor compañero para la camaradería!', 'CP8'),
-(1, 'Aguardiente', 'Sabor tradicional que une generaciones. Nuestro aguardiente mantiene la esencia de anís y la suavidad que caracteriza esta bebida emblemática. Ideal para celebrar la amistad y la tradición.', 'CP9'),
-(1, 'Brandy', 'Elegancia y suavidad envejecida. El brandy ofrece notas de fruta madura y roble que se funden en un abrazo cálido y reconfortante. Perfecto para momentos de reflexión y placer.', 'CP10');
+(1, 'Vino', 'Descubre la elegancia en cada copa. Nuestra selección de vinos te transporta a los mejores viñedos del mundo, con aromas y sabores que celebran los momentos especiales. Perfectos para compartir o disfrutar en una noche tranquila.', 'CP1.png'),
+(1, 'Whisky', 'Elixir dorado de tradición y carácter. Cada sorbo de nuestro whisky cuenta una historia de añejamiento perfecto y sabores robustos. Ideal para los paladares exigentes que buscan sofisticación y profundidad.', 'CP2.png'),
+(1, 'Ron', 'Dulce caribeño en estado puro. Nuestro ron captura el espíritu festivo de las islas, con notas de caña de azúcar y especias que evocan brisas tropicales. Perfecto para cocktails o disfrutar solo.', 'CP3.png'),
+(1, 'Vodka', 'Pureza y versatilidad en cada trago. La cristalinidad de nuestro vodka ofrece una experiencia suave y refrescente, ideal como base para cocktails creativos o para disfrutar en su forma más pura.', 'CP4.png'),
+(1, 'Tequila', 'El espíritu vibrante de México. Desde el corazón del agave azul, nuestro tequila ofrece notas terrosas y cítricas que despiertan los sentidos. ¡Vive la fiesta en cada sorbo!', 'CP5.png'),
+(1, 'Ginebra', 'Botánica y sofisticación en armonía. Nuestra ginebra combina enebro con una selección de hierbas y especias que crean un perfil complejo y aromático. La base perfecta para un gin-tonic excepcional.', 'CP6.png'),
+(1, 'Mezcal', 'Fuego y tradición ancestral. El humo seductor de nuestro mezcal te transporta a Oaxaca, con notas ahumadas que revelan el arte centenario de su producción. Para los aventureros del sabor.', 'CP7.png'),
+(1, 'Cerveza', 'La reina de las reuniones. Desde rubias refrescantes hasta artesanales intensas, nuestra selección de cervezas ofrece variedad y calidad para cada ocasión. ¡El mejor compañero para la camaradería!', 'CP8.png'),
+(1, 'Aguardiente', 'Sabor tradicional que une generaciones. Nuestro aguardiente mantiene la esencia de anís y la suavidad que caracteriza esta bebida emblemática. Ideal para celebrar la amistad y la tradición.', 'CP9.png'),
+(1, 'Brandy', 'Elegancia y suavidad envejecida. El brandy ofrece notas de fruta madura y roble que se funden en un abrazo cálido y reconfortante. Perfecto para momentos de reflexión y placer.', 'CP10.png');
 
 -- Insertar subcategorías para Vino (categoria_id = 1)
 INSERT INTO `sub_categorias` (`categoria_id`, `nombre`) VALUES
