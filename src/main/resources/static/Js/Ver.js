@@ -61,12 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ? parseFloat(product.price.replace(/[^0-9.]/g, ""))
             : product.price;
 
+        // OBTENER STOCK DEL PRODUCTO (si está disponible)
+        const stock = product.stock || null;
+
         addProductToCart({
             name: product.name,
             price: numericPrice,
             img: product.image,
             qty: qty,          // cantidad del contador
-            openDrawer: true   // abrir drawer
+            openDrawer: true,   // abrir drawer
+            stock: stock
         });
 
         // Reiniciamos el contador

@@ -11,14 +11,34 @@ export function activarGlassmorphism() {
     });
 }
 
-export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
+export function addProductToCart({ name, price, img, qty = 1, openDrawer = true, stock = null }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existing = cart.find(p => p.name === name);
+
+    // Calcular cantidad total que tendría el producto
+    const newQty = existing ? existing.qty + qty : qty;
+
+    // VALIDAR STOCK - si hay stock definido y la nueva cantidad excede el stock
+    if (stock !== null && newQty > stock) {
+        Toastify({
+            text: `No hay suficiente stock. Máximo disponible: ${stock} unidades`,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "linear-gradient(to right, #ff416c, #ff4b2b)"
+            }
+        }).showToast();
+        return; // No agregar al carrito
+    }
+
     if (existing) {
         existing.qty += qty;  // 🔥 ahora suma la cantidad correcta
     } else {
-        cart.push({ name, price, img, qty });
+        cart.push({ name, price, img, qty, stock });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -84,7 +104,7 @@ export function initCart() {
         if (e?.detail?.openDrawer) openCart();
     });
 
-    // 🔥 EVENT DELEGATION - Un solo listener para toda la página
+    // EVENT DELEGATION - Un solo listener para toda la página
     document.addEventListener('click', (e) => {
         // Verificar si se hizo click en el ícono del carrito o en un elemento dentro de él
         if (e.target.classList.contains('ri-shopping-cart-line') ||
@@ -99,11 +119,12 @@ export function initCart() {
                 const name = card.querySelector(".description").textContent.trim();
                 const price = parseInt(card.getAttribute("data-price"));
                 const img = card.querySelector("img").src;
+                const stock = parseInt(card.getAttribute("data-stock")) || null;
 
                 // Llamamos la función pública que ya maneja localStorage, toast y evento
-                addProductToCart({ name, price, img, openDrawer: true });
+                addProductToCart({ name, price, img, openDrawer: true, stock });
 
-                // 🔥 Prevenir el comportamiento por defecto y stop propagation
+                // Prevenir el comportamiento por defecto y stop propagation
                 e.preventDefault();
                 e.stopPropagation();
             }
@@ -218,6 +239,20 @@ export function initCart() {
 
                 // Botón más
                 control.querySelector(".plus").addEventListener("click", () => {
+                    if (cart[i].stock !== null && cart[i].qty >= cart[i].stock) {
+                        Toastify({
+                            text: `No hay más stock disponible. Máximo: ${cart[i].stock} unidades`,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            stopOnFocus: true,
+                            style: {
+                                background: "linear-gradient(to right, #ff416c, #ff4b2b)"
+                            }
+                        }).showToast();
+                        return;
+                    }
                     cart[i].qty++;
                     saveCart();
                     updateCart();
