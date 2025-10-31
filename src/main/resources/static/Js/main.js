@@ -40,8 +40,16 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
 }
 
-// Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
+// flag global para evitar duplicación
+let cartInitialized = false;
 export function initCart() {
+
+    if (cartInitialized) {
+        return;
+    }
+
+    cartInitialized = true;
+
     const drawer = document.getElementById("cart-drawer");
     const overlay = document.getElementById("cart-overlay");
     const closeBtn = document.getElementById("cart-close");
@@ -76,17 +84,30 @@ export function initCart() {
         if (e?.detail?.openDrawer) openCart();
     });
 
-    // Agregar productos desde los íconos en cada card (usa la función pública)
-    document.querySelectorAll(".card-icons .ri-shopping-cart-line").forEach(icon => {
-        icon.addEventListener("click", () => {
-            const card = icon.closest(".card");
-            const name = card.querySelector(".description").textContent.trim();
-            const price = parseFloat(card.querySelector(".price").textContent.replace("$", ""));
-            const img = card.querySelector("img").src;
+    // 🔥 EVENT DELEGATION - Un solo listener para toda la página
+    document.addEventListener('click', (e) => {
+        // Verificar si se hizo click en el ícono del carrito o en un elemento dentro de él
+        if (e.target.classList.contains('ri-shopping-cart-line') ||
+            e.target.closest('.ri-shopping-cart-line')) {
 
-            // Llamamos la función pública que ya maneja localStorage, toast y evento
-            addProductToCart({ name, price, img, openDrawer: true });
-        });
+            const icon = e.target.classList.contains('ri-shopping-cart-line')
+                ? e.target
+                : e.target.closest('.ri-shopping-cart-line');
+
+            const card = icon.closest(".card");
+            if (card) {
+                const name = card.querySelector(".description").textContent.trim();
+                const price = parseInt(card.getAttribute("data-price"));
+                const img = card.querySelector("img").src;
+
+                // Llamamos la función pública que ya maneja localStorage, toast y evento
+                addProductToCart({ name, price, img, openDrawer: true });
+
+                // 🔥 Prevenir el comportamiento por defecto y stop propagation
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
     });
 
     // Abrir y cerrar drawer
@@ -104,7 +125,7 @@ export function initCart() {
     overlay.addEventListener("click", closeCart);
     cartIcon.addEventListener("click", openCart);
 
-    //cerrar el carrito cuando quiera seguir comprando
+    // Cerrar el carrito cuando quiera seguir comprando
     if (seguirComprandoBtn) {
         seguirComprandoBtn.addEventListener("click", closeCart);
     }
@@ -141,7 +162,7 @@ export function initCart() {
             }
         } else {
             cart.forEach((item, index) => {
-                subtotal += item.price * item.qty;
+                subtotal += parseInt(item.price) * item.qty;
 
                 const li = document.createElement("li");
                 li.className = "cart-item";
@@ -154,7 +175,7 @@ export function initCart() {
                             <span class="qty">${item.qty}</span>
                             <button class="plus">+</button>
                         </div>
-                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <span class="price">$${parseInt(item.price).toLocaleString('es-CO')}</span>
                     </div>
                     <button class="remove" data-index="${index}">
                         <i class="ri-delete-bin-6-line"></i>
@@ -163,9 +184,9 @@ export function initCart() {
                 cartList.appendChild(li);
             });
 
-            subtotalEl.textContent = "$" + subtotal.toFixed(2);
+            subtotalEl.textContent = "$" + parseInt(subtotal).toLocaleString('es-CO');
 
-            //  Mostrar subtotal solo si hay productos
+            // Mostrar subtotal solo si hay productos
             subtotalContainer.style.display = "flex";
 
             // Mostrar botones de compra
@@ -177,7 +198,7 @@ export function initCart() {
                 cartFooter.removeChild(btnCerrar);
             }
 
-            // Eventos de + y -
+            // Eventos de + y - (también podrías usar event delegation aquí)
             document.querySelectorAll(".quantity-control").forEach(control => {
                 const i = control.dataset.index;
 
@@ -219,7 +240,15 @@ export function initCart() {
     }
 }
 
+// flag global para evitar duplicación
+let heartInitialized = false;
 export function inicialHeart() {
+
+    if (heartInitialized) {
+        return;
+    }
+    heartInitialized = true;
+
     const favCount = document.getElementById("fav-count");
 
     // Recuperar productos guardados
@@ -258,6 +287,15 @@ export function inicialHeart() {
                     duration: 2000,
                     style: {
                         background: "linear-gradient(to right, #ff416c, #ff4b2b)",
+                    }
+                }).showToast();
+            } else {
+                // Opcional: Mensaje si ya está en favoritos
+                Toastify({
+                    text: "Ya está en favoritos",
+                    duration: 2000,
+                    style: {
+                        background: "linear-gradient(to right, #ff9900, #ff6600)",
                     }
                 }).showToast();
             }
