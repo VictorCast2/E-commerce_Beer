@@ -416,7 +416,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p, stat : ${productosMasVendidos}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -484,7 +484,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaWhisky}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -553,7 +553,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaTequilaMezcal}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -622,7 +622,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaVino}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -692,7 +692,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaCerveza}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -761,7 +761,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaRonAguardiente}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 
@@ -830,7 +830,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p : ${productosConCategoriaVodkaGinebra}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 

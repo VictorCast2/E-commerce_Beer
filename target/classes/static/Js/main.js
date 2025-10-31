@@ -11,14 +11,34 @@ export function activarGlassmorphism() {
     });
 }
 
-export function addProductToCart({ name, price, img, qty = 1, openDrawer = true }) {
+export function addProductToCart({ name, price, img, qty = 1, openDrawer = true, stock = null }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existing = cart.find(p => p.name === name);
+
+    // Calcular cantidad total que tendría el producto
+    const newQty = existing ? existing.qty + qty : qty;
+
+    // VALIDAR STOCK - si hay stock definido y la nueva cantidad excede el stock
+    if (stock !== null && newQty > stock) {
+        Toastify({
+            text: `No hay suficiente stock. Máximo disponible: ${stock} unidades`,
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "linear-gradient(to right, #ff416c, #ff4b2b)"
+            }
+        }).showToast();
+        return; // No agregar al carrito
+    }
+
     if (existing) {
         existing.qty += qty;  // 🔥 ahora suma la cantidad correcta
     } else {
-        cart.push({ name, price, img, qty });
+        cart.push({ name, price, img, qty, stock });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -40,8 +60,16 @@ export function addProductToCart({ name, price, img, qty = 1, openDrawer = true 
     document.dispatchEvent(new CustomEvent("cartUpdated", { detail: { openDrawer } }));
 }
 
-// Exporta initCart tal y como la tienes, pero agregando un listener para 'cartUpdated'
+// flag global para evitar duplicación
+let cartInitialized = false;
 export function initCart() {
+
+    if (cartInitialized) {
+        return;
+    }
+
+    cartInitialized = true;
+
     const drawer = document.getElementById("cart-drawer");
     const overlay = document.getElementById("cart-overlay");
     const closeBtn = document.getElementById("cart-close");
@@ -76,17 +104,31 @@ export function initCart() {
         if (e?.detail?.openDrawer) openCart();
     });
 
-    // Agregar productos desde los íconos en cada card (usa la función pública)
-    document.querySelectorAll(".card-icons .ri-shopping-cart-line").forEach(icon => {
-        icon.addEventListener("click", () => {
-            const card = icon.closest(".card");
-            const name = card.querySelector(".description").textContent.trim();
-            const price = parseFloat(card.querySelector(".price").textContent.replace("$", ""));
-            const img = card.querySelector("img").src;
+    // EVENT DELEGATION - Un solo listener para toda la página
+    document.addEventListener('click', (e) => {
+        // Verificar si se hizo click en el ícono del carrito o en un elemento dentro de él
+        if (e.target.classList.contains('ri-shopping-cart-line') ||
+            e.target.closest('.ri-shopping-cart-line')) {
 
-            // Llamamos la función pública que ya maneja localStorage, toast y evento
-            addProductToCart({ name, price, img, openDrawer: true });
-        });
+            const icon = e.target.classList.contains('ri-shopping-cart-line')
+                ? e.target
+                : e.target.closest('.ri-shopping-cart-line');
+
+            const card = icon.closest(".card");
+            if (card) {
+                const name = card.querySelector(".description").textContent.trim();
+                const price = parseInt(card.getAttribute("data-price"));
+                const img = card.querySelector("img").src;
+                const stock = parseInt(card.getAttribute("data-stock")) || null;
+
+                // Llamamos la función pública que ya maneja localStorage, toast y evento
+                addProductToCart({ name, price, img, openDrawer: true, stock });
+
+                // Prevenir el comportamiento por defecto y stop propagation
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
     });
 
     // Abrir y cerrar drawer
@@ -104,7 +146,7 @@ export function initCart() {
     overlay.addEventListener("click", closeCart);
     cartIcon.addEventListener("click", openCart);
 
-    //cerrar el carrito cuando quiera seguir comprando
+    // Cerrar el carrito cuando quiera seguir comprando
     if (seguirComprandoBtn) {
         seguirComprandoBtn.addEventListener("click", closeCart);
     }
@@ -141,7 +183,7 @@ export function initCart() {
             }
         } else {
             cart.forEach((item, index) => {
-                subtotal += item.price * item.qty;
+                subtotal += parseInt(item.price) * item.qty;
 
                 const li = document.createElement("li");
                 li.className = "cart-item";
@@ -154,7 +196,7 @@ export function initCart() {
                             <span class="qty">${item.qty}</span>
                             <button class="plus">+</button>
                         </div>
-                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <span class="price">$${parseInt(item.price).toLocaleString('es-CO')}</span>
                     </div>
                     <button class="remove" data-index="${index}">
                         <i class="ri-delete-bin-6-line"></i>
@@ -163,9 +205,9 @@ export function initCart() {
                 cartList.appendChild(li);
             });
 
-            subtotalEl.textContent = "$" + subtotal.toFixed(2);
+            subtotalEl.textContent = "$" + parseInt(subtotal).toLocaleString('es-CO');
 
-            //  Mostrar subtotal solo si hay productos
+            // Mostrar subtotal solo si hay productos
             subtotalContainer.style.display = "flex";
 
             // Mostrar botones de compra
@@ -177,7 +219,7 @@ export function initCart() {
                 cartFooter.removeChild(btnCerrar);
             }
 
-            // Eventos de + y -
+            // Eventos de + y - (también podrías usar event delegation aquí)
             document.querySelectorAll(".quantity-control").forEach(control => {
                 const i = control.dataset.index;
 
@@ -197,6 +239,20 @@ export function initCart() {
 
                 // Botón más
                 control.querySelector(".plus").addEventListener("click", () => {
+                    if (cart[i].stock !== null && cart[i].qty >= cart[i].stock) {
+                        Toastify({
+                            text: `No hay más stock disponible. Máximo: ${cart[i].stock} unidades`,
+                            duration: 3000,
+                            close: true,
+                            gravity: "top",
+                            position: "right",
+                            stopOnFocus: true,
+                            style: {
+                                background: "linear-gradient(to right, #ff416c, #ff4b2b)"
+                            }
+                        }).showToast();
+                        return;
+                    }
                     cart[i].qty++;
                     saveCart();
                     updateCart();
@@ -219,7 +275,15 @@ export function initCart() {
     }
 }
 
+// flag global para evitar duplicación
+let heartInitialized = false;
 export function inicialHeart() {
+
+    if (heartInitialized) {
+        return;
+    }
+    heartInitialized = true;
+
     const favCount = document.getElementById("fav-count");
 
     // Recuperar productos guardados
@@ -258,6 +322,15 @@ export function inicialHeart() {
                     duration: 2000,
                     style: {
                         background: "linear-gradient(to right, #ff416c, #ff4b2b)",
+                    }
+                }).showToast();
+            } else {
+                // Opcional: Mensaje si ya está en favoritos
+                Toastify({
+                    text: "Ya está en favoritos",
+                    duration: 2000,
+                    style: {
+                        background: "linear-gradient(to right, #ff9900, #ff6600)",
                     }
                 }).showToast();
             }
@@ -336,6 +409,8 @@ export function carruselProductos() {
         const prevBtn = carrusel.querySelector(".arrow--left");
         const nextBtn = carrusel.querySelector(".arrow--right");
 
+        if (!track || !prevBtn || !nextBtn) return;
+
         const cardWidth = 300; // ancho de cada card
         const gap = 40;        // espacio entre cards
         const visibles = 4;    // cuántos se muestran a la vez
@@ -379,7 +454,8 @@ export function verProductos() {
                 oldPrice: card.dataset.oldprice,
                 image: card.dataset.image,
                 category: card.dataset.category,
-                subcategory: card.dataset.subcategory
+                subcategory: card.dataset.subcategory,
+                descripcion: card.dataset.descripcion
             };
 
             // Guardar en localStorage
@@ -448,76 +524,85 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSlide = 0;
     let autoPlayInterval = null;
 
-    // Mostrar slide por índice
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-            dots[i]?.classList.toggle('active', i === index);
+    // validamos que exista slides y hero antes de usar
+    if (slides.length > 0 && hero) {
+        // Mostrar slide por índice
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                dots[i]?.classList.toggle('active', i === index);
+            });
+
+            const activeSlide = slides[index];
+            const theme = activeSlide.getAttribute('data-theme');
+
+            hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
+            hero.classList.add(`hero--${theme}`);
+
+            currentSlide = index;
+        }
+
+
+        // Siguiente slide
+        function nextSlide() {
+            const nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        // Slide anterior
+        function prevSlide() {
+            const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevIndex);
+        }
+
+        // Iniciar autoplay
+        function startAutoplay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Detener autoplay temporalmente
+        function stopAutoplay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Click en dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.dataset.index);
+                showSlide(index);
+                stopAutoplay();
+                startAutoplay(); // Reiniciar autoplay al interactuar
+            });
         });
 
-        const activeSlide = slides[index];
-        const theme = activeSlide.getAttribute('data-theme');
-
-        hero.classList.remove('hero--paulaner', 'hero--heineken', 'hero--budweiser', 'hero--guinness');
-        hero.classList.add(`hero--${theme}`);
-
-        currentSlide = index;
-    }
-
-
-    // Siguiente slide
-    function nextSlide() {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        showSlide(nextIndex);
-    }
-
-    // Slide anterior
-    function prevSlide() {
-        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prevIndex);
-    }
-
-    // Iniciar autoplay
-    function startAutoplay() {
-        autoPlayInterval = setInterval(nextSlide, 5000);
-    }
-
-    // Detener autoplay temporalmente
-    function stopAutoplay() {
-        clearInterval(autoPlayInterval);
-    }
-
-    // Click en dots
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const index = parseInt(dot.dataset.index);
-            showSlide(index);
-            stopAutoplay();
-            startAutoplay(); // Reiniciar autoplay al interactuar
+        // Click en flechas
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const direction = arrow.dataset.direction;
+                if (direction === 'next') {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                stopAutoplay();
+                startAutoplay(); // Reiniciar autoplay
+            });
         });
-    });
 
-    // Click en flechas
-    arrows.forEach(arrow => {
-        arrow.addEventListener('click', () => {
-            const direction = arrow.dataset.direction;
-            if (direction === 'next') {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-            stopAutoplay();
-            startAutoplay(); // Reiniciar autoplay
-        });
-    });
+        // Mostrar primer slide
+        showSlide(0);
+        startAutoplay();
 
-    // Mostrar primer slide
-    showSlide(0);
-    startAutoplay();
+    }
 
-    //duplicacion de los logos
-    const logos = document.getElementById("slider").cloneNode(true);
-    document.getElementById("logos").appendChild(logos);
+    // Duplicación de logos (solo si existe en la vista)
+    const slider = document.getElementById("slider");
+    const logosWrapper = document.getElementById("logos");
+
+    if (slider && logosWrapper) {
+        const logos = slider.cloneNode(true);
+        logosWrapper.appendChild(logos);
+    }
 
     //invocar el iniciar carrito y corazon
     inicialHeart();
