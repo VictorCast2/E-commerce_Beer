@@ -134,7 +134,7 @@
                         <div class="flex__productos-track">
                             <div class="card"
                                  th:each="p, stat : ${packsActivos}"
-                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular},
+                                 th:attr="data-name=${p.nombre}, data-price=${p.precio}, data-oldprice=${p.precioRegular}, data-stock=${p.stock},
                                  data-subcategory=${p.nombreCategoria}, data-descripcion=${p.descripcion}, data-category=${p.nombreSubCategoria},
                                  data-image=@{'/imagen-producto/' + ${p.imagen}}">
 

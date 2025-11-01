@@ -80,7 +80,7 @@
 
 /* Tabla */
 /* .notification__table-container {
-    
+
 } */
 
 
@@ -455,7 +455,7 @@
 
 .input__error {
     font: 600 1rem var(--typografiaUrbanist);
-    width: 100%;  
+    width: 100%;
     margin: 0 0 10px 20px;
     display:none ;
 }
@@ -475,7 +475,7 @@
 
 .error--ciudad{
     margin: 0 0 10px -45px;
-} 
+}
 
 .error--barrio{
     margin: 0 0 10px -115px;
@@ -627,8 +627,8 @@
 
 /**Opciones de envio */
 .formulario .opciones__envios {
-    grid-column: 1 / -1; 
-    width: 100%;         
+    grid-column: 1 / -1;
+    width: 100%;
 }
 
 .opciones__envios .envios__titulo{
@@ -641,7 +641,7 @@
 .container__item label {
     display: flex;
     align-items: center;
-    gap: 0.5rem; 
+    gap: 0.5rem;
     cursor: pointer;
 }
 
@@ -660,7 +660,7 @@
 }
 
 .container__item input[type="radio"]:checked {
-    border-color: #2563eb; 
+    border-color: #2563eb;
     background-color: #2563eb;
 }
 
@@ -736,7 +736,7 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-} 
+}
 
 /* --- CONTENIDO DEL MODAL --- */
 .envio__content {
@@ -801,7 +801,7 @@
         opacity: 0;
         transform: scale(0.7);
     }
-} 
+}
 
 .envio__close {
     position: absolute;
@@ -837,3 +837,4 @@
     cursor: pointer;
     margin: 0.5rem 0 0 -17.5rem;
 }
+

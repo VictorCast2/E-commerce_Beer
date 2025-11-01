@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Calcular total del carrito ---
     function updateCartTotal() {
-        const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-        totalEl.textContent = `$${subtotal.toFixed(2)}`;
+        const subtotal = cart.reduce((acc, item) => acc + (parseInt(item.price) * item.qty), 0);
+        totalEl.textContent = `$${parseInt(subtotal).toLocaleString('es-CO')}`;
 
         // Obtener cupón (siempre será número aunque empiece en $0.00)
         const cuponEl = document.getElementById("cupon__envio");
-        const cuponValue = parseFloat(cuponEl.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+        const cuponValue = parseInt(cuponEl.textContent.replace(/[^0-9.-]+/g, "")) || 0;
 
         // Envío (siempre gratis en tu HTML actual → 0)
         const envio = 0;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Actualizar el total en pantalla
         const totalAllEl = document.getElementById("total__all");
-        totalAllEl.textContent = `$${totalFinal.toFixed(2)}`;
+        totalAllEl.textContent = `$${parseInt(totalFinal).toLocaleString('es-CO')}`;
     }
 
     // --- Render tabla ---
@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cart.length === 0) {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-        <td colspan="6" style="text-align:center; padding:20px; font-weight:600;">
-            No hay productos en el carrito
-        </td>
-    `;
+                <td colspan="6" style="text-align:center; padding:20px; font-weight:600;">
+                    No hay productos en el carrito
+                </td>
+            `;
             cartTableBody.appendChild(tr);
 
             paginationText.textContent = `Mostrando 0-0 de 0`;
@@ -77,27 +77,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         paginatedItems.forEach((item, index) => {
             const globalIndex = start + index; // posición real en el array
-            const subtotal = item.price * item.qty;
+            const subtotal = parseInt(item.price) * item.qty;
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
-        <td><img src="${item.img}" width="50"/></td>
-        <td>${item.name}</td>
-        <td>
-            <div class="quantity-control" data-index="${globalIndex}">
-                <button class="minus">−</button>
-                <span class="qty">${item.qty}</span>
-                <button class="plus">+</button>
-            </div>
-        </td>
-        <td>$${item.price.toFixed(2)}</td>
-        <td>$${subtotal.toFixed(2)}</td>
-        <td>
-            <button class="content__icon btn-delete" data-index="${globalIndex}">
-                <i class="ri-delete-bin-6-line" title="Eliminar"></i>
-            </button>
-        </td>
-    `;
+                <td><img src="${item.img}" width="50"/></td>
+                <td>${item.name}</td>
+                <td>
+                    <div class="quantity-control" data-index="${globalIndex}">
+                        <button class="minus">−</button>
+                        <span class="qty">${item.qty}</span>
+                        <button class="plus" ${item.stock !== null && item.qty >= item.stock ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>+</button> <!-- VALIDAR STOCK -->
+                    </div>
+                </td>
+                <td>$${parseInt(item.price).toLocaleString('es-CO')}</td>
+                <td>$${parseInt(subtotal).toLocaleString('es-CO')}</td>
+                <td>
+                    <button class="content__icon btn-delete" data-index="${globalIndex}">
+                        <i class="ri-delete-bin-6-line" title="Eliminar"></i>
+                    </button>
+                </td>
+            `;
             cartTableBody.appendChild(tr);
         });
 
@@ -199,6 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = parseInt(control.getAttribute("data-index"));
 
             if (e.target.classList.contains("plus")) {
+                if (cart[index].stock !== null && cart[index].qty >= cart[index].stock) {
+                    Swal.fire({
+                        title: "Stock insuficiente",
+                        text: `No hay más stock disponible. Máximo: ${cart[index].stock} unidades`,
+                        icon: "warning",
+                        confirmButtonText: "Entendido",
+                        customClass: {
+                            title: 'swal-title',
+                            popup: 'swal-popup'
+                        }
+                    });
+                    return;
+                }
                 cart[index].qty++;
             } else if (e.target.classList.contains("minus") && cart[index].qty > 1) {
                 cart[index].qty--;
