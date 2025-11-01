@@ -31,12 +31,10 @@ public class ProductoController {
     public String DashboardProducto(@AuthenticationPrincipal CustomUserPrincipal principal,
             @RequestParam(value = "mensaje", required = false) String mensaje,
             Model model) {
-
-        Usuario usuario = usuarioService.getUsuarioByCorreo(principal.getUsername());
+        /*
         List<ProductoResponse> productoList = productoService.getProductos();
-
-        model.addAttribute("usuario", usuario);
         model.addAttribute("productoList", productoList);
+         */
         model.addAttribute("mensaje", mensaje);
 
         return "DashboardProducto";

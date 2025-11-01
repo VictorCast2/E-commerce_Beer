@@ -1,6 +1,6 @@
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -8,8 +8,6 @@ target/
 .apt_generated
 .classpath
 .factorypath
-.project
-.settings
 .springBeans
 .sts4-cache
 
@@ -18,17 +16,6 @@ target/
 *.iws
 *.iml
 *.ipr
-
-### Variables de entorno ###
-*.env
-.env
-**/*.env
-*/*.env
-
-### El .mvm ###
-.mvn/
-.mvn/wrapper/maven-wrapper.properties
-.mvn/wrapper/maven-wrapper.jar
 
 ### NetBeans ###
 /nbproject/private/
@@ -39,6 +26,13 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### Variables de entorno ###
+*.env
+*.env*
+.env
+**/*.env
+*/*.env
 
 ### VS Code ###
 .vscode/

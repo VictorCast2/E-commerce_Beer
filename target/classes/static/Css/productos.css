@@ -1,0 +1,295 @@
+@import url("./style.css");
+
+:root {
+    --typografiaGeist: "Geist";
+    --typografiaUrbanist: "Urbanist";
+    --colorPrincipal: #f59e0b;
+    --colorDark: #18181b;
+    --colorLigth: #71717a;
+    --colorCafe: #8e705c;
+    --colorWhite: #ffffff;
+}
+
+
+.productos {
+    min-height: 100vh;
+    padding-top: 150px;
+    position: relative;
+}
+
+.container__enlaces {
+    position: relative; /* Cambia de absolute a relative */
+    margin-bottom: 2rem; /* Espacio debajo */
+    padding: 0 6.5%; /* Mismo padding que tenía en left */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container__enlaces a {
+    font: 500 1.1rem var(--typografiaUrbanist);
+    text-decoration: none;
+    color: #000000;
+}
+
+.container__enlaces a:hover {
+    text-decoration: underline;
+}
+
+.container__enlaces .enlaces__titulos {
+    font: 700 3rem var(--typografiaGeist);
+    margin: 0.5rem 0 0 0; /* Un poco de margen arriba */
+}
+
+#selected-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    top: -40px;
+    left: 6.5%;
+}
+
+.filter-chip {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font: 600 1rem var(--typografiaUrbanist);
+}
+
+.filter-chip span {
+    cursor: pointer;
+    color: #444;
+    font-weight: 100;
+    font-size: 15px;
+}
+
+.filter-chip span:hover {
+    color: red;
+}
+
+
+.produtos__filter {
+    display: flex;
+    padding-left: 6.2rem;
+    gap: 2.5rem;
+    align-items: flex-end;
+    position: relative;
+    top: -1rem;
+
+}
+
+.custom-select {
+    position: relative;
+    width: 300px;
+}
+
+.select-selected {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 55px;
+    font: 700 1.5rem var(--typografiaUrbanist);
+    padding-left: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.select-selected i {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.select-selected i.up {
+    transform: rotate(180deg);
+}
+
+.selected--marca i {
+    left: 10rem;
+}
+
+.selected--categoria i {
+    left: 8rem;
+
+}
+
+.selected--pais i {
+    left: 12rem;
+
+}
+
+.selected--ordenar i {
+    left: 6.2rem;
+
+}
+
+.selected--precio i {
+    left: 5.7rem;
+}
+
+.select-items {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 99;
+}
+
+.select-items input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 1rem 0.9rem;
+    font: 600 1rem var(--typografiaUrbanist);
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font: 600 1rem var(--typografiaUrbanist);
+}
+
+
+
+.option input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #48f;
+    /* color del check */
+}
+
+.select-hide {
+    display: none;
+}
+
+/* Flex Container */
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.flex__productos {
+    display: block; /* Cambia de grid a block */
+    max-width: 1345px;
+}
+
+.flex__productos-track {
+    display: grid; /* Mueve el grid aquí */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-items: center;
+}
+
+@media (max-width: 1024px) {
+    .flex__productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .flex__productos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card */
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 16px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: none !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+.card.active-page {
+    display: flex !important;
+}
+
+.card {
+    transition: opacity 0.3s ease;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: 5rem;
+    width: 100%;
+    position: static; /* Elimina posicionamiento absoluto */
+    left: auto;
+    top: auto;
+}
+
+.pagination__Numbers {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pagination__Numbers .button__pagination {
+    font: 600 1.2rem "Urbanist";
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ccc;
+    display: flex;
+    cursor: pointer;
+    color: var(--colorLigth);
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color .2s ease, color .2s ease-in;
+}
+
+.pagination__Numbers .button__pagination.active {
+    background-color: var(--colorCafe);
+    border: none;
+    color: var(--colorWhite);
+}
+
+.pagination__Numbers .button__pagination:hover {
+    background-color: var(--colorCafe);
+    border: 1px solid var(--colorCafe);
+    color: #ffffff;
+}
+
+.pagination button {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    background-color: transparent;
+    font: 700 1.4rem "Urbanist";
+    color: var(--colorLigth);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color .4s ease, color .4s ease-in;
+}
+
+.pagination button:hover {
+    background-color: var(--colorCafe);
+    border: 1px solid var(--colorCafe);
+    color: #ffffff;
+}
